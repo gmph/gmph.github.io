@@ -6,12 +6,6 @@
 <style>
 <![endif]-->
 
-<!-- #############################################
-
-PLEASE NOTE THAT THIS IS VERY OLD, VERY BAD CODE. DON'T USE IF IT YOU DON'T HAVE TO :)
-
-############################################# -->
-
 <html id="top">
 
 <head>
@@ -67,10 +61,9 @@ body {
 	position: relative;
 	height:100vh;
 	width:100%;
-	background:#fff;
 }
 
-.block p {
+.block {
 	width: 80%;
 	max-width: 550px;
 	height:280px;
@@ -78,33 +71,39 @@ body {
 	top: 50%;
 	left: 50%;
 	margin: -165px 0 0 -275px;
+}
 
+.block p {
 	font-family: 'Libre Baskerville', serif;
 	font-size: 16px;
 	line-height: 28px;
 	color:#333;
 }
 
-.block p a {
+div.block div.links a {
 	position: relative;
 	display: inline-block;
 	top:0;
 	left:0;
 	width:auto;
 	height:auto;
-	margin: 0 6px 6px 0;
-	padding:5px 14px;
+	margin: 0 2px 6px 0;
+	padding:10px 14px;
 	color:#444;
 	background: #fff;
 	border: solid 1px #ddd;
 	border-radius:3px;
 
-	font-family: 'Open Sans', sans-serif;
+	font-family: "Helvetica Neue", "HelveticaNeue-Bold", "Helvetica Neue Bold", Helvetica, "Open Sans", Arial, "Lucida Grande", sans-serif !important; 
 	font-weight: 400;
 	opacity:.7;
 }
 
-.block p a:hover {
+.block .links {
+	margin:40px 0 0 0;
+}
+
+.block .links a:hover {
 	position:relative;
 	/*top:-5px;*/
 	color:#222;
@@ -112,7 +111,7 @@ body {
 	opacity:.8;
 }
 
-.block p strong {
+.block h1 {
 	position: relative;
 	top:0;
 	left: -2px;
@@ -129,7 +128,7 @@ span.littleline {
 	display: block;
 	height:1px;
 	width:40px;
-	background: #ccc;
+	background: #ddd;
 	margin:0 0 10px 0;
 }
 
@@ -143,6 +142,17 @@ span.littleline {
 	top:-4px;
 }
 
+img.coloured {
+	position: absolute;
+	top:50%;
+	left:48%;
+	z-index: -1;
+	width:150px;
+	height: 150px;
+	margin: -100px 0 -100px -75px;
+	opacity: .1;
+}
+
 @media(max-width:750px){
 
 	.nomo {
@@ -150,18 +160,13 @@ span.littleline {
 	}
 
 	.block {
-		width: 100%;
-		height:auto;
-	}
-
-	.block p {
 		height: auto;
 		width:85%;
 		position:static;
 		margin:50px auto 60px auto;
 	}
 
-	.block p strong {
+	.block h1 {
 		left: -1px;
 		line-height: 1.2em;
 		margin: 0 0 11px 0;
@@ -179,23 +184,54 @@ span.littleline {
 
 <body>
 
-		<div class="block">
-			<p>
+		<img class="coloured" src="../res/img/ptlogo.png"/>
 
-				<strong>Graham Macphee is&nbsp;a&nbsp;human.</strong>
+
+		<div class="block">
+
+				<h1>Graham&nbsp;Macphee is&nbsp;a&nbsp;human.</h1>
 
 				<span class="littleline"></span>
 
-				I tend to think about puppies, pizza and equality. I enjoy being creative: writing, photography, guitar, ukulele and singing occasionally. I'm quiet and thoughtful, and like nature and quiet nights. I'm interested in a combination of technology, design, psychology and sociology. I live in Edinburgh, Scotland. I design apps, websites and some other things. I exist in reality too.
+				<p>I tend to think about puppies, pizza and equality. I enjoy being creative: writing, photography, guitar, ukulele and singing occasionally. I'm quiet and thoughtful, and like nature and quiet nights. I'm interested in a combination of technology, design, psychology and sociology. I live in Edinburgh, Scotland. I design apps, websites and some other things. I exist in reality too.</p>
 
-				<br /><br /><br />
+				<div class="links">
+					
+					<a href="http://twitter.com/gmph">twitter</a>
+					<a href="http://facebook.com/grahammacphee">facebook</a>
+					<a href="http://instagr.am/gmph">instagram</a>
+					<a href="https://foursquare.com/gmph">foursquare</a>
+					<a href="http://thinks.grahammacphee.co.uk">blog</a>
+					<a href="http://grahammacphee.co.uk" title="My Website"><span class="upabit">...</span></a>
 
-				<!--<a href="https://www.google.com/webhp?#q=5%278%22+in+cm">5'8"</a><a href="http://en.wikipedia.org/wiki/1996"><span class="leftabit">'96<span></a><a href="http://www.ed.ac.uk">UoE</a><a href="https://www.google.co.uk/maps/search/EH8+UK/">EH8</a>-->
-				<a href="http://twitter.com/gmph">twitter</a><a href="http://facebook.com/grahammacphee">facebook</a><!-- <a href="http://plus.google.com/+grahammacphee">google+</a> --><a href="http://instagr.am/gmph">instagram</a><a href="https://foursquare.com/gmph">foursquare</a><!-- <a href="http://play.spotify.com/user/gmacf33">spotify</a> --><a href="http://thinks.grahammacphee.co.uk">blog</a><a href="http://grahammacphee.co.uk" title="My Website"><span class="upabit">...</span></a><!-- <a href="https://www.google.co.uk/search?q=graham%20macphee%20gmph"><span class="upabit">...</span></a> -->
+				</div>
 
-			</p>
 		</div>
 
 </body>
+
+
+<script language="javascript">
+
+window.addEventListener("load", function() { window. scrollTo(0, 0); });
+
+    $('.block').css('opacity','0');
+
+    $('.coloured').css('opacity','0');
+
+    $(document).ready(function(){
+    	setTimeout(function(){
+    		$('.coloured').css('opacity','1');
+    		setTimeout(function(){
+	    		$('.coloured').css('opacity','0');
+	    		setTimeout(function(){
+		    		$('.block').css('opacity','1');
+		    	},400);
+	    	},1200);
+    	},400);
+	});
+	
+
+</script>
 
 </html>
