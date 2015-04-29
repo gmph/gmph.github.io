@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: landing
 title: Graham Macphee
 heading: Graham Macphee is a human.
 date: 28th April 2015
@@ -7,7 +7,11 @@ published: true
 format: markdown
 ---
 
-I tend to think about puppies, pizza and equality. I enjoy being creative: writing, photography, guitar, ukulele and singing occasionally. I'm quiet and thoughtful, and like nature and quiet nights. I'm interested in a combination of technology, design, psychology and sociology. I live in Edinburgh, Scotland. I design apps, websites and some other things. I exist in reality too.
+I tend to think about puppies, pizza and equality. I enjoy being creative: writing, photography, guitar, ukulele and singing occasionally. I'm quiet and thoughtful, and like nature and quiet nights. I'm interested in a combination of technology, design, psychology and sociology.
+
+I am a UI/UX Designer and Front-end Developer with 3 years industry experience working with startups around the world. You can see my work and side projects in [my portfolio](http://grahammacphee.co.uk), and download my [résumé](http://j.mp/gmresume15). If you would like to discuss a role at your company, please [email me](mailto:hi@grahammacphee.co.uk) to arrange a call.
+
+<!--
 
 Here are my previous posts:
 
@@ -19,7 +23,7 @@ Here are my previous posts:
   {% endfor %}
 </ul>
 
-<!-- [![My Image](https://d13yacurqjgara.cloudfront.net/users/28519/screenshots/2039695/frezko-small.png)](https://dribbble.com/shots/2039695-Frezko-Hand-Drawn-Messaging) -->
+[![My Image](https://d13yacurqjgara.cloudfront.net/users/28519/screenshots/2039695/frezko-small.png)](https://dribbble.com/shots/2039695-Frezko-Hand-Drawn-Messaging)
 
 Suspendisse condimentum leo ut dapibus condimentum. Fusce sit amet volutpat mauris. Aenean vitae dapibus quam. Quisque posuere [turpis vitae tortor](/) feugiat rutrum.
 
@@ -51,4 +55,6 @@ Lorem ipsum dolor sit amet, cras sed sapien quam. Sed dapibus est id enim facili
 
 > Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed sapien quam. Sed dapibus est id enim facilisis, at posuere turpis adipiscing. Quisque sit amet dui dui.
 
-Lorem ipsum dolor sit amet, cras sed sapien quam. Sed dapibus est id enim facilisis, at posuere turpis adipiscing. Quisque sit amet dui.
+Lorem ipsum dolor sit amet, cras sed sapien quam. Sed dapibus est id enim facilisis, at posuere turpis adipiscing. Quisque sit amet dui. 
+
+-->

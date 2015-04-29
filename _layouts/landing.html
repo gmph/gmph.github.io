@@ -68,7 +68,7 @@ body {
 	max-width: 550px;
 	height:auto;
 	position: static;
-	margin: 110px auto 0 auto;
+	margin: 22vh auto 0 auto;
 }
 
 span.littleline {
@@ -217,8 +217,7 @@ div.block div.links a {
 }
 
 .block .links {
-	display: none;
-	margin:20px 0 0 0;
+	margin:60px 0 0 0;
 }
 
 .block .links a:hover {
@@ -316,7 +315,7 @@ a div.footerimg {
 	a div.footerimg {
 		position: relative;
 		top:0;
-		left:-8px;
+		left:-9px;
 	}
 
 }
@@ -337,15 +336,6 @@ a div.footerimg {
 
 			{{ content }}
 
-			<p class="meta">Written on {{ page.date | date_to_long_string }} by <a href="http://grahammacphee.co.uk">Graham Macphee</a>.</p>
-
-			<p class="social">
-				<a href="https://twitter.com/gmph" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @gmph</a>
-				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>&nbsp;
-				<a href="https://twitter.com/share" class="twitter-share-button" data-text="{{ page.heading }}" data-via="gmph" data-size="large" data-related="gmph">Tweet</a>
-				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-			</p>
-
 			<div class="links">
 				
 				<a href="http://twitter.com/gmph">twitter</a>
@@ -356,7 +346,6 @@ a div.footerimg {
 				<a href="http://grahammacphee.co.uk" title="My Website"><span class="upabit">...</span></a>
 
 			</div>
-
 
 			<a href="/"><div class="footerimg"></div></a>
 
