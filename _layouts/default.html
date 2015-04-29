@@ -71,6 +71,14 @@ body {
 	margin: 100px auto 100px auto;
 }
 
+span.littleline {
+	display: block;
+	height:1px;
+	width:40px;
+	background: #ddd;
+	margin:0 0 -10px 0;
+}
+
 .block h1 {
 	position: relative;
 	top:0;
@@ -82,6 +90,26 @@ body {
 	line-height: 1.1em;
 	color:#222;
 	font-weight: 700;
+}
+
+.block h2 {
+	font-family: "Helvetica Neue", "HelveticaNeue-Bold", "Helvetica Neue Bold", Helvetica, "Open Sans", Arial, "Lucida Grande", sans-serif !important; 
+	font-size:20px;
+	display: block;
+	margin: 30px 0 0 0;
+	line-height: 1.1em;
+	color:#222;
+	font-weight: 700;
+}
+
+.block h3 {
+	font-family: "Helvetica Neue", "HelveticaNeue-Bold", "Helvetica Neue Bold", Helvetica, "Open Sans", Arial, "Lucida Grande", sans-serif !important; 
+	font-size:24px;
+	display: block;
+	margin: 42px 0 40px 0;
+	line-height: 1.3em;
+	color:#777;
+	font-weight: 300;
 }
 
 .block p, ul, ol, blockquote {
@@ -109,19 +137,18 @@ blockquote {
 }
 
 .block p span {
-	padding:2px;
-	background:rgba(139,103,255,.15);
-	border-radius: 2px;
+	padding:3px 5px;
+	background:#f1e3ff; 
 }
 
 .block a {
 	text-decoration: none;
-	border-bottom: solid 2px rgba(85,255,199,.2);
+	border-bottom: solid 2px rgba(85,255,199,.3);
 }
 
 .block a:hover {
 	color:#222;
-	border-bottom: solid 2px rgba(85,255,199,.4);
+	border-bottom: solid 2px rgba(85,255,199,.5);
 }
 
 .block img, .block a img {
@@ -130,13 +157,22 @@ blockquote {
 	border: none !important;
 }
 
+.block hr {
+	border:none;
+	display: block;
+	height:1px;
+	width:40px;
+	background: #ddd;
+	margin:20px 0 0 0;
+}
+
 pre {
 	width:100%;
 	height:auto;
 	margin:20px 0 0 0;
 	padding:11px 10px 10px 10px;
 	color:#333;
-	background:rgba(139,103,255,.15);
+	background:#f1e3ff;
 	border: solid 10px rgba(139,103,255,0);
 	overflow: scroll
 }
@@ -145,9 +181,19 @@ code {
 	font-family: Courier, 'Courier New', monospace;
 	font-size:16px;
 	line-height: 1.5em;
+	padding:3px 5px;
+	background:#f1e3ff; 
+}
+
+p.social {
+	margin:20px 0 0 0;
+	opacity:.9;
 }
 
 p.meta {
+	font-family: "Helvetica Neue", "HelveticaNeue-Bold", "Helvetica Neue Bold", Helvetica, "Open Sans", Arial, "Lucida Grande", sans-serif !important; 
+	font-size: 19px;
+	font-weight: 300;
 	margin: 60px 0 0 0;
 	color:#666;
 }
@@ -165,13 +211,13 @@ div.block div.links a {
 	background: #fff;
 	border: solid 1px #ddd;
 	border-radius:3px;
-
 	font-family: "Open Sans", Arial, "Lucida Grande", sans-serif !important; 
 	font-weight: 400;
 	opacity:.7;
 }
 
 .block .links {
+	display: none;
 	margin:20px 0 0 0;
 }
 
@@ -181,14 +227,6 @@ div.block div.links a {
 	color:#222;
 	border-color: #aaa;
 	opacity:.8;
-}
-
-span.littleline {
-	display: block;
-	height:1px;
-	width:40px;
-	background: #ddd;
-	margin:0 0 -10px 0;
 }
 
 .leftabit {
@@ -216,10 +254,10 @@ img.loadimg {
 	-o-transform:rotate(-45deg);
 }
 
-img.footerimg {
+a img.footerimg {
 	position: static;
 	display: block;
-	margin: 80px auto 60px auto;
+	margin: 90px auto 60px auto;
 	width:80px;
 	height:80px;
 	transform:rotate(-45deg);
@@ -238,7 +276,7 @@ img.footerimg {
 		height: auto;
 		width:85%;
 		position:static;
-		margin:50px auto 60px auto;
+		margin:50px auto 110px auto;
 	}
 
 	.block h1 {
@@ -259,7 +297,7 @@ img.footerimg {
 
 <body>
 
-		<img class="loadimg" src="../res/img/ptlogo.png"/>
+		<img class="loadimg" src="{{ site.url }}/res/img/ptlogo.png"/>
 
 		<div class="block">
 
@@ -269,7 +307,14 @@ img.footerimg {
 
 			{{ content }}
 
-			<p class="meta">Written on {{ page.date }} by <a href="http://grahammacphee.co.uk">Graham Macphee</a>.</p>
+			<p class="meta">Written on {{ page.date | date_to_long_string }} by <a href="http://grahammacphee.co.uk">Graham Macphee</a>.</p>
+
+			<p class="social">
+				<a href="https://twitter.com/gmph" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @gmph</a>
+				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>&nbsp;
+				<a href="https://twitter.com/share" class="twitter-share-button" data-text="{{ page.heading }}" data-via="gmph" data-size="large" data-related="gmph">Tweet</a>
+				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+			</p>
 
 			<div class="links">
 				
@@ -283,7 +328,7 @@ img.footerimg {
 			</div>
 
 
-			<img class="footerimg" src="../res/img/ptlogo.png"/>
+			<a href="/"><img class="footerimg" src="{{ site.url }}/res/img/ptlogo.png"/></a>
 
 		</div>
 

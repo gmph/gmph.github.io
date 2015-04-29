@@ -1,6 +1,6 @@
 ---
-title: Intro: Graham Macphee
-layout: post
+title: Graham Macphee
+layout: default
 ---
 
 Here is my page.
