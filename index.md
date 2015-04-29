@@ -1,7 +1,7 @@
 ---
 layout: landing
 title: Graham Macphee
-heading: Graham Macphee is a human.
+heading: Graham Macphee is&nbsp;a&nbsp;human.
 date: 28th April 2015
 published: true
 format: markdown
