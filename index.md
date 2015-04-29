@@ -27,7 +27,7 @@ Proin nibh arcu, consectetur a odio nec, aliquet suscipit enim. Suspendisse aliq
 
 	function getData(source){
 		return load(source).decrypt("ALPHA9");
-	};
+	 };
 
 Lorem ipsum dolor sit amet, cras sed sapien quam. Sed `test()` dapibus est id enim facilisis, at posuere turpis adipiscing. Quisque sit amet dui.
 
