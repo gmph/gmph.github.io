@@ -250,13 +250,13 @@ img.loadimg {
 	opacity: 1;
 }
 
-a div.footerimg {
-	background: url('{{ site.url }}/res/img/ptlogo.png');
+a img.footerimg {
 	position: static;
 	display: block;
-	margin: 30px auto 0 auto;
-	width:448px;
-	height:224px;
+	margin: 30px auto 0 auto !important;
+	max-width:448px;
+	width:90%;
+	height:auto;
 }
 
 @media(max-width:750px){
@@ -294,7 +294,7 @@ a div.footerimg {
 	}
 
 	.block h3 {
-		font-size: 22px;
+		font-size: 20px;
 	}
 
 	.block p, ul, ol, blockquote {
@@ -337,7 +337,7 @@ a div.footerimg {
 
 			{{ content }}
 
-			<p class="meta">Written on {{ page.date | date_to_long_string }} by <a href="http://grahammacphee.co.uk">Graham Macphee</a>.</p>
+			<p class="meta">Written on {{ page.date | date_to_long_string }} by <a href="/">Graham Macphee</a>. Graham is a UI/UX Designer and Front-end Developer. He is interested in technology, design, psychology and sociology.</p>
 
 			<p class="social">
 				<a href="https://twitter.com/gmph" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @gmph</a>
@@ -358,7 +358,7 @@ a div.footerimg {
 			</div>
 
 
-			<a href="/"><div class="footerimg"></div></a>
+			<a href="/"><img class="footerimg" src="{{ site.url }}/res/img/ptfooter.png"/></a>
 
 		</div>
 

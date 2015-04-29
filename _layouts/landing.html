@@ -249,16 +249,16 @@ img.loadimg {
 	opacity: 1;
 }
 
-a div.footerimg {
-	background: url('{{ site.url }}/res/img/ptlogo.png');
+a img.footerimg {
 	position: static;
 	display: block;
-	margin: 30px auto 0 auto;
-	width:448px;
-	height:224px;
+	margin: 30px auto 0 auto !important;
+	max-width:448px;
+	width:90%;
+	height:auto;
 }
 
-@media(max-width:750px){
+@media(max-width:700px){
 
 	.nomo {
 		display: none;
@@ -347,7 +347,7 @@ a div.footerimg {
 
 			</div>
 
-			<a href="/"><div class="footerimg"></div></a>
+			<a href="/"><img class="footerimg" src="{{ site.url }}/res/img/ptfooter.png"/></a>
 
 		</div>
 
