@@ -1,6 +1,11 @@
 ---
 title: Graham Macphee
+heading: Graham Macphee is a Designer.
 layout: default
 ---
 
-Here is my page.
+Graham Macphee is a UI/UX Designer and Front-end Developer with 3 years industry experience working with startups around the world. You can see his work and side projects here, and download his [résumé](http://j.mp/gmresume15). If you would like to discuss a role at your company, please [email him](mailto:hi@grahammacphee.co.uk) to arrange a call.
+
+Graham's ideal role would involve working in a small team at a fast pace, designing a user-facing product which solves a real issue. Space to be creative and experimental in order to solve problems is something he appreciates. He is interested in minimalism and animation which both simplify the experience of a product. He would like to work more with these ideas in his work in the future.
+
+Online, Graham tends to be most active on [Tumblr](http://tumblr.grahammacphee.co.uk), where he shares thoughts on equality, cute animals and silly GIFs. You can find his photos on [Instragram](http://instagr.am/gmph) and occasionally interesting links on [Twitter](http://twitter.com/gmph). He enjoys writing and posts thoughts about technology, design and society on his [blog](http://thinks.grahammacphee.co.uk). Offline, he plays ukulele and guitar and sings sometimes to relax and enjoys walking and nature.
