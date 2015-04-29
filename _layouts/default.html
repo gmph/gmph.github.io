@@ -27,6 +27,10 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
+{% if page.url == "/404.html" %}
+	<meta http-equiv="refresh" content="10; url=/">
+{% endif %}
+
 <style type="text/css">
 
 /* CSS RESET */
@@ -397,5 +401,13 @@ window.addEventListener("load", function() { window. scrollTo(0, 0); });
 	});
 
 </script>
+
+{% if page.url == "/404.html" %}
+	<script language="javascript">
+		$('.block').css('margin-top','24vh');
+		$('p.meta').css('display','none');
+		$('p.social').css('display','none');
+	</script>
+{% endif %}
 
 </html>
