@@ -39,7 +39,7 @@ $(document).ready(function($){
 			$("head").append(cssLink); 
 		};
 
-		loadCSS("http://me.gmph.co/spyplugin/pluginFTWStyle.css");
+		loadCSS("http://me.gmph.co/ftwplugin/pluginFTWStyle.css");
 
 		var url = $(location).attr('href'); 
 		var hash = $(location).attr('hash');
