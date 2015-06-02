@@ -43,7 +43,7 @@ $(document).ready(function($){
 
 		var url = $(location).attr('href'); 
 		var hash = $(location).attr('hash');
-		var html = '<div id="pluginSpyBox"><div id="pluginSpyText">Laws being created by the UK Government mean you could be spied on and tracked online, and all your messages and calls could be recorded. Click below to see our ‘free the web’ petition and hide this message.</div><div id="pluginSpyButton">Read in new tab</div><div id="pluginSpyClose">Close</div></div>'
+		var html = '<div id="pluginSpyBox"><div id="pluginSpyText">Laws being created by the UK Government mean you could be spied on and tracked online, and all your messages and calls could be recorded. Click below to see our ‘free the web’ petition and hide this box.</div><div id="pluginSpyButton">Read in new tab</div><div id="pluginSpyClose">Close</div></div>'
 
 	
 		$('div#pluginSpyBox').css('opacity','0');
