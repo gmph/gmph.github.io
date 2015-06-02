@@ -32,7 +32,7 @@ SOFTWARE.
 
 $(document).ready(function($){
 
-	if (!($(location).attr('hash')=="#nospy")){
+	if (!($(location).attr('hash')=="#noftw")){
 
 		loadCSS = function(href) {
 			var cssLink = $("<link rel='stylesheet' type='text/css' href='"+href+"'>");
@@ -57,16 +57,16 @@ $(document).ready(function($){
 		
 
 		$('div#pluginSpyButton').click(function(){
-			window.open('http://grahammacphee.co.uk/spyurl', '_blank');
+			window.open('http://grahammacphee.co.uk/ftwurl', '_blank');
 			$('div#pluginSpyBox').css({'opacity':'0','bottom':'-300px'});
 			$('body *:not(#pluginSpyBox)').removeClass('pluginSpyGrey');
-			window.location.href += "#nospy";
+			window.location.href += "#noftw";
 		});
 
 		$('div#pluginSpyClose').click(function(){
 			$('div#pluginSpyBox').css({'opacity':'0','bottom':'-300px'});
 			$('body *:not(#pluginSpyBox)').removeClass('pluginSpyGrey');
-			window.location.href += "#nospy";
+			window.location.href += "#noftw";
 		});
 
 	}
