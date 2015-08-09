@@ -20,11 +20,11 @@ I'll split this article into four parts so you can find what you're looking for:
 
 2. [You're Not Alone, and Here's Why](#notalone)
 
-3. [What Starting to Get Help is Like](#gethelp)
+3. [What Starting to Get Help is Like](#gettinghelp)
 
 4. [Help, Advice and What You Can Do](#advice)
 
-## 1. My Experience of Depression and Anxiety
+<h2 id="experience">1. My Experience of Depression and Anxiety</h2>
 
 When I talk to new people one of the things I now commonly ask  is if they have experienced any mental health issues and if they are happy. These questions – which started as a way for me to try to learn how to be happy myself and how to understand how I was feeling when affected by depression or anxiety – are now a routine part of me getting to know new people. I ask these questions because I understand (at least a little) what it is like to have an issue you feel like you can't talk about. I want to play my own small roll in normalising discussion about them.
 
@@ -36,7 +36,7 @@ What I do lose is all positivity, energy and willpower I have to do them. Every 
 
 For me, this with some combination of anxiety meant that often while I was at university I wouldn't go out, even as far as the shared areas in my own flat outwith my room. It's not something I ever want to experience again, though I know I will. Even though I can articulate what I know I should do just now.
 
-## 2. You're Not Alone, and Here's Why
+<h2 id="notalone">2. You're Not Alone, and Here's Why</h2>
 
 It is my understanding that with mine and many mental health issues, you feel alone. It is the horrible irony of mental health issues that so many people suffer with them feeling like they're the only one in their position and that no one understands.  But you aren't. You aren't alone.
 
@@ -46,7 +46,7 @@ _University_
 
 _Idea of scale_
 
-## 3. What Starting to Get Help is Like
+<h2 id="gettinghelp">3. What Starting to Get Help is Like</h2>
 
 _Counselling_
 
@@ -64,7 +64,7 @@ In this meeting, my doctor did everything he could to help me and discussed both
 
 Because of this experience with the doctor, I have realised that it is very likely not just me who is affected by the availability of help for, and attitude towards, metal health conditions. 
 
-## 4. Help and Advice for You
+<h2 id="advice">4. Help and Advice for You</h2>
 
 _Advice and Help_
 
