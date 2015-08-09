@@ -8,7 +8,7 @@ format: markdown
 version: 0.2
 ---
 
-![Test Image]({{ site.url }}/res/posts/vote.png)
+![Mental Health and Me]({{ site.url }}/res/posts/brain.png)
 
 I've been doing this all wrong. Whenever I consider writing about a topic that matters to me I turn to statistics to back up my feelings and help people understand why they should care. It doesn't work as well as I want it to. So here are some words – just my words.
 
@@ -17,11 +17,8 @@ Mental health disorders have affected me and the people around me which I care a
 I'll split this article into four parts so you can find what you're looking for:
 
 1. [My Experience of Depression and Anxiety](#experience)
-
 2. [You're Not Alone, and Here's Why](#notalone)
-
 3. [What Starting to Get Help is Like](#gettinghelp)
-
 4. [Help, Advice and What You Can Do](#advice)
 
 <h2 id="experience">1. My Experience of Depression and Anxiety</h2>
