@@ -11,17 +11,17 @@ I tend to think about puppies, pizza and equality. I enjoy being creative: writi
 
 I am a UI/UX Designer and Front-end Developer with 3 years industry experience working with startups around the world. You can see my work and side projects in [my portfolio](http://grahammacphee.co.uk), and download my [résumé](http://j.mp/gmresume15). If you would like to discuss a role at your company, please [email me](mailto:hi@grahammacphee.co.uk) to arrange a call.
 
-<!--
-
-Here are my previous posts:
+You can see my recent articles below:
 
 <ul>
-  {% for post in site.posts %}
+  {% for post in site.posts limit:6 %}
     <li>
       <a href="{{ post.url }}">{{ post.title }}</a>
     </li>
   {% endfor %}
 </ul>
+
+<!--
 
 [![My Image](https://d13yacurqjgara.cloudfront.net/users/28519/screenshots/2039695/frezko-small.png)](https://dribbble.com/shots/2039695-Frezko-Hand-Drawn-Messaging)
 
@@ -55,6 +55,6 @@ Lorem ipsum dolor sit amet, cras sed sapien quam. Sed dapibus est id enim facili
 
 > Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed sapien quam. Sed dapibus est id enim facilisis, at posuere turpis adipiscing. Quisque sit amet dui dui.
 
-Lorem ipsum dolor sit amet, cras sed sapien quam. Sed dapibus est id enim facilisis, at posuere turpis adipiscing. Quisque sit amet dui. 
+Lorem ipsum dolor sit amet, cras sed sapien quam. Sed dapibus est id enim facilisis, at posuere turpis adipiscing. Quisque sit amet dui.
 
 -->
