@@ -87,7 +87,7 @@ span.littleline {
 	position: relative;
 	top:0;
 	left: -2px;
-	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, "Open Sans", Arial, "Lucida Grande", sans-serif !important; 
+	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, "Open Sans", Arial, "Lucida Grande", sans-serif !important;
 	font-size:30px;
 	display: block;
 	margin: 0 0 10px 0;
@@ -97,7 +97,7 @@ span.littleline {
 }
 
 .block h2 {
-	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, "Open Sans", Arial, "Lucida Grande", sans-serif !important; 
+	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, "Open Sans", Arial, "Lucida Grande", sans-serif !important;
 	font-size:20px;
 	display: block;
 	margin: 30px 0 0 0;
@@ -107,7 +107,7 @@ span.littleline {
 }
 
 .block h3 {
-	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, "Open Sans", Arial, "Lucida Grande", sans-serif !important; 
+	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, "Open Sans", Arial, "Lucida Grande", sans-serif !important;
 	font-size:24px;
 	display: block;
 	margin: 42px 0 42px 0;
@@ -142,7 +142,7 @@ blockquote {
 
 .block p span {
 	padding:3px 5px;
-	background:#f1e3ff; 
+	background:#f1e3ff;
 }
 
 .block a {
@@ -195,7 +195,7 @@ code {
 	font-size:16px;
 	line-height: 1.5em;
 	padding:3px 5px;
-	background:#f1e3ff; 
+	background:#f1e3ff;
 }
 
 p.social {
@@ -204,7 +204,7 @@ p.social {
 }
 
 p.meta {
-	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, "Open Sans", Arial, "Lucida Grande", sans-serif !important; 
+	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, "Open Sans", Arial, "Lucida Grande", sans-serif !important;
 	font-size: 19px;
 	font-weight: 300;
 	line-height: 1.6em;
@@ -225,7 +225,7 @@ div.block div.links a {
 	background: #fff;
 	border: solid 1px #ddd;
 	border-radius:3px;
-	font-family: "Open Sans", Arial, "Lucida Grande", sans-serif !important; 
+	font-family: "Open Sans", Arial, "Lucida Grande", sans-serif !important;
 	font-weight: 400;
 	opacity:.7;
 }
@@ -274,16 +274,16 @@ a img.footerimg {
 	width:90%;
 	height:auto;
 
-/*	-webkit-transition: all 400ms cubic-bezier(0.770, 0, 0.290, 1); 
-    -webkit-transition: all 400ms cubic-bezier(0.770, -0.600, 0.290, 1.650); 
-       -moz-transition: all 400ms cubic-bezier(0.770, -0.600, 0.290, 1.650); 
-         -o-transition: all 400ms cubic-bezier(0.770, -0.600, 0.290, 1.650); 
+/*	-webkit-transition: all 400ms cubic-bezier(0.770, 0, 0.290, 1);
+    -webkit-transition: all 400ms cubic-bezier(0.770, -0.600, 0.290, 1.650);
+       -moz-transition: all 400ms cubic-bezier(0.770, -0.600, 0.290, 1.650);
+         -o-transition: all 400ms cubic-bezier(0.770, -0.600, 0.290, 1.650);
             transition: all 400ms cubic-bezier(0.770, -0.600, 0.290, 1.650);
 
-    -webkit-transition-timing-function: cubic-bezier(0.770, 0, 0.290, 1); 
-    -webkit-transition-timing-function: cubic-bezier(0.770, -0.600, 0.290, 1.650); 
-       -moz-transition-timing-function: cubic-bezier(0.770, -0.600, 0.290, 1.650); 
-         -o-transition-timing-function: cubic-bezier(0.770, -0.600, 0.290, 1.650); 
+    -webkit-transition-timing-function: cubic-bezier(0.770, 0, 0.290, 1);
+    -webkit-transition-timing-function: cubic-bezier(0.770, -0.600, 0.290, 1.650);
+       -moz-transition-timing-function: cubic-bezier(0.770, -0.600, 0.290, 1.650);
+         -o-transition-timing-function: cubic-bezier(0.770, -0.600, 0.290, 1.650);
             transition-timing-function: cubic-bezier(0.770, -0.600, 0.290, 1.650);
 
 }
@@ -384,7 +384,7 @@ a img.footerimg:hover {
 			</p>
 
 			<div class="links">
-				
+
 				<a href="http://twitter.com/gmph">twitter</a>
 				<a href="http://facebook.com/grahammacphee">facebook</a>
 				<a href="http://instagr.am/gmph">instagram</a>
@@ -430,6 +430,21 @@ a img.footerimg:hover {
 	    	},1000);
     	},200);
 	});
+
+	$(function() {
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({
+              scrollTop: (target.offset().top - 20)
+            }, 1000);
+            return false;
+          }
+        }
+      });
+    });
 
 </script>
 
