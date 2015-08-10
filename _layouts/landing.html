@@ -63,6 +63,8 @@
 
 	// window.location.replace("http://twitter.com/gmph");
 
+    window.addEventListener("load", function() { window. scrollTo(0, 0); });
+
     $('.block').css('opacity','0');
 
     $('body').css('overflow-y','hidden');
@@ -88,7 +90,20 @@
     	},200);
 	});
 
-	window.addEventListener("load", function() { window. scrollTo(0, 0); });
+	$(function() {
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({
+              scrollTop: (target.offset().top - 30)
+		  	}, 400);
+            return false;
+          }
+        }
+      });
+    });
 
 </script>
 
