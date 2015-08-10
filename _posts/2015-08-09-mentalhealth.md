@@ -39,13 +39,13 @@ It is my understanding that with mine and many mental health issues, you feel al
 
 Throughout my life I have always been quiet, reserved and withdrawn, even with my friends. This persisted until last year when I started university. 
 
-_University_
+_TODO: University_
 
-_Idea of scale_
+_TODO: Idea of scale_
 
 <h2 id="gettinghelp">3. What Starting to Get Help is Like</h2>
 
-_Counselling_
+_TODO: Counselling_
 
 I have never been diagnosed with any mental health condition officially, which may seem odd given that I've described my experience of having and anxiety and clinical depression. I have also visited my doctor about these issues which may confuse you more. This puzzling contradiction leads me on to a story. 
 
@@ -63,9 +63,9 @@ Because of this experience with the doctor, I have realised that it is very like
 
 <h2 id="advice">4. Help and Advice for You</h2>
 
-_Advice and Help_
+_TODO: Advice and Help_
 
-**Plan:**
+## Article Notes and Plan
 
 Introduction:
 
