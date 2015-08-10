@@ -21,7 +21,7 @@ I'll split this article into four parts so you can find what you're looking for:
 3. [What Starting to Get Help is Like](#gettinghelp)
 4. [Help, Advice and What You Can Do](#advice)
 
-If you have any questions or suggestions, you can tweet me [@gmph](http://twitter.com/gmph).
+If you have any questions or suggestions, tweet me [@gmph](http://twitter.com/gmph).
 
 <h2 id="experience">1. My Experience of Depression and Anxiety</h2>
 
