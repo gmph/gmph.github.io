@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Mental Health and Me (Draft)
+title: Mental Health and Me
 heading: Mental Health and Me
 date: 9th August 2015
 published: true
@@ -39,7 +39,7 @@ For me, this with some combination of anxiety meant that often while I was at un
 
 It is my understanding that with mine and many mental health issues, you feel alone. It is the horrible irony of mental health issues that so many people suffer with them feeling like they're the only one in their position and that no one understands.  But you aren't. You aren't alone.
 
-Throughout my life I have always been quiet, reserved and withdrawn, even with my friends. This persisted until last year when I started university. 
+Throughout my life I have always been quiet, reserved and withdrawn, even with my friends. I never really talked about how I felt as I considered it to be normal for me. This persisted until last year when I started university. In the few months prior to starting university I was beginning to realise that what I thought was normal might not be: long periods of feeling down for no reason,
 
 _TODO: University_
 
