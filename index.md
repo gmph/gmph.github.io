@@ -7,13 +7,13 @@ published: true
 format: markdown
 ---
 
-I tend to think about puppies, pizza and equality. I enjoy being creative: writing, photography, guitar, ukulele and singing occasionally. I'm quiet and thoughtful, and like nature and quiet nights. I'm interested in a combination of technology, design, psychology and sociology.
+I tend to think about puppies, pizza and equality. I enjoy being creative: writing, photography, guitar, ukulele and singing occasionally. I'm quiet and thoughtful, and like nature and quiet nights.
 
-I am a Designer and Front-end Developer with 3 years industry experience working with startups around the world. I'm currently working with the team at [Snipandshare](http://snipandshare.com) on a variety of design and development challenges. Previously I worked as a Writer and PR Manager for UltraLinx, and other online publications.
+I am a Designer and Front-end Developer with 3 years industry experience working with startups around the world. Previously I worked as a Writer and PR Manager for UltraLinx, and other online publications.
 
 <!-- If you would like to discuss a role at your company, please [email me](mailto:hi@grahammacphee.co.uk) to arrange a call. -->
 
-This is where I publish my thoughts on technology, society, politics and more. You can see my most recent articles below:
+This is where I publish my thoughts on technology, design, psychology, society, politics and more. You can see my most recent articles below:
 
 <ul>
   {% for post in site.posts limit:6 %}
