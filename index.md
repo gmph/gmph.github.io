@@ -13,7 +13,7 @@ I am a Designer and Front-end Developer with 3 years industry experience working
 
 <!-- If you would like to discuss a role at your company, please [email me](mailto:hi@grahammacphee.co.uk) to arrange a call. -->
 
-This is where I publish my thoughts on society, politics, technology and more. You can see my most recent articles below:
+This is where I publish my thoughts on technology, society, politics and more. You can see my most recent articles below:
 
 <ul>
   {% for post in site.posts limit:6 %}
