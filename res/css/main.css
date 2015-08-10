@@ -175,6 +175,23 @@ p.meta {
 	color:#666;
 }
 
+span.postlistmeta {
+    margin-left:10px;
+    font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, "Open Sans", Arial, "Lucida Grande", sans-serif !important;
+    font-weight: 300;
+    color:#888;
+}
+
+.block .links {
+	display: none;
+	margin:20px 0 0 0;
+}
+
+.block.landing .links {
+	display: block;
+	margin:24px 0 0 0;
+}
+
 div.block div.links a {
 	position: relative;
 	display: inline-block;
@@ -191,11 +208,6 @@ div.block div.links a {
 	font-family: "Open Sans", Arial, "Lucida Grande", sans-serif !important;
 	font-weight: 400;
 	opacity:.7;
-}
-
-.block .links {
-	display: none;
-	margin:20px 0 0 0;
 }
 
 .block .links a:hover {

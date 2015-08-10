@@ -18,7 +18,7 @@ This is where I publish my thoughts on technology, psychology, politics and more
 <ul>
   {% for post in site.posts limit:6 %}
     <li>
-      <a href="{{ post.url }}">{{ post.title }}</a>
+      <a href="{{ post.url }}">{{ post.title }}</a><span class="postlistmeta">{{ post.date | date_to_long_string }}</span>
     </li>
   {% endfor %}
 </ul>

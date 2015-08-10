@@ -12,7 +12,7 @@ version: 0.2
 
 I've been doing this all wrong. Whenever I consider writing about a topic that matters to me I turn to statistics to back up my feelings and help people understand why they should care. It doesn't work as well as I want it to. So here are some words – just my words.
 
-Mental health disorders have affected me and the people around me which I care about most for some time. It's something I have only talked about with a few people, but I feel like we (all of us) need to discuss these issues more widely. I'm going to talk about my personal experiences of mental health issues and my understanding of how important these issues and their treatment is today.
+Mental health disorders have affected me and the people around me which I care about most for some time. It's something I have only talked about with a few people, but I feel like we (all of us) need to discuss these issues more widely. I'm going to talk about my experiences of mental health issues and my understanding of how important these issues and their treatment is today.
 
 I'll split this article into four parts so you can find what you're looking for:
 
