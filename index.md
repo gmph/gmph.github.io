@@ -1,7 +1,7 @@
 ---
 layout: landing
 title: Graham Macphee
-heading: Graham Macphee is&nbsp;a&nbsp;human.
+heading: Graham Macphee is&nbsp;a&nbsp;writer.
 date: 28th April 2015
 published: true
 format: markdown
@@ -9,11 +9,11 @@ format: markdown
 
 I tend to think about puppies, pizza and equality. I enjoy being creative: writing, photography, guitar, ukulele and singing occasionally. I'm quiet and thoughtful, and like nature and quiet nights. I'm interested in a combination of technology, design, psychology and sociology.
 
-I am a UI/UX Designer and Front-end Developer with 3 years industry experience working with startups around the world. You can see my work and side projects in [my portfolio](http://grahammacphee.co.uk), and download my [résumé](http://j.mp/gmresume15).
+I am a Designer and Front-end Developer with 3 years industry experience working with startups around the world. You can see my work and side projects in [my portfolio](http://grahammacphee.co.uk), and download my [résumé](http://j.mp/gmresume15). I'm currently working with the team at [Snipandshare](http://snipandshare.com) on a variety of design and development challenges.
 
 <!-- If you would like to discuss a role at your company, please [email me](mailto:hi@grahammacphee.co.uk) to arrange a call. -->
 
-You can see my recent articles below:
+This is where I publish my thoughts on society, politics, technology and more. You can see my most recent articles below:
 
 <ul>
   {% for post in site.posts limit:6 %}
@@ -23,7 +23,7 @@ You can see my recent articles below:
   {% endfor %}
 </ul>
 
-You can find more of my writing on [my other blog](http://thinks.grahammacphee.co.uk).
+You can find more informal writing on [my other blog](http://thinks.grahammacphee.co.uk).
 
 <!--
 

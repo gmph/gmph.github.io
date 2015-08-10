@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Mental Health and Me
+title: Mental Health and Me (Draft)
 heading: Mental Health and Me
 date: 9th August 2015
 published: true
@@ -20,6 +20,8 @@ I'll split this article into four parts so you can find what you're looking for:
 2. [You're Not Alone, and Here's Why](#notalone)
 3. [What Starting to Get Help is Like](#gettinghelp)
 4. [Help, Advice and What You Can Do](#advice)
+
+If you have any questions or suggestions, you can tweet me [@gmph](http://twitter.com/gmph).
 
 <h2 id="experience">1. My Experience of Depression and Anxiety</h2>
 
