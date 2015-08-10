@@ -365,9 +365,9 @@ a img.footerimg:hover {
         font-size:14px;
     }
 
-    /*div.block div.links a {
+    div.block div.links a {
         font-size:15px;
-    }*/
+    }
 
 	a div.footerimg {
 		position: relative;
