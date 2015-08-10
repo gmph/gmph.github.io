@@ -5,11 +5,12 @@ heading: Let's fix the world.
 date: 29th April 2015
 published: true
 format: markdown
+version: 1.0
 ---
 
 Forget about reality for a second. Leave your understanding of how the world works and the structure of society behind while you read this. Imagine a blank slate; a limitless space for you to think.
 
-![The Earth]({{ site.url }}/res/posts/earth.png)
+![Let's Fix the World]({{ site.url }}/res/posts/earth.png)
 
 As a human being, what are your priorities in life? For most people the list will be filled with concepts like happiness, kindness, compassion, creativity and discovery. These seem obvious to us. We all have basic desires and understand to some extent what we value and what makes us happy. But–
 

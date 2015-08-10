@@ -5,7 +5,7 @@ heading: Mental Health and Me
 date: 9th August 2015
 published: true
 format: markdown
-version: 0.2
+version: 0.3
 ---
 
 ![Mental Health and Me]({{ site.url }}/res/posts/brain.png)
@@ -41,9 +41,11 @@ It is my understanding that with mine and many mental health issues, you feel al
 
 Throughout my life I have always been quiet, reserved and withdrawn, even with my friends. I never really talked about how I felt as I considered it to be normal for me. This persisted until last year when I started university. In the few months prior to starting university I was beginning to realise that what I thought was normal might not be: long periods of feeling down for no reason; feeling anxious in most social situations even with friends and family. I started to talk about it. I had been interested in mental health before this realisation about myself. Several people close to me have had experiences with mental health issues and my attempts to learn more about it to support them left me knowing what I should do (though it was far from easy when I actually had to put this into practice).
 
-I tried to talk to people about how I was feeling and over time found a few people who I could trust.
+I tried to talk to people about how I was feeling and over time found a few people who I could trust. I won't go into too much detail here, but the people I came to trust were in similar positions to me. They could understand how I felt, and I could understand them too. It surprised me how little was needed to achieve this level of trust. Just a common problem and understanding of how we felt was all that seemed to matter. I'm not so sure that was it though. While, yes, we did understand each other, that's not what I needed when talking to people and that's not all I needed to give.
 
-TODO: _University_
+The friends I made and the people I talked to at university are special simply because they were accepting. Oh, you've been crying for the past three hours? That's okay, I'm here, call me, or meet me tomorrow maybe? Don't have the energy to get food tonight? I'll make some pizza. And here's some Ben and Jerry's. It's these small things that made these people so important to me. We accepted our situations and did the best we could to be happy and support each other. I tried to say it as much as possible but I really can't thank my friends enough for the help they gave me.
+
+This experience is really what made me realise that I'm not alone. I had talked to people online before in a similar way to this, and some have become my good friends. This extra step of finding friends in person who could talk about mental health openly, affectionately and understandingly was a big help for me. No matter how you feel, you're not alone. There are people there who you can talk to and sometimes you just have to open up, spill your feelings, and you'll find them.
 
 TODO: _Idea of scale_
 
