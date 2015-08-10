@@ -34,10 +34,7 @@ body {
 	height:auto;
 	position: static;
 	margin: 110px auto 0 auto;
-}
-
-.block.landing {
-    margin-top: 180px;
+    opacity:0;
 }
 
 span.littleline {

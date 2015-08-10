@@ -9,7 +9,9 @@ format: markdown
 
 I tend to think about puppies, pizza and equality. I enjoy being creative: writing, photography, guitar, ukulele and singing occasionally. I'm quiet and thoughtful, and like nature and quiet nights. I'm interested in a combination of technology, design, psychology and sociology.
 
-I am a UI/UX Designer and Front-end Developer with 3 years industry experience working with startups around the world. You can see my work and side projects in [my portfolio](http://grahammacphee.co.uk), and download my [résumé](http://j.mp/gmresume15). If you would like to discuss a role at your company, please [email me](mailto:hi@grahammacphee.co.uk) to arrange a call.
+I am a UI/UX Designer and Front-end Developer with 3 years industry experience working with startups around the world. You can see my work and side projects in [my portfolio](http://grahammacphee.co.uk), and download my [résumé](http://j.mp/gmresume15).
+
+<!-- If you would like to discuss a role at your company, please [email me](mailto:hi@grahammacphee.co.uk) to arrange a call. -->
 
 You can see my recent articles below:
 
@@ -20,6 +22,8 @@ You can see my recent articles below:
     </li>
   {% endfor %}
 </ul>
+
+You can find more of my writing on [my other blog](http://thinks.grahammacphee.co.uk).
 
 <!--
 
