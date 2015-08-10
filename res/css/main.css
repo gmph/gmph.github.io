@@ -6,19 +6,19 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
 
 @font-face {
     font-family: 'Helvetica Neue';
-    src: url('{{ site.url }}/res/font/hnl.ttf') format('truetype');
+    src: url('../font/hnl.ttf') format('truetype');
   	font-weight: 300;
 }
 
 @font-face {
     font-family: 'Helvetica Neue';
-    src: url('{{ site.url }}/res/font/hnm.ttf') format('truetype');
+    src: url('../font/hnm.ttf') format('truetype');
   	font-weight: 400;
 }
 
 @font-face {
     font-family: 'Helvetica Neue';
-    src: url('{{ site.url }}/res/font/hnb.ttf') format('truetype');
+    src: url('../font/hnb.ttf') format('truetype');
   	font-weight: 700;
 }
 
@@ -205,8 +205,7 @@ li.postitem a:hover {
 }
 
 span.postitemmeta {
-    margin-left:6px;
-    font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, "Open Sans", Arial, "Lucida Grande", sans-serif !important;
+    margin-left:4px;
     font-size:17px;
     font-weight: 300;
     color:#bbb;
@@ -355,6 +354,20 @@ a img.footerimg:hover {
 	span.littleline {
 		margin: 0 0 44px 0;
 	}
+
+    li.postitem {
+        font-size:18px;
+    }
+
+    span.postitemmeta {
+        display: block;
+        margin:-10px 0 0 0;
+        font-size:14px;
+    }
+
+    /*div.block div.links a {
+        font-size:15px;
+    }*/
 
 	a div.footerimg {
 		position: relative;
