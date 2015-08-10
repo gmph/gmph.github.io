@@ -12,17 +12,17 @@
 
 <title>{{ page.title }}</title>
 <meta name="author" content="Graham Macphee" />
-<meta name="description" content="I'm Graham. I tend to think about puppies, pizza and equality. I enjoy being creative: graphic design, writing, photography, guitar, ukulele and singing occasionally. I'm quiet and thoughtful, and like nature and quiet nights-in. I'm interested in technology, design and neuroscience, which  intersect quite nicely. I live in Edinburgh and study Computer Science at UoE. I'm a freelance designer." />
-<meta name="keywords" content="I'm Graham. I tend to think about puppies, pizza and equality. I enjoy being creative: graphic design, writing, photography, guitar, ukulele and singing occasionally. I'm quiet and thoughtful, and like nature and quiet nights-in. I'm interested in technology, design and neuroscience, which  intersect quite nicely. I live in Edinburgh and study Computer Science at UoE. I'm a freelance designer." />
+<meta name="description" content="{{ content }}" />
+<meta name="keywords" content="{{ content }}" />
 <meta charset="utf-8">
-<meta property="og:title" content="Intro: Graham Macphee">
+<meta property="og:title" content="{{ page.title }}">
 <meta property="og:type" content="website">
-<meta property="og:url" content="http://grahammacphee.co.uk/intro">
+<meta property="og:url" content="{{ site.url }}/{{ page.path }}">
 <meta property="og:site_name" content="Graham Macphee">
-<meta property="og:description" content="I'm Graham. I tend to think about puppies, pizza and equality. I enjoy being creative: graphic design, writing, photography, guitar, ukulele and singing occasionally. I'm quiet and thoughtful, and like nature and quiet nights-in. I'm interested in technology, design and neuroscience, which  intersect quite nicely. I live in Edinburgh and study Computer Science at UoE. I'm a freelance designer.">
+<meta property="og:description" content="{{ content }}">
 <meta property="twitter:account_id" content="87261538" /> <!-- Twitter ID, currently for @gmph -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="shortcut icon" href="http://static.tumblr.com/ajv5ctq/NLfn8e369/ham_icon_small.png">
+<link rel="shortcut icon" href="{{ site.url }}/res/img/ptlogo.png">
 <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400|Open+Sans:400,700' rel='stylesheet' type='text/css'>
 <link href="{{ site.url }}/res/css/main.css" rel="stylesheet" type="text/css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
