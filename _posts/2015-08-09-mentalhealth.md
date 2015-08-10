@@ -39,15 +39,17 @@ For me, this with some combination of anxiety meant that often while I was at un
 
 It is my understanding that with mine and many mental health issues, you feel alone. It is the horrible irony of mental health issues that so many people suffer with them feeling like they're the only one in their position and that no one understands.  But you aren't. You aren't alone.
 
-Throughout my life I have always been quiet, reserved and withdrawn, even with my friends. I never really talked about how I felt as I considered it to be normal for me. This persisted until last year when I started university. In the few months prior to starting university I was beginning to realise that what I thought was normal might not be: long periods of feeling down for no reason,
+Throughout my life I have always been quiet, reserved and withdrawn, even with my friends. I never really talked about how I felt as I considered it to be normal for me. This persisted until last year when I started university. In the few months prior to starting university I was beginning to realise that what I thought was normal might not be: long periods of feeling down for no reason; feeling anxious in most social situations even with friends and family. I started to talk about it. I had been interested in mental health before this realisation about myself. Several people close to me have had experiences with mental health issues and my attempts to learn more about it to support them left me knowing what I should do (though it was far from easy when I actually had to put this into practice).
 
-_TODO: University_
+I tried to talk to people about how I was feeling and over time found a few people who I could trust.
 
-_TODO: Idea of scale_
+TODO: _University_
+
+TODO: _Idea of scale_
 
 <h2 id="gettinghelp">3. What Starting to Get Help is Like</h2>
 
-_TODO: Counselling_
+TODO: _Counselling_
 
 I have never been diagnosed with any mental health condition officially, which may seem odd given that I've described my experience of having and anxiety and clinical depression. I have also visited my doctor about these issues which may confuse you more. This puzzling contradiction leads me on to a story. 
 
@@ -61,11 +63,11 @@ To me this signifies not only that mental health isn't something which is discus
 
 In this meeting, my doctor did everything he could to help me and discussed both the issues I was having and the psychology related to them in good detail. However, one of the main things I took away from our discussions was that the system he was working in was not adequately set up to provide help to people with common mental health conditions of a similar level to mine.
 
-Because of this experience with the doctor, I have realised that it is very likely not just me who is affected by the availability of help for, and attitude towards, metal health conditions. 
+This unfortunate story aside, there is lots of help available. While taking the first steps to get help is the most difficult, it is also the most important thing you can do to help yourself. There are people far more experienced than me in the process of seeking help, getting treatment and recovering from mental health disorders,
 
-<h2 id="advice">4. Help and Advice for You</h2>
+<h2 id="advice">4. Help, Advice and What You Can Do</h2>
 
-_TODO: Advice and Help_
+TODO: _Advice and Help_
 
 ## Article Notes and Plan
 
