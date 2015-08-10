@@ -29,15 +29,15 @@ body {
 .block {
 	position: relative;
 	height:100vh;
-	width:100%;
-}
-
-.block {
 	width: 80%;
 	max-width: 550px;
 	height:auto;
 	position: static;
 	margin: 110px auto 0 auto;
+}
+
+.block.landing {
+    margin-top: 250px;
 }
 
 span.littleline {
@@ -261,7 +261,7 @@ a img.footerimg:hover {
 	opacity: .9;*/
 }
 
-@media(max-width:750px){
+@media (max-width:750px){
 
 	.nomo {
 		display: none;
