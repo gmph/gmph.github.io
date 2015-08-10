@@ -132,7 +132,6 @@ blockquote {
 	box-shadow: 0 0px 2px rgba(0,0,0,.2)
 }
 
-
 .block hr {
 	border:none;
 	display: block;
@@ -175,11 +174,43 @@ p.meta {
 	color:#666;
 }
 
-span.postlistmeta {
-    margin-left:10px;
+ul.postlist {
+    margin:20px 0 0 0;
+    list-style-type: none !important;
+}
+
+li.postitem {
     font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, "Open Sans", Arial, "Lucida Grande", sans-serif !important;
+    font-size:19px;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+li.postitem a {
+    position: relative;
+    top:0;
+    left:0;
+    border-bottom: none !important;
+    opacity:.85;
+
+    transition:.15s all ease-out;
+    -webkit-transition:.15s all ease-out;
+    -moz-transition:.15s all ease-out;
+    -o-transition:.15s all ease-out
+}
+
+li.postitem a:hover {
+    left:5px;
+    opacity: 1;
+}
+
+span.postitemmeta {
+    margin-left:6px;
+    font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, "Open Sans", Arial, "Lucida Grande", sans-serif !important;
+    font-size:17px;
     font-weight: 300;
-    color:#888;
+    color:#bbb;
+    /*float:right;*/
 }
 
 .block .links {

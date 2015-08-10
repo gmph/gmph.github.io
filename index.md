@@ -13,15 +13,19 @@ I am a Designer and Front-end Developer with 3 years industry experience working
 
 <!-- If you would like to discuss a role at your company, please [email me](mailto:hi@grahammacphee.co.uk) to arrange a call. -->
 
-This is where I publish my thoughts on technology, psychology, politics and more. You can see my most recent articles below:
+This is where I publish my thoughts on technology, psychology, politics and more. You can see my most recent articles below.
 
-<ul>
+***
+
+<ul class="postlist">
   {% for post in site.posts limit:6 %}
-    <li>
-      <a href="{{ post.url }}">{{ post.title }}</a><span class="postlistmeta">{{ post.date | date_to_long_string }}</span>
+    <li class="postitem">
+      <a href="{{ post.url }}">{{ post.title }} <span class="postitemmeta">{{ post.date | date_to_long_string }}</span></a>
     </li>
   {% endfor %}
 </ul>
+
+***
 
 You can find more informal writing on [my other blog](http://thinks.grahammacphee.co.uk).
 
