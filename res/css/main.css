@@ -367,6 +367,7 @@ a img.footerimg:hover {
 
     div.block div.links a {
         font-size:15px;
+    	padding:10px 14px 8px 14px;
     }
 
 	a div.footerimg {
