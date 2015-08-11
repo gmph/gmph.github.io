@@ -154,9 +154,9 @@ pre {
 
 code {
 	font-family: Courier, 'Courier New', monospace;
-	font-size:16px;
-	line-height: 1.5em;
-	padding:3px 5px;
+	font-size:17px;
+	line-height: 1.6em;
+	padding:2px 5px 3px 5px;
 	background:#f1e3ff;
 }
 
