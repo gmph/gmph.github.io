@@ -5,7 +5,7 @@ heading: Mental Health and Me
 date: 9th August 2015
 published: true
 format: markdown
-version: 0.3
+version: 0.4
 ---
 
 ![Mental Health and Me]({{ site.url }}/res/posts/brain.png)
@@ -14,7 +14,7 @@ I've been doing this all wrong. Whenever I consider writing about a topic that m
 
 Mental health disorders have affected me and the people around me which I care about most for some time. It's something I have only talked about with a few people, but I feel like we (all of us) need to discuss these issues more widely. I'm going to talk about my experiences of mental health issues and my understanding of how important these issues and their treatment is today.
 
-I'll split this article into four parts so you can find what you're looking for:
+I'll split this article into four parts so you can find what you're looking for, and avoid what may be triggring:
 
 1. [My Experience of Depression and Anxiety](#experience)
 2. [You're Not Alone, and Here's Why](#notalone)
@@ -25,7 +25,7 @@ If you have any questions or suggestions, tweet me [@gmph](http://twitter.com/gm
 
 <h2 id="experience">1. My Experience of Depression and Anxiety</h2>
 
-When I talk to new people one of the things I now commonly ask  is if they have experienced any mental health issues and if they are happy. These questions – which started as a way for me to try to learn how to be happy myself and how to understand how I was feeling when affected by depression or anxiety – are now a routine part of me getting to know new people. I ask these questions because I understand (at least a little) what it is like to have an issue you feel like you can't talk about. I want to play my own small roll in normalising discussion about them.
+When I talk to new people one of the things I now commonly ask  is if they have experienced any mental health issues and if they are happy. These questions – which started as a way for me to try to learn how to be happy myself and how to understand how I was feeling when affected by depression or anxiety – are now a routine part of me getting to know new people. I ask these questions because I understand (at least a little) what it is like to have an issue you feel like you can't talk about. I want to play my own small role in normalising discussion about them.
 
 My own experience of mental health problems aren't something I can define easily, nor even something I understand well myself. Before I start, I would like to say that my conditions aren't near as difficult to live with as many others' and I have no major concerns about my physical health due to them. As much as I intend to keep this positive and helpful, I feel like some expression of my own experiences is needed.
 
@@ -47,9 +47,11 @@ The friends I made and the people I talked to at university are special simply b
 
 This experience is really what made me realise that I'm not alone. I had talked to people online before in a similar way to this, and some have become my good friends. This extra step of finding friends in person who could talk about mental health openly, affectionately and understandingly was a big help for me. No matter how you feel, you're not alone. There are people there who you can talk to and sometimes you just have to open up, spill your feelings, and you'll find them.
 
-TODO: _Idea of scale_
+The important thing to take away from my story is that mental health is something which affects everyone. You don't have to have a severe condition to be one of the people who can support someone: you just need to listen, be accepting and talk to them. There's no magic answer to mental illness and everyone will find that different things help them, but we can all appreciate some genuine affection sometimes. From my experience, if you are accepting, you'll find the rest follows.
 
 <h2 id="gettinghelp">3. What Starting to Get Help is Like</h2>
+
+Having friends to support me was extremely important. It was something that I didn't take advantage of or notice I had for a long time and I should have. It gives you a solid foundation of support to start from to seek further help.
 
 TODO: _Counselling_
 
@@ -85,21 +87,17 @@ My Experiences:
 
 [x]  what it's like
 
-[  ]  university
+[x]  university
 
 [  ]  counselling
 
 [x]  doctor story
 
-[  ]  link to scale: not only me
-
 Idea of Scale:
 
-[  ]  friends and family, be vague
+[x]  friends and family, be vague
 
-[  ]  main idea: affects everyone
-
-[  ]  link to advice: you/someone loved will need it
+[x]  main idea: affects everyone
 
 Advice and Help:
 
