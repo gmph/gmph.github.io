@@ -5,6 +5,7 @@ heading: Mental Health and Me
 date: 9th August 2015
 published: true
 format: markdown
+permalink: /mental-health
 version: 0.4
 ---
 
@@ -53,11 +54,13 @@ The important thing to take away from my story is that mental health is somethin
 
 Having friends to support me was extremely important. It was something that I didn't take advantage of or notice I had for a long time and I should have. It gives you a solid foundation of support to start from to seek further help. One thing I have experienced is that even when I know what to do, what the next step is, it's significantly more difficult to see it when you're in the situation yourself. You need support to see what to do.
 
-The first thing I did to get help after talking to friends (and before discussing it with my family) was to contact my university's counselling service. They sent me a couple of forms which I filled out and sent back to them. Then they told me to go along next Tuesday at 2pm. I did. I had no idea where I was going, which was fun. I had been in the university library a few times but never on the floor where the counselling service was. Once I found it, after a short detour past some computers, through a wrong door and along a corridor quietly trying to make sure no one heard or saw me, I found it.
+The first thing I did to get help after talking to friends (and before discussing it with my family) was to contact my university's counselling service. They sent me a couple of forms which I filled out and sent back to them. Then they told me to go along next Tuesday at 2pm. I did. I had no idea where I was going, which was fun. I had been in the university library a few times but never on the floor where the counselling service was. Once I found it, after a short detour past some computers, through a wrong door and along a corridor quietly trying to make sure no one heard or saw me, I found it. I was given a short survey to judge how I was feeling and then got to talk to one of the counsellors.
 
-`IN PROGRESS: Counselling`
+We went into her office and I sat down. Then she told me to get out of her seat (politely). I was flustered and shuffled around and moved to the other seat, desperately trying to relax and seem normal. And so began the long, unstructured rambling of my feelings. There was a lot I had to discuss and being able to talk to – or at – someone for a short while was nice, and not having to worry about her not wanting to listen or help was nice.
 
-I have never been diagnosed with any mental health condition officially, which may seem odd given that I've described my experience of having and anxiety and clinical depression. I have also visited my doctor about these issues which may confuse you more. This puzzling contradiction leads me on to a story. 
+For me, counselling was a way to talk through the difficulties that were upsetting me that I couldn't figure out on my own. It was a way to come to decisions about several things which worried me at the time. While it did help to remove these stresses from my life, it didn't help with how I was feeling in general due to depression and anxiety. The counselling I received was just like speech therapy rather than CBT.
+
+The other help I have sought is with my doctor – once at university and once at home. I have never been diagnosed with any mental health condition officially, which may seem odd given that I've described my experience of having and anxiety and clinical depression. This puzzling contradiction leads me on to a story. 
 
 After spending the majority of a year at university going through the motions and trying to keep my mood higher than it wanted to be; after a period of sneaking into the school library on a weekly basis trying not to be seen, sitting nervously in counselling sessions; after several weeks of completely avoiding my studies and socialising to attempt to focus on being happy; after several tense conversations with my parents and trying to stop them from worrying: I came home from university for a break and went to see my doctor. 
 
@@ -65,45 +68,19 @@ Sitting in the small local practice waiting room, looking around anxiously tryin
 
 One thing he said gave me hope that I wasn't just being a hormonal, upset teenager. He explained that he was worried about writing in my medical notes that I have depression and anxiety (while casually confirming my suspicions). He explained, with a look of cloaked embarrassment, genuine empathy and intelligence, that if he entered these details in my notes I wouldn't be able to receive any reasoned care in the future. In the 8 minutes a GP has to treat you, if they see a mental health condition and similar symptoms they will prescribe pills. While this can work for some people a tailored, thought-out, case-by-case approach is better and not afforded by the current system. Some people respond well to medicine, some to CBT, some to therapy, some to counselling. My doctor was scared that I wouldn't be treated properly by other doctors in the future and so couldn't diagnose me officially. 
 
-`Explain some of these more fully or link to help and advice section here too?`
-
 To me this signifies not only that mental health isn't something which is discussed openly enough among friends, but also by those in charge of health services, the people who we rely on to get help. Every piece of advice out there suggests that when you talk to someone who hasn't sought help with a mental health condition but thinks they need help, you should help them feel confident enough to talk to their family or close friends, then their doctor. When that important professional step isn't functioning as it should, when doctors are too scared to make a diagnosis because of how that patient will be treated in the future, there is a serious problem. 
 
 In this meeting, my doctor did everything he could to help me and discussed both the issues I was having and the psychology related to them in good detail. However, one of the main things I took away from our discussions was that the system he was working in was not adequately set up to provide help to people with common mental health conditions of a similar level to mine.
 
 This unfortunate story aside, there is lots of help available. While taking the first steps to get help is the most difficult, it is also the most important thing you can do to help yourself. There are people far more experienced than me in the process of seeking help, getting treatment and recovering from mental health disorders, but I can share a few thoughts on getting help.
 
+My own attempts to overcome depression and anxiety are still ongoing so this section may grow over time.
+
+`Ask a friend for their experience with medication.`
+
 <h2 id="advice">4. Help, Advice and What You Can Do</h2>
 
 `TODO: Advice and Help`
-
-## Article Notes and Plan
-
-Introduction:
-
-[x]  explain new writing idea
-
-[x]  basic intro to topic
-
-[x]  link to experience: important to me
-
-My Experiences:
-
-[x]  what it's like
-
-[x]  university
-
-[  ]  counselling
-
-[x]  doctor story
-
-Idea of Scale:
-
-[x]  friends and family, be vague
-
-[x]  main idea: affects everyone
-
-Advice and Help:
 
 [  ]  it's okay to be scared
 
