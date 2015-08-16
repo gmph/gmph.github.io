@@ -366,8 +366,8 @@ a img.footerimg:hover {
 		font-size:26px;
 	}
 
-	.block h2 {
-		font-size: 19px;
+    .block h2, .block h5, .block h6 {
+		font-size: 18px;
 	}
 
 	.block h3 {

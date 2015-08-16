@@ -18,14 +18,11 @@ Mental health disorders have affected me and the people around me which I care a
 
 I'll split this article into four parts so you can find what you're looking for, and avoid what may be triggering:
 
-1. [My Experience of Depression and Anxiety](#experience)
-2. [You're Not Alone, and Here's Why](#notalone)
-3. [What Starting to Get Help is Like](#gettinghelp)
-4. [Help, Advice and What You Can Do](#advice)
+The first section covers [my experience of depression and anxiety](#experience). The second covers the idea that [you're not alone when suffering from a mental illness](#notalone). The third section discusses [what starting to get help is like](#gettinghelp) with some of my own thoughts and some from my friend. And the final section is on [help, advice and what you can do](#advice).
 
-If you have any questions, suggestions or additions, tweet me [@gmph](http://twitter.com/gmph).
+If you have any questions or suggestions, tweet me [@gmph](http://twitter.com/gmph).
 
-<h2 id="experience">1. My Experience of Depression and Anxiety</h2>
+<h2 id="experience">My Experience of Depression and&nbsp;Anxiety</h2>
 
 When I talk to new people one of the things I now commonly ask is if they have experienced any mental health issues and if they are happy. These questions – which are rooted in being a way for me to try to learn how to be happy myself and how to understand how I was feeling when affected by depression or anxiety – are now a routine part of me getting to know new people. I ask these questions because I understand (at least a little) what it is like to have an issue you feel like you can't talk about. I want to play my own small role in normalising discussion about them.
 
@@ -41,7 +38,7 @@ Being scared to speak in person caused me to turn to messaging people online, wh
 
 Overall the effect of depression and anxiety on me wasn't very obvious outwardly. Most of the people in my life wouldn't have noticed anything was wrong had I not mentioned it to them, and I wasn't even struggling to hide it. It's just something I adopted naturally in order to avoid feeling judged (which my condition would have emphasised). This was a factor that I now realise was important for me to change in order to start feeling better.
 
-<h2 id="notalone">2. You're Not Alone, and Here's Why</h2>
+<h2 id="notalone">You're Not Alone, and Here's&nbsp;Why</h2>
 
 It is my understanding that with mine and many mental health issues, you feel alone. It is the horrible irony of mental illness that so many people suffer with them feeling like they're the only one in their position and that no one understands.  But you aren't. You aren't alone.
 
@@ -55,7 +52,7 @@ This experience is really what made me realise that I'm not alone. I had talked 
 
 The important thing to take away from this story is that mental health is something which affects everyone. You don't have to have a severe condition to be one of the people who can support someone: you just need to listen, be accepting and talk to them. There's no magic answer to mental illness and everyone will find that different things help them, but we can all appreciate some genuine affection sometimes. From my experience, if you are accepting, you'll find the rest follows.
 
-<h2 id="gettinghelp">3. What Starting to Get Help is Like</h2>
+<h2 id="gettinghelp">What Starting to Get Help is&nbsp;Like</h2>
 
 Having friends to support me was extremely important. It was something that I didn't take advantage of or notice I had for a long time and I should have. It gives you a solid foundation of support to start from to seek further help. One thing I have experienced is that even when I know what to do, what the next step to getting better is, it's significantly more difficult to see it when you're in the situation yourself. You need support to see what to do.
 
@@ -81,7 +78,7 @@ This unfortunate story aside, there is lots of help available for conditions of 
 
 My own attempts to overcome depression and anxiety are still ongoing so, apart from saying that I am currently considering medication, this is where my input to this section ends. I have asked a friend who has experience of medication and the next steps in seeking treatment and help by writing a few paragraphs about that process and what it was like for her.
 
-`Add ADC's experience with medication below.`
+`Add Anna's experience with medication below.`
 
 > Cras mattis consectetur purus sit amet fermentum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam quis risus eget urna mollis ornare vel eu leo. Donec sed odio dui. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui.
 >
@@ -93,11 +90,11 @@ My own attempts to overcome depression and anxiety are still ongoing so, apart f
 
 I hope that gives you a good idea of the whole experience of seeking help. It goes through stages: beginning to notice a problem; talking about it with others and understanding it more; talking to a professional like a doctor or counsellor; seeking treatment; finding one that works for you; sticking to it until you notice an improvement or try another.
 
-<h2 id="advice">4. Help, Advice and What You Can Do</h2>
+<h2 id="advice">Help, Advice and What You Can&nbsp;Do</h2>
 
 Everyone's experiences of mental illness and treatment will be different and everyone's path to recovery will be different. There's no one-size-fits-all solution to hand out, but there is a general set of stages that I have seen people (including myself) go through:
 
-[![Steps to Recovery]({{ site.url }}/res/posts/mentalhealthsteps.png)]({{ site.url }}/res/posts/mentalhealthsteps.png)
+![Steps to Recovery]({{ site.url }}/res/posts/mentalhealthsteps.png)
 
 Knowing these steps gives me hope that (while I might have some way to go) there's a definite path for me to follow and an easy set of things I can do. Even when I don't feel positive about the way things are going, it brings some order back to what doesn't feel like a very ordered or consistent experience.
 
