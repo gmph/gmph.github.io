@@ -19,9 +19,11 @@ This is where I publish my thoughts on technology, psychology, politics and more
 
 <ul class="postlist">
   {% for post in site.posts limit:6 %}
+    {% unless post.private %}
     <li class="postitem">
       <a href="{{ post.url }}">{{ post.title }} <span class="postitemmeta">{{ post.date | date_to_long_string }}</span></a>
     </li>
+    {% endunless %}
   {% endfor %}
 </ul>
 

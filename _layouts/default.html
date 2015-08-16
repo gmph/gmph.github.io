@@ -22,7 +22,7 @@
 <meta property="og:description" content="">
 <meta property="twitter:account_id" content="87261538" /> <!-- Twitter ID, currently for @gmph -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#8B67FF"> 
+<meta name="theme-color" content="#8B67FF">
 <link rel="shortcut icon" href="{{ site.url }}/res/img/ptlogooutline.png">
 <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400|Open+Sans:400' rel='stylesheet' type='text/css'>
 <link href="{{ site.url }}/res/css/main.css" rel="stylesheet" type="text/css">
@@ -40,7 +40,11 @@
 
 		<div class="block">
 
-			<h1>{{ page.heading }}</h1>
+			<h1 class="heading">{{ page.heading }}</h1>
+
+			{% if page.private %}
+			<h2 class="subheading">This article is currently a private draft.</h2>
+			{% endif %}
 
 			<span class="littleline"></span>
 
