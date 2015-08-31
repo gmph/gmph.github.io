@@ -2,19 +2,19 @@
 layout: default
 title: Mental Health and Me
 heading: Mental Health and Me
-date: 9th August 2015
+date: 31st August 2015
 published: true
-private: true
+private: false
 format: markdown
 permalink: /mental-health
-version: 0.6
+version: 1.0
 ---
 
 ![Mental Health and Me]({{ site.url }}/res/posts/brain.png)
 
-I've been doing this all wrong. Whenever I consider writing about a topic that matters to me I turn to statistics to back up my feelings and help people understand why they should care. It doesn't work as well as I want it to. So here are some words – just my words.
+I've been doing this all wrong. Whenever I write about a topic I care about, I turn to statistics to back up my feelings and help people understand why they should care too. It doesn't work as well. In this article I will share my personal experiences to convey the importance of mental health to me.
 
-Mental health disorders have affected me and the people around me which I care about most. It's something I have only talked about with a few people, but I feel like we all need to discuss these issues more openly. I'm going to talk about my experiences of mental health and my understanding of how important these issues and their treatment are today, as well as some (completely unprofessional, personal) advice.
+Mental health disorders have affected me and the people around me which I care about most. It's something I have only talked about with a few people, but I feel like we all need to discuss these issues more openly. I'm going to talk about my experiences of mental health and my understanding of how important these issues and their treatment are today.
 
 I'll split this article into four parts so you can find what you're looking for, and avoid what may be triggering:
 
@@ -76,17 +76,15 @@ In this meeting, my doctor did everything he could to help me and discussed both
 
 This story aside, there is lots of help available for conditions of all severities. While taking the first steps to get help is the most difficult, it is also the most important thing you can do to help yourself. There are people far more experienced than me in the process of seeking help, getting treatment and recovering from mental health disorders, but I can share a few thoughts on getting help.
 
-My own attempts to overcome depression and anxiety are still ongoing so, apart from saying that I am currently considering medication, this is where my input to this section ends. I have asked a friend who has experience of medication and the next steps in seeking treatment and help by writing a few paragraphs about that process and what it was like for her.
+My own attempts to overcome depression and anxiety are still ongoing so, apart from saying that I am currently considering medication, this is where my input to this section ends. I have asked a few friends who have experience of medication and the next steps in seeking treatment about their experiences; I'll share some of what they said below.
 
-`Add Anna's experience with medication below.`
+My friends have had mixed experiences with medication. The majority of my friends have found that medication has helped their conditions (as do most people in the general poulation). There are some common issues I've seen when it comes to medication though. The first is that it's important to have a good relationship with your doctor and take time to have them explain things to you, including possible complications and side effects. It's important that you and people close to you know these so that if anything happens you can do something about it. Read up on symptoms and you'll be well prepared to deal with them if something happens. As the full descriptions of side effects can be rather overwhelming, it's also good to ask your doctor about which specific ones you're likely to experience, if any. Once you know these, and as long as you take your medication as prescribed, there are very few cons to trying medication.
 
-> Cras mattis consectetur purus sit amet fermentum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam quis risus eget urna mollis ornare vel eu leo. Donec sed odio dui. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui.
->
-> Maecenas sed diam eget risus varius blandit sit amet non magna. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas faucibus mollis interdum. Nullam quis risus eget urna mollis ornare vel eu leo. Nulla vitae elit libero.
->
-> Cume sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Curabitur blandit tempus porttitor.
->
->Nullam quis risus eget urna mollis ornare vel eu leo. Sed posuere consectetur est at lobortis. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Vestibulum id ligula porta felis euismod semper. Nulla vitae elit libero.
+My friends have switched medication several times, as advised by their doctors. This is part of the process of finding the most effective combination of treatment and activities in their lives to be happy and less affected by their mental health conditions. Some changes work, others don't. Medication isn't a complete solution in many cases but can pick up your levels of happiness in the case of depression, or ease your mood, or help to reduce the effects of other symptoms of mental health conditions. It can make living your life easier so that you can take steps to be more healthy in general and do additional things to feel better.
+
+As for medication, therapy and counselling is also effective for many people. If medication isn't for you, then trying therapy may be a good step. Therapy is extremely effective, especially in young people, but does require patience and co-operation too. Waiting lists for therapy can be quite long, but if you can arrange to be on one I would recommend that you do. People I know well have been helped greatly by therapy.
+
+If medication and therapy are both large steps for you, there are always simpler things which can help: ensuring you get a good amount of sleep, spending time outside regularly, exercising and eating healthily. Additionally, there are CBT courses available online that anyone can use for free. One course called [MoodGYM](http://moodgym.anu.edu.au) was recommended to me by my doctor. Other sites like [7 Cups of Tea](http://www.7cupsoftea.com/) let you talk through your issues anonymously with someone online. (You can also sign up to talk to people and help on this site by taking a short 'active listening' course, which I'd recommend.) I have used both of these and found them useful. If you're looking for something to try, these links are a good place to start; after that keep googling and trying things until you're feeling better or are ready to take further steps.
 
 I hope that gives you a good idea of the whole experience of seeking help. It goes through stages: beginning to notice a problem; talking about it with others and understanding it more; talking to a professional like a doctor or counsellor; seeking treatment; finding one that works for you; sticking to it until you notice an improvement or try another.
 
@@ -136,8 +134,16 @@ One of the best things to do is to find some small things that make you happy. P
 
 Another important aid to help you progress is to have someone you can talk to in detail about how you feel and what you want to achieve. This person can encourage you to keep going and remind you of what you could do next, while still not taking the load of your worries onto them. This is the most helpful thing when you're trying to get better – everyone needs support and finding someone that understands and can help you is key, whether that's a close friend, family member or someone else you trust.
 
+The simple truth about mental health is that is can be a very lonely experience. The one thing that you can do that will help – the line you need to cross to start getting better and manage your mental health issue – is to talk. There are always people you can talk to. No matter how low you feel you can reach out to them. Trust the people in your life and ask for help, and with time you will see that things get better.
+
 ## Acknowledgements
 
 I'd like to say thanks to the many people I have discussed this article with for their advice and input. Speaking to people about the issues in this article gave me even more encouragement to write it as I know the issues are important to them.
 
-If you have anything you'd like to add, suggest or correct, please tweet me at [@gmph](http://twitter.com/gmph) or email me at <grahammacphee@gmail.com>. If you have an experience of mental health to share (especially if it's different to what's above) then please let me know and I'll find somewhere to add it if I think it will be helpful for people. You can also get in touch if you need someone to talk to about any personal worries you may have. Thank you for reading this article. Please share it with anyone you think it might help.
+Please also know that I am not a doctor or medical professional and the advice I have given is generally me passing on advice given to me, or based on my own personal experiences. Please talk to your doctor for sound advice.
+
+If you have anything you'd like to add, suggest or correct, please tweet me at [@gmph](http://twitter.com/gmph), or email me at <grahammacphee@gmail.com>. If you have an experience of mental health to share (especially if it's different to what's above) then please let me know and I'll add it if it will be helpful for people. You can also get in touch if you need someone to talk to about any personal worries you may have.
+
+Thank you for reading this article. Please share it with anyone you think it might help.
+
+<!-- This article was written in memory of James Brooks. I wish I had done more for you, James. -->
