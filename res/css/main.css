@@ -399,6 +399,30 @@ a img.footerimg:hover {
 		display: none;
 	}
 
+    a.backbutton {
+        top:-48px;
+        left:-4px;
+    }
+
+    a.backbutton::after {
+        content:"Graham Macphee";
+        display: block;
+        position: absolute;
+        top:24px;
+        left:34px;
+        width:300px;
+        height:auto;
+        vertical-align: middle;
+        font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+    	font-size: 17px;
+    	font-weight: 400;
+    }
+
+    a.backbutton:hover {
+        top:-48px;
+        left:-8px;
+    }
+
 	img.loadimg {
 		position: fixed;
 		top:48%;
