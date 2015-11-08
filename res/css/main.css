@@ -399,6 +399,10 @@ a img.footerimg:hover {
 		display: none;
 	}
 
+    .cursor {
+        top:-2px;
+    }
+
     a.backbutton {
         top:-48px;
         left:-4px;

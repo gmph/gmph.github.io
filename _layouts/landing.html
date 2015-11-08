@@ -36,7 +36,7 @@
 
 		<div class="block landing">
 
-			<h1><span class="title">{{ page.heading }}</span><span class='cursor'>&#124;</span></h1>
+			<h1><span class="title">{{ page.heading }}</span><span class="cursor blink">&#124;</span></h1>
 
 			<span class="littleline"></span>
 
@@ -97,11 +97,11 @@
 			if (titleVariation == 0){
 				$('.title').html('Graham is a designer.');
 				setTimeout(function(){
-					typeReplace("is a designer.","codes web apps.");
+					typeReplace("is a designer.","writes code.");
 				},500);
 			} else if (titleVariation == 1){
 				setTimeout(function(){
-					typeReplace("codes web apps.","writes articles.");
+					typeReplace("writes code.","writes articles.");
 				},500);
 			} else if (titleVariation == 2){
 				setTimeout(function(){
