@@ -36,22 +36,20 @@
 
 		<div class="block landing">
 
-			<h1>{{ page.heading }}</h1>
+			<h1><span class="title">{{ page.heading }}</span><span class='cursor'>&#124;</span></h1>
 
 			<span class="littleline"></span>
 
 			{{ content }}
 
-			<div class="links">
-
+			<!-- <div class="links">
 				<a href="http://twitter.com/gmph">twitter</a>
 				<a href="http://facebook.com/grahammacphee">facebook</a>
 				<a href="http://instagr.am/gmph">instagram</a>
 				<a href="https://foursquare.com/gmph">foursquare</a>
-				<a href="http://thinks.grahammacphee.co.uk">blog</a>
-				<a href="http://grahammacphee.co.uk" title="My Website"><span class="upabit">...</span></a>
-
-			</div>
+				<a href="https://uk.linkedin.com/in/grahammacphee">linkedin</a>
+				<a href="http://google.co.uk/search?q=graham+macphee+designer" title="Google me..."><span class="upabit">...</span></a>
+			</div> -->
 
 			<a href="/"><img class="footerimg" src="{{ site.url }}/res/img/ptfooter.png"/></a>
 
@@ -62,7 +60,7 @@
 
 <script language="javascript">
 
-	// window.location.replace("http://twitter.com/gmph");
+	var titleVariation = 0;
 
     $('.block').css('opacity','0');
 
@@ -77,6 +75,8 @@
 	});
 
     $(document).ready(function(){
+		$('.title').html('Graham Macphee');
+		$('.cursor').addClass('blink');
     	setTimeout(function(){
     		$('.loadimg').css('opacity','1');
     		setTimeout(function(){
@@ -84,10 +84,82 @@
 	    		setTimeout(function(){
 		    		$('.block').css('opacity','1');
 		    		$('body').css('overflow-y','scroll');
+					setTimeout(function(){
+						backspaceThis("Macphee".length,"is a designer.",0);
+					},3000);
 		    	},400);
 	    	},1200);
     	},200);
 	});
+
+	function animLoopTitle(){
+		setTimeout(function(){
+			if (titleVariation == 0){
+				$('.title').html('Graham is a designer.');
+				setTimeout(function(){
+					typeReplace("is a designer.","codes web apps.");
+				},500);
+			} else if (titleVariation == 1){
+				setTimeout(function(){
+					typeReplace("codes web apps.","writes articles.");
+				},500);
+			} else if (titleVariation == 2){
+				setTimeout(function(){
+					typeReplace("writes articles.","takes photos.");
+				},500);
+			} else if (titleVariation == 3){
+				setTimeout(function(){
+					typeReplace("takes photos.","is a feminist.");
+				},500);
+			} else if (titleVariation == 4){
+				setTimeout(function(){
+					typeReplace("is a feminist.","Macphee");
+				},500);
+			} else if (titleVariation == 5){
+				setTimeout(function(){
+					typeReplace("Macphee","is a designer.");
+				},500);
+			}
+		},2400);
+	}
+
+	function typeReplace(oldString,newString){
+		var stepTo = (titleVariation+1) % 6;
+		backspaceThis(oldString.length,newString,stepTo);
+	}
+
+	function backspaceThis(i,string,variation){
+		if (i > 0){
+			$('.cursor').removeClass('blink');
+			setTimeout(function(){
+				$('.title').html($('.title').text().slice(0,-1));
+				backspaceThis(i-1,string,variation);
+			},40);
+		} else {
+			setTimeout(function(){
+				$('.cursor').addClass('blink');
+			},400);
+			setTimeout(function(){
+				typeThis(string,1,variation);
+			},700);
+		}
+	}
+
+	function typeThis(string,i,variation){
+		if (i <= string.length){
+			$('.cursor').removeClass('blink');
+			setTimeout(function(){
+				$('.title').html($('.title').text() + string.slice(i-1,i));
+				typeThis(string,i+1,variation);
+			},110);
+		} else {
+			setTimeout(function(){
+				$('.cursor').addClass('blink');
+			},400);
+			titleVariation = variation;
+			animLoopTitle();
+		}
+	}
 
 	$(function() {
       $('a[href*=#]:not([href=#])').click(function() {
