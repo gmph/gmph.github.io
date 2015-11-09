@@ -54,19 +54,31 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
     100% { opacity: 1; }
 }
 
+::-moz-selection {
+    /*color:#fff;*/
+    background: rgba(139,103,255,.2);
+}
+::selection {
+    /*color:#fff;*/
+    background: rgba(139,103,255,.2);
+}
+
 body {
 	background:#fff;
 }
 
 .block {
-	position: relative;
-	height:100vh;
-	width: 80%;
-	max-width: 550px;
-	height:auto;
 	position: static;
-	margin: 110px auto 0 auto;
+    -webkit-transform:translateX(-20px);
+    transform:translateX(-20px);
+	height:100vh;
+	width: 90%;
+	max-width: 595px;
+	height:auto;
+	margin: 90px auto 0 auto;
+    padding:24px 0 0 40px;
     opacity:0;
+    overflow: hidden;
 }
 
 a.backbutton {
@@ -413,10 +425,11 @@ a img.footerimg:hover {
         display: block;
         position: absolute;
         top:24px;
-        left:34px;
+        left:0;
         width:300px;
         height:auto;
         vertical-align: middle;
+        padding-left:34px;
         font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
     	font-size: 17px;
     	font-weight: 400;
@@ -439,9 +452,7 @@ a img.footerimg:hover {
 
 	.block {
 		height: auto;
-		width:85%;
-		position:static;
-		margin:50px auto 0 auto;
+		margin:30px auto 0 auto;
 	}
 
 	.block h1 {
