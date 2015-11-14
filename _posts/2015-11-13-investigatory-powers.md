@@ -4,7 +4,7 @@ title: On Investigatory Powers
 heading: On Investigatory Powers
 date: 13th November 2015
 published: true
-private: true
+private: false
 format: markdown
 permalink: /investigatory-powers
 version: 0.1
