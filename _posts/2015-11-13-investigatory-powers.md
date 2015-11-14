@@ -7,7 +7,7 @@ published: true
 private: false
 format: markdown
 permalink: /investigatory-powers
-version: 0.1
+version: 1.0
 ---
 
 The Draft Investigatory Powers Bill proposes to increase powers to collect and analyse digital data in the UK. Currently being discussed in the UK Parliament, the Bill is designed to provide further powers of data collection and surveillance of any data within the UK and to collate the powers provided by separate legislation presently.
@@ -28,7 +28,7 @@ Increasingly, we use technology to track our daily lives. Our smartphones track 
 
 ![Draft Investigatory Powers Bill Excerpt]({{ site.url }}/res/posts/investigatorypowers3.png)
 
-### Forcing the removal of encryption and adding back-doors weakens all security and privacy online.
+<h3 id="important">Forcing the removal of encryption and adding back-doors weakens all security and privacy online.</h3>
 
 Another concern I have about the Bill was expressed widely regarding its predecessor. Many digital security experts worried that legislation such as this could require that encryption not be used when transmitting and storing data. One specific type of encryption (end-to-end encryption) prevents data content being viewed while it is in transit between sender and recipient. This is the encryption which ensures that your banking data is secure and that your private messages in apps like Whatsapp cannot be easily read by malicious hackers. The integrity of encryption is extremely important to ensure that data online can be guaranteed to be secure.
 
