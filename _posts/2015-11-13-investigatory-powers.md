@@ -7,7 +7,7 @@ published: true
 private: false
 format: markdown
 permalink: /investigatory-powers
-version: 1.0
+version: 1.1
 ---
 
 The Draft Investigatory Powers Bill proposes to increase powers to collect and analyse digital data in the UK. Currently being discussed in the UK Parliament, the Bill is designed to provide further powers of data collection and surveillance of any data within the UK and to collate the powers provided by separate legislation presently.
@@ -51,6 +51,8 @@ The range of people, companies and authorities this proposed legislation applies
 ![Draft Investigatory Powers Bill Excerpt]({{ site.url }}/res/posts/investigatorypowers1.png)
 
 One of the most troubling parts of the Bill is what has been dubbed by analysts as “gagging orders” which prevent anyone from discussing requirements placed upon them. The non-disclosure requirements prevent anyone involved in providing data from discussing the case with experts and even elected members of parliament. [As UCl Associate Professor of Security and Privacy Engineering, George Danezis, said](https://conspicuouschatter.wordpress.com/2015/11/05/uk-draft-ip-bill-the-last-policy-discussion-about-surveillance-before-the-mass-gagging): the non-disclosure section “in effect means shielding [the Bill] from any proper scrutiny as related to its necessity, or appropriateness in the future, or any debate on that matter.” It means that no cases can be discussed in the future even when related to the details of the Bill itself. Notably, the only people whom the Bill allows any person affected by it to discuss an order against them with are the people who issue the order or one of fifteen Judicial Commissioners. There is no possibility to challenge the order if it has not been addressed to you, for example.
+
+One important concept for companies developing software or hardware is “responsible disclosure”. This is when an outside party who finds a flaw with the security of a system can report this issue to be fixed. Responsible disclosure is often seen as the positive contrary to using knowledge of security flaws illicitly or maliciously. By imposing non-disclosure orders – gagging orders – the government muddies the waters with those who wish to make technical systems more secure through programs like responsible disclosure. The government is at odds with the incentive of the general public and technology companies for data to be secure. This position is one which I struggle to support in its current form.
 
 ### There are, of course, arguments supporting the Bill and increased investigatory powers.
 
