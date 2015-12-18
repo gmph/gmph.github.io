@@ -81,10 +81,10 @@
             -moz-font-smoothing: antialiased;
             font-smoothing: antialiased;
             box-sizing: border-box;
-            transition: .25s all ease-in-out;
-            -webkit-transition: .25s all ease-in-out;
-            -moz-transition: .25s all ease-in-out;
-            -o-transition: .25s all ease-in-out;
+            transition: .4s all ease-in-out;
+            -webkit-transition: .4s all ease-in-out;
+            -moz-transition: .4s all ease-in-out;
+            -o-transition: .4s all ease-in-out;
         }
 
         textarea, input {
@@ -111,11 +111,20 @@
 
         /* END OF RESET */
 
+        .hidden {
+            top:53% !important;
+            opacity:0 !important;
+        }
+
+        html {
+            background: #333;
+        }
+
         body {
-            transition: .4s all ease-in-out;
-            -webkit-transition: .4s all ease-in-out;
-            -moz-transition: .4s all ease-in-out;
-            -o-transition: .4s all ease-in-out;
+            transition: .5s all ease-in-out;
+            -webkit-transition: .5s all ease-in-out;
+            -moz-transition: .5s all ease-in-out;
+            -o-transition: .5s all ease-in-out;
         }
 
         .backgroundvideo {
@@ -168,6 +177,13 @@
             width:85%;
             height:auto;
             max-width: 450px;
+
+            body {
+                transition: .7s all ease-in-out;
+                -webkit-transition: .7s all ease-in-out;
+                -moz-transition: .7s all ease-in-out;
+                -o-transition: .7s all ease-in-out;
+            }
         }
 
         .content .title {
@@ -250,6 +266,7 @@
             position: relative;
             top:0;
             left:7px;
+            z-index:4;
             width: 100%;
             height:auto;
             padding: 60px 0 60px 38px;
@@ -282,10 +299,11 @@
             cursor: pointer;
         }
 
-        footer {
+        footer, footer.hidden {
             display: block;
             position: fixed;
             bottom:20px;
+            top: auto !important;
             left:50%;
             z-index:2;
             -webkit-transform:translate(-50%,0);
@@ -316,27 +334,34 @@
             }*/
 
             #emailform input[type="email"] {
-                width:58%;
+                width:59%;
             }
 
             #emailform input[type="submit"] {
-                width: 33%;
+                width: 33.5%;
                 padding: 11px 0 10px 0;
             }
 
             #emailform input {
                 font-size: 16px;
+                margin: 5px 5px 5px 0;
             }
 
             .content .title {
+                width:80%;
+                margin:0 auto;
                 font-size: 25px;
+            }
+
+            .logo {
+                top:53px;
             }
 
             .content .body {
                 font-size: 16px;
             }
 
-            footer {
+            footer, footer.hidden {
                 font-size: 12px;
             }
 
@@ -364,10 +389,10 @@
         <img src="background5.png"/>
     </div>
     <div class="backgroundoverlay">
-        <footer>&copy; 2015, <a href="http://snipandshare.com">Snipandshare</a>. Photography by <a href="http://www.theverge.com/a/holiday-gift-ideas-2015">The Verge</a>.</footer>
+        <footer class="hidden">&copy; 2015, <a href="http://snipandshare.com">Snipandshare</a>. Photography by <a href="http://www.theverge.com/a/holiday-gift-ideas-2015">The Verge</a>.</footer>
     </div>
 
-    <div class="content">
+    <div class="content hidden">
         <div class="title">Video can make your content stand&nbsp;out.</div>
         <div class="body">What if you could make a video trailer out of any webpage in a few minutes. No software download or overwhelming templates or effects to pick from. Just find good content and add creative text. Our technology does the rest. It’s that simple!</div>
         <div class="form">
@@ -385,9 +410,27 @@
     <script language="javascript">
 
         var baseurl = "";
+        var isMobile = false;
         $(document).ready(function(){
+            updateIsMobile();
+            setTimeout(function(){
+                $('body').removeClass('hidden');
+                setTimeout(function(){
+                    $('.content,footer').removeClass('hidden');
+                },3700);
+            },1000);
             $('.backgroundvideo').css('background-image',("url("+baseurl+"background1.png)"));
             rotateBackgroundImage(0);
+
+            $('input.email').focus(function(){
+                if (isMobile){
+                    $('footer').addClass('hidden');
+                }
+            });
+            $('input.email').blur(function(){
+                $('footer').removeClass('hidden');
+            });
+
         });
 
         function rotateBackgroundImage(i){
@@ -396,6 +439,14 @@
                 $('.backgroundvideo').css('background-image',("url("+baseurl+'background'+(j+1)+".png)"));
                 rotateBackgroundImage(j+1);
             },4000);
+        }
+
+        $(window).resize(function(){
+            updateIsMobile();
+        });
+
+        function updateIsMobile(){
+            isMobile = ($(window).width() <= 500);
         }
 
     </script>
