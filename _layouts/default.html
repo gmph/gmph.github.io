@@ -46,6 +46,8 @@
 
 			{% if page.private %}
 			<h2 class="subheading">This article is currently a private draft.</h2>
+			{% else if page.subheading %}
+			<h2 class="subheading">{{ page.subheading }}</h2>
 			{% endif %}
 
 			<span class="littleline"></span>

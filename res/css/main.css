@@ -192,7 +192,7 @@ ul li, ol li {
 
 blockquote {
 	margin: 20px 10px 0 0;
-	padding: 0px 0 0px 22px;
+	padding: 0px 0 0px 20px;
 	border-left: solid 5px #e9e9e9;
 	color:#444;
 	opacity:.8;
@@ -270,7 +270,7 @@ code {
 
 p.social {
 	margin:20px 0 0 0;
-	opacity:.9;
+	opacity:.7;
 }
 
 p.meta {
