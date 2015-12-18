@@ -133,6 +133,19 @@
             background-repeat: no-repeat !important;
         }
 
+        .backgroundimageload {
+            position: fixed;
+            top:50%;
+            left:50%;
+            z-index:0;
+            -webkit-transform:translate(-50%,-50%);
+            transform:translate(-50%,-50%);
+            width:100%;
+            height:100%;
+            overflow: hidden;
+            opacity:0.000000001;
+        }
+
         .backgroundoverlay {
             display: block;
             position: fixed;
@@ -343,6 +356,13 @@
 <body id="top" class="hidden">
 
     <div class="backgroundvideo"></div>
+    <div class="backgroundimageload">
+        <img src="background1.png"/>
+        <img src="background2.png"/>
+        <img src="background3.png"/>
+        <img src="background4.png"/>
+        <img src="background5.png"/>
+    </div>
     <div class="backgroundoverlay">
         <footer>&copy; 2015, <a href="http://snipandshare.com">Snipandshare</a>. Photography by <a href="http://www.theverge.com/a/holiday-gift-ideas-2015">The Verge</a>.</footer>
     </div>
