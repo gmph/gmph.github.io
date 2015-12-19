@@ -119,13 +119,13 @@
 	function openMenu(){
 		$('.block').addClass('menuopen');
 		$('.menu').removeClass('closed');
-		$('html').css('overflow','hidden');
+		$('html,body').css('overflow','hidden');
 	}
 
 	function closeMenu(){
 		$('.block').removeClass('menuopen');
 		$('.menu').addClass('closed');
-		$('html').css('overflow','auto');
+		$('html,body').css('overflow','auto');
 	}
 
 	function animLoopTitle(){
