@@ -36,6 +36,21 @@
 
 		<div class="block landing">
 
+			<div class="menubutton">
+				<div class="hamburgerpart"></div>
+				<div class="hamburgerpart"></div>
+				<div class="hamburgerpart"></div>
+			</div>
+
+			<div class="menu closed">
+
+				<a href="{{ site.url }}/portfolio" class="purple">Portfolio</a>
+				<a href="http://twitter.com/gmph" class="twitter">Twitter</a>
+				<a href="http://instagr.am/gmph" class="instagram">Instagram</a>
+				<a href="https://foursquare.com/gmph" class="foursquare">Foursquare</a>
+
+			</div>
+
 			<h1><span class="title">{{ page.heading }}</span><span class="cursor blink">&#124;</span></h1>
 
 			<span class="littleline"></span>
@@ -91,6 +106,27 @@
 	    	},1200);
     	},200);
 	});
+
+	$('.menubutton').click(function(){
+		$('.menubutton').toggleClass('close');
+		if ($('.menubutton').hasClass('close')){ // open menu
+			openMenu();
+		} else { // close menu
+			closeMenu();
+		}
+	});
+
+	function openMenu(){
+		$('.block').addClass('menuopen');
+		$('.menu').removeClass('closed');
+		$('html').css('overflow','hidden');
+	}
+
+	function closeMenu(){
+		$('.block').removeClass('menuopen');
+		$('.menu').addClass('closed');
+		$('html').css('overflow','auto');
+	}
 
 	function animLoopTitle(){
 		setTimeout(function(){
