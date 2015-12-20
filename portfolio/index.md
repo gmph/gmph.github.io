@@ -18,6 +18,8 @@ version: 1.0
 
 [![Snipandshare Animation]({{ site.url }}/portfolio/img/snipandshareanimation.gif)](http://snipandshare.com)
 
+[![Snipandshare Video Ad Website]({{ site.url }}/portfolio/img/snipandsharevideo.gif)](http://snipandshare.com)
+
 [![Suave Collage UI]({{ site.url }}/portfolio/img/suavecollage.png)](https://dribbble.com/shots/2096399-Suave-Collage)
 
 [![Wonderloop Designs]({{ site.url }}/portfolio/img/wonderloopui.png)](http://wonderloop.me)
