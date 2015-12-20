@@ -44,6 +44,8 @@
 
 			<div class="menu closed">
 
+				<div class="mobileclose"></div>
+
 				<a href="{{ site.url }}/portfolio" class="purple">Portfolio</a>
 				<a href="http://twitter.com/gmph" class="twitter">Twitter</a>
 				<a href="http://instagr.am/gmph" class="instagram">Instagram</a>
@@ -107,14 +109,18 @@
     	},200);
 	});
 
-	$('.menubutton').click(function(){
+	$('.menubutton, .mobileclose').click(function(){
+		controlMenu();
+	});
+
+	function controlMenu(){
 		$('.menubutton').toggleClass('close');
 		if ($('.menubutton').hasClass('close')){ // open menu
 			openMenu();
 		} else { // close menu
 			closeMenu();
 		}
-	});
+	}
 
 	function openMenu(){
 		$('.block').addClass('menuopen');

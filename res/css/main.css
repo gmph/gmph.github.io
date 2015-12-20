@@ -180,6 +180,21 @@ body {
     pointer-events: none;
 }
 
+.menu .mobileclose {
+    display: none;
+}
+
+.menu:not(.closed) .mobileclose {
+    display: block;
+    position: absolute;
+    top:-5px;
+    left:150px;
+    z-index:5;
+    width:550px;
+    height:100vh;
+    cursor:pointer;
+}
+
 .menu a {
     display: block;
     position: relative;
@@ -568,7 +583,7 @@ a img.footerimg:hover {
     }
 
     .menubutton {
-        top:-42px;
+        top:-55px;
         left:-4px;
     }
 
@@ -604,14 +619,15 @@ a img.footerimg:hover {
     .menu {
         display: block;
         position: relative;
-        top:-67px;
+        top:-82px;
         left:-210px;
         z-index:3;
         width:177px;
         height:100vh;
         margin:-3px 0 -100vh 0;
-        padding: 15px 30px 30px 30px;
-        background: #f9f9f9;
+        padding: 30px 30px 30px 30px;
+        background: #fbfbfb;
+        border-right: solid 1px #f8f8f8;
     }
 
     .menu::after {
@@ -623,11 +639,26 @@ a img.footerimg:hover {
         z-index:3;
         width:170px;
         height:100vh;
-        background: #f9f9f9;
+        background: #fbfbfb;
+    }
+
+    .menu .mobileclose {
+        display: block;
+        position: absolute;
+        top:0;
+        left:170px;
+        z-index:5;
+        width:-webkit-calc(100vw - 170px);
+        width:calc(100vw - 170px);
+        height:100vh;
     }
 
     .menu.closed {
         left:-210px;
+    }
+
+    .menu a {
+        margin:0 0 25px 0;
     }
 
     a.backbutton {
@@ -639,7 +670,7 @@ a img.footerimg:hover {
         content:"Graham Macphee";
         display: block;
         position: absolute;
-        top:24.5px;
+        top:24px;
         left:0;
         width:300px;
         height:auto;
@@ -666,9 +697,9 @@ a img.footerimg:hover {
 	}
 
 	.block {
-                width: 92%;
+        width: 92%;
 		height: auto;
-		margin:30px auto 0 auto;
+		margin:45px auto 0 auto;
 	}
 
     .block h2.subheading {
@@ -704,7 +735,7 @@ a img.footerimg:hover {
 	}
 
 	span.littleline {
-		margin: 0 0 44px 0;
+		margin: 0 0 4px 0;
 	}
 
     li.postitem {
