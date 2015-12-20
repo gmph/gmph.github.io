@@ -50,6 +50,6 @@ version: 1.0
 
 ***
 
-You can see more of my work on Dribbble, or [email me](mailto:hi@gmph.co?subject=&body=Hey%20Graham%2C%0A%0A) if you're looking for something specific. I'm not currently available for freelance work but [introduce me to your project](mailto:hi@gmph.co?subject=&body=Hey%20Graham%2C%0A%0A) and I'll see if there's any way I can help.
+You can see more of my work on [Dribbble](http://dribbble.com/gmph), or [email me](mailto:hi@gmph.co?subject=&body=Hey%20Graham%2C%0A%0A) if you're looking for something specific. I'm not currently available for freelance work but [introduce me to your project](mailto:hi@gmph.co?subject=&body=Hey%20Graham%2C%0A%0A) and I'll see if I can help out.
 
 ***
