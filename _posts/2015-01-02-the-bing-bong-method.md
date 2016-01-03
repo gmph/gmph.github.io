@@ -1,19 +1,45 @@
 ---
 layout: default
-title: These Are The Facts
-heading: These are the facts.
+title: The Bing Bong Method
+heading: The Bing Bong Method
 subheading: A brief guide to public speaking for politicians.
-date: 15th December 2015
+date: 2nd January 2016
 published: true
 private: true
 format: markdown
-permalink: /these-are-the-facts
-version: 0.1
+permalink: /the-bing-bong-method
+version: 0.2
 ---
 
-Being a politician in a genuine democracy is extremely troublesome. One must appear to represent their voters sufficiently. One must learn the policies their advisors tell them. One must communicate their talking points to the media.
+Being a politician in a genuine democracy is entirely troublesome. One must appear to represent their constituents. One must learn policies from their advisors. One must communicate their talking points to the media. All with more grace and fewer stutters than even the most talented Hollywood performer.
 
-This short guide will help you, dear politician, to realise your dream of not being abused by the public or being choreographed out of your job for answering a question. Shall we begin?
+This short guide will help you, dear politician, to realise your dream of not being abused by the public or choreographed from your job for answering a question genuinely. Shall we begin?
+
+The first rule when having a conversation with the media is that you should never have that conversation. To this end, the most effective technique we have developed is the Bing Bong Method. You're in a supermarket:
+
+1. A staff member pushes the tannoy button.
+2. They hear a meaningless noise: Bing, bong!
+3. The staff member then gives a message.
+
+When you're with the media, you should put yourself in the mindset of the tannoy operator. The way you speak should be exactly like the supermarket staff member making an announcement with the machine. No matter how personal and human your conversation may be, remember you are a tannoy operator.
+
+1. You engage with the media; have an interview.
+2. You hear a meaningless noise: the media asks a question.
+3. You give your rehearsed, scripted message.
+
+To reiterate this point: you must hear all media questions as a blank cue to talk on the subject of your choice and nothing else.
+
+Because we have been using this technique for so long, we can actually invert it to our own advantage. If you want to seem  honest when being interviewed, all you must do is answer briefly and clearly. The public is so familiar with the monotonous tannoy that anything different will excite them. If you really want to shock the public into thinking you're a real person, try saying a simple “Yes.” or “No.” and see what happens.
+
+Much like the staff member operating the tannoy in a supermarket, you must know who your audience is. Staff announcement. Customer announcement. These apply in politics too. Remember who your audience is when you speak through the media. If you want to keep your backbenchers on side, your staff announcement should include hints that you're listening to them. If you are talking to the customers (in politics ‘customers’ is as valid as ‘electorate’), use the grand language polling prefers.
+
+Trying to talk in this way is daunting at first. You will worry that the media will take advantage of and spin what you say. Thankfully, in our wonderful democracy, if you keep to the party line and speak to the right journalists, you'll find navigating the media as simple as pushing that tannoy button.
+
+Bing, bong! And our message is out there.
+
+<!--
+
+PREVIOUS DRAFT:
 
 ## The First Rule
 
@@ -93,8 +119,6 @@ attack the question
 
 ## “I'll get to that question if you let me finish...”
 
-
-
 ## Appendix A: Useful Phrases
 
 **“I think it is right that...”**
@@ -103,4 +127,4 @@ This phrase is extremely useful for convincing the audience that there is a mora
 
 **“Let me be clear...”**
 
-The fact of the matter is that politics is a game.
+The fact of the matter is that politics is a game. -->
