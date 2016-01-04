@@ -7,9 +7,11 @@ date: 2nd January 2016
 published: true
 private: true
 format: markdown
-permalink: /the-bing-bong-method
-version: 0.2
+permalink: /bing-bong
+version: 0.3
 ---
+
+![The Bing Bong Method]({{ site.url }}/res/posts/bingbong.png)
 
 Being a politician in a genuine democracy is entirely troublesome. One must appear to represent their constituents. One must learn policies from their advisors. One must communicate their talking points to the media. All with more grace and fewer stutters than even the most talented Hollywood performer.
 
@@ -17,9 +19,9 @@ This short guide will help you, dear politician, to realise your dream of not be
 
 The first rule when having a conversation with the media is that you should never have that conversation. To this end, the most effective technique we have developed is the Bing Bong Method. You're in a supermarket:
 
-1. A staff member pushes the tannoy button.
-2. They hear a meaningless noise: Bing, bong!
-3. The staff member then gives a message.
+1. A staff member behind the till pushes the tannoy button.
+2. They hear it make a meaningless noise: Bing, bong!
+3. The staff member then gives their message.
 
 When you're with the media, you should put yourself in the mindset of the tannoy operator. The way you speak should be exactly like the supermarket staff member making an announcement with the machine. No matter how personal and human your conversation may be, remember you are a tannoy operator.
 
