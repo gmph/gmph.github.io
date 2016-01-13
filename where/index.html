@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=100" />
+<style type="text/css">
+/* IE CSS HERE */
+<style>
+<![endif]-->
+
+<html id="top">
+
+<head>
+
+<title>Where's Graham?</title>
+<meta name="author" content="Graham Macphee" />
+<meta name="description" content="I tend to think about puppies, pizza and equality. I enjoy being creative: writing, photography, guitar, ukulele and singing occasionally. I'm quiet and thoughtful, and like nature and quiet nights. I'm interested in a combination of technology, design, psychology and sociology." />
+<meta name="keywords" content="I tend to think about puppies, pizza and equality. I enjoy being creative: writing, photography, guitar, ukulele and singing occasionally. I'm quiet and thoughtful, and like nature and quiet nights. I'm interested in a combination of technology, design, psychology and sociology." />
+<meta charset="utf-8">
+<meta property="og:title" content="{Where's Graham?">
+<meta property="og:type" content="website">
+<meta property="og:url" content="gmph.co/where">
+<meta property="og:site_name" content="Graham Macphee">
+<meta property="og:description" content="I tend to think about puppies, pizza and equality. I enjoy being creative: writing, photography, guitar, ukulele and singing occasionally. I'm quiet and thoughtful, and like nature and quiet nights. I'm interested in a combination of technology, design, psychology and sociology.">
+<meta property="twitter:account_id" content="87261538" /> <!-- Twitter ID, currently for @gmph -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#8B67FF">
+<link rel="shortcut icon" href="{{ site.url }}/res/img/ptlogooutline.png">
+<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400' rel='stylesheet' type='text/css'>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<style type="text/css">
+
+	@font-face {
+		font-family: 'Helvetica Neue';
+		src: url('../res/font/hnl.ttf') format('truetype');
+		font-weight: 300;
+	}
+
+	@font-face {
+		font-family: 'Helvetica Neue';
+		src: url('../res/font/hnm.ttf') format('truetype');
+		font-weight: 400;
+	}
+
+	@font-face {
+		font-family: 'Helvetica Neue';
+		src: url('../res/font/hnb.ttf') format('truetype');
+		font-weight: 700;
+	}
+
+	* {
+		font-family: 'Helvetica Neue';
+		transition:.15s all ease-out;
+	    -webkit-transition:.15s all ease-out;
+	    -moz-transition:.15s all ease-out;
+	    -o-transition:.15s all ease-out
+	}
+
+	.content {
+		display: block;
+		position: absolute;
+		top:50%;
+		left:50%;
+		-webkit-transform:translate(-50%,-50%);
+		transform:translate(-50%,-50%);
+		text-align: center;
+	}
+
+	.hidden {
+		opacity: 0 !important;
+		pointer-events: none !important;
+	}
+
+	.loading {
+		display: block;
+		position: absolute;
+		top:50%;
+		left:50%;
+		-webkit-transform:translate(-50%,-50%);
+		transform:translate(-50%,-50%);
+		padding:0 0 0 30px;
+		background-image:url(loading.gif);
+		background-size: auto 60% !important;
+		background-repeat: no-repeat !important;
+		background-position:0 52% !important;
+		text-align: center;
+		font-size:26px;
+		color:#bbb;
+		opacity: 0.6;
+	}
+
+	a {
+		color:inherit;
+		text-decoration: none !important;
+	}
+
+	.title {
+		margin:0 auto;
+		font-size:16px;
+		color:#ccc;
+	}
+
+	.region {
+		margin: 25px auto;
+		font-size:54px;
+		font-weight:700;
+		color:#8B67FF;
+	}
+
+	.name {
+		margin:5px auto 0 auto;
+		font-size:26px;
+		color:#ccc;
+	}
+
+	.date {
+		padding: 5px 0 10px 0;
+		font-size:16px;
+		font-weight:300;
+		color:#ccc;
+	}
+
+	a.foursquare {
+		display:inline-block;
+		padding:10px 0 10px 18px;
+		background-image:url(foursquare.png);
+		background-size: auto 42% !important;
+		background-repeat: no-repeat !important;
+		background-position:0 55% !important;
+		font-size:14px;
+		color:#F94877;
+	}
+
+	.content.location-hover .title, .content.location-hover .foursquare {
+		opacity: 0.3;
+	}
+
+	.content.location-hover #latestLocation * {
+		opacity: 0.5;
+	}
+
+	.content.location-hover .region {
+		opacity:1 !important;
+		-webkit-transform:scale(1.1);
+		transform:scale(1.1);
+	}
+
+	.content.foursquare-hover #latestLocation, .content.location-hover .title {
+		opacity: 0.5;
+	}
+
+	.content.foursquare-hover .foursquare {
+		opacity:1;
+		-webkit-transform:scale(1.1);
+		transform:scale(1.1);
+	}
+
+</style>
+
+</head>
+
+<body>
+
+	<div class="loading">Loading...</div>
+
+	<div class="content hidden">
+
+		<div class="title">Last seen in...</div>
+		<div id="latestLocation"></div>
+		<a href="http://foursquare.com/gmph" class="foursquare">See more on Foursquare</a>
+
+	</div>
+
+</body>
+
+
+<script language="javascript">
+
+	var $latestLocation = $('#latestLocation');
+
+	var locationDataText;
+	var locationData = [];
+
+	$(document).ready(function(){
+		readTextFile("https://dl.dropboxusercontent.com/u/17016249/Data/location.txt");
+		$('#latestLocation').hover(function(){
+			$('.content').addClass('location-hover');
+		},function(){
+			$('.content').removeClass('location-hover');
+		});
+		$('.foursquare').hover(function(){
+			$('.content').addClass('foursquare-hover');
+		},function(){
+			$('.content').removeClass('foursquare-hover');
+		});
+	});
+
+    function readTextFile(file){
+        var rawFile = new XMLHttpRequest();
+        rawFile.open("GET", file, true);
+        rawFile.onreadystatechange = function (){
+            if(rawFile.readyState === 4){
+                if(rawFile.status === 200 || rawFile.status == 0){
+                    locationDataText = rawFile.responseText;
+					processLocationData();
+                }
+            }
+        }
+        rawFile.send(null);
+    }
+
+	function processLocationData(){
+		var locationDataTextSplit = locationDataText.split("/%/");
+		locationDataTextSplit.pop();
+		for (i=0;i<locationDataTextSplit.length;i++){
+			locationData.push(JSON.parse(locationDataTextSplit[i]));
+		}
+
+		displayLatestLocation();
+		console.log(locationData);
+	}
+
+	function displayLatestLocation(){
+		var latestLocation = locationData[locationData.length-1];
+		var latestValidName = "";
+		var latestValidURL = latestLocation.mapURL;
+		setStyleLoading();
+		if (latestLocation.name != ""){
+			latestValidName = ' <div class="name">' + latestLocation.name + "</div>";
+		} else {
+			for (i=0;i<locationData.length-1;i++){
+				thisRegion = locationData[locationData.length-(2+i)].region;
+				thisName = locationData[locationData.length-(2+i)].name;
+				thisMap = locationData[locationData.length-(2+i)].mapURL;
+				if (locationData[locationData.length-(2+i)].region == latestLocation.region){
+					if (thisName != ""){
+						latestValidName= ' <div class="name">' + thisName + "</div>";
+						latestValidURL = thisMap;
+						break;
+					}
+				} else {
+					break;
+				}
+			}
+		}
+		updateText = '<a href="'+latestValidURL+'" target="_blank"><div class="region">' + latestLocation.region + "</div>" + latestValidName + '<div class="date">' + latestLocation.date.slice(0,-2) + latestLocation.date.substring(latestLocation.date.length-2).toLowerCase() + '</div></a>';
+		$latestLocation.html(updateText);
+		setStyleReady();
+	}
+
+	function setStyleLoading(){
+		$('.content').addClass('hidden');
+		$('.loading').removeClass('hidden');
+	}
+
+	function setStyleReady(){
+		$('.content').removeClass('hidden');
+		$('.loading').addClass('hidden');
+	}
+
+	$(function() {
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({
+              scrollTop: (target.offset().top - 30)
+		  	}, 400);
+            return false;
+          }
+        }
+      });
+    });
+
+</script>
+
+</html>
