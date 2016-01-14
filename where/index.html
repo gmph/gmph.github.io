@@ -111,6 +111,10 @@
 		color:#ccc;
 	}
 
+	.name:hover {
+		color:#aaa;
+	}
+
 	.date {
 		padding: 5px 0 10px 0;
 		font-size:16px;
@@ -224,7 +228,7 @@
 		var latestValidURL = latestLocation.mapURL;
 		setStyleLoading();
 		if (latestLocation.name != ""){
-			latestValidName = ' <div class="name">' + latestLocation.name + "</div>";
+			latestValidName = ' <a href="'+latestValidURL+'" target="_blank"><div class="name">' + latestLocation.name + "</div></a>";
 		} else {
 			for (i=0;i<locationData.length-1;i++){
 				thisRegion = locationData[locationData.length-(2+i)].region;
@@ -232,8 +236,7 @@
 				thisMap = locationData[locationData.length-(2+i)].mapURL;
 				if (locationData[locationData.length-(2+i)].region == latestLocation.region){
 					if (thisName != ""){
-						latestValidName= ' <div class="name">' + thisName + "</div>";
-						latestValidURL = thisMap;
+						latestValidName= ' <div class="name"><a href="'+'this'+'" target="_blank">' + thisName + "</a></div>";
 						break;
 					}
 				} else {
@@ -241,7 +244,7 @@
 				}
 			}
 		}
-		updateText = '<a href="'+latestValidURL+'" target="_blank"><div class="region">' + latestLocation.region + "</div>" + latestValidName + '<div class="date">' + latestLocation.date.slice(0,-2) + latestLocation.date.substring(latestLocation.date.length-2).toLowerCase() + '</div></a>';
+		updateText = '<a href="'+latestValidURL+'" target="_blank"><div class="region">' + latestLocation.region + "</div></a>" + latestValidName + '<a href="'+latestValidURL+'" target="_blank"><div class="date">' + latestLocation.date.slice(0,-2) + latestLocation.date.substring(latestLocation.date.length-2).toLowerCase() + '</div></a>';
 		$latestLocation.html(updateText);
 		setStyleReady();
 	}
