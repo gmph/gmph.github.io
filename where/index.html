@@ -94,13 +94,12 @@
 	}
 
 	.title {
-		margin:0 auto;
 		font-size:16px;
 		color:#ccc;
 	}
 
 	.region {
-		margin: 25px auto;
+		padding: 25px 0;
 		font-size:54px;
 		font-weight:700;
 		color:#8B67FF;
@@ -182,7 +181,7 @@
 
 	$(document).ready(function(){
 		readTextFile("https://dl.dropboxusercontent.com/u/17016249/Data/location.txt");
-		$('#latestLocation').hover(function(){
+		$('#latestLocation,.title').hover(function(){
 			$('.content').addClass('location-hover');
 		},function(){
 			$('.content').removeClass('location-hover');
