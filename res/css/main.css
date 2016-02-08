@@ -301,7 +301,7 @@ span.littleline {
 	font-weight: 300;
 }
 
-.block h2, .block h5, .block h6 {
+.block h2, .block h5 {
 	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
 	font-size:20px;
 	display: block;
@@ -331,9 +331,14 @@ span.littleline {
 	font-weight: 300;
 }
 
-.block p, ul, ol, blockquote {
+.block h6 {
+    color:#999 !important;
+}
+
+.block p, ul, ol, blockquote, .block h6 {
 	font-family: 'Libre Baskerville', serif;
 	font-size: 16px;
+    font-weight: 400;
 	line-height: 1.7em;
 	color:#333;
 	margin: 20px 0 0 0;
@@ -407,15 +412,40 @@ blockquote p:first-child {
 	line-height: 1.7em;
 }
 
+.block sup {
+    margin: 0 2px;
+    color: #999;
+}
+
+.block sup a {
+    position: relative;
+    top:-2px;
+    padding: 0 6px;
+    background: #8B67FF;
+    border-radius: 1px;
+    border-bottom: none !important;
+    font-size: 0.8em;
+    color: #fff !important;
+    opacity: .6;
+}
+.block sup a:hover {
+    opacity: 1;
+}
+
 pre {
 	width:100%;
 	height:auto;
 	margin:20px 0 0 0;
 	padding:11px 10px 10px 10px;
-	color:#333;
-	background:#f1e3ff;
+	color:#fff !important;
+	background:#8B67FF !important;
 	border: solid 10px rgba(139,103,255,0);
 	overflow: scroll
+}
+
+pre code {
+    background:#8B67FF;
+    color:#fff;
 }
 
 code {
