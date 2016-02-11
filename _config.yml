@@ -1,1 +1,7 @@
+url: http://gmph.co
+author: "Graham Macphee"
 permalink: /:title
+gems:
+  - jekyll-feed
+feed:
+  path: atom.xml
