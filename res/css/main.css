@@ -757,7 +757,7 @@ a img.footerimg:hover {
 		line-height:1.4em;
 	}
 
-	.block p, ul, ol, blockquote {
+	.block p, ul, ol, blockquote, .block h6 {
 		font-size: 15px;
 	}
 

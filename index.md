@@ -35,4 +35,4 @@ This is where I publish my thoughts on technology, psychology, politics and more
 
 ***
 
-You can email me at [hi@gmph.co](mailto:hi@gmph.co?subject=&body=Hey%20Graham%2C%0A%0AI%27d%20really%20like%20to%20talk%20to%20you%20about...) to say hello. I like to help people. I'm available for design consultancy. [Google me](http://google.co.uk/search?q=graham+macphee+designer).
+You can email me at [hi@gmph.co](mailto:hi@gmph.co?subject=&body=Hey%20Graham%2C%0A%0AI%27d%20really%20like%20to%20talk%20to%20you%20about...) to say hello. I love talking about design. I'm available for design consultancy. [Google me](http://google.co.uk/search?q=graham+macphee+designer).
