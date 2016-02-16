@@ -15,11 +15,11 @@ This blog was written, designed and coded by Graham Macphee. It was mainly writt
 
 ## Design
 
-The blog's design is based on Graham's minimalistic typographic style. With a focus on openness and whitespace, the design uses a simple pairing of Helvetica Neue and Libre Baskerville. It uses the vibrant colours <code style="background:#8B67FF;color:#fff">#8B67FF</code> and <code style="background:#55FFC7;color:#fff">#55FFC7</code> throughout. The purple is intended to reflect a sense of depth, formality and boldness while the turquoise is represents happiness, openness and freshness.
+The blog's design is based on Graham's minimalistic typographic style. With a focus on openness and whitespace, the design uses a simple pairing of Helvetica Neue and Libre Baskerville. It uses the vibrant colours <code style="background:#8B67FF;color:#fff">#8B67FF</code> and <code style="background:#55FFC7;color:#fff">#55FFC7</code> throughout. The purple is intended to reflect a sense of depth, formality and boldness while the turquoise represents happiness, openness and freshness.
 
 ## Brand
 
-The logo used in this blog is Graham Macphee's personal logomark. The mark conveys the shape of Graham's initials, with the round circle shape following the outer curve of the “G” and the sharp sides of the square mimicking an “M”. The logomark is also the basis of a logo system, including article illustrations.
+The logo used in this blog is Graham Macphee's personal logomark. The mark conveys the shape of Graham's initials, with the round circle shape following the outer curve of the “G” and the sharp sides of the tilted square mimicking an “M”. The logomark is also the basis of a logo system, including article illustrations.
 
 The illustrations in this blog are based on the logomark, with each one's subtle variations in colour, shape and arrangement presenting itself as an abstract form of the article's subject. The illustrations are used as an introduction to the feel and theme of each article.
 
