@@ -1,3 +1,4 @@
+title: "Graham Macphee"
 url: http://gmph.co
 author: "Graham Macphee"
 permalink: /:title
@@ -5,3 +6,10 @@ gems:
   - jekyll-feed
 feed:
   path: atom.xml
+defaults:
+  -
+    scope:
+      path: "" # all files in the project
+    values:
+      author: {name: Graham Macphee, email: hi@gmph.co, uri: http://gmph.co}
+      
