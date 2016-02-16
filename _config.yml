@@ -11,5 +11,4 @@ defaults:
     scope:
       path: "" # all files in the project
     values:
-      author: {name: Graham Macphee, email: hi@gmph.co, uri: http://gmph.co}
-      
+      author: {"name": "Graham Macphee", "email": "hi@gmph.co", "uri": "http://gmph.co"}
