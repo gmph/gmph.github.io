@@ -15,24 +15,33 @@ I am a designer and front-end developer with 4 years industry experience working
 
 This is where I publish my thoughts on technology, psychology, politics and more. You can see my most recent articles below.
 
-***
+<br/>
+
+##### Recent Articles
 
 <ul class="postlist">
-  {% for post in site.posts limit:6 %}
+  {% for post in site.posts limit:20 %}
     {% unless post.private %}
     <li class="postitem">
-      <a href="{{ post.url }}">{{ post.title }} <span class="postitemmeta">{{ post.date | date_to_long_string }}</span></a>
+      <a href="{{ post.url }}">
+
+      <span class="postitemtitle">{{ post.title }}</span> <span class="postitemmeta">{{ post.date | date: "%B %-d, %Y" }}</span>
+
+      <div class="positemdescription">
+
+      <p>{{ post.content | strip_html | truncatewords:55 }}</p></div>
+
+      </a>
     </li>
     {% endunless %}
   {% endfor %}
-  <li class="postitem">
-    <a href="http://thinks.grahammacphee.co.uk">My Other Blog <span class="postitemmeta">Informal thoughts.</span></a>
+  <!-- <li class="postitem">
+    <a href="http://thinks.grahammacphee.co.uk">My Previous Blog <span class="postitemmeta">Older thoughts.</span></a>
   </li>
   <li class="postitem">
     <a href="http://medium.com/@gmph">My Medium Posts <span class="postitemmeta">Anything else.</span></a>
-  </li>
+  </li> -->
 </ul>
 
-***
 
 You can email me at [hi@gmph.co](mailto:hi@gmph.co?subject=&body=Hey%20Graham%2C%0A%0AI%27d%20really%20like%20to%20talk%20to%20you%20about...) to say hello. I love talking about design. I'm available for design consultancy. [Google me](http://google.co.uk/search?q=graham+macphee+designer).

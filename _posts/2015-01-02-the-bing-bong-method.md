@@ -11,7 +11,7 @@ permalink: /bing-bong
 version: 0.3
 ---
 
-![The Bing Bong Method]({{ site.url }}/res/posts/bingbong.png)
+![The Bing Bong Method]({{ site.baseurl }}/res/posts/bingbong.png)
 
 Being a politician in a genuine democracy is entirely troublesome. One must appear to represent their constituents. One must learn policies from their advisors. One must communicate their talking points to the media. All with more grace and fewer stutters than even the most talented Hollywood performer.
 

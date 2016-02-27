@@ -88,7 +88,7 @@ body {
     transform:translateX(80px);
 }
 
-.block.menuopen h1, .block.menuopen h2, .block.menuopen h3, .block.menuopen p, .block.menuopen ul, .block.menuopen ol, .block.menuopen .littleline {
+.block.menuopen h1, .block.menuopen h2, .block.menuopen h3, .block.menuopen h4, .block.menuopen h5, .block.menuopen h6, .block.menuopen p, .block.menuopen ul, .block.menuopen ol, .block.menuopen .littleline {
     opacity: 0.3 !important;
 }
 
@@ -335,6 +335,17 @@ span.littleline {
 	font-weight: 300;
 }
 
+.block h5 {
+	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+	font-size:17px;
+	display: block;
+	margin: 30px 0 0 0;
+	line-height: 1.3em;
+	color:#d9d9d9;
+	font-weight: 700;
+    text-transform: uppercase;
+}
+
 .block h6 {
     color:#999 !important;
 }
@@ -483,7 +494,8 @@ li.postitem {
     font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
     font-size:19px;
     font-weight: 700;
-    margin: 10px 0;
+    margin:0;
+    padding: 10px 0 55px 0;
 }
 
 li.postitem a {
@@ -500,7 +512,7 @@ li.postitem a {
 }
 
 li.postitem a:hover {
-    left:5px;
+    left:8px;
     opacity: 1;
 }
 
@@ -510,6 +522,12 @@ span.postitemmeta {
     font-weight: 300;
     color:#bbb;
     /*float:right;*/
+}
+
+div.positemdescription p {
+    margin-top:0;
+    padding-top:10px;
+    color:#555;
 }
 
 .block .links {

@@ -2,6 +2,7 @@ title: "Graham Macphee"
 url: http://gmph.co
 author: "Graham Macphee"
 permalink: /:title
+excerpt_separator: "<!--MORE-->"
 gems:
   - jekyll-feed
 feed:

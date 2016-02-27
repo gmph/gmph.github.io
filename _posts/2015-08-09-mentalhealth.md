@@ -10,7 +10,7 @@ permalink: /mental-health
 version: 1.0
 ---
 
-![Mental Health and Me]({{ site.url }}/res/posts/brain.png)
+![Mental Health and Me]({{ site.baseurl }}/res/posts/brain.png)
 
 I've been doing this all wrong. Whenever I write about a topic I care about, I turn to statistics to back up my feelings and help people understand why they should care too. It doesn't work well. In this article I will share my personal experiences to convey the importance of mental health.
 
@@ -92,7 +92,7 @@ I hope that gives you a good idea of the whole experience of seeking help. It go
 
 Everyone's experiences of mental illness and treatment will be different and everyone's path to recovery will be different. There's no one-size-fits-all solution to hand out, but there is a general set of stages that I have seen people (including myself) go through:
 
-![Steps to Recovery]({{ site.url }}/res/posts/mentalhealthsteps.png)
+![Steps to Recovery]({{ site.baseurl }}/res/posts/mentalhealthsteps.png)
 
 Knowing these steps gives me hope that (while I might have some way to go) there's a definite path for me to follow and an easy set of things I can do. Even when I don't feel positive about the way things are going, it brings some order back to what doesn't feel like a very ordered or consistent experience.
 
