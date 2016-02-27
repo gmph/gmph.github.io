@@ -804,6 +804,11 @@ a img.footerimg:hover {
         line-height:1.2em;
     }
 
+    li.postitem a {
+        left:0 !important;
+        opacity: 0.9 !important;
+    }
+
     span.postitemmeta {
         display: block;
         margin:10px 0 0 0;
