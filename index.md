@@ -20,28 +20,27 @@ This is where I publish my thoughts on technology, psychology, politics and more
 ##### Recent Articles
 
 <ul class="postlist">
-  {% for post in site.posts limit:20 %}
-    {% unless post.private %}
-    <li class="postitem">
-      <a href="{{ post.url }}">
+    {% for post in site.posts limit:20 %}
+        {% unless post.private %}
+            <li class="postitem">
 
-      <span class="postitemtitle">{{ post.title }}</span> <span class="postitemmeta">{{ post.date | date: "%B %-d, %Y" }}</span>
+            {% if post.redirect %}
+                <a href="{{ post.redirect }}" target="_blank">
+            {% else %}
+                <a href="{{ post.url }}">
+            {% endif %}
 
-      <div class="positemdescription">
+                    <span class="postitemtitle">{{ post.title }}</span> <span class="postitemmeta">{{ post.date | date: "%B %-d, %Y" }}</span>
 
-      <p>{{ post.content | strip_html | truncatewords:55 }}</p></div>
+                    <div class="positemdescription">
 
-      </a>
-    </li>
-    {% endunless %}
-  {% endfor %}
-  <!-- <li class="postitem">
-    <a href="http://thinks.grahammacphee.co.uk">My Previous Blog <span class="postitemmeta">Older thoughts.</span></a>
-  </li>
-  <li class="postitem">
-    <a href="http://medium.com/@gmph">My Medium Posts <span class="postitemmeta">Anything else.</span></a>
-  </li> -->
+                    <p>{{ post.content | strip_html | truncatewords:55 }}</p></div>
+
+                </a>
+            </li>
+        {% endunless %}
+    {% endfor %}
 </ul>
 
 
-You can email me at [hi@gmph.co](mailto:hi@gmph.co?subject=&body=Hey%20Graham%2C%0A%0AI%27d%20really%20like%20to%20talk%20to%20you%20about...) to say hello. I love talking about design. I'm available for design consultancy. [Google me](http://google.co.uk/search?q=graham+macphee+designer).
+You can email me at [hi@gmph.co](mailto:hi@gmph.co?subject=&body=Hey%20Graham%2C%0A%0AI%27d%20really%20like%20to%20talk%20to%20you%20about...) to say hello – I love talking about design. You can read more about this website in its [colophon]({{ site.baseurl }}/colophon).

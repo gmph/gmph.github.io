@@ -770,13 +770,17 @@ a img.footerimg:hover {
 		font-size:26px;
 	}
 
-    .block h2, .block h5, .block h6 {
+    .block h2 {
 		font-size: 18px;
 	}
 
 	.block h3 {
 		font-size: 20px;
 		line-height:1.4em;
+	}
+
+    .block h5 {
+		font-size: 16px;
 	}
 
 	.block p, ul, ol, blockquote, .block h6 {
@@ -797,11 +801,12 @@ a img.footerimg:hover {
 
     li.postitem {
         font-size:18px;
+        line-height:1.2em;
     }
 
     span.postitemmeta {
         display: block;
-        margin:-10px 0 0 0;
+        margin:10px 0 0 0;
         font-size:14px;
     }
 

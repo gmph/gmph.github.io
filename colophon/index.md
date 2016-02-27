@@ -29,4 +29,4 @@ This blog is hosted by GitHub and based on [GitHub Pages](https://pages.github.c
 
 ## Rights
 
-All content in this blog and this domain &copy; 2015-16 Graham Macphee. All rights reserved. Quotes and references are used under fair-use. Rights statements for the open-source software used can be found with the individual code. Helvetica&reg; Neue &copy; Linotype.
+All content in this blog and this domain &copy; 2015-16 Graham Macphee. All rights reserved. Quotes and references are used under fair-use. Rights statements for the open-source software used can be found with each code block. Helvetica&reg; Neue &copy; Linotype.

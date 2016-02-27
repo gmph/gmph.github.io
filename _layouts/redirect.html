@@ -10,7 +10,7 @@
 
 <head>
 
-<title>{{ page.title }} | Graham Macphee</title>
+<title>{{ page.title }}</title>
 <meta name="author" content="Graham Macphee" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />
@@ -28,10 +28,7 @@
 <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400' rel='stylesheet' type='text/css'>
 <link href="{{ site.baseurl }}/res/css/main.css" rel="stylesheet" type="text/css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-{% if page.url == "/404.html" %}
-	<meta http-equiv="refresh" content="10; url=/">
-{% endif %}
+<meta http-equiv="refresh" content="0; url={{ page.redirect }}">
 
 </head>
 
@@ -83,55 +80,9 @@
 
 <script language="javascript">
 
-    $('.block').css('opacity','0');
-
-    $('body').css('overflow-y','hidden');
-
-    $('.loadimg').css('opacity','0');
-
-    $('a').each(function() {
-	    if ($(this).find('img,svg').length) {
-	        $(this).css('border','none');
-	    }
-	});
-
-    $(document).ready(function(){
-    	setTimeout(function(){
-    		$('.loadimg').css('opacity','1');
-    		setTimeout(function(){
-	    		$('.loadimg').css('opacity','0');
-	    		setTimeout(function(){
-		    		$('.block').css('opacity','1');
-		    		$('body').css('overflow-y','scroll');
-		    	},400);
-	    	},1200);
-    	},200);
-	});
-
-	$(function() {
-      $('a[href*=#]:not([href=#])').click(function() {
-        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-          var target = $(this.hash);
-          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-          if (target.length) {
-            $('html,body').animate({
-              scrollTop: (target.offset().top - 30)
-		  	}, 400);
-            return false;
-          }
-        }
-      });
-    });
-
-</script>
-
-{% if page.url == "/404.html" %}
-	<script language="javascript">
-		$('.block').css('margin-top','24vh');
-		$('p.meta').css('display','none');
-		$('p.social').css('display','none');
-	</script>
-{% endif %}
+$('.block').css('opacity','0');
+$('body').css('overflow-y','hidden');
+$('.loadimg').css('opacity','0');
 
 <!-- Landy -->
 <script>var JavaScript={load:function(e,t){var a,l=document.createElement("script");l.setAttribute("src",e),t&&(l.onreadystatechange=l.onload=function(){a||t(),a=!0});var o=document.getElementsByTagName("head")[0];o.insertBefore(l,o.firstChild)}},config={g:[{"event":"click","value":".postlist .postitem"},{"event":"click","value":".menu .purple"},{"event":"click","value":".menu .twitter, .menu .instagram, .menu .foursquare"}],modelId:"a6e6703d313e900ef8d1786f",user:"JELjJCCiqsNAHrPAf",url:"http://gmph.co",type:"ab",subtype:"contains"};JavaScript.load("https://d2mnlxdd0x11jg.cloudfront.net/landy.min.js",function(){landy.init(config)});</script>
