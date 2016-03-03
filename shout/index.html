@@ -237,14 +237,14 @@ body {
     position: absolute;
     top:50%;
     left:50%;
-    width:95.78125%; /* to match canvas */
+    width:85.8%; /* to match canvas */
     transform:translate(-50%,-50%);
     height:auto;
     min-height:46px;
     margin:-4px 0 0 1px;
     line-height: 1.4em;
     font-family: Arial, sans-serif;
-    font-size:30px;
+    font-size:36px;
     text-align: center;
     color: inherit;
     background: none;
@@ -635,7 +635,7 @@ body {
 
 <script language="javascript">
 
-    var defaultTextStyle = "30px Arial";
+    var defaultTextStyle = "36px Arial";
     var defaultLineHeight = 1.4;
 
     var $canvasList = $('canvas.frame');
@@ -765,7 +765,7 @@ body {
 
         textList[frameNumber] = $inputList.eq(frameNumber).val().split('\n');
         ctxs[frameNumber].fillStyle = $('.frame-container').eq(frameNumber).find('.frame-text').css('color');
-        drawLines(frameNumber,textList[frameNumber],600,defaultLineHeight,$('.frame-container').eq(frameNumber).attr('data-style') + ' ' + defaultTextStyle);
+        drawLines(frameNumber,textList[frameNumber],540,defaultLineHeight,$('.frame-container').eq(frameNumber).attr('data-style') + ' ' + defaultTextStyle);
     }
 
     function getLines(n,phrases,maxPxLength,textStyle) {
@@ -859,7 +859,7 @@ body {
     }
 
     function setScaledFontSize(){
-        $('.frame-text').css('font-size',Math.round(0.08333333333 * $('.frame-container').height())+'px');
+        $('.frame-text').css('font-size',Math.round(0.1 * $('.frame-container').height())+'px');
     }
 
     function setCreateButtonState(bool){
@@ -889,7 +889,7 @@ body {
         $('.frame-container').each(function(){
             var $frameContainer = $(this);
             var $input = $(this).find('.frame-text');
-            var duration = Math.round($input.val().split(' ').length*0.26*1000+1250);
+            var duration = Math.round($input.val().split(' ').removeByValue('').length*0.26*1000+1250);
             $input.closest('.frame-container').attr('data-duration',duration);
             updateFrame(parseInt($frameContainer.attr('id').substring(1)));
         });
@@ -928,7 +928,7 @@ body {
 
        /* Accounts for rows being deleted, pixel value may need adjusting */
        if (text.clientHeight == text.scrollHeight) {
-          text.style.height = "30px";
+          text.style.height = "36px";
        }
 
        var adjustedHeight = text.clientHeight;
