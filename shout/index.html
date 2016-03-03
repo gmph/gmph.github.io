@@ -577,8 +577,8 @@ body {
 
 <div class="frame-list">
 
-    <div id="f0" class="frame-container" data-colour="dark-blue" data-style="bold" data-duration="1250">
-        <canvas class="frame" height="360" width="640"></canvas>
+    <div id="f0" class="frame-container" data-colour="dark-blue" data-style="bold" data-duration="1300">
+        <canvas class="frame"></canvas>
         <div class="frame-edit dark-blue">
             <textarea class="frame-text bold" rows="1" placeholder="Type something awesome..."></textarea>
         </div>
@@ -599,8 +599,8 @@ body {
         <div class="remove"></div>
     </div>
 
-    <div id="f1" class="frame-container" data-colour="white" data-style="italic" data-duration="1250">
-        <canvas class="frame" height="360" width="640"></canvas>
+    <div id="f1" class="frame-container" data-colour="white" data-style="italic" data-duration="1300">
+        <canvas class="frame"></canvas>
         <div class="frame-edit white">
             <textarea class="frame-text italic" rows="1" placeholder="Type another thing..."></textarea>
         </div>
@@ -644,7 +644,12 @@ body {
     var $inputList = $('textarea.frame-text');
     var textList = [];
 
-    var frameHTML = ['<div id="f','" class="frame-container" data-colour="white" data-style="bold" data-duration="1250"> <canvas class="frame" height="360" width="640"></canvas> <div class="frame-edit white"> <textarea class="frame-text bold" rows="1" placeholder="Type another thing..."></textarea> </div> <div class="frame-colour"> <div class="colour white active"></div> <div class="colour black"></div> <div class="colour pink"></div> <div class="colour red"></div> <div class="colour orange"></div> <div class="colour yellow"></div> <div class="colour dark-green"></div> <div class="colour light-green"></div> <div class="colour light-blue"></div> <div class="colour dark-blue"></div> <div class="colour purple"></div> </div> <div class="frame-style bold">T</div> <div class="remove"></div> </div>'];
+    var frameHTML = ['<div id="f','" class="frame-container" data-colour="white" data-style="bold" data-duration="1300"> <canvas class="frame"></canvas> <div class="frame-edit white"> <textarea class="frame-text bold" rows="1" placeholder="Type another thing..."></textarea> </div> <div class="frame-colour"> <div class="colour white active"></div> <div class="colour black"></div> <div class="colour pink"></div> <div class="colour red"></div> <div class="colour orange"></div> <div class="colour yellow"></div> <div class="colour dark-green"></div> <div class="colour light-green"></div> <div class="colour light-blue"></div> <div class="colour dark-blue"></div> <div class="colour purple"></div> </div> <div class="frame-style bold">T</div> <div class="remove"></div> </div>'];
+
+    if (window.Worker){
+        var encodeWorker = new Worker("shoutEncode.js");
+    }
+
 
     $(document).ready(function(){
 
@@ -730,11 +735,6 @@ body {
             ctxs[i].translate(0.5,0.5);
             updateFrame(i);
         }
-
-        console.log($canvasList);
-        console.log($inputList);
-        console.log(ctxs);
-        console.log(textList);
 
     }
 
@@ -878,31 +878,73 @@ body {
         }
     }
 
+    function calcNumberOfFrames(){
+        $('.frame-container').each(function(){
+            var $frameContainer = $(this);
+            var $input = $(this).find('.frame-text');
+            var frameCount = Math.round($input.val().split(' ').removeByValue('').length*0.28*1000+1300);
+            $input.closest('.frame-container').attr('data-frames',frameCount * 0.01);
+            updateFrame(parseInt($frameContainer.attr('id').substring(1)));
+        });
+    }
+
     function encodeGIF(){
 
-        var encoder = new GIFEncoder();
+        var imageList = [];
+        var durationList = [];
 
         for (var i=0;i<getFrameCount();i++){
             updateFrame(i);
         }
 
-        $('.frame-container').each(function(){
-            var $frameContainer = $(this);
-            var $input = $(this).find('.frame-text');
-            var duration = Math.round($input.val().split(' ').removeByValue('').length*0.26*1000+1250);
-            $input.closest('.frame-container').attr('data-duration',duration);
-            updateFrame(parseInt($frameContainer.attr('id').substring(1)));
-        });
+        calcNumberOfFrames();
 
-        encoder.setRepeat(0);   //0  -> loop forever
-                                //1+ -> loop n times then stop
-        encoder.setDelay(1000); //go to next frame every n milliseconds
+        for (var i=0;i<getFrameCount();i++){
+            imageList.push(ctxs[i].getImageData(0,0,640,360).data);
+            durationList.push(parseInt($('.frame-container').eq(i).attr('data-frames')));
+        }
+
+        if (window.Worker){
+            encodeWorker.postMessage({imageList:imageList,durationList:durationList});
+        } else {
+            localEncodeWorker(imageList,durationList);
+        }
+
+    }
+
+    encodeWorker.onmessage = function(e){
+        setCreateButtonState(true);
+        downloadURI(e.data['filename'],e.data['data'])
+    }
+
+    function localEncodeWorker(imageList,durationList){
+
+        var encoder = new GIFEncoder();
+        var unique = new Date().getTime();
+
+        encoder.setRepeat(0);   // 0  -> loop forever
+                                // 1+ -> loop n times then stop
+        encoder.setDelay(100);  // go to next frame every n milliseconds
+
+        encoder.setSize(640, 360); // set frame size
+
+        encoder.setQuality(25); // set quality of colour reproduction
 
         encoder.start();
 
-        for (var i=0;i<getFrameCount();i++){
-            encoder.setDelay($('.frame-container').eq(i).attr('data-duration'));
-            encoder.addFrame(ctxs[i]);
+        for (var i=0;i<imageList.length;i++){
+            var image = imageList[i];
+            var frames = durationList[i];
+            console.log('frames: '+frames);
+            for (var j=0;j<frames;j++){
+                if (j>0){
+                    console.log('dup');
+                    encoder.addFrame(image,true,true);
+                } else {
+                    console.log('ori');
+                    encoder.addFrame(image,true);
+                }
+            }
         }
 
         encoder.finish();
@@ -910,14 +952,19 @@ body {
         var binary_gif = encoder.stream().getData();
         var data_url = 'data:image/gif;base64,'+encode64(binary_gif);
 
+        downloadURI("shout_"+unique+".gif",data_url);
+
         setCreateButtonState(true);
 
+    }
+
+    function downloadURI(filename,data){
+        // setCreateButtonState(true);
         var link = document.createElement("a");
-        link.download = "shout.gif";
-        link.href = data_url;
+        link.download = filename;
+        link.href = data;
         link.target = "_blank";
         link.click();
-
     }
 
     function fitToContent(element, maxHeight){
