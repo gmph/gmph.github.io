@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=100" />
+<style type="text/css">
+/* IE CSS HERE */
+<style>
+<![endif]-->
+
+<html id="top">
+
+<head>
+
+<title>Shout</title>
+<meta name="author" content="Graham Macphee" />
+<meta name="description" content="Shout is a very simple app for creating GIFs out of custom text." />
+<meta name="keywords" content="Shout is a very simple app for creating GIFs out of custom text." />
+<meta name="theme-color" content="#34b871">
+<meta charset="utf-8">
+<meta property="og:title" content="Shout">
+<meta property="og:type" content="website">
+<meta property="og:url" content="http://gmph.co/shout">
+<meta property="og:site_name" content="Graham Macphee">
+<meta property="og:description" content="Shout is a very simple app for creating GIFs out of custom text.">
+<meta property="twitter:account_id" content="87261538" /> <!-- Twitter ID, currently for @gmph -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="shout.png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="LZWEncoder.js"></script>
+<script type="text/javascript" src="NeuQuant.js"></script>
+<script type="text/javascript" src="GIFEncoder.js"></script>
+<script type="text/javascript" src="b64.js"></script>
+
+<style type="text/css">
+
+/* CSS RESET */
+
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav ul{list-style-type:none!important}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{background-color:#ff9;color:#000;text-decoration:none}mark{background-color:#ff9;color:#000;font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}input,select{vertical-align:middle}a{text-decoration:none;color:inherit}*{font-feature-settings:kern;text-ren­der­ing:optimizeLegibility!important;-webkit-box-sizing:border-box!important;-moz-box-sizing:border-box!important;box-sizing:border-box!important;-webkit-font-smoothing:antialiased;-moz-font-smoothing:antialiased;font-smoothing:antialiased;transition:.25s all ease-out;-webkit-transition:.25s all ease-out;-moz-transition:.25s all ease-out;-o-transition:.25s all ease-out;-webkit-style:none;}
+
+textarea, input {
+    outline: none;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -moz-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+:focus {
+    outline-color: transparent;
+    outline-style: none;
+}
+
+/* END CSS RESET */
+
+body {
+	background:#f8f8f8;
+}
+
+.title-container {
+    display: block;
+    position: relative;
+    top:0;
+    left:-5px;
+    width:90%;
+    max-width:440px;
+    height:auto;
+    overflow: hidden;
+    margin:10px auto -12px auto;
+    padding:20px;
+    text-align: center;
+}
+
+.title-container .logo {
+    display: inline-block;
+    vertical-align: middle;
+    width:40px;
+    height:40px;
+    margin:7px;
+}
+
+.title-container h1 {
+    vertical-align: middle;
+    display: inline-block;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color:#333;
+    padding:4px 0;
+}
+
+.frame-container {
+    display: block;
+    position: relative;
+    width:90%;
+    max-width:640px;
+    height:auto;
+    overflow: hidden;
+    margin:28px auto 32px auto;
+    border-radius: 5px;
+    opacity: 0.99;
+    box-shadow: 0 1px 3px rgba(0,0,0,.2);
+}
+
+.frame-container::after {
+    content: "";
+    display: block;
+    position: absolute;
+    padding-top: 56.25%; /* 16:9 */
+}
+
+.action-container {
+    display: block;
+    position: relative;;
+    top:0;
+    right:0;
+    padding:20px 20px 60px 20px;
+    text-align: center;
+}
+
+.button {
+    display: inline-block;
+    position: relative;
+    top:0;
+    left:0;
+    width:auto;
+    height:auto;
+    margin:8px;
+    padding:16px 32px;
+    border-radius: 5px;
+    opacity: 0.99;
+    box-shadow: 0 1px 3px rgba(0,0,0,.2);
+    background: #34b871;
+    color:#fff;
+    font-size:18px;
+    font-weight:500;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #2fab68;
+}
+
+.button.add-frame {
+    background: #bbb;
+}
+
+.button.add-frame:hover {
+    background: #b0b0b0;
+}
+
+.frame-container .frame {
+    width:100%;
+    height:100%;
+}
+
+.frame-container .remove {
+    display: block;
+    position: absolute;
+    top:2px;
+    right:14px;
+    width:30px;
+    height:30px;
+    opacity: 0;
+    pointer-events: none;
+    cursor: pointer;
+}
+
+.frame-container:hover .remove, .frame-container.show-controls .remove {
+    top:14px;
+    pointer-events: all;
+    opacity: 0.6;
+}
+
+.frame-container:hover .remove:hover, .frame-container.show-controls .remove:hover {
+    transform:scale(1.1);
+    opacity: 0.9;
+}
+
+.frame-container .remove::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%) rotate(-45deg);
+    width:3px;
+    height:24px;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.frame-container .remove::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%) rotate(45deg);
+    width:3px;
+    height:24px;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.frame-container[data-colour="white"] .remove::after {
+    background: #aaa;
+}
+
+.frame-container[data-colour="white"] .remove::before {
+    background: #aaa;
+}
+
+.frame-container .frame-edit {
+    display: block;
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+
+.frame-container .frame-text {
+    display: block;
+    position: absolute;
+    top:50%;
+    left:50%;
+    width:100%;
+    transform:translate(-50%,-50%);
+    max-width:613px; /* to match canvas */
+    height:auto;
+    min-height:46px;
+    margin:-4px 0 0 1px;
+    line-height: 1.4em;
+    font-family: Arial, sans-serif;
+    font-size:30px;
+    text-align: center;
+    color: inherit;
+    background: none;
+    border:none;
+    resize: none;
+    overflow: hidden !important;
+
+    -webkit-touch-callout: text;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+
+    transition:.0s all ease-out;
+    -webkit-transition:.0s all ease-out;
+    -moz-transition:.0s all ease-out;
+    -o-transition:.0s all ease-out
+}
+
+.frame-container .frame-text.bold {
+    font-style: normal;
+    font-weight: 700;
+}
+
+.frame-container .frame-text.italic {
+    font-style: italic;
+    font-weight: 400;
+}
+
+.frame-container .frame-text::-webkit-scrollbar {
+	width: 0; /* hidden */
+}
+
+.frame-container .frame-text::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: rgba(255,255,255,.6);
+}
+.frame-container .frame-text::-moz-placeholder { /* Firefox 19+ */
+    color: rgba(255,255,255,.6);
+}
+.frame-container .frame-text:-ms-input-placeholder { /* IE 10+ */
+    color: rgba(255,255,255,.6);
+}
+.frame-container .frame-text:-moz-placeholder { /* Firefox 18- */
+    color: rgba(255,255,255,.6);
+}
+
+.frame-container .white .frame-text::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: rgba(32,32,32,.3);
+}
+.frame-container .white .frame-text::-moz-placeholder { /* Firefox 19+ */
+    color: rgba(32,32,32,.3);
+}
+.frame-container .white .frame-text:-ms-input-placeholder { /* IE 10+ */
+    color: rgba(32,32,32,.3);
+}
+.frame-container .white .frame-text:-moz-placeholder { /* Firefox 18- */
+    color: rgba(32,32,32,.3);
+}
+
+.frame-container .frame-text::selection {
+  background: rgba(0,0,0,.2); /* WebKit/Blink Browsers */
+}
+.frame-container .frame-text::-moz-selection {
+  background: rgba(0,0,0,.2); /* Gecko Browsers */
+}
+
+.frame-container .frame-colour {
+    display: block;
+    position: absolute;
+    bottom:5px;
+    left:20px;
+    width:auto;
+    height:auto;
+    pointer-events: none;
+}
+
+.frame-container:hover .frame-colour, .frame-container.show-controls .frame-colour {
+    display: block;
+    position: absolute;
+    bottom:20px;
+    left:20px;
+    width:auto;
+    height:auto;
+    pointer-events: all;
+}
+
+.frame-container .frame-colour .colour {
+    display: inline-block;
+    position: relative;
+    top:20px;
+    left:0;
+    width:30px;
+    height:30px;
+    margin:0 2px 0 0;
+    background: #666;
+    border:solid 2px rgba(255,255,255,.8);
+    border-radius:20px;
+    opacity: 0;
+    cursor: pointer;
+    -webkit-backface-visibility:hidden;
+}
+
+.frame-container:hover .frame-colour .colour, .frame-container.show-controls .frame-colour .colour {
+    top:0;
+    opacity: 0.75;
+}
+
+.frame-container:hover .frame-colour .colour:hover, .frame-container.show-controls .frame-colour .colour:hover {
+    transform: scale(1.2);
+    opacity: 0.99;
+}
+
+.frame-container:hover .frame-colour .colour.active, .frame-container.show-controls .frame-colour .colour.active {
+    border:solid 2px rgba(255,255,255,1);
+    transform: scale(1.1);
+    opacity: 0.99;
+}
+
+.frame-container:hover .frame-colour .colour:hover, .frame-container.show-controls .frame-colour .colour:hover {
+    transition:.1s all ease-out !important;
+    -webkit-transition:.1s all ease-out !important;
+    -moz-transition:.1s all ease-out !important;
+    -o-transition:.1s all ease-out !important;
+}
+
+.frame-colour .colour:nth-last-child(11) {
+    transition:.5s all ease-out;
+    -webkit-transition:.5s all ease-out;
+    -moz-transition:.5s all ease-out;
+    -o-transition:.5s all ease-out
+}
+
+.frame-colour .colour:nth-last-child(10) {
+    transition:.475s all ease-out;
+    -webkit-transition:.475s all ease-out;
+    -moz-transition:.475s all ease-out;
+    -o-transition:.475s all ease-out
+}
+
+.frame-colour .colour:nth-last-child(9) {
+    transition:.45s all ease-out;
+    -webkit-transition:.45s all ease-out;
+    -moz-transition:.45s all ease-out;
+    -o-transition:.45s all ease-out
+}
+
+.frame-colour .colour:nth-last-child(8) {
+    transition:.4s all ease-out;
+    -webkit-transition:.4s all ease-out;
+    -moz-transition:.4s all ease-out;
+    -o-transition:.4s all ease-out
+}
+
+.frame-colour .colour:nth-last-child(7) {
+    transition:.375s all ease-out;
+    -webkit-transition:.375s all ease-out;
+    -moz-transition:.375s all ease-out;
+    -o-transition:.375s all ease-out
+}
+
+.frame-colour .colour:nth-last-child(6) {
+    transition:.325s all ease-out;
+    -webkit-transition:.325s all ease-out;
+    -moz-transition:.325s all ease-out;
+    -o-transition:.325s all ease-out
+}
+
+.frame-colour .colour:nth-last-child(5) {
+    transition:.3s all ease-out;
+    -webkit-transition:.3s all ease-out;
+    -moz-transition:.3s all ease-out;
+    -o-transition:.3s all ease-out
+}
+
+.frame-colour .colour:nth-last-child(4) {
+    transition:.25s all ease-out;
+    -webkit-transition:.25s all ease-out;
+    -moz-transition:.25s all ease-out;
+    -o-transition:.25s all ease-out
+}
+
+.frame-colour .colour:nth-last-child(3) {
+    transition:.2s all ease-out;
+    -webkit-transition:.2s all ease-out;
+    -moz-transition:.2s all ease-out;
+    -o-transition:.2s all ease-out
+}
+
+.frame-colour .colour:nth-last-child(2) {
+    transition:.15s all ease-out;
+    -webkit-transition:.15s all ease-out;
+    -moz-transition:.15s all ease-out;
+    -o-transition:.15s all ease-out
+}
+
+.frame-colour .colour:nth-last-child(1) {
+    transition:.1s all ease-out;
+    -webkit-transition:.1s all ease-out;
+    -moz-transition:.1s all ease-out;
+    -o-transition:.1s all ease-out
+}
+
+.black {
+    background: #222 !important;
+    color: #fff !important;
+}
+
+.white {
+    border-color: rgba(32,32,32,.8) !important;
+    background: #fff !important;
+    color: #222 !important;
+}
+
+.white.active {
+    border-color: rgba(32,32,32,1) !important;
+}
+
+.pink {
+    background: #db78c5 !important;
+    color: #fff !important;
+}
+
+.purple {
+    background: #6044e4 !important;
+    color: #fff !important;
+}
+
+.dark-blue {
+    background: #4a71e4 !important;
+    color: #fff !important;
+}
+
+.light-blue {
+    background: #4ab1e4 !important;
+    color: #fff !important;
+}
+
+.dark-green {
+    background: #2fab68 !important;
+    color: #fff !important;
+}
+
+.light-green {
+    background: #53cf6a !important;
+    color: #fff !important;
+}
+
+.yellow {
+    background: #e8bf2d !important;
+    color: #fff !important;
+}
+
+.orange {
+    background: #f09b37 !important;
+    color: #fff !important;
+}
+
+.red {
+    background: #e94e4e !important;
+    color: #fff !important;
+}
+
+.frame-style {
+    display: block;
+    position: absolute;
+    bottom: 12px;
+    right:22px;
+    width:36px;
+    background: rgba(255,255,255,0);
+    box-shadow: 0 0 0 2px rgba(255,255,255,.15);
+    padding:10px 13px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size:16px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color:#fff;
+    opacity: 0;
+    pointer-events: none;
+
+    transition:.1s all ease-out;
+    -webkit-transition:.1s all ease-out;
+    -moz-transition:.1s all ease-out;
+    -o-transition:.1s all ease-out
+}
+
+[data-colour="white"] .frame-style {
+    background: rgba(255,255,255,0);
+    box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+    color:#999;
+}
+
+.frame-style:hover {
+    transform: scale(1.05);
+    background: rgba(255,255,255,.05);
+}
+
+.frame-container:hover .frame-style, .frame-container.show-controls .frame-style {
+    bottom:22px;
+    opacity: 1;
+    pointer-events: all;
+}
+
+.frame-style.bold {
+    font-style: normal;
+    font-weight: 700;
+}
+
+.frame-style.italic {
+    font-style: italic;
+    font-weight: 400;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="title-container">
+    <img class="logo" src="shout.png"/>
+    <h1>Shout</h1>
+</div>
+
+<div class="frame-list">
+
+    <div id="f0" class="frame-container" data-colour="dark-blue" data-style="bold" data-duration="1200">
+        <canvas class="frame" height="360" width="640"></canvas>
+        <div class="frame-edit dark-blue">
+            <textarea class="frame-text bold" rows="1" placeholder="Type something awesome..."></textarea>
+        </div>
+        <div class="frame-colour">
+            <div class="colour white"></div>
+            <div class="colour black"></div>
+            <div class="colour pink"></div>
+            <div class="colour red"></div>
+            <div class="colour orange"></div>
+            <div class="colour yellow"></div>
+            <div class="colour dark-green"></div>
+            <div class="colour light-green"></div>
+            <div class="colour light-blue"></div>
+            <div class="colour dark-blue active"></div>
+            <div class="colour purple"></div>
+        </div>
+        <div class="frame-style bold">T</div>
+        <div class="remove"></div>
+    </div>
+
+    <div id="f1" class="frame-container" data-colour="white" data-style="italic" data-duration="1200">
+        <canvas class="frame" height="360" width="640"></canvas>
+        <div class="frame-edit white">
+            <textarea class="frame-text italic" rows="1" placeholder="Type another thing..."></textarea>
+        </div>
+        <div class="frame-colour">
+            <div class="colour white active"></div>
+            <div class="colour black"></div>
+            <div class="colour pink"></div>
+            <div class="colour red"></div>
+            <div class="colour orange"></div>
+            <div class="colour yellow"></div>
+            <div class="colour dark-green"></div>
+            <div class="colour light-green"></div>
+            <div class="colour light-blue"></div>
+            <div class="colour dark-blue"></div>
+            <div class="colour purple"></div>
+        </div>
+        <div class="frame-style italic">T</div>
+        <div class="remove"></div>
+    </div>
+</div>
+
+<div class="action-container">
+    <div class="button add-frame">Add Frame</div>
+    <div class="button create-gif">Create GIF</div>
+    <!-- <div class="preview">
+        <a id="resultLink" download="gift.gif" href="#" target="_blank">
+            <div>Right click to download:</div>
+            <img id="resultImage" download="gift.gif" src="#"/>
+        </a>
+    </div> -->
+</div>
+
+<script language="javascript">
+
+    var defaultTextStyle = "30px Arial";
+    var defaultLineHeight = 1.4;
+
+    var $canvasList = $('canvas.frame');
+    var ctxs = [];
+
+    var $inputList = $('textarea.frame-text');
+    var textList = [];
+
+    var frameHTML = ['<div id="f','" class="frame-container" data-colour="dark-blue" data-style="bold" data-duration="1200"> <canvas class="frame" height="360" width="640"></canvas> <div class="frame-edit dark-blue"> <textarea class="frame-text bold" rows="1" placeholder="Type another thing..."></textarea> </div> <div class="frame-colour"> <div class="colour white"></div> <div class="colour black"></div> <div class="colour pink"></div> <div class="colour red"></div> <div class="colour orange"></div> <div class="colour yellow"></div> <div class="colour dark-green"></div> <div class="colour light-green"></div> <div class="colour light-blue"></div> <div class="colour dark-blue active"></div> <div class="colour purple"></div> </div> <div class="frame-style bold">T</div> <div class="remove"></div> </div>'];
+
+    $(document).ready(function(){
+
+        init();
+
+        $('.frame-text').eq(0).focus();
+
+        setTimeout(function(){
+            $('.frame-container').eq(0).addClass('show-controls');
+        },500);
+
+        $(document).on('mouseleave mouseenter','.frame-container',function(){
+            $('.frame-container').removeClass('show-controls');
+        });
+
+        $(document).on('click','.frame-edit',function(){
+            $(this).find('.frame-text').focus();
+        });
+
+        $(document).on('click','.frame-container .remove',function(){
+            $(this).closest('.frame-container').remove();
+            if ($('.frame-container').length <= 0){
+                addFrame();
+            }
+        });
+
+        $(document).on('click','.add-frame',addFrame);
+
+        $(document).on('click','.create-gif',encodeGIF);
+
+        $(document).on('keyup','.frame-text',function(){
+            var duration = ($(this).val().split(' ').length*0.38*1000+800) > 1200 ? Math.round($(this).val().split(' ').length*0.38*1000+800) : 1200;
+            $(this).closest('.frame-container').attr('data-duration',duration);
+            fitToContent(this,300);
+            updateFrame(parseInt($(this).closest('.frame-container').attr('id').substring(1)));
+        });
+
+        $(document).on('click','.frame-style',function(){
+            var style;
+            $(this).toggleClass('bold italic');
+            style = $(this).attr('class').split(' ').removeByValue('frame-style')[0];
+            $(this).closest('.frame-container').attr('data-style',style).find('.frame-edit .frame-text').toggleClass('bold italic').focus();
+            updateFrame(parseInt($(this).parent().attr('id').substring(1)));
+        });
+
+        $(document).on('mousedown','.frame-colour .colour',function(){
+            var colour = $(this).attr('class').split(' ').removeByValue('colour').removeByValue('active')[0];
+            $('.frame-colour .colour').removeClass('active');
+            $(this).addClass('active');
+            $(this).closest('.frame-container').attr('data-colour',colour).find('.frame-edit').attr('class','frame-edit '+colour);
+            updateFrame(parseInt($(this).parent().parent().attr('id').substring(1)));
+        });
+
+        $(document).on('click','.frame-colour .colour',function(){
+            $(this).closest('.frame-container').find('.frame-text').focus();
+        });
+
+
+
+    });
+
+    function init(){
+
+        $canvasList = $('.frame-container .frame');
+        $inputList = $('.frame-container .frame-text');
+        ctxs = [];
+        textList = [];
+
+        for (var i=0;i<$canvasList.length;i++){
+            $canvasList[i].width = 640;
+            $canvasList[i].height = 360;
+            ctxs.push($canvasList[i].getContext('2d'));
+            textList.push($inputList.eq(i).val().split('\n'));
+        }
+
+        for (var i=0;i<ctxs.length;i++){
+            ctxs[i].translate(0.5,0.5);
+            updateFrame(i);
+        }
+
+        console.log($canvasList);
+        console.log($inputList);
+        console.log(ctxs);
+        console.log(textList);
+
+    }
+
+    function addFrame(){
+        var f = $('.frame-container').length;
+        $('.frame-list').append(frameHTML[0]+f+frameHTML[1]);
+        init();
+        $('html,body').animate({scrollTop:($('#f'+f).offset().top - 80)},500);
+
+        setTimeout(function(){
+            $('#f'+f+' .frame-text').focus().addClass('show-controls');
+        },500);
+    }
+
+    function updateFrame(frameNumber){
+        console.log(frameNumber);
+        console.log(ctxs);
+        ctxs[frameNumber].clearRect(0,0,$canvasList[frameNumber].width, $canvasList[frameNumber].height);
+        ctxs[frameNumber].fillStyle = $('.colour.'+$('#f'+frameNumber).attr('data-colour')).css('background-color');
+        ctxs[frameNumber].fillRect(0,0,$canvasList[frameNumber].width, $canvasList[frameNumber].height);
+
+        textList[frameNumber] = $inputList.eq(frameNumber).val().split('\n');
+        ctxs[frameNumber].fillStyle = $('#f'+frameNumber+' .frame-text').css('color');
+        drawLines(frameNumber,textList[frameNumber],600,defaultLineHeight,$('#f'+frameNumber).attr('data-style') + ' ' + defaultTextStyle);
+    }
+
+    function getLines(n,phrases,maxPxLength,textStyle) {
+        console.log('phrases');
+        console.log(phrases);
+        var phraseFinal = [];
+        for (var j=0;j<phrases.length;j++){
+            var phrase = phrases[j];
+            var wa=phrase.split(" "),
+                phraseArray=[],
+                lastPhrase=wa[0],
+                measure=0,
+                splitChar=" ";
+            if (wa.length <= 1) {
+                console.log('1 word');
+                phraseFinal.push(wa[0]);
+                lastPhrase=wa[0];
+            }
+            ctxs[n].font = textStyle;
+            for (var c=1;c<wa.length;c++) {
+                var w=wa[c];
+                measure=ctxs[n].measureText(lastPhrase+splitChar+w).width;
+                if (measure<maxPxLength) {
+                    lastPhrase+=(splitChar+w);
+                } else {
+                    phraseFinal.push(lastPhrase + ' ');
+                    lastPhrase=w;
+                }
+                if (c===wa.length-1) {
+                    phraseFinal.push(lastPhrase + ' ');
+                }
+            }
+
+            console.log('phraseFinal');
+            console.log(phraseFinal);
+
+        }
+
+        return phraseFinal;
+
+    }
+
+    function drawLines(n,phrase,maxPxLength,lineHeight,textStyle){
+        var phraseArray = getLines(n,phrase,maxPxLength,textStyle);
+
+        var textLineHeight = parseInt(defaultTextStyle.split("px ")[0]);
+        var lineOuterHeight = lineHeight * textLineHeight;
+        var fullOuterHeight = lineOuterHeight * phraseArray.length;
+
+        ctxs[n].textAlign = "center";
+        ctxs[n].textBaseline = "top";
+        ctxs[n].font = textStyle;
+
+        for (var i=0;i<phraseArray.length;i++){
+            var positionFromTop = (($canvasList[0].height - fullOuterHeight) * 0.5) + ((i) * lineOuterHeight);
+            var positionFromLeft = $canvasList[0].width * 0.5;
+            ctxs[n].fillText(phraseArray[i],positionFromLeft,positionFromTop,maxPxLength);
+
+        }
+
+    }
+
+    function getRandomRGB(){
+         return 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+    }
+
+    function encodeGIF(){
+        var encoder = new GIFEncoder();
+
+        for (var i=0;i<ctxs.length;i++){
+            updateFrame(i);
+        }
+
+        encoder.setRepeat(0);   //0  -> loop forever
+                                //1+ -> loop n times then stop
+        encoder.setDelay(1000); //go to next frame every n milliseconds
+
+        encoder.start();
+
+        for (var i=0;i<ctxs.length;i++){
+            encoder.setDelay($('#f'+i).attr('data-duration'));
+            encoder.addFrame(ctxs[i]);
+        }
+
+        encoder.finish();
+
+        var binary_gif = encoder.stream().getData();
+        var data_url = 'data:image/gif;base64,'+encode64(binary_gif);
+
+        var link = document.createElement("a");
+        link.download = "gift.gif";
+        link.href = data_url;
+        link.target = "_blank";
+        link.click();
+
+    }
+
+    function fitToContent(element, maxHeight){
+       var text = $(element).get(0);
+       if (!text){
+           return;
+       }
+
+       /* Accounts for rows being deleted, pixel value may need adjusting */
+       if (text.clientHeight == text.scrollHeight) {
+          text.style.height = "30px";
+       }
+
+       var adjustedHeight = text.clientHeight;
+       if (!maxHeight || maxHeight > adjustedHeight)
+       {
+          adjustedHeight = Math.max(text.scrollHeight, adjustedHeight);
+          if (maxHeight)
+             adjustedHeight = Math.min(maxHeight, adjustedHeight);
+          if (adjustedHeight > text.clientHeight)
+             text.style.height = adjustedHeight + "px";
+       }
+    }
+
+    Array.prototype.removeByValue = function() {
+        var what, a = arguments, L = a.length, ax;
+        while (L && this.length) {
+            what = a[--L];
+            while ((ax = this.indexOf(what)) !== -1) {
+                this.splice(ax, 1);
+            }
+        }
+        return this;
+    };
+
+    $.fn.reflow = function () {
+        this[0].offsetHeight;   // force redrawing of element
+        return this;
+    };
+
+    $.fn.cssStatic = function (name, value) {
+        return this
+            .css('transition', 'none')
+            .css(name, value)
+            .reflow()
+            .css('transition', '');
+    };
+
+</script>
+
+</body>
+
+</html>
