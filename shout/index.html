@@ -71,7 +71,7 @@ body {
     max-width:440px;
     height:auto;
     overflow: hidden;
-    margin:10px auto -12px auto;
+    margin:12px auto -12px auto;
     padding:20px;
     text-align: center;
 }
@@ -81,7 +81,7 @@ body {
     vertical-align: middle;
     width:40px;
     height:40px;
-    margin:7px;
+    margin:8px;
 }
 
 .title-container h1 {
@@ -91,7 +91,7 @@ body {
     font-size: 18px;
     font-weight: 700;
     color:#333;
-    padding:4px 0;
+    padding:3px 0;
 }
 
 .frame-container {
@@ -116,7 +116,7 @@ body {
 
 .action-container {
     display: block;
-    position: relative;;
+    position: relative;
     top:0;
     right:0;
     padding:20px 20px 60px 20px;
@@ -153,6 +153,12 @@ body {
 
 .button.add-frame:hover {
     background: #b0b0b0;
+}
+
+.button.create-gif.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: default;
 }
 
 .frame-container .frame {
@@ -231,9 +237,8 @@ body {
     position: absolute;
     top:50%;
     left:50%;
-    width:100%;
+    width:95.78125%; /* to match canvas */
     transform:translate(-50%,-50%);
-    max-width:613px; /* to match canvas */
     height:auto;
     min-height:46px;
     margin:-4px 0 0 1px;
@@ -310,9 +315,10 @@ body {
 .frame-container .frame-colour {
     display: block;
     position: absolute;
-    bottom:5px;
-    left:20px;
-    width:auto;
+    bottom:10px;
+    left:25px;
+    width:74%;
+    max-width:400px;
     height:auto;
     pointer-events: none;
 }
@@ -320,10 +326,8 @@ body {
 .frame-container:hover .frame-colour, .frame-container.show-controls .frame-colour {
     display: block;
     position: absolute;
-    bottom:20px;
-    left:20px;
-    width:auto;
-    height:auto;
+    bottom:25px;
+    left:25px;
     pointer-events: all;
 }
 
@@ -332,15 +336,21 @@ body {
     position: relative;
     top:20px;
     left:0;
-    width:30px;
-    height:30px;
-    margin:0 2px 0 0;
+    width:6.4%;
+    height:auto;
+    margin:0 1% 0 0;
     background: #666;
     border:solid 2px rgba(255,255,255,.8);
     border-radius:20px;
     opacity: 0;
     cursor: pointer;
     -webkit-backface-visibility:hidden;
+}
+
+.frame-container .frame-colour .colour::after {
+    content: "";
+    display: block;
+    padding-top: 100%; /* 16:9 */
 }
 
 .frame-container:hover .frame-colour .colour, .frame-container.show-controls .frame-colour .colour {
@@ -567,7 +577,7 @@ body {
 
 <div class="frame-list">
 
-    <div id="f0" class="frame-container" data-colour="dark-blue" data-style="bold" data-duration="1200">
+    <div id="f0" class="frame-container" data-colour="dark-blue" data-style="bold" data-duration="1250">
         <canvas class="frame" height="360" width="640"></canvas>
         <div class="frame-edit dark-blue">
             <textarea class="frame-text bold" rows="1" placeholder="Type something awesome..."></textarea>
@@ -589,7 +599,7 @@ body {
         <div class="remove"></div>
     </div>
 
-    <div id="f1" class="frame-container" data-colour="white" data-style="italic" data-duration="1200">
+    <div id="f1" class="frame-container" data-colour="white" data-style="italic" data-duration="1250">
         <canvas class="frame" height="360" width="640"></canvas>
         <div class="frame-edit white">
             <textarea class="frame-text italic" rows="1" placeholder="Type another thing..."></textarea>
@@ -634,7 +644,7 @@ body {
     var $inputList = $('textarea.frame-text');
     var textList = [];
 
-    var frameHTML = ['<div id="f','" class="frame-container" data-colour="dark-blue" data-style="bold" data-duration="1200"> <canvas class="frame" height="360" width="640"></canvas> <div class="frame-edit dark-blue"> <textarea class="frame-text bold" rows="1" placeholder="Type another thing..."></textarea> </div> <div class="frame-colour"> <div class="colour white"></div> <div class="colour black"></div> <div class="colour pink"></div> <div class="colour red"></div> <div class="colour orange"></div> <div class="colour yellow"></div> <div class="colour dark-green"></div> <div class="colour light-green"></div> <div class="colour light-blue"></div> <div class="colour dark-blue active"></div> <div class="colour purple"></div> </div> <div class="frame-style bold">T</div> <div class="remove"></div> </div>'];
+    var frameHTML = ['<div id="f','" class="frame-container" data-colour="white" data-style="bold" data-duration="1250"> <canvas class="frame" height="360" width="640"></canvas> <div class="frame-edit white"> <textarea class="frame-text bold" rows="1" placeholder="Type another thing..."></textarea> </div> <div class="frame-colour"> <div class="colour white active"></div> <div class="colour black"></div> <div class="colour pink"></div> <div class="colour red"></div> <div class="colour orange"></div> <div class="colour yellow"></div> <div class="colour dark-green"></div> <div class="colour light-green"></div> <div class="colour light-blue"></div> <div class="colour dark-blue"></div> <div class="colour purple"></div> </div> <div class="frame-style bold">T</div> <div class="remove"></div> </div>'];
 
     $(document).ready(function(){
 
@@ -646,8 +656,9 @@ body {
             $('.frame-container').eq(0).addClass('show-controls');
         },500);
 
-        $(document).on('mouseleave mouseenter','.frame-container',function(){
-            $('.frame-container').removeClass('show-controls');
+        $(window).resize(function(){
+            setScaledFontSize();
+            showControlsForMobile();
         });
 
         $(document).on('click','.frame-edit',function(){
@@ -656,6 +667,8 @@ body {
 
         $(document).on('click','.frame-container .remove',function(){
             $(this).closest('.frame-container').remove();
+            resetFrameID();
+            setCreateButtonState();
             if ($('.frame-container').length <= 0){
                 addFrame();
             }
@@ -663,13 +676,13 @@ body {
 
         $(document).on('click','.add-frame',addFrame);
 
-        $(document).on('click','.create-gif',encodeGIF);
+        $(document).on('click','.create-gif',function(){
+            setCreateButtonState(false);
+            encodeGIF();
+        });
 
         $(document).on('keyup','.frame-text',function(){
-            var duration = ($(this).val().split(' ').length*0.38*1000+800) > 1200 ? Math.round($(this).val().split(' ').length*0.38*1000+800) : 1200;
-            $(this).closest('.frame-container').attr('data-duration',duration);
-            fitToContent(this,300);
-            updateFrame(parseInt($(this).closest('.frame-container').attr('id').substring(1)));
+            fitToContent($(this),300);
         });
 
         $(document).on('click','.frame-style',function(){
@@ -692,25 +705,28 @@ body {
             $(this).closest('.frame-container').find('.frame-text').focus();
         });
 
-
+        showControlsForMobile();
 
     });
 
     function init(){
+
+        setScaledFontSize();
+        showControlsForMobile();
 
         $canvasList = $('.frame-container .frame');
         $inputList = $('.frame-container .frame-text');
         ctxs = [];
         textList = [];
 
-        for (var i=0;i<$canvasList.length;i++){
+        for (var i=0;i<getFrameCount();i++){
             $canvasList[i].width = 640;
             $canvasList[i].height = 360;
             ctxs.push($canvasList[i].getContext('2d'));
             textList.push($inputList.eq(i).val().split('\n'));
         }
 
-        for (var i=0;i<ctxs.length;i++){
+        for (var i=0;i<getFrameCount();i++){
             ctxs[i].translate(0.5,0.5);
             updateFrame(i);
         }
@@ -723,31 +739,36 @@ body {
     }
 
     function addFrame(){
-        var f = $('.frame-container').length;
-        $('.frame-list').append(frameHTML[0]+f+frameHTML[1]);
+        $('.frame-list').append(frameHTML[0]+getFrameCount()+frameHTML[1]);
         init();
-        $('html,body').animate({scrollTop:($('#f'+f).offset().top - 80)},500);
+        $('html,body').animate({scrollTop:($('.frame-container').eq(getFrameCount()-1).offset().top - 80)},300);
 
         setTimeout(function(){
-            $('#f'+f+' .frame-text').focus().addClass('show-controls');
-        },500);
+            $('.frame-container').eq(getFrameCount()-1).find('.frame-text').focus().addClass('show-controls');
+        },300);
+
+        resetFrameID();
+        setCreateButtonState();
+
+        var newColour = getRandomColour();
+        $('.frame-colour .colour').removeClass('active');
+        $('.frame-container').eq(getFrameCount()-1).attr('data-colour',newColour).find('.frame-edit').attr('class','frame-edit '+newColour).parent().find('.colour.'+newColour).addClass('active;');
+
     }
 
     function updateFrame(frameNumber){
-        console.log(frameNumber);
-        console.log(ctxs);
+        $canvasList = $('.frame-container .frame');
+        $inputList = $('.frame-container .frame-text');
         ctxs[frameNumber].clearRect(0,0,$canvasList[frameNumber].width, $canvasList[frameNumber].height);
-        ctxs[frameNumber].fillStyle = $('.colour.'+$('#f'+frameNumber).attr('data-colour')).css('background-color');
+        ctxs[frameNumber].fillStyle = $('.colour.'+$('.frame-container').eq(frameNumber).attr('data-colour')).css('background-color');
         ctxs[frameNumber].fillRect(0,0,$canvasList[frameNumber].width, $canvasList[frameNumber].height);
 
         textList[frameNumber] = $inputList.eq(frameNumber).val().split('\n');
-        ctxs[frameNumber].fillStyle = $('#f'+frameNumber+' .frame-text').css('color');
-        drawLines(frameNumber,textList[frameNumber],600,defaultLineHeight,$('#f'+frameNumber).attr('data-style') + ' ' + defaultTextStyle);
+        ctxs[frameNumber].fillStyle = $('.frame-container').eq(frameNumber).find('.frame-text').css('color');
+        drawLines(frameNumber,textList[frameNumber],600,defaultLineHeight,$('.frame-container').eq(frameNumber).attr('data-style') + ' ' + defaultTextStyle);
     }
 
     function getLines(n,phrases,maxPxLength,textStyle) {
-        console.log('phrases');
-        console.log(phrases);
         var phraseFinal = [];
         for (var j=0;j<phrases.length;j++){
             var phrase = phrases[j];
@@ -757,7 +778,6 @@ body {
                 measure=0,
                 splitChar=" ";
             if (wa.length <= 1) {
-                console.log('1 word');
                 phraseFinal.push(wa[0]);
                 lastPhrase=wa[0];
             }
@@ -775,10 +795,6 @@ body {
                     phraseFinal.push(lastPhrase + ' ');
                 }
             }
-
-            console.log('phraseFinal');
-            console.log(phraseFinal);
-
         }
 
         return phraseFinal;
@@ -809,12 +825,74 @@ body {
          return 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
     }
 
-    function encodeGIF(){
-        var encoder = new GIFEncoder();
+    function getRandomColour(){
+        var colours = ['white','black','pink','red','orange','yellow','dark-green','light-green','light-blue','dark-blue','purple'].removeByValue($('#f'+(getFrameCount()-2)).attr('data-colour'));
+        console.log($('#f'+(getFrameCount()-2)).attr('data-colour'));
+        var randomColour = colours[Math.floor(Math.random() * colours.length)];
+        return randomColour;
+    }
 
-        for (var i=0;i<ctxs.length;i++){
+    function getFrameCount(){
+        return $('.frame-container').length;
+    }
+
+    function resetFrameID(){
+        for (var i=0;i<getFrameCount();i++){
+            $('.frame-container').eq(i).attr('id','f'+i);
+        }
+        for (var i=0;i<getFrameCount();i++){
             updateFrame(i);
         }
+    }
+
+    function showControlsForMobile(){
+        $(document).off('mouseleave mouseenter','.frame-container').on('mouseleave mouseenter','.frame-container',function(){
+            $('.frame-container').removeClass('show-controls');
+        });
+        if ($(window).width() < 800){
+            $('.frame-container').addClass('show-controls');
+            $(document).off('mouseleave mouseenter','.frame-container');
+        } else {
+            $('.frame-container').removeClass('show-controls');
+            $('#f0').addClass('show-controls');
+        }
+    }
+
+    function setScaledFontSize(){
+        $('.frame-text').css('font-size',Math.round(0.08333333333 * $('.frame-container').height())+'px');
+    }
+
+    function setCreateButtonState(bool){
+        var $createButton = $('.button.create-gif');
+        if (getFrameCount() < 1){
+            $createButton.addClass('disabled');
+        } else {
+            $createButton.removeClass('disabled');
+        }
+        if (bool != null && bool != undefined){
+            if (bool){
+                $createButton.removeClass('disabled');
+            } else {
+                $createButton.addClass('disabled');
+            }
+        }
+    }
+
+    function encodeGIF(){
+
+        var encoder = new GIFEncoder();
+
+        for (var i=0;i<getFrameCount();i++){
+            updateFrame(i);
+        }
+
+        $('.frame-container').each(function(){
+            var $frameContainer = $(this);
+            var $input = $(this).find('.frame-text');
+            var duration = Math.round($input.val().split(' ').length*0.26*1000+1250);
+            $input.closest('.frame-container').attr('data-duration',duration);
+            updateFrame(parseInt($frameContainer.attr('id').substring(1)));
+        });
 
         encoder.setRepeat(0);   //0  -> loop forever
                                 //1+ -> loop n times then stop
@@ -822,8 +900,8 @@ body {
 
         encoder.start();
 
-        for (var i=0;i<ctxs.length;i++){
-            encoder.setDelay($('#f'+i).attr('data-duration'));
+        for (var i=0;i<getFrameCount();i++){
+            encoder.setDelay($('.frame-container').eq(i).attr('data-duration'));
             encoder.addFrame(ctxs[i]);
         }
 
@@ -831,6 +909,8 @@ body {
 
         var binary_gif = encoder.stream().getData();
         var data_url = 'data:image/gif;base64,'+encode64(binary_gif);
+
+        setCreateButtonState(true);
 
         var link = document.createElement("a");
         link.download = "gift.gif";
