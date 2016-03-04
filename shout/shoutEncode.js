@@ -12,7 +12,7 @@ self.onmessage = function(e) {
 
     encoder.setSize(640, 360); // set frame size
 
-    encoder.setQuality(25); // set quality of colour reproduction
+    encoder.setQuality(10); // set quality of colour reproduction
 
     encoder.start();
 
