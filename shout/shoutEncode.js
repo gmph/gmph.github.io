@@ -1,9 +1,10 @@
 importScripts('LZWEncoder.js', 'NeuQuant.js', 'GIFEncoder.js', 'b64.js');
 
+var encoder = new GIFEncoder();
+
 self.onmessage = function(e) {
     var imageList = e.data['imageList'];
     var durationList = e.data['durationList'];
-    var encoder = new GIFEncoder();
     var unique = new Date().getTime();
 
     encoder.setRepeat(0);   // 0  -> loop forever
