@@ -1,15 +1,8 @@
 importScripts('LZWEncoder.js', 'NeuQuant.js', 'GIFEncoder.js', 'b64.js');
 
-onmessage = function(e) {
-  var imageList = e.data['imageList'];
-  var durationList = e.data['durationList'];
-  encodeGIF(imageList,durationList);
-}
-
-// contexts,
-
-function encodeGIF(imageList,durationList){
-
+self.onmessage = function(e) {
+    var imageList = e.data['imageList'];
+    var durationList = e.data['durationList'];
     var encoder = new GIFEncoder();
     var unique = new Date().getTime();
 
@@ -26,13 +19,10 @@ function encodeGIF(imageList,durationList){
     for (var i=0;i<imageList.length;i++){
         var image = imageList[i];
         var frames = durationList[i];
-        console.log('frames: '+frames);
         for (var j=0;j<frames;j++){
             if (j>0){
-                console.log('dup');
                 encoder.addFrame(image,true,true);
             } else {
-                console.log('ori');
                 encoder.addFrame(image,true);
             }
         }
@@ -43,6 +33,6 @@ function encodeGIF(imageList,durationList){
     var binary_gif = encoder.stream().getData();
     var data_url = 'data:image/gif;base64,'+encode64(binary_gif);
 
-    postMessage({filename:"shout_"+unique+".gif",data:data_url});
+    self.postMessage({filename:"shout_"+unique+".gif",data:data_url});
 
 }

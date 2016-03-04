@@ -123,6 +123,40 @@ body {
     text-align: center;
 }
 
+.action-container .preview {
+    display: block;
+    position: relative;
+    width:100%;
+    max-width:640px;
+    height:0;
+    margin:0 auto;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color:#bbb;
+}
+
+.action-container .preview.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+    cursor: default;
+}
+
+.action-container .preview.visible {
+    height:402px;
+    margin:54px auto 32px auto;
+}
+
+.action-container .preview img {
+    width: 100%;
+    height:auto;
+    margin:20px 0 0 0;
+    border-radius: 5px;
+    opacity: 0.99;
+    box-shadow: 0 1px 3px rgba(0,0,0,.2);
+}
+
 .button {
     display: inline-block;
     position: relative;
@@ -625,18 +659,21 @@ body {
 <div class="action-container">
     <div class="button add-frame">Add Frame</div>
     <div class="button create-gif">Create GIF</div>
-    <!-- <div class="preview">
+    <div class="preview">
         <a id="resultLink" download="shout.gif" href="#" target="_blank">
-            <div>Right click to download:</div>
+            <div>Click to download</div>
             <img id="resultImage" download="shout.gif" src="#"/>
         </a>
-    </div> -->
+    </div>
 </div>
 
 <script language="javascript">
 
     var defaultTextStyle = "36px Arial";
     var defaultLineHeight = 1.4;
+
+    var downloadFilename;
+    var downloadData;
 
     var $canvasList = $('canvas.frame');
     var ctxs = [];
@@ -646,10 +683,9 @@ body {
 
     var frameHTML = ['<div id="f','" class="frame-container" data-colour="white" data-style="bold" data-duration="1300"> <canvas class="frame"></canvas> <div class="frame-edit white"> <textarea class="frame-text bold" rows="1" placeholder="Type another thing..."></textarea> </div> <div class="frame-colour"> <div class="colour white active"></div> <div class="colour black"></div> <div class="colour pink"></div> <div class="colour red"></div> <div class="colour orange"></div> <div class="colour yellow"></div> <div class="colour dark-green"></div> <div class="colour light-green"></div> <div class="colour light-blue"></div> <div class="colour dark-blue"></div> <div class="colour purple"></div> </div> <div class="frame-style bold">T</div> <div class="remove"></div> </div>'];
 
-    if (window.Worker){
+    if (typeof(Worker) !== "undefined"){
         var encodeWorker = new Worker("shoutEncode.js");
     }
-
 
     $(document).ready(function(){
 
@@ -716,9 +752,6 @@ body {
 
     function init(){
 
-        setScaledFontSize();
-        showControlsForMobile();
-
         $canvasList = $('.frame-container .frame');
         $inputList = $('.frame-container .frame-text');
         ctxs = [];
@@ -735,6 +768,9 @@ body {
             ctxs[i].translate(0.5,0.5);
             updateFrame(i);
         }
+
+        setScaledFontSize();
+        showControlsForMobile();
 
     }
 
@@ -816,9 +852,7 @@ body {
             var positionFromTop = (($canvasList[0].height - fullOuterHeight) * 0.5) + ((i) * lineOuterHeight);
             var positionFromLeft = $canvasList[0].width * 0.5;
             ctxs[n].fillText(phraseArray[i],positionFromLeft,positionFromTop,maxPxLength);
-
         }
-
     }
 
     function getRandomRGB(){
@@ -827,7 +861,6 @@ body {
 
     function getRandomColour(){
         var colours = ['white','black','pink','red','orange','yellow','dark-green','light-green','light-blue','dark-blue','purple'].removeByValue($('#f'+(getFrameCount()-2)).attr('data-colour'));
-        console.log($('#f'+(getFrameCount()-2)).attr('data-colour'));
         var randomColour = colours[Math.floor(Math.random() * colours.length)];
         return randomColour;
     }
@@ -863,7 +896,7 @@ body {
     }
 
     function setCreateButtonState(bool){
-        var $createButton = $('.button.create-gif');
+        var $createButton = $('.button.create-gif,.preview');
         if (getFrameCount() < 1){
             $createButton.addClass('disabled');
         } else {
@@ -904,7 +937,7 @@ body {
             durationList.push(parseInt($('.frame-container').eq(i).attr('data-frames')));
         }
 
-        if (window.Worker){
+        if (typeof(Worker) !== "undefined"){
             encodeWorker.postMessage({imageList:imageList,durationList:durationList});
         } else {
             localEncodeWorker(imageList,durationList);
@@ -914,7 +947,9 @@ body {
 
     encodeWorker.onmessage = function(e){
         setCreateButtonState(true);
-        downloadURI(e.data['filename'],e.data['data'])
+        downloadFilename = e.data['filename'];
+        downloadData = e.data['data'];
+        showDownload();
     }
 
     function localEncodeWorker(imageList,durationList){
@@ -935,13 +970,10 @@ body {
         for (var i=0;i<imageList.length;i++){
             var image = imageList[i];
             var frames = durationList[i];
-            console.log('frames: '+frames);
             for (var j=0;j<frames;j++){
                 if (j>0){
-                    console.log('dup');
                     encoder.addFrame(image,true,true);
                 } else {
-                    console.log('ori');
                     encoder.addFrame(image,true);
                 }
             }
@@ -952,19 +984,27 @@ body {
         var binary_gif = encoder.stream().getData();
         var data_url = 'data:image/gif;base64,'+encode64(binary_gif);
 
-        downloadURI("shout_"+unique+".gif",data_url);
-
+        downloadFilename = e.data['filename'];
+        downloadData = e.data['data'];
+        showDownload();
         setCreateButtonState(true);
 
     }
 
-    function downloadURI(filename,data){
-        // setCreateButtonState(true);
-        var link = document.createElement("a");
-        link.download = filename;
-        link.href = data;
-        link.target = "_blank";
-        link.click();
+    function showDownload(){
+        $('#resultImage').attr('src',downloadData);
+        $('#resultLink').attr('href',downloadData).attr('download',downloadFilename);
+        $('.preview').addClass('visible');
+        $('html,body').animate({scrollTop:$('.preview').offset().top-80},300);
+        // var link = document.createElement("a");
+        // link.download = downloadFilename;
+        // link.href = downloadData;
+        // if (!(navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1)) {
+        //     link.target = "_blank";
+        // }
+        // link.click();
+
+
     }
 
     function fitToContent(element, maxHeight){
