@@ -12,8 +12,14 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
 
 @font-face {
     font-family: 'Helvetica Neue';
-    src: url('../font/hnm.ttf') format('truetype');
+    src: url('../font/hnn.ttf') format('truetype');
   	font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('../font/hnm.ttf') format('truetype');
+  	font-weight: 500;
 }
 
 @font-face {
