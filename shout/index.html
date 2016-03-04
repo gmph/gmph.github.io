@@ -58,6 +58,28 @@ textarea, input {
 
 /* END CSS RESET */
 
+@font-face {
+  font-family: emoji;
+
+  /* Fonts for text outside emoji blocks */
+  src: local(sans-serif),
+       local(Arial),
+       local('Arial');
+}
+
+@font-face {
+  font-family: emoji;
+
+  src: local('Apple Color Emoji'),
+       local('Android Emoji'),
+       local('Segoe UI'),
+       local(EmojiSymbols),
+       local(Symbola);
+
+  /* Emoji unicode blocks */
+  unicode-range: U+1F300-1F5FF, U+1F600-1F64F, U+1F680-1F6FF, U+2600-26FF;
+}
+
 body {
 	background:#f8f8f8;
 }
@@ -277,7 +299,7 @@ body {
     min-height:46px;
     margin:-4px 0 0 1px;
     line-height: 1.4em;
-    font-family: Arial, sans-serif;
+    font-family: emoji, Arial;
     font-size:36px;
     text-align: center;
     color: inherit;
@@ -306,6 +328,11 @@ body {
 
 .frame-container .frame-text.italic {
     font-style: italic;
+    font-weight: 400;
+}
+
+.frame-container .frame-text.normal {
+    font-style: normal;
     font-weight: 400;
 }
 
@@ -598,6 +625,11 @@ body {
     font-weight: 400;
 }
 
+.frame-style.normal {
+    font-style: normal;
+    font-weight: 400;
+}
+
 </style>
 
 </head>
@@ -669,7 +701,7 @@ body {
 
 <script language="javascript">
 
-    var defaultTextStyle = "36px Arial";
+    var defaultTextStyle = "36px emoji";
     var defaultLineHeight = 1.4;
 
     var downloadFilename;
@@ -681,7 +713,7 @@ body {
     var $inputList = $('textarea.frame-text');
     var textList = [];
 
-    var frameHTML = ['<div id="f','" class="frame-container" data-colour="white" data-style="bold" data-duration="1300"> <canvas class="frame"></canvas> <div class="frame-edit white"> <textarea class="frame-text bold" rows="1" placeholder="Type another thing..."></textarea> </div> <div class="frame-colour"> <div class="colour white active"></div> <div class="colour black"></div> <div class="colour pink"></div> <div class="colour red"></div> <div class="colour orange"></div> <div class="colour yellow"></div> <div class="colour dark-green"></div> <div class="colour light-green"></div> <div class="colour light-blue"></div> <div class="colour dark-blue"></div> <div class="colour purple"></div> </div> <div class="frame-style bold">T</div> <div class="remove"></div> </div>'];
+    var frameHTML = ['<div id="f','" class="frame-container" data-colour="white" data-style="normal" data-duration="1300"> <canvas class="frame"></canvas> <div class="frame-edit white"> <textarea class="frame-text normal" rows="1" placeholder="Type another thing..."></textarea> </div> <div class="frame-colour"> <div class="colour white active"></div> <div class="colour black"></div> <div class="colour pink"></div> <div class="colour red"></div> <div class="colour orange"></div> <div class="colour yellow"></div> <div class="colour dark-green"></div> <div class="colour light-green"></div> <div class="colour light-blue"></div> <div class="colour dark-blue"></div> <div class="colour purple"></div> </div> <div class="frame-style normal">T</div> <div class="remove"></div> </div>'];
 
     if (typeof(Worker) !== "undefined"){
         var encodeWorker = new Worker("shoutEncode.js");
@@ -728,9 +760,19 @@ body {
 
         $(document).on('click','.frame-style',function(){
             var style;
-            $(this).toggleClass('bold italic');
-            style = $(this).attr('class').split(' ').removeByValue('frame-style')[0];
-            $(this).closest('.frame-container').attr('data-style',style).find('.frame-edit .frame-text').toggleClass('bold italic').focus();
+            if ($(this).hasClass('bold')){
+                $(this).removeClass('bold normal').addClass('italic');
+                style = $(this).attr('class').split(' ').removeByValue('frame-style')[0];
+                $(this).closest('.frame-container').attr('data-style',style).find('.frame-edit .frame-text').removeClass('bold normal').addClass('italic').focus();
+            } else if ($(this).hasClass('italic')){
+                $(this).removeClass('italic bold').addClass('normal');
+                style = $(this).attr('class').split(' ').removeByValue('frame-style')[0];
+                $(this).closest('.frame-container').attr('data-style',style).find('.frame-edit .frame-text').removeClass('italic bold').addClass('normal').focus();
+            } else if ($(this).hasClass('normal')){
+                $(this).removeClass('normal italic').addClass('bold');
+                style = $(this).attr('class').split(' ').removeByValue('frame-style')[0];
+                $(this).closest('.frame-container').attr('data-style',style).find('.frame-edit .frame-text').removeClass('normal italic').addClass('bold').focus();
+            }
             updateFrame(parseInt($(this).parent().attr('id').substring(1)));
         });
 
