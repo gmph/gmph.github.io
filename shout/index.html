@@ -901,7 +901,6 @@ body {
     }
 
     .frame-image-button {
-        top: 14px;
         left:50px;
         background-size: 24px !important;
     }
@@ -988,7 +987,7 @@ body {
 
     var defaultFrameWidth = 640;
     var defaultFrameHeight = 360;
-    var defaultTextStyle = "36px 'Helvetica Neue'";
+    var defaultTextStyle = parseInt(Math.round(defaultFrameHeight * 0.1)) + "px 'Helvetica Neue'";
     var defaultLineHeight = 1.4;
 
     var downloadFilename;
