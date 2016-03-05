@@ -29,6 +29,8 @@
 <script type="text/javascript" src="NeuQuant.js"></script>
 <script type="text/javascript" src="GIFEncoder.js"></script>
 <script type="text/javascript" src="b64.js"></script>
+<script type="text/javascript" src="fileSaver.js"></script>
+<script type="text/javascript" src="Blob.js"></script>
 
 <style type="text/css">
 
@@ -119,6 +121,7 @@ textarea, input {
     animation-fill-mode: both;
     -webkit-animation: load7 1.3s infinite ease-in-out;
     animation: load7 1.3s infinite ease-in-out;
+    -webkit-backface-visibility:hidden;
 }
 .loader {
     font-size: 5px;
@@ -975,7 +978,7 @@ body {
     <div class="button create-gif">Create GIF<div class="loaderbox"><div class="loader">Loading...</div></div></div>
     <div class="preview">
         <a id="resultLink" download="shout.gif" href="#" target="_blank">
-            <img id="resultImage" download="shout.gif" src="#"/>
+            <img id="resultImage" download="shout.gif" target="_blank" src="#"/>
             <div class="button download">Download</div>
         </a>
     </div>
@@ -983,7 +986,9 @@ body {
 
 <script language="javascript">
 
-    var defaultTextStyle = "72px 'Helvetica Neue'";
+    var defaultFrameWidth = 640;
+    var defaultFrameHeight = 360;
+    var defaultTextStyle = "36px 'Helvetica Neue'";
     var defaultLineHeight = 1.4;
 
     var downloadFilename;
@@ -1018,6 +1023,7 @@ body {
         $(window).resize(function(){
             setScaledFontSize();
             showControlsForMobile();
+            updateAllFrames();
         });
 
         $(document).on('click','.frame-edit',function(){
@@ -1106,8 +1112,8 @@ body {
         textList = [];
 
         for (var i=0;i<getFrameCount();i++){
-            $canvasList[i].width = 1280;
-            $canvasList[i].height = 720;
+            $canvasList[i].width = defaultFrameWidth;
+            $canvasList[i].height = defaultFrameHeight;
             ctxs.push($canvasList[i].getContext('2d'));
             textList.push($inputList.eq(i).val().split('\n'));
         }
@@ -1158,18 +1164,18 @@ body {
             console.log('natWidth: '+natWidth);
             if (natHeight * 16 > natWidth * 9){
                 // cover to width
-                var newHeight = 1280/natWidth * natHeight;
-                var verOffset = (720 - newHeight) * 0.5;
+                var newHeight = defaultFrameWidth/natWidth * natHeight;
+                var verOffset = (defaultFrameHeight - newHeight) * 0.5;
                 console.log('newHeight: '+newHeight);
                 console.log('verOffset: '+verOffset);
-                ctxs[frameNumber].drawImage(img, 0, verOffset, 1280, newHeight);
+                ctxs[frameNumber].drawImage(img, 0, verOffset, defaultFrameWidth, newHeight);
             } else {
                 // cover to height
-                var newWidth = 720/natHeight * natWidth;
-                var horOffset = (1280 - newWidth) * 0.5;
+                var newWidth = defaultFrameHeight/natHeight * natWidth;
+                var horOffset = (defaultFrameWidth - newWidth) * 0.5;
                 console.log('newWidth: '+newWidth);
                 console.log('horOffset: '+horOffset);
-                ctxs[frameNumber].drawImage(img, horOffset, 0, newWidth, 720);
+                ctxs[frameNumber].drawImage(img, horOffset, 0, newWidth, defaultFrameHeight);
             }
             if ($inputList.eq(frameNumber).val() != "" && $inputList.eq(frameNumber).val() != " "){
                 ctxs[frameNumber].fillStyle = "rgba(0,0,0,.3)";
@@ -1179,7 +1185,7 @@ body {
 
         textList[frameNumber] = $inputList.eq(frameNumber).val().split('\n');
         ctxs[frameNumber].fillStyle = $('.frame-container').eq(frameNumber).find('.frame-text').css('color');
-        drawLines(frameNumber,textList[frameNumber],1080,defaultLineHeight,$('.frame-container').eq(frameNumber).attr('data-style') + ' ' + defaultTextStyle);
+        drawLines(frameNumber,textList[frameNumber],((defaultFrameWidth/1280)*1080),defaultLineHeight,$('.frame-container').eq(frameNumber).attr('data-style') + ' ' + defaultTextStyle);
     }
 
     function getLines(n,phrases,maxPxLength,textStyle) {
@@ -1229,7 +1235,6 @@ body {
         for (var i=0;i<phraseArray.length;i++){
             var positionFromTop = (($canvasList[0].height - fullOuterHeight) * 0.5) + ((i) * lineOuterHeight);
             var positionFromLeft = $canvasList[0].width * 0.5;
-
             ctxs[n].fillText(phraseArray[i],positionFromLeft,positionFromTop,maxPxLength);
         }
     }
@@ -1310,6 +1315,10 @@ body {
         for (var i=0;i<getFrameCount();i++){
             $('.frame-container').eq(i).attr('id','f'+i);
         }
+        updateAllFrames();
+    }
+
+    function updateAllFrames(){
         for (var i=0;i<getFrameCount();i++){
             updateFrame(i);
         }
@@ -1322,9 +1331,15 @@ body {
         if ($(window).width() < 800){
             $('.frame-container').addClass('show-controls');
             $(document).off('mouseleave mouseenter','.frame-container');
+            defaultFrameWidth = 640;
+            defaultFrameHeight = 360;
+            defaultTextStyle = "36px 'Helvetica Neue'";
         } else {
             $('.frame-container').removeClass('show-controls');
             $('#f0').addClass('show-controls');
+            // defaultFrameWidth = 1280;
+            // defaultFrameHeight = 720;
+            // defaultTextStyle = "72px 'Helvetica Neue'";
         }
     }
 
@@ -1363,10 +1378,9 @@ body {
 
     function encodeGIF(){
 
-        for (var i=0;i<getFrameCount();i++){
-            updateFrame(i);
-        }
+        init();
 
+        updateAllFrames();
         calcNumberOfFrames();
 
         if (getFrameCount() == 1){
@@ -1379,12 +1393,12 @@ body {
             var durationList = [];
 
             for (var i=0;i<getFrameCount();i++){
-                imageList.push(ctxs[i].getImageData(0,0,1280,720).data);
+                imageList.push(ctxs[i].getImageData(0,0,defaultFrameWidth,defaultFrameHeight).data);
                 durationList.push(parseInt($('.frame-container').eq(i).attr('data-frames')));
             }
 
             if (typeof(Worker) !== "undefined"){
-                encodeWorker.postMessage({imageList:imageList,durationList:durationList});
+                encodeWorker.postMessage({imageList:imageList,durationList:durationList,defaultFrameWidth:defaultFrameWidth,defaultFrameHeight:defaultFrameHeight});
             } else {
                 localEncodeWorker(imageList,durationList);
             }
@@ -1406,9 +1420,13 @@ body {
                                 // 1+ -> loop n times then stop
         encoder.setDelay(100);  // go to next frame every n milliseconds
 
-        encoder.setSize(1280, 720); // set frame size
+        encoder.setSize(defaultFrameWidth, defaultFrameHeight); // set frame size
 
-        encoder.setQuality(15); // set quality of colour reproduction
+        if (defaultFrameHeight >= 1280){
+            encoder.setQuality(30); // set quality of colour reproduction
+        } else {
+            encoder.setQuality(20); // set quality of colour reproduction
+        }
 
         encoder.start();
 
@@ -1433,15 +1451,37 @@ body {
 
     }
 
+    function dataURItoBlob(dataURI) {
+        // convert base64/URLEncoded data component to raw binary data held in a string
+        var byteString;
+        if (dataURI.split(',')[0].indexOf('base64') >= 0)
+            byteString = atob(dataURI.split(',')[1]);
+        else
+            byteString = unescape(dataURI.split(',')[1]);
+
+        // separate out the mime component
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+        // write the bytes of the string to a typed array
+        var ia = new Uint8Array(byteString.length);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+
+        return new Blob([ia], {type:mimeString});
+    }
+
     function showDownload(data){
         var unique = new Date().getTime();
         downloadFilename = "shout_"+unique+".gif";
-        downloadData = data;
+        downloadData = window.URL.createObjectURL(dataURItoBlob(data));
         $('#resultImage').attr('src',downloadData);
         $('#resultLink').attr('href',downloadData).attr('download',downloadFilename);
-        $('.preview').addClass('visible');
-        $('html,body').animate({scrollTop:$('.preview').offset().top-80},300);
-        setCreateButtonState(true);
+        setTimeout(function(){
+            $('.preview').addClass('visible');
+            $('html,body').animate({scrollTop:$('.preview').offset().top-80},300);
+            setCreateButtonState(true);
+        },800);
     }
 
     function fitToContent(element, maxHeight){

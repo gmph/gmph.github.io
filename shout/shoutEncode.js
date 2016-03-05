@@ -5,15 +5,20 @@ var encoder = new GIFEncoder();
 self.onmessage = function(e) {
     var imageList = e.data['imageList'];
     var durationList = e.data['durationList'];
-    var unique = new Date().getTime();
+    var defaultFrameWidth = e.data['defaultFrameWidth'];
+    var defaultFrameHeight = e.data['defaultFrameHeight'];
 
     encoder.setRepeat(0);   // 0  -> loop forever
                             // 1+ -> loop n times then stop
     encoder.setDelay(100);  // go to next frame every n milliseconds
 
-    encoder.setSize(1280, 720); // set frame size
+    encoder.setSize(defaultFrameWidth, defaultFrameHeight); // set frame size
 
-    encoder.setQuality(10); // set quality of colour reproduction
+    if (defaultFrameHeight >= 1280){
+        encoder.setQuality(30); // set quality of colour reproduction
+    } else {
+        encoder.setQuality(15); // set quality of colour reproduction
+    }
 
     encoder.start();
 
