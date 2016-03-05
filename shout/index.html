@@ -1041,7 +1041,7 @@ body {
         });
 
         $(document).on('keyup','.frame-text',function(){
-            fitToContent($(this),300);
+            fitToContent($(this),$(this).closest('.frame-container').height());
             if ($(this).val() == "" || $(this).val() == " "){
                 $(this).closest('.frame-container').addClass('image-only');
             } else {
@@ -1330,6 +1330,9 @@ body {
 
     function setScaledFontSize(){
         $('.frame-text').css('font-size',Math.round(0.1 * $('.frame-container').height())+'px');
+        for (var i=0;i<getFrameCount();i++){
+            fitToContent($('.frame-text').eq(i),$('.frame-container').eq(i).height());
+        }
     }
 
     function setCreateButtonState(bool){
