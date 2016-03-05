@@ -11,7 +11,7 @@ self.onmessage = function(e) {
                             // 1+ -> loop n times then stop
     encoder.setDelay(100);  // go to next frame every n milliseconds
 
-    encoder.setSize(640, 360); // set frame size
+    encoder.setSize(1280, 720); // set frame size
 
     encoder.setQuality(10); // set quality of colour reproduction
 
@@ -34,6 +34,6 @@ self.onmessage = function(e) {
     var binary_gif = encoder.stream().getData();
     var data_url = 'data:image/gif;base64,'+encode64(binary_gif);
 
-    self.postMessage({filename:"shout_"+unique+".gif",data:data_url});
+    self.postMessage({data:data_url});
 
 }
