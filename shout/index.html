@@ -518,12 +518,11 @@ header.hidden {
 }
 
 .frame-container.sort-dragging {
-    opacity: 0.9;
-    box-shadow: 0 6px 20px rgba(0,0,0,.6);
+    opacity: 0.98;
 }
 
 .frame-container.sort-touched {
-    opacity: 0.9;
+    opacity: 0.7;
 }
 
 .frame-container .frame {
@@ -628,7 +627,7 @@ header.hidden {
     width:85.4%; /* to match canvas */
     transform:translate(-50%,-50%);
     height:auto;
-    margin:-3px 0 0 0;
+    margin:-0.2em 0 0 0;
     line-height: 1.4em;
     font-family: "Helvetica Neue", Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size:36px;
@@ -718,16 +717,16 @@ header.hidden {
 }
 
 .frame-container.image.image-only .frame-text::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    color: rgba(255,255,255,.85) !important;
+    color: rgba(255,255,255,.6) !important;
 }
 .frame-container.image.image-only .frame-text::-moz-placeholder { /* Firefox 19+ */
-    color: rgba(255,255,255,.85) !important;
+    color: rgba(255,255,255,.6) !important;
 }
 .frame-container.image.image-only .frame-text:-ms-input-placeholder { /* IE 10+ */
-    color: rgba(255,255,255,.85) !important;
+    color: rgba(255,255,255,.6) !important;
 }
 .frame-container.image.image-only .frame-text:-moz-placeholder { /* Firefox 18- */
-    color: rgba(255,255,255,.85) !important;
+    color: rgba(255,255,255,.6) !important;
 }
 
 .frame-container .frame-text::selection {
@@ -742,22 +741,13 @@ header.hidden {
     position: absolute;
     top:0;
     left:0;
-    z-index:1;
     width:100%;
     height:100%;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
-    opacity: .7;
+    opacity: .6;
     pointer-events: none;
-}
-
-.frame-container.image.image-only .frame-edit .frame-image {
-    opacity: 1;
-}
-
-.frame-container.image.image-only .frame-edit .frame-text {
-    text-shadow: 0 1px 4px rgba(0,0,0,.4);
 }
 
 .frame-container .frame-edit .frame-image-upload {
@@ -1066,6 +1056,19 @@ header.hidden {
     background-image: url(remove-image.png);
 }
 
+.image-only .frame-image-button::after {
+    display: block;
+    position: absolute;
+    top:50%;
+    right: 45px;
+    transform: translateY(-50%);
+    width:300%;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: right;
+    color:rgba(255,255,255,.8);
+}
+
 [data-colour="white"] .frame-image-button {
     background-image: url(add-image-dark.png);
 }
@@ -1215,6 +1218,19 @@ header.hidden {
     [data-colour="white"]:not(.image) .frame-style:hover, [data-colour="white"]:not(.image) .frame-image-button:hover {
         transform: scale(1.05);
         background-color: rgba(0,0,0,.1);
+    }
+
+    .image-only .frame-image-button::after {
+        display: block;
+        position: absolute;
+        top:50%;
+        left: 40px;
+        transform: translateY(-50%);
+        width:300%;
+        font-size: 14px;
+        font-weight: 400;
+        text-align: left;
+        color:rgba(255,255,255,.8);
     }
 
 }
@@ -1382,13 +1398,16 @@ header.hidden {
                     setHeaderVisibility();
                 },350);
             }
-            $('html,body').animate({
-                scrollTop: $(this).offset().top - 80,
-            },300);
             if ($(this).hasClass('frame-edit')){
                 $(this).find('.frame-text').focus().addClass('show-controls');
+                $('html,body').animate({
+                    scrollTop: $(this).offset().top - 80,
+                },300);
             } else {
                 $(this).focus().closest('.frame-container').addClass('show-controls');
+                $('html,body').animate({
+                    scrollTop: $(this).closest('.frame-container').offset().top - 80,
+                },300);
             }
         });
 
@@ -1438,7 +1457,7 @@ header.hidden {
 
         $(document).on('keyup','.frame-text',function(){
             fitToContent($(this),$(this).closest('.frame-container').height());
-            if ($(this).val() == "" || $(this).val() == " "){
+            if ($(this).val().split(' ').removeByValue('').removeByValue(' ').join() == "" || $(this).val().split(' ').removeByValue('').removeByValue(' ').join('') == " "){
                 $(this).closest('.frame-container').addClass('image-only');
             } else {
                 $(this).closest('.frame-container').removeClass('image-only');
@@ -1478,7 +1497,7 @@ header.hidden {
         $(document).on('click','.frame-image-button',function(){
             var $frame = $(this).closest('.frame-container')
             if ($frame.hasClass('image')){
-                $frame.attr('data-image','').removeClass('image').find('.frame-image').css('background','');
+                $frame.attr('data-image','').removeClass('image image-only').find('.frame-image').css('background','');
                 $frame.find('.frame-image-upload').get(0).value = null;
             } else {
                 $frame.find('.frame-image-upload').click();
@@ -1580,8 +1599,8 @@ header.hidden {
                 console.log('horOffset: '+horOffset);
                 ctxs[frameNumber].drawImage(img, horOffset, 0, newWidth, defaultFrameHeight);
             }
-            if ($inputList.eq(frameNumber).val() != "" && $inputList.eq(frameNumber).val() != " "){
-                ctxs[frameNumber].fillStyle = "rgba(0,0,0,.3)";
+            if ($inputList.eq(frameNumber).hasClass('image-only')){
+                ctxs[frameNumber].fillStyle = "rgba(0,0,0,.4)";
                 ctxs[frameNumber].fillRect(0,0,$canvasList[frameNumber].width, $canvasList[frameNumber].height);
             }
         }
@@ -1668,18 +1687,12 @@ header.hidden {
     function setBackgroundImage(frame,file){
         var $frame = $(frame);
         console.log($frame);
-        //don't try to mess with non-image files
         if (file && file.type && file.type.match('image.*')) {
-            //then we have an image,
 
-            //we have a file handle, need to read it with file reader!
             var reader = new FileReader();
 
-            // Closure to capture the file information.
             reader.onload = (function(theFile) {
-                //get the data uri
                 var dataURI = theFile.target.result;
-                //make a new image element with the dataURI as the source
                 var img = document.createElement("img");
                 img.src = dataURI;
 
@@ -1688,14 +1701,13 @@ header.hidden {
                 $frame.find('.frame-image').css('background','url("'+dataURI+'")');
                 $frame.addClass('image');
 
-                if ($frame.find('.frame-text').val() == "" || $frame.find('.frame-text').val() == " "){
+                if ($frame.find('.frame-text').val().split(' ').removeByValue('').removeByValue(' ').join() == "" || $frame.find('.frame-text').val().split(' ').removeByValue('').removeByValue(' ').join('') == " "){
                     $frame.addClass('image-only');
                 } else {
                     $frame.removeClass('image-only');
                 }
 
             });
-            //this reads in the file, and the onload event triggers, which adds the image to the div at the carat
             reader.readAsDataURL(file);
         }
     }
@@ -1744,14 +1756,14 @@ header.hidden {
             // defaultFrameWidth = 1280;
             // defaultFrameHeight = 720;
             // defaultTextStyle = "72px 'Helvetica Neue'";
-            sortedFrameList.option('delay','0');
+            sortedFrameList.option('delay','10');
         }
     }
 
     function setHeaderVisibility(){
         if ($(document).height() - 100 > $(window).height()){
             var st = $(this).scrollTop();
-            if ((((st < lastScrollTop) || ($(window).scrollTop() <= 40)) && !($(window).scrollTop() + $(window).height() >= $(document).height())) && !stopHeaderChange){
+            if ((((st < lastScrollTop) || ($(window).scrollTop() <= 45)) && !($(window).scrollTop() + $(window).height() >= $(document).height())) && !stopHeaderChange){
                 $('header').removeClass('hidden');
             } else {
                 $('header').addClass('hidden');
@@ -1790,7 +1802,7 @@ header.hidden {
             var $frameContainer = $(this);
             var $input = $(this).find('.frame-text');
             var duration = Math.round($input.val().split(' ').removeByValue('').length*0.28*1000+1000);
-            if ($frameContainer.hasClass('image-only')){
+            if ($frameContainer.hasClass('image') && duration < 2000){
                 duration = 2000;
             }
             $input.closest('.frame-container').attr('data-frames',Math.round(duration * 0.01)).attr('data-duration',Math.round(duration));
