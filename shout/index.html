@@ -7,30 +7,37 @@
 <![endif]-->
 
 <html id="top">
-
 <head>
 
 <title>Shout</title>
 <meta name="author" content="Graham Macphee" />
-<meta name="description" content="Shout is a very simple app for creating GIFs out of custom text." />
-<meta name="keywords" content="Shout is a very simple app for creating GIFs out of custom text." />
-<meta name="theme-color" content="#34b871">
+<meta name="description" content="Create colourful animated GIFs from your text and images." />
+<meta name="keywords" content="gif, animated, animate, animated gif, creator, text, image, app, website, web, create, convert, marketing, custom, content, colourful, background, photo, picture, slide, template, creative, twitter, facebook, social media"/>
 <meta charset="utf-8">
-<meta property="og:title" content="Shout">
-<meta property="og:type" content="website">
-<meta property="og:url" content="http://gmph.co/shout">
-<meta property="og:site_name" content="Graham Macphee">
-<meta property="og:description" content="Shout is a very simple app for creating GIFs out of custom text.">
-<meta property="twitter:account_id" content="87261538" /> <!-- Twitter ID, currently for @gmph -->
+
+<!-- Facebook -->
+<meta property="og:url"                content="http://gmph.co/shout" />
+<meta property="og:type"               content="website" />
+<meta property="og:title"              content="Shout – Create GIFs the easy way" />
+<meta property="og:description"        content="Create colourful animated GIFs from your text and images." />
+<meta property="og:image"              content="shout-banner.png" />
+
+<!-- Twitter -->
+<meta name="twitter:card"              content="summary_large_image">
+<meta name="twitter:site"              content="@gmph">
+<meta name="twitter:creator"           content="@gmph">
+<meta name="twitter:title"             content="Shout – Create GIFs the easy way">
+<meta name="twitter:description"       content="Create colourful animated GIFs from your text and images.">
+<meta name="twitter:image"             content="shout-banner.png">
+<meta property="twitter:account_id"    content="87261538" /> <!-- @gmph -->
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" href="shout.png">
+<link rel="icon" sizes="196x196" href="shout.png">
+<link rel="apple-touch-icon" href="shout-square.png">
+<meta name="theme-color" content="#f8f8f8">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script type="text/javascript" src="LZWEncoder.js"></script>
-<script type="text/javascript" src="NeuQuant.js"></script>
-<script type="text/javascript" src="GIFEncoder.js"></script>
-<script type="text/javascript" src="b64.js"></script>
-<script type="text/javascript" src="fileSaver.js"></script>
-<script type="text/javascript" src="Blob.js"></script>
 
 <style type="text/css">
 
@@ -173,20 +180,60 @@ textarea, input {
 
 body {
 	background:#f8f8f8;
+    padding:100px 0 10px 0;
+}
+
+body.show-popup {
+    background:#e9e9e9;
+    overflow: hidden;
+}
+
+header {
+    display: block;
+    position: fixed;
+    top:0;
+    left:50%;
+    z-index: 9998;
+    transform: translateX(-50%);
+    width:100%;
+    height:auto;
+    overflow: hidden;
+    background: rgba(255,255,255,.98);
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+
+    transition:.15s all ease-out;
+    -webkit-transition:.15s all ease-out;
+    -moz-transition:.15s all ease-out;
+    -o-transition:.15s all ease-out
+}
+
+header.hidden {
+    top:-100px;
+}
+
+.show-popup header {
+    opacity: 0.1;
+    pointer-events: none;
 }
 
 .title-container {
     display: block;
     position: relative;
     top:0;
-    left:-5px;
+    left:0;
     width:90%;
-    max-width:440px;
+    max-width:640px;
     height:auto;
     overflow: hidden;
-    margin:12px auto -12px auto;
-    padding:20px;
+    margin:0 auto;
+    padding:20px 0;
     text-align: center;
+}
+
+.title-container .logo-block {
+    display: inline-block;
+    float:left;
+    vertical-align: middle;
 }
 
 .title-container .logo {
@@ -207,13 +254,120 @@ body {
     padding:3px 0;
 }
 
+.title-container .nav {
+    display: block;
+    position: absolute;
+    top:50%;
+    right:0;
+    transform: translateY(-50%);
+    height:auto;
+    vertical-align: middle;
+    text-align: right;
+}
+
+.title-container .nav .button {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0 0 16px;
+    padding:14px 17px;
+    font-size: 16px;
+    border-radius: 3px;
+    box-shadow: none;
+    background: none;
+    color:#aaa;
+}
+
+.title-container .nav .button:hover {
+    background: #f8f8f8;
+}
+
+.popup {
+    display: block;
+    position: fixed;
+    top:55%;
+    left:50%;
+    z-index:9999;
+    transform: translate(-50%,-50%);
+    width:100%;
+    height:auto;
+    max-width:500px;
+    max-height:80vh;
+    margin:0;
+    padding:50px 50px 30px 50px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background: rgba(255,255,255,.98);
+    box-shadow: 0 2px 5px rgba(40,40,40,.1);
+    border-radius: 5px;
+    opacity: 0;
+    pointer-events: none;
+    -webkit-backface-visibility:hidden;
+
+    transition:.15s all ease-out;
+    -webkit-transition:.15s all ease-out;
+    -moz-transition:.15s all ease-out;
+    -o-transition:.15s all ease-out;
+}
+
+.popup.visible {
+    top:50%;
+    opacity: 0.99;
+    pointer-events: all;
+}
+
+.popup h1 {
+    padding: 0 0 30px 0;
+    font-family: "Helvetica Neue", Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size:21px;
+    font-weight: 500;
+    line-height: 1.4em;
+    color:#333;
+    text-align: center;
+}
+
+.popup p {
+    padding: 0 0 24px 0;
+    font-family: "Helvetica Neue", Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size:17px;
+    font-weight: 400;
+    line-height: 1.54em;
+    color:#444;
+    text-align: left;
+}
+
+.popup a {
+    text-decoration: none;
+    color: #34b871;
+    border-bottom: solid 1px rgba(52,184,113,.2);
+}
+
+.popup a:hover {
+    color: #2fab68;
+    border-bottom: solid 1px rgba(52,184,113,.4);
+}
+
+.popup p strong {
+    display: block;
+    margin: 0 0 -14px 0;
+    padding: 0;
+}
+
 .action-container {
     display: block;
     position: relative;
     top:0;
     right:0;
-    padding:20px 20px 60px 20px;
+    width:90%;
+    max-width: 640px;
+    margin: 0 auto;
+    padding:20px 0 60px 0;
     text-align: center;
+    overflow: visible;
+}
+
+.show-popup .action-container {
+    opacity: 0.1;
+    pointer-events: none;
 }
 
 .button {
@@ -255,6 +409,12 @@ body {
     cursor: default;
 }
 
+.button.create-gif.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: default;
+}
+
 .action-container .preview {
     display: block;
     position: relative;
@@ -262,7 +422,8 @@ body {
     max-width:640px;
     height:0;
     margin:0 auto;
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: visible;
     font-family: "Helvetica Neue", Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 18px;
     font-weight: 400;
@@ -283,6 +444,7 @@ body {
 }
 
 .action-container .preview.visible {
+    overflow: visible;
     height:402px;
     margin: 40px auto 32px auto;
 }
@@ -322,6 +484,11 @@ body {
     cursor: pointer;
 }
 
+.show-popup .frame-list {
+    opacity: 0.1;
+    pointer-events: none;
+}
+
 .frame-container {
     display: block;
     position: relative;
@@ -330,7 +497,7 @@ body {
     height:auto;
     overflow: hidden;
     margin:28px auto 32px auto;
-    border-radius: 5px;
+    border-radius: 4px;
     opacity: 0.99;
     box-shadow: 0 1px 3px rgba(0,0,0,.2);
 }
@@ -342,35 +509,54 @@ body {
     padding-top: 56.25%; /* 16:9 */
 }
 
+.frame-container.sort-ghost {
+    opacity: 0.3 !important;
+}
+
 .frame-container .frame {
     width:100%;
     height:100%;
 }
 
-.frame-container .remove {
+.frame-container .remove, .popup .close {
     display: block;
     position: absolute;
     top:2px;
-    right:14px;
+    right:18px;
     width:30px;
     height:30px;
     opacity: 0;
     pointer-events: none;
     cursor: pointer;
+
+    transition:.1s all ease-out !important;
+    -webkit-transition:.1s all ease-out !important;
+    -moz-transition:.1s all ease-out !important;
+    -o-transition:.1s all ease-out !important;
+}
+
+.popup .close {
+    position: absolute;
+    top:20px;
+    right:20px;
+    height:28px;
+    width:28px;
+    opacity: 0.6;
+    pointer-events: all;
 }
 
 .frame-container:hover .remove, .frame-container.show-controls .remove {
-    top:14px;
+    top:18px;
     pointer-events: all;
     opacity: 0.6;
 }
 
-.frame-container:hover .remove:hover, .frame-container.show-controls .remove:hover {
+.frame-container:hover .remove:hover, .frame-container.show-controls .remove:hover, .popup .close:hover {
     transform:scale(1.1);
     opacity: 0.9;
 }
 
-.frame-container .remove::after {
+.frame-container .remove::after, .popup .close::after {
     content: "";
     display: block;
     position: absolute;
@@ -378,12 +564,12 @@ body {
     left:50%;
     transform: translate(-50%,-50%) rotate(-45deg);
     width:3px;
-    height:24px;
+    height:80%;
     border-radius: 6px;
     background: #fff;
 }
 
-.frame-container .remove::before {
+.frame-container .remove::before, .popup .close::before {
     content: "";
     display: block;
     position: absolute;
@@ -391,16 +577,16 @@ body {
     left:50%;
     transform: translate(-50%,-50%) rotate(45deg);
     width:3px;
-    height:24px;
+    height:80%;
     border-radius: 6px;
     background: #fff;
 }
 
-.frame-container[data-colour="white"]:not(.image) .remove::after {
+.frame-container[data-colour="white"]:not(.image) .remove::after, .popup .close::after  {
     background: #aaa;
 }
 
-.frame-container[data-colour="white"]:not(.image) .remove::before {
+.frame-container[data-colour="white"]:not(.image) .remove::before, .popup .close::before  {
     background: #aaa;
 }
 
@@ -433,12 +619,12 @@ body {
     resize: none;
     overflow: hidden !important;
 
-    -webkit-touch-callout: text;
-    -webkit-user-select: text;
-    -khtml-user-select: text;
-    -moz-user-select: text;
-    -ms-user-select: text;
-    user-select: text;
+    -webkit-touch-callout: all;
+    -webkit-user-select: all;
+    -khtml-user-select: all;
+    -moz-user-select: all;
+    -ms-user-select: all;
+    user-select: all;
 
     transition:.0s all ease-out;
     -webkit-transition:.0s all ease-out;
@@ -492,16 +678,16 @@ body {
 }
 
 .frame-container.image .frame-text::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    color: rgba(255,255,255,.6) !important;
+    color: rgba(255,255,255,.8) !important;
 }
 .frame-container.image .frame-text::-moz-placeholder { /* Firefox 19+ */
-    color: rgba(255,255,255,.6) !important;
+    color: rgba(255,255,255,.8) !important;
 }
 .frame-container.image .frame-text:-ms-input-placeholder { /* IE 10+ */
-    color: rgba(255,255,255,.6) !important;
+    color: rgba(255,255,255,.8) !important;
 }
 .frame-container.image .frame-text:-moz-placeholder { /* Firefox 18- */
-    color: rgba(255,255,255,.6) !important;
+    color: rgba(255,255,255,.8) !important;
 }
 
 .frame-container.image.image-only .frame-text::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -542,7 +728,7 @@ body {
 }
 
 .frame-container.image.image-only .frame-edit .frame-text {
-    text-shadow: 0 1px 2px rgba(0,0,0,.2);
+    text-shadow: 0 1px 4px rgba(0,0,0,.4);
 }
 
 .frame-container .frame-edit .frame-image-upload {
@@ -585,7 +771,7 @@ body {
     margin:0 1% 0 0;
     background: #666;
     border:solid 2px rgba(255,255,255,.8);
-    border-radius:20px;
+    border-radius:100%;
     opacity: 0;
     cursor: pointer;
     -webkit-backface-visibility:hidden;
@@ -594,7 +780,7 @@ body {
 .frame-container .frame-colour .colour::after {
     content: "";
     display: block;
-    padding-top: 100%; /* 16:9 */
+    padding-top: 100% !important;
 }
 
 .frame-container:not(.image):hover .frame-colour .colour, .frame-container.show-controls:not(.image) .frame-colour .colour {
@@ -603,7 +789,7 @@ body {
 }
 
 .frame-container:not(.image):hover .frame-colour .colour:hover, .frame-container.show-controls:not(.image) .frame-colour .colour:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
     opacity: 0.99;
 }
 
@@ -762,6 +948,7 @@ body {
     position: absolute;
     bottom: 12px;
     right:22px;
+    transform: translateZ(0);
     width:36px;
     height:36px;
     background: rgba(255,255,255,0);
@@ -775,11 +962,12 @@ body {
     color:#fff;
     opacity: 0;
     pointer-events: none;
+    -webkit-backface-visibility: hidden;
 
-    transition:.1s all ease-out, 0 padding, 0 font-weight;
-    -webkit-transition:.1s all ease-out, 0 padding, 0 font-weight;
-    -moz-transition:.1s all ease-out, 0 padding, 0 font-weight;
-    -o-transition:.1s all ease-out, 0 padding, 0 font-weight;
+    transition:.1s all ease-out !important;
+    -webkit-transition:.1s all ease-out !important;
+    -moz-transition:.1s all ease-out !important;
+    -o-transition:.1s all ease-out !important;
 }
 
 [data-colour="white"]:not(.image) .frame-style, [data-colour="white"]:not(.image) .frame-image-button {
@@ -867,6 +1055,75 @@ body {
 }
 
 @media (max-width:800px){
+
+    body {
+        padding: 106px 0 0 0;
+    }
+
+    header .title-container {
+        padding:10px 0;
+    }
+
+    header .title-container .logo {
+        width:30px;
+        height:30px;
+    }
+
+    .popup {
+        width:100%;
+        height:100%;
+        max-height:none;
+        border-radius: 0;
+        padding:13% 10% 8% 10%;
+    }
+
+    .popup h1 {
+        padding: 0 0 30px 0;
+        font-size:17px;
+    }
+
+    .popup p {
+        padding: 0 0 24px 0;
+        font-size:15px;
+    }
+
+    .action-container {
+        padding-top:0;
+    }
+
+    .action-container .button {
+        font-size: 15px;
+        padding:14px 20px;
+        border-radius: 3px;
+    }
+
+    .action-container .preview .button.download {
+        width:125px;
+        font-size: 15px;
+        padding:13px 20px 13px 42px;
+        border-radius: 3px;
+        background-size: 20px;
+        background-position: 12.5% 48.5%;
+    }
+
+    .action-container .preview.visible {
+        margin-top:15px;
+    }
+
+    .frame-container {
+        margin-top:-20px;
+    }
+
+    .frame-container .remove {
+        right:14px;
+        width:25px;
+        height:25px;
+    }
+
+    .frame-container.show-controls .remove {
+        top:14px;
+    }
+
     .frame-container .frame-colour {
         width:90%;
         max-width: none;
@@ -898,6 +1155,8 @@ body {
         width:26px;
         height:26px;
         font-size: 14px;
+        box-shadow: none;
+        background-color: rgba(0,0,0,.07);
     }
 
     .frame-image-button {
@@ -908,6 +1167,27 @@ body {
     .frame-container:hover .frame-style, .frame-container.show-controls .frame-style, .frame-container:hover .frame-image-button, .frame-container.show-controls .frame-image-button {
         top:14px;
     }
+
+    [data-colour="white"]:not(.image) .frame-style, [data-colour="white"]:not(.image) .frame-image-button {
+        background-color: rgba(0,0,0,.03);
+        box-shadow: none;
+        color:#999;
+    }
+
+    .frame-style:hover, .frame-image-button:hover {
+        transform: scale(1.05);
+        background-color: rgba(0,0,0,.1);
+    }
+
+    [data-colour="white"]:not(.image) .frame-style:hover, [data-colour="white"]:not(.image) .frame-image-button:hover {
+        background-color: rgba(0,0,0,.05) !important;
+    }
+
+    [data-colour="white"]:not(.image) .frame-style:hover, [data-colour="white"]:not(.image) .frame-image-button:hover {
+        transform: scale(1.05);
+        background-color: rgba(0,0,0,.1);
+    }
+
 }
 
 </style>
@@ -916,9 +1196,33 @@ body {
 
 <body>
 
-<div class="title-container">
-    <img class="logo" src="shout.png"/>
-    <h1>Shout</h1>
+<header>
+    <div class="title-container">
+        <div class="logo-block">
+            <img class="logo" src="shout.png"/>
+            <h1>Shout</h1>
+        </div>
+        <div class="nav">
+            <div class="button about">Help</div>
+            <!-- <div class="button add-frame">Add Frame</div>
+            <div class="button create-gif">Create GIF<div class="loaderbox"><div class="loader">Loading...</div></div></div> -->
+        </div>
+    </div>
+</header>
+
+<div class="popup about">
+    <div class="close"></div>
+    <h1>Need a hand?</h1>
+    <p>Shout is an app for creating colourful animated GIFs from images and text. It runs in your browser.</p>
+    <p><strong>Customise Text</strong><br/>Type a message in a frame then choose a style using the 'Style' icon on each slide. You can use emoji in your text too – be creative! (If an emoji doesn't work, change the style.)</p>
+    <p><strong>Background Colours</strong><br/>You can choose a colour to use as your background to make your GIF more exciting. Shout comes with 11 colours, and no custom colours yet.</p>
+    <p><strong>Background Images</strong><br/>You can add a background image by dragging it to any frame or by clicking the 'Image' icon on any frame. Currently Shout supports all common background image types except for animated GIFs.</p>
+    <p><strong>Manage Frames</strong><br/>You can add frames by clicking the 'Add Frame' button at the bottom of the screen. You can remove any slide by clicking the 'X' in its top-right corner. You can re-order frames by dragging them or on mobile, tap-holding then dragging.</p>
+    <p><strong>Download your GIF</strong><br/>Once you have your frames ready, click 'Create GIF' then wait for it to process. Click 'Download' to save the image. If you're using Safari the GIF will open in a new tab where you can tap and hold then 'Copy', or right-click and 'Save Image As...' to save it.</p>
+    <p><br/><strong>About Shout</strong><br/>
+    Shout was built by <a href="http://twitter.com/gmph">Graham Macphee</a> as a personal project. Graham is a designer from Edinburgh, UK. See more of his work: <a href="http://gmph.co/portfolio">gmph.co/portfolio</a>.<br/><br/>
+    No data from Shout is uploaded to the cloud. All processing is done with JS in the browser.<br/><br/>
+    Shout uses several libraries including <a href="LZWEncoder.js">LZWEncoder JS</a>, <a href="NeuQuant.js">NeuQuant JS</a>, <a href="GIFEncoder.js">GIFEncoder JS (modified)</a>, <a href="fileSaver.js">File Saver JS</a>, <a href="Blob.js">Blob JS</a> and <a href="sortable.min.js">Sortable</a>. It uses HTML5 Canvas, Web Workers and Blobs.</p>
 </div>
 
 <div class="frame-list">
@@ -983,12 +1287,21 @@ body {
     </div>
 </div>
 
+<script src="LZWEncoder.js"></script>
+<script src="NeuQuant.js"></script>
+<script src="GIFEncoder.js"></script>
+<script src="b64.js"></script>
+<script src="fileSaver.js"></script>
+<script src="Blob.js"></script>
+<script src="sortable.min.js"></script>
+
 <script language="javascript">
 
     var defaultFrameWidth = 640;
     var defaultFrameHeight = 360;
     var defaultTextStyle = parseInt(Math.round(defaultFrameHeight * 0.1)) + "px 'Helvetica Neue'";
     var defaultLineHeight = 1.4;
+    var lastScrollTop = 0;
 
     var downloadFilename;
     var downloadData;
@@ -999,7 +1312,7 @@ body {
     var $inputList = $('textarea.frame-text');
     var textList = [];
 
-    var frameHTML = ['<div id="f','" class="frame-container" data-colour="white" data-style="normal" data-duration="1300"> <canvas class="frame"></canvas> <div class="frame-edit white"> <textarea class="frame-text normal" rows="1" placeholder="Type another thing..."></textarea> <div class="frame-image"><input class="frame-image-upload" type="file"/></div> </div> <div class="frame-colour"> <div class="colour white active"></div> <div class="colour black"></div> <div class="colour pink"></div> <div class="colour red"></div> <div class="colour orange"></div> <div class="colour yellow"></div> <div class="colour dark-green"></div> <div class="colour light-green"></div> <div class="colour light-blue"></div> <div class="colour dark-blue"></div> <div class="colour purple"></div> </div> <div class="frame-image-button"></div> <div class="frame-style normal"></div> <div class="remove"></div> </div>'];
+    var frameHTML = ['<div id="f','" class="frame-container" data-colour="white" data-style="normal" data-duration="1300"> <canvas class="frame"></canvas> <div class="frame-edit white"> <textarea class="frame-text normal" rows="1" placeholder="Type a thing..."></textarea> <div class="frame-image"><input class="frame-image-upload" type="file"/></div> </div> <div class="frame-colour"> <div class="colour white active"></div> <div class="colour black"></div> <div class="colour pink"></div> <div class="colour red"></div> <div class="colour orange"></div> <div class="colour yellow"></div> <div class="colour dark-green"></div> <div class="colour light-green"></div> <div class="colour light-blue"></div> <div class="colour dark-blue"></div> <div class="colour purple"></div> </div> <div class="frame-image-button"></div> <div class="frame-style normal"></div> <div class="remove"></div> </div>'];
 
     if (typeof(Worker) !== "undefined"){
         var encodeWorker = new Worker("shoutEncode.js");
@@ -1017,11 +1330,12 @@ body {
 
         setTimeout(function(){
             $('.frame-container').eq(0).addClass('show-controls');
-        },500);
+        },1000);
 
         $(window).resize(function(){
             setScaledFontSize();
             showControlsForMobile();
+            setHeaderVisibility();
             updateAllFrames();
         });
 
@@ -1033,6 +1347,7 @@ body {
             $(this).closest('.frame-container').remove();
             resetFrameID();
             setCreateButtonState();
+            setHeaderVisibility();
             if ($('.frame-container').length <= 0){
                 addFrame();
             }
@@ -1043,6 +1358,21 @@ body {
         $(document).on('click','.create-gif',function(){
             setCreateButtonState(false);
             encodeGIF();
+        });
+
+        $(document).on('click','.button.about',function(){
+            $('.popup.about').addClass('visible');
+            $('body').addClass('show-popup');
+        });
+
+        $(document).on('click','.popup.about .close',function(){
+            $('.popup.about').removeClass('visible');
+            $('body').removeClass('show-popup');
+        });
+
+        $(document).on('click','.show-popup,show-popup:not(.popup)',function(){
+            $('.popup').removeClass('visible');
+            $('body').removeClass('show-popup');
         });
 
         $(document).on('keyup','.frame-text',function(){
@@ -1095,9 +1425,20 @@ body {
         });
 
         $(document).on('change','.frame-image-upload',function(e){
-           var fileList = this.files;
-           if (fileList.length) setBackgroundImage($(this).closest('.frame-container'),fileList[0]);
-       });
+            var fileList = this.files;
+            if (fileList.length) setBackgroundImage($(this).closest('.frame-container'),fileList[0]);
+        });
+
+        $(window).scroll(function(event){
+            setHeaderVisibility();
+        });
+
+        var frameList = $('.frame-list').get(0);
+        var sortedFrameList = Sortable.create(frameList, {
+            animation: 150,
+            ghostClass: "sort-ghost",
+            onUpdate: resetFrameID,
+        });
 
         showControlsForMobile();
 
@@ -1122,6 +1463,7 @@ body {
             updateFrame(i);
         }
 
+        setHeaderVisibility();
         setScaledFontSize();
         showControlsForMobile();
 
@@ -1139,7 +1481,7 @@ body {
         resetFrameID();
         setCreateButtonState();
 
-        var newColour = getRandomColour();
+        var newColour = 'white'; // getRandomColour();
         $('.frame-colour .colour').removeClass('active');
         $('.frame-container').eq(getFrameCount()-1).attr('data-colour',newColour).find('.frame-edit').attr('class','frame-edit '+newColour).parent().find('.colour.'+newColour).addClass('active;');
 
@@ -1342,6 +1684,20 @@ body {
         }
     }
 
+    function setHeaderVisibility(){
+        if ($(document).height() - 100 > $(window).height()){
+            var st = $(this).scrollTop();
+            if (((st < lastScrollTop) || ($(window).scrollTop() <= 40)) && !($(window).scrollTop() + $(window).height() >= $(document).height())){
+                $('header').removeClass('hidden');
+            } else {
+                $('header').addClass('hidden');
+            }
+            lastScrollTop = st;
+        } else {
+            $('header').removeClass('hidden');
+        }
+    }
+
     function setScaledFontSize(){
         $('.frame-text').css('font-size',Math.round(0.1 * $('.frame-container').height())+'px');
         for (var i=0;i<getFrameCount();i++){
@@ -1351,16 +1707,16 @@ body {
 
     function setCreateButtonState(bool){
         var $createButton = $('.button.create-gif,.preview');
-        if (getFrameCount() < 1){
-            $createButton.addClass('loading');
+        if (getFrameCount() <= 1){
+            $createButton.addClass('disabled');
         } else {
-            $createButton.removeClass('loading');
+            $createButton.removeClass('loading disabled');
         }
         if (bool != null && bool != undefined){
             if (bool){
-                $createButton.removeClass('loading');
+                $createButton.removeClass('loading disabled');
             } else {
-                $createButton.addClass('loading');
+                $createButton.addClass('loading disabled');
             }
         }
     }
@@ -1369,8 +1725,11 @@ body {
         $('.frame-container').each(function(){
             var $frameContainer = $(this);
             var $input = $(this).find('.frame-text');
-            var frameCount = Math.round($input.val().split(' ').removeByValue('').length*0.28*1000+1000);
-            $input.closest('.frame-container').attr('data-frames',Math.round(frameCount * 0.01));
+            var duration = Math.round($input.val().split(' ').removeByValue('').length*0.28*1000+1000);
+            if ($frameContainer.hasClass('image-only')){
+                duration = 2000;
+            }
+            $input.closest('.frame-container').attr('data-frames',Math.round(duration * 0.01)).attr('data-duration',Math.round(duration));
             updateFrame(parseInt($frameContainer.attr('id').substring(1)));
         });
     }
