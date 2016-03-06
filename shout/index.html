@@ -500,6 +500,7 @@ header.hidden {
     border-radius: 4px;
     opacity: 0.99;
     box-shadow: 0 1px 3px rgba(0,0,0,.2);
+    cursor: pointer;
 }
 
 .frame-container::after {
@@ -510,7 +511,9 @@ header.hidden {
 }
 
 .frame-container.sort-ghost {
-    opacity: 0.3 !important;
+    opacity: 0.3;
+    cursor: grabing;
+    cursor: -webkit-grabbing;
 }
 
 .frame-container .frame {
@@ -597,6 +600,13 @@ header.hidden {
     left:0;
     width:100%;
     height:100%;
+
+    -webkit-touch-callout: text;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
 }
 
 .frame-container .frame-text {
@@ -608,7 +618,7 @@ header.hidden {
     width:85.4%; /* to match canvas */
     transform:translate(-50%,-50%);
     height:auto;
-    margin:-4px 0 0 1px;
+    margin:0;
     line-height: 1.4em;
     font-family: "Helvetica Neue", Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size:36px;
@@ -618,18 +628,25 @@ header.hidden {
     border:none;
     resize: none;
     overflow: hidden !important;
+    pointer-events: none;
 
-    -webkit-touch-callout: all;
-    -webkit-user-select: all;
-    -khtml-user-select: all;
-    -moz-user-select: all;
-    -ms-user-select: all;
-    user-select: all;
+    -webkit-touch-callout: text;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
 
-    transition:.0s all ease-out;
-    -webkit-transition:.0s all ease-out;
-    -moz-transition:.0s all ease-out;
-    -o-transition:.0s all ease-out
+    transition: .0s all ease-out;
+    -webkit-transition: .0s all ease-out;
+    -moz-transition: .0s all ease-out;
+    -o-transition: .0s all ease-out
+}
+
+.frame-container .frame-text:focus {
+    z-index:3;
+    cursor:text;
+    pointer-events:auto;
 }
 
 .frame-container .frame-text.bold {
@@ -715,12 +732,14 @@ header.hidden {
     position: absolute;
     top:0;
     left:0;
+    z-index:1;
     width:100%;
     height:100%;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     opacity: .7;
+    pointer-events: none;
 }
 
 .frame-container.image.image-only .frame-edit .frame-image {
@@ -1312,6 +1331,9 @@ header.hidden {
     var $inputList = $('textarea.frame-text');
     var textList = [];
 
+    var frameList = $('.frame-list').get(0);
+    var sortedFrameList;
+
     var frameHTML = ['<div id="f','" class="frame-container" data-colour="white" data-style="normal" data-duration="1300"> <canvas class="frame"></canvas> <div class="frame-edit white"> <textarea class="frame-text normal" rows="1" placeholder="Type a thing..."></textarea> <div class="frame-image"><input class="frame-image-upload" type="file"/></div> </div> <div class="frame-colour"> <div class="colour white active"></div> <div class="colour black"></div> <div class="colour pink"></div> <div class="colour red"></div> <div class="colour orange"></div> <div class="colour yellow"></div> <div class="colour dark-green"></div> <div class="colour light-green"></div> <div class="colour light-blue"></div> <div class="colour dark-blue"></div> <div class="colour purple"></div> </div> <div class="frame-image-button"></div> <div class="frame-style normal"></div> <div class="remove"></div> </div>'];
 
     if (typeof(Worker) !== "undefined"){
@@ -1339,8 +1361,13 @@ header.hidden {
             updateAllFrames();
         });
 
-        $(document).on('click','.frame-edit',function(){
-            $(this).find('.frame-text').focus();
+        $(document).on('click','.frame-edit, .frame-text',function(){
+            $('.frame-text').focus();
+            if ($(this).hasClass('frame-edit')){
+                $(this).find('.frame-text').focus();
+            } else {
+                $(this).focus();
+            }
         });
 
         $(document).on('click','.frame-container .remove',function(){
@@ -1433,13 +1460,6 @@ header.hidden {
             setHeaderVisibility();
         });
 
-        var frameList = $('.frame-list').get(0);
-        var sortedFrameList = Sortable.create(frameList, {
-            animation: 150,
-            ghostClass: "sort-ghost",
-            onUpdate: resetFrameID,
-        });
-
         showControlsForMobile();
 
     });
@@ -1462,6 +1482,13 @@ header.hidden {
             ctxs[i].translate(0.5,0.5);
             updateFrame(i);
         }
+
+        sortedFrameList = Sortable.create(frameList, {
+            delay: 0,
+            animation: 150,
+            ghostClass: "sort-ghost",
+            onUpdate: resetFrameID,
+        });
 
         setHeaderVisibility();
         setScaledFontSize();
@@ -1607,7 +1634,7 @@ header.hidden {
         var $frame = $(frame);
         console.log($frame);
         //don't try to mess with non-image files
-        if (file.type.match('image.*')) {
+        if (file && file.type && file.type.match('image.*')) {
             //then we have an image,
 
             //we have a file handle, need to read it with file reader!
@@ -1675,12 +1702,15 @@ header.hidden {
             defaultFrameWidth = 640;
             defaultFrameHeight = 360;
             defaultTextStyle = "36px 'Helvetica Neue'";
+            sortedFrameList.option('delay','150');
+
         } else {
             $('.frame-container').removeClass('show-controls');
             $('#f0').addClass('show-controls');
             // defaultFrameWidth = 1280;
             // defaultFrameHeight = 720;
             // defaultTextStyle = "72px 'Helvetica Neue'";
+            sortedFrameList.option('delay','0');
         }
     }
 
