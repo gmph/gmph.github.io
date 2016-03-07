@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<!--[if IE]>
-<meta http-equiv="X-UA-Compatible" content="IE=100" />
-<style type="text/css">
-/* IE CSS HERE */
-<style>
-<![endif]-->
+
+<!--
+
+/ _\ |__   ___  _   _| |_
+\ \| '_ \ / _ \| | | | __|
+_\ \ | | | (_) | |_| | |_
+\__/_| |_|\___/ \__,_|\__|
+
+Shout – Create GIFs the easy way
+Create colourful animated GIFs from your text and images.
+
+A personal project by Graham Macphee. Graham is a Designer from
+Edinburgh, UK. See more of his work: http://gmph.co/portfolio
+
+Copyright 2016, Graham Macphee. All rights reserved.
+Find licenses linked in the 'Help' section of the site.
+
+-->
 
 <html id="top">
 <head>
@@ -37,6 +49,7 @@
 <link rel="apple-touch-icon" href="shout-square.png">
 <meta name="theme-color" content="#f8f8f8">
 
+<link rel='stylesheet' href='spectrum.css' />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -316,13 +329,20 @@ header.hidden {
 }
 
 .popup h1 {
-    padding: 0 0 30px 0;
+    padding: 10px 0 40px 0;
     font-family: "Helvetica Neue", Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size:21px;
     font-weight: 500;
     line-height: 1.4em;
     color:#333;
     text-align: center;
+}
+
+.popup.colour h1 {
+    margin:-5px 0 0 0;
+    padding:0 0 20px 0;
+    font-size: 20px;
+    color:#aaa;
 }
 
 .popup p {
@@ -350,6 +370,18 @@ header.hidden {
     display: block;
     margin: 0 0 -14px 0;
     padding: 0;
+}
+
+.popup .center {
+    padding-top:20px;
+    padding-bottom:10px;
+    text-align: center;
+}
+
+.popup .button {
+    padding: 13px 35px 14px 35px;
+    border-radius: 4px;
+    font-size:16px;
 }
 
 .action-container {
@@ -394,11 +426,11 @@ header.hidden {
     background: #2fab68;
 }
 
-.button.add-frame {
+.button.add-frame, .button.grey {
     background: #bbb;
 }
 
-.button.add-frame:hover {
+.button.add-frame:hover, .button.grey:hover {
     background: #b0b0b0;
 }
 
@@ -528,6 +560,7 @@ header.hidden {
 .frame-container .frame {
     width:100%;
     height:100%;
+    opacity: 0;
 }
 
 .frame-container .remove, .popup .close {
@@ -627,7 +660,7 @@ header.hidden {
     width:85.4%; /* to match canvas */
     transform:translate(-50%,-50%);
     height:auto;
-    margin:-0.2em 0 0 0;
+    margin:-0.2em 0 0 0; /* for centring, half of line-gap */
     line-height: 1.4em;
     font-family: "Helvetica Neue", Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size:36px;
@@ -656,6 +689,14 @@ header.hidden {
     z-index:3;
     cursor:text;
     pointer-events:auto;
+}
+
+.frame-container .custom-light-bg .frame-text {
+    color:rgba(0,0,0,.5);
+}
+
+.frame-container .custom-dark-bg .frame-text {
+    color:rgba(255,255,255,.9);
 }
 
 .frame-container .frame-text.bold {
@@ -688,6 +729,32 @@ header.hidden {
 }
 .frame-container .frame-text:-moz-placeholder { /* Firefox 18- */
     color: rgba(255,255,255,.6);
+}
+
+.frame-container .custom-dark-bg .frame-text::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: rgba(255,255,255,.6);
+}
+.frame-container .custom-dark-bg .frame-text::-moz-placeholder { /* Firefox 19+ */
+    color: rgba(255,255,255,.6);
+}
+.frame-container .custom-dark-bg .frame-text:-ms-input-placeholder { /* IE 10+ */
+    color: rgba(255,255,255,.6);
+}
+.frame-container .custom-dark-bg .frame-text:-moz-placeholder { /* Firefox 18- */
+    color: rgba(255,255,255,.6);
+}
+
+.frame-container .custom-light-bg .frame-text::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: rgba(32,32,32,.3);
+}
+.frame-container .custom-light-bg .frame-text::-moz-placeholder { /* Firefox 19+ */
+    color: rgba(32,32,32,.3);
+}
+.frame-container .custom-light-bg .frame-text:-ms-input-placeholder { /* IE 10+ */
+    color: rgba(32,32,32,.3);
+}
+.frame-container .custom-light-bg .frame-text:-moz-placeholder { /* Firefox 18- */
+    color: rgba(32,32,32,.3);
 }
 
 .frame-container .white .frame-text::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -802,6 +869,25 @@ header.hidden {
     padding-top: 100% !important;
 }
 
+.frame-container .frame-colour .colour.custom {
+    background: rgba(0,0,0,.4);
+}
+
+.frame-container .frame-colour .colour.custom::before {
+    content: "+";
+    display: block;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-65%);
+    width:auto;
+    height:auto;
+    font-family: "Helvetica Neue", Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color:#fff;
+}
+
 .frame-container:not(.image):hover .frame-colour .colour, .frame-container.show-controls:not(.image) .frame-colour .colour {
     top:0;
     opacity: 0.75;
@@ -823,6 +909,13 @@ header.hidden {
     -webkit-transition:.1s all ease-out !important;
     -moz-transition:.1s all ease-out !important;
     -o-transition:.1s all ease-out !important;
+}
+
+.frame-colour .colour:nth-last-child(12) {
+    transition:.525s all ease-out;
+    -webkit-transition:.525s all ease-out;
+    -moz-transition:.525s all ease-out;
+    -o-transition:.525s all ease-out
 }
 
 .frame-colour .colour:nth-last-child(11) {
@@ -1103,6 +1196,7 @@ header.hidden {
 
     .popup {
         width:100%;
+        max-width: none;
         height:100%;
         max-height:none;
         border-radius: 0;
@@ -1165,8 +1259,14 @@ header.hidden {
     }
 
     .frame-container .frame-colour .colour {
-        width:6.6%;
+        width:6.5%;
+        margin: 0 0.4% 0 0;
         max-width: none;
+        border-width: 2px !important;
+    }
+
+    .frame-container .frame-colour .colour.custom::before {
+        transform:translate(-48%,-65%);
     }
 
     .frame-style::after {
@@ -1255,6 +1355,19 @@ header.hidden {
     </div>
 </header>
 
+<div class="popup colour">
+
+    <h1>Choose a colour:</h1>
+
+    <input type='text' id="custom-colour" />
+
+    <div class="center">
+        <div class="button colour-done">Done</div>
+        <div class="button colour-cancel grey">Cancel</div>
+    </div>
+
+</div>
+
 <div class="popup about">
     <div class="close"></div>
     <h1>Need a hand?</h1>
@@ -1267,7 +1380,7 @@ header.hidden {
     <p><br/><strong>About Shout</strong><br/>
     Shout was built by <a href="http://twitter.com/gmph">Graham Macphee</a> as a personal project. Graham is a designer from Edinburgh, UK. See more of his work: <a href="http://gmph.co/portfolio">gmph.co/portfolio</a>.<br/><br/>
     No data from Shout is uploaded to the cloud. All processing is done with JS in the browser.<br/><br/>
-    Shout uses several libraries including <a href="LZWEncoder.js">LZWEncoder JS</a>, <a href="NeuQuant.js">NeuQuant JS</a>, <a href="GIFEncoder.js">GIFEncoder JS (modified)</a>, <a href="fileSaver.js">File Saver JS</a>, <a href="Blob.js">Blob JS</a> and <a href="sortable.min.js">Sortable</a>. It uses HTML5 Canvas, Web Workers and Blobs.</p>
+    Shout uses several libraries including <a href="LZWEncoder.js">LZWEncoder JS</a>, <a href="NeuQuant.js">NeuQuant JS</a>, <a href="GIFEncoder.js">GIFEncoder JS (modified)</a>, <a href="fileSaver.js">File Saver JS</a>, <a href="Blob.js">Blob JS</a>, <a href="sortable.min.js">Sortable</a>, <a href="spectrum.js">Spectrum</a> and <a href="tinycolour.js">TinyColor</a>. It uses HTML5 Canvas, Web Workers and Blobs.</p>
 </div>
 
 <div class="frame-list">
@@ -1290,6 +1403,7 @@ header.hidden {
             <div class="colour light-blue"></div>
             <div class="colour dark-blue active"></div>
             <div class="colour purple"></div>
+            <div class="colour custom"></div>
         </div>
         <div class="frame-image-button"></div>
         <div class="frame-style bold"></div>
@@ -1314,6 +1428,7 @@ header.hidden {
             <div class="colour light-blue"></div>
             <div class="colour dark-blue"></div>
             <div class="colour purple"></div>
+            <div class="colour custom"></div>
         </div>
         <div class="frame-image-button"></div>
         <div class="frame-style italic"></div>
@@ -1339,6 +1454,8 @@ header.hidden {
 <script src="fileSaver.js"></script>
 <script src="Blob.js"></script>
 <script src="sortable.min.js"></script>
+<script src="tinycolour.js"></script>
+<script src='spectrum.js'></script>
 
 <script language="javascript">
 
@@ -1361,7 +1478,7 @@ header.hidden {
     var frameList = $('.frame-list').get(0);
     var sortedFrameList;
 
-    var frameHTML = ['<div id="f','" class="frame-container" data-colour="white" data-style="normal" data-duration="1300"> <canvas class="frame"></canvas> <div class="frame-edit white"> <textarea class="frame-text normal" rows="1" placeholder="Type a thing..."></textarea> <div class="frame-image"><input class="frame-image-upload" type="file"/></div> </div> <div class="frame-colour"> <div class="colour white active"></div> <div class="colour black"></div> <div class="colour pink"></div> <div class="colour red"></div> <div class="colour orange"></div> <div class="colour yellow"></div> <div class="colour dark-green"></div> <div class="colour light-green"></div> <div class="colour light-blue"></div> <div class="colour dark-blue"></div> <div class="colour purple"></div> </div> <div class="frame-image-button"></div> <div class="frame-style normal"></div> <div class="remove"></div> </div>'];
+    var frameHTML = ['<div id="f','" class="frame-container" data-colour="white" data-style="normal" data-duration="1300"> <canvas class="frame"></canvas> <div class="frame-edit white"> <textarea class="frame-text normal" rows="1" placeholder="Type a thing..."></textarea> <div class="frame-image"><input class="frame-image-upload" type="file"/></div> </div> <div class="frame-colour"> <div class="colour white active"></div> <div class="colour black"></div> <div class="colour pink"></div> <div class="colour red"></div> <div class="colour orange"></div> <div class="colour yellow"></div> <div class="colour dark-green"></div> <div class="colour light-green"></div> <div class="colour light-blue"></div> <div class="colour dark-blue"></div> <div class="colour purple"></div> <div class="colour custom"></div> </div> <div class="frame-image-button"></div> <div class="frame-style normal"></div> <div class="remove"></div> </div>'];
 
     if (typeof(Worker) !== "undefined"){
         var encodeWorker = new Worker("shoutEncode.js");
@@ -1479,19 +1596,55 @@ header.hidden {
                 style = $(this).attr('class').split(' ').removeByValue('frame-style')[0];
                 $(this).closest('.frame-container').attr('data-style',style).find('.frame-edit .frame-text').removeClass('normal italic').addClass('bold').focus();
             }
+            fitToContent($(this).closest('.frame-container').find('.frame-text'),$(this).closest('.frame-container').height());
             updateFrame(parseInt($(this).parent().attr('id').substring(1)));
         });
 
-        $(document).on('mousedown','.frame-colour .colour',function(){
+        $(document).on('mousedown','.frame-colour .colour:not(.custom)',function(){
             var colour = $(this).attr('class').split(' ').removeByValue('colour').removeByValue('active')[0];
-            $('.frame-colour .colour').removeClass('active');
+            $(this).parent().find('.colour').removeClass('active');
             $(this).addClass('active');
             $(this).closest('.frame-container').attr('data-colour',colour).find('.frame-edit').attr('class','frame-edit '+colour);
             updateFrame(parseInt($(this).parent().parent().attr('id').substring(1)));
         });
 
-        $(document).on('click','.frame-colour .colour',function(){
+        $(document).on('click','.frame-colour .colour:not(.custom)',function(){
             $(this).closest('.frame-container').find('.frame-text').focus();
+        });
+
+        $(document).on('click','.frame-colour .colour.custom',function(e){
+            e.preventDefault();
+            $('body').addClass('show-popup');
+            $('.popup.colour').addClass('visible').attr('data-for',$(this).closest('.frame-container').attr('id'));
+            $('#custom-colour').spectrum("set",tinycolor($(this).closest('.frame-container').find('.frame-edit').css('background-color')).toHexString());
+
+            $(document).on('click','.popup.colour .colour-cancel',function(e){
+                $(document).off('click','.popup.colour .colour-cancel');
+                $('.popup.colour').removeClass('visible');
+                $('body').removeClass('show-popup');
+            });
+
+            $(document).on('click','.popup.colour .colour-done',function(e){
+                $(document).off('click','.popup.colour .colour-done');
+                $('.popup.colour').removeClass('visible');
+                $('body').removeClass('show-popup');
+                var customColour = tinycolor($('#custom-colour').spectrum("get"));
+                var $colourPopup = $(this).closest('.popup.colour');
+                var $frame = $('#'+$colourPopup.attr('data-for'));
+                if (customColour.isValid()){
+                    $frame.attr('data-colour','custom').attr('data-colour-custom',customColour.toString("hex6"));
+                    $frame.find('.frame-edit').attr('class','frame-edit').css('background-color',customColour.toString("hex6"));
+                    console.log(customColour);
+                    if ((customColour.getBrightness()/255) > 0.7){
+                        $frame.addClass('custom-light-bg').removeClass('custom-dark-bg').find('.frame-edit').addClass('custom-light-bg').removeClass('custom-dark-bg');
+                    } else {
+                        $frame.removeClass('custom-light-bg').addClass('custom-dark-bg').find('.frame-edit').removeClass('custom-light-bg').addClass('custom-dark-bg');
+                    }
+                    $frame.find('.frame-colour .colour').removeClass('active');
+                }
+            });
+
+
         });
 
         $(document).on('click','.frame-image-button',function(){
@@ -1544,6 +1697,12 @@ header.hidden {
             onUpdate: resetFrameID,
         });
 
+        $("#custom-colour").spectrum({
+            flat: true,
+            showInput: false,
+            showButtons: false,
+        });
+
         setHeaderVisibility();
         setScaledFontSize();
         showControlsForMobile();
@@ -1573,7 +1732,7 @@ header.hidden {
         $canvasList = $('.frame-container .frame');
         $inputList = $('.frame-container .frame-text');
         ctxs[frameNumber].clearRect(0,0,$canvasList[frameNumber].width, $canvasList[frameNumber].height);
-        ctxs[frameNumber].fillStyle = $('.colour.'+$('.frame-container').eq(frameNumber).attr('data-colour')).css('background-color');
+        ctxs[frameNumber].fillStyle = $frame.find('.frame-edit').css('background-color');
         ctxs[frameNumber].fillRect(0,0,$canvasList[frameNumber].width, $canvasList[frameNumber].height);
 
         if ($frame.hasClass('image')){

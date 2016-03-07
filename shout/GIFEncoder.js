@@ -4,6 +4,7 @@
  * @author Kevin Weiner (original Java version - kweiner@fmsware.com)
  * @author Thibault Imbert (AS3 version - bytearray.org)
  * @author Kevin Kwok (JavaScript version - https://github.com/antimatter15/jsgif)
+ * @author Graham Macphee (JavaScript version modified)
  * @version 0.1 AS3 implementation
  */
 
