@@ -547,6 +547,7 @@ header.hidden {
     cursor: grabing !important;
     cursor: -webkit-grabbing !important;
     box-shadow: none !important;
+    transform: scale(0.98) !important;
 }
 
 .frame-container.sort-dragging {
@@ -871,22 +872,31 @@ header.hidden {
 
 .frame-container .frame-colour .colour.custom {
     background: rgba(0,0,0,.4);
+    border-radius: 100%;
 }
 
-.frame-container .frame-colour .colour.custom::before {
-    content: "+";
+.frame-container .frame-colour .colour.custom .p1 {
+    content: "";
     display: block;
     position: absolute;
     top:50%;
     left:50%;
-    transform: translate(-50%,-68%);
-    width:auto;
-    height:auto;
-    font-family: "Helvetica Neue", Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1em;
-    font-weight: 500;
-    color:#fff;
+    transform: translate(-50%,-50%);
+    width: 2px;
+    height: 50%;
+    background: rgba(255,255,255,1);
+}
+
+.frame-container .frame-colour .colour.custom .p2 {
+    content: "";
+    display: block;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    width: 50%;
+    height: 2px;
+    background: rgba(255,255,255,1);
 }
 
 .frame-container:not(.image):hover .frame-colour .colour, .frame-container.show-controls:not(.image) .frame-colour .colour {
@@ -1270,10 +1280,6 @@ header.hidden {
         border-width: 2px !important;
     }
 
-    .frame-container .frame-colour .colour.custom::before {
-        transform:translate(-50%,-55%);
-    }
-
     .frame-style::after {
         content:"";
         display: block;
@@ -1408,7 +1414,7 @@ header.hidden {
             <div class="colour light-blue"></div>
             <div class="colour dark-blue active"></div>
             <div class="colour purple"></div>
-            <div class="colour custom"></div>
+            <div class="colour custom"><div class="p1"></div><div class="p2"></div></div>
         </div>
         <div class="frame-image-button"></div>
         <div class="frame-style bold"></div>
@@ -1433,7 +1439,7 @@ header.hidden {
             <div class="colour light-blue"></div>
             <div class="colour dark-blue"></div>
             <div class="colour purple"></div>
-            <div class="colour custom"></div>
+            <div class="colour custom"><div class="p1"></div><div class="p2"></div></div>
         </div>
         <div class="frame-image-button"></div>
         <div class="frame-style italic"></div>
@@ -1483,7 +1489,7 @@ header.hidden {
     var frameList = $('.frame-list').get(0);
     var sortedFrameList;
 
-    var frameHTML = ['<div id="f','" class="frame-container" data-colour="white" data-style="normal" data-duration="1300"> <canvas class="frame"></canvas> <div class="frame-edit white"> <textarea class="frame-text normal" rows="1" placeholder="Type a thing..."></textarea> <div class="frame-image"><input class="frame-image-upload" type="file"/></div> </div> <div class="frame-colour"> <div class="colour white active"></div> <div class="colour black"></div> <div class="colour pink"></div> <div class="colour red"></div> <div class="colour orange"></div> <div class="colour yellow"></div> <div class="colour dark-green"></div> <div class="colour light-green"></div> <div class="colour light-blue"></div> <div class="colour dark-blue"></div> <div class="colour purple"></div> <div class="colour custom"></div> </div> <div class="frame-image-button"></div> <div class="frame-style normal"></div> <div class="remove"></div> </div>'];
+    var frameHTML = ['<div id="f','" class="frame-container" data-colour="white" data-style="normal" data-duration="1300"> <canvas class="frame"></canvas> <div class="frame-edit white"> <textarea class="frame-text normal" rows="1" placeholder="Type a thing..."></textarea> <div class="frame-image"><input class="frame-image-upload" type="file"/></div> </div> <div class="frame-colour"> <div class="colour white active"></div> <div class="colour black"></div> <div class="colour pink"></div> <div class="colour red"></div> <div class="colour orange"></div> <div class="colour yellow"></div> <div class="colour dark-green"></div> <div class="colour light-green"></div> <div class="colour light-blue"></div> <div class="colour dark-blue"></div> <div class="colour purple"></div> <div class="colour custom"><div class="p1"></div><div class="p2"></div></div> </div> <div class="frame-image-button"></div> <div class="frame-style normal"></div> <div class="remove"></div> </div>'];
 
     if (typeof(Worker) !== "undefined"){
         var encodeWorker = new Worker("shoutEncode.js");
@@ -1553,6 +1559,7 @@ header.hidden {
             if ($('.frame-container').length <= 0){
                 addFrame();
             }
+            resetSorting();
         });
 
         $(document).on('click','.add-frame',addFrame);
@@ -1694,22 +1701,32 @@ header.hidden {
             updateFrame(i);
         }
 
-        sortedFrameList = Sortable.create(frameList, {
-            delay: 0,
-            animation: 100,
-            ghostClass: "sort-ghost",
-            chosenClass: "sort-dragging",
-            onUpdate: resetFrameID,
-        });
-
         $("#custom-colour").spectrum({
             flat: true,
             showInput: false,
             showButtons: false,
         });
 
+        resetSorting();
         setHeaderVisibility();
         setScaledFontSize();
+        showControlsForMobile();
+
+    }
+
+    function resetSorting(){
+
+        if (sortedFrameList != undefined) sortedFrameList.destroy();
+
+        sortedFrameList = Sortable.create(frameList, {
+            delay: 0,
+            animation: 100,
+            ghostClass: "sort-ghost",
+            chosenClass: "sort-dragging",
+            onUpdate: resetFrameID,
+            scrollSensitivity: 60,
+        });
+
         showControlsForMobile();
 
     }
@@ -1729,6 +1746,8 @@ header.hidden {
         var newColour = 'white'; // getRandomColour();
         $('.frame-colour .colour').removeClass('active');
         $('.frame-container').eq(getFrameCount()-1).attr('data-colour',newColour).find('.frame-edit').attr('class','frame-edit '+newColour).parent().find('.colour.'+newColour).addClass('active;');
+
+        resetSorting();
 
     }
 
