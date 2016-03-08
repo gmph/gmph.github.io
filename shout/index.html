@@ -1576,11 +1576,6 @@ header.hidden {
             $('body').removeClass('show-popup');
         });
 
-        $(document).on('click','.show-popup,show-popup:not(.popup)',function(){
-            $('.popup').removeClass('visible');
-            $('body').removeClass('show-popup');
-        });
-
         $(document).on('keyup','.frame-text',function(){
             fitToContent($(this),$(this).closest('.frame-container').height());
             if ($(this).val().split(' ').removeByValue('').removeByValue(' ').join() == "" || $(this).val().split(' ').removeByValue('').removeByValue(' ').join('') == " "){
