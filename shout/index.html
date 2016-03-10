@@ -306,9 +306,8 @@ header.hidden {
     max-width:500px;
     max-height:80vh;
     margin:0;
-    padding:50px 50px 30px 50px;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    padding:0;
+    overflow:hidden;
     background: rgba(255,255,255,.98);
     box-shadow: 0 2px 5px rgba(40,40,40,.1);
     border-radius: 5px;
@@ -326,6 +325,20 @@ header.hidden {
     top:50%;
     opacity: 0.99;
     pointer-events: all;
+}
+
+.popup-content {
+    display: block;
+    position: relative;
+    top:0;
+    left:0;
+    width:100%;
+    height:auto;
+    max-height:80vh;
+    margin:0;
+    padding:50px 50px 30px 50px;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .popup h1 {
@@ -1367,31 +1380,31 @@ header.hidden {
 </header>
 
 <div class="popup colour">
-
-    <h1>Choose a colour:</h1>
-
-    <input type='text' id="custom-colour" />
-
-    <div class="center">
-        <div class="button colour-done">Done</div>
-        <div class="button colour-cancel grey">Cancel</div>
+    <div class="popup-content">
+        <h1>Choose a colour:</h1>
+        <input type="text" id="custom-colour"/>
+        <div class="center">
+            <div class="button colour-done">Done</div>
+            <div class="button colour-cancel grey">Cancel</div>
+        </div>
     </div>
-
 </div>
 
 <div class="popup about">
+    <div class="popup-content">
+        <h1>Need a hand?</h1>
+        <p>Shout is an app for creating colourful animated GIFs from images and text. It runs in your browser.</p>
+        <p><strong>Customise Text</strong><br/>Type a message in a frame then choose a style using the 'Style' icon on each slide. You can use emoji in your text too – be creative! (If an emoji doesn't work, change the style.)</p>
+        <p><strong>Background Colours</strong><br/>You can choose a colour to use as your background to make your GIF more exciting. Shout comes with 11 colours, and no custom colours yet.</p>
+        <p><strong>Background Images</strong><br/>You can add a background image by dragging it to any frame or by clicking the 'Image' icon on any frame. Currently Shout supports all common background image types except for animated GIFs.</p>
+        <p><strong>Manage Frames</strong><br/>You can add frames by clicking the 'Add Frame' button at the bottom of the screen. You can remove any slide by clicking the 'X' in its top-right corner. You can re-order frames by dragging them or on mobile, tap-holding then dragging.</p>
+        <p><strong>Download your GIF</strong><br/>Once you have your frames ready, click 'Create GIF' then wait for it to process. Click 'Download' to save the image. If you're using Safari the GIF will open in a new tab where you can tap and hold then 'Copy', or right-click and 'Save Image As...' to save it.</p>
+        <p><br/><strong>About Shout</strong><br/>
+        Shout was built by <a href="http://twitter.com/gmph">Graham Macphee</a> as a personal project. Graham is a designer from Edinburgh, UK. See more of his work: <a href="http://gmph.co/portfolio">gmph.co/portfolio</a>.<br/><br/>
+        No data from Shout is uploaded to the cloud. All processing is done with JS in the browser.<br/><br/>
+        Shout uses several libraries: <a href="LZWEncoder.js">LZWEncoder JS</a>, <a href="NeuQuant.js">NeuQuant JS</a>, <a href="GIFEncoder.js">GIFEncoder JS (modified)</a>, <a href="fileSaver.js">File Saver JS</a>, <a href="Blob.js">Blob JS</a>, <a href="sortable.min.js">Sortable</a>, <a href="spectrum.js">Spectrum</a> and <a href="tinycolour.js">TinyColor</a>. It uses HTML5 Canvas, Web Workers and Blobs.</p>
+    </div>
     <div class="close"></div>
-    <h1>Need a hand?</h1>
-    <p>Shout is an app for creating colourful animated GIFs from images and text. It runs in your browser.</p>
-    <p><strong>Customise Text</strong><br/>Type a message in a frame then choose a style using the 'Style' icon on each slide. You can use emoji in your text too – be creative! (If an emoji doesn't work, change the style.)</p>
-    <p><strong>Background Colours</strong><br/>You can choose a colour to use as your background to make your GIF more exciting. Shout comes with 11 colours, and no custom colours yet.</p>
-    <p><strong>Background Images</strong><br/>You can add a background image by dragging it to any frame or by clicking the 'Image' icon on any frame. Currently Shout supports all common background image types except for animated GIFs.</p>
-    <p><strong>Manage Frames</strong><br/>You can add frames by clicking the 'Add Frame' button at the bottom of the screen. You can remove any slide by clicking the 'X' in its top-right corner. You can re-order frames by dragging them or on mobile, tap-holding then dragging.</p>
-    <p><strong>Download your GIF</strong><br/>Once you have your frames ready, click 'Create GIF' then wait for it to process. Click 'Download' to save the image. If you're using Safari the GIF will open in a new tab where you can tap and hold then 'Copy', or right-click and 'Save Image As...' to save it.</p>
-    <p><br/><strong>About Shout</strong><br/>
-    Shout was built by <a href="http://twitter.com/gmph">Graham Macphee</a> as a personal project. Graham is a designer from Edinburgh, UK. See more of his work: <a href="http://gmph.co/portfolio">gmph.co/portfolio</a>.<br/><br/>
-    No data from Shout is uploaded to the cloud. All processing is done with JS in the browser.<br/><br/>
-    Shout uses several libraries including <a href="LZWEncoder.js">LZWEncoder JS</a>, <a href="NeuQuant.js">NeuQuant JS</a>, <a href="GIFEncoder.js">GIFEncoder JS (modified)</a>, <a href="fileSaver.js">File Saver JS</a>, <a href="Blob.js">Blob JS</a>, <a href="sortable.min.js">Sortable</a>, <a href="spectrum.js">Spectrum</a> and <a href="tinycolour.js">TinyColor</a>. It uses HTML5 Canvas, Web Workers and Blobs.</p>
 </div>
 
 <div class="frame-list">
@@ -1590,15 +1603,15 @@ header.hidden {
             if ($(this).hasClass('bold')){
                 $(this).removeClass('bold normal').addClass('italic');
                 style = $(this).attr('class').split(' ').removeByValue('frame-style')[0];
-                $(this).closest('.frame-container').attr('data-style',style).find('.frame-edit .frame-text').removeClass('bold normal').addClass('italic').focus();
+                $(this).closest('.frame-container').attr('data-style',style).find('.frame-edit .frame-text').removeClass('bold normal').addClass('italic'); // .focus();
             } else if ($(this).hasClass('italic')){
                 $(this).removeClass('italic bold').addClass('normal');
                 style = $(this).attr('class').split(' ').removeByValue('frame-style')[0];
-                $(this).closest('.frame-container').attr('data-style',style).find('.frame-edit .frame-text').removeClass('italic bold').addClass('normal').focus();
+                $(this).closest('.frame-container').attr('data-style',style).find('.frame-edit .frame-text').removeClass('italic bold').addClass('normal'); // .focus();
             } else if ($(this).hasClass('normal')){
                 $(this).removeClass('normal italic').addClass('bold');
                 style = $(this).attr('class').split(' ').removeByValue('frame-style')[0];
-                $(this).closest('.frame-container').attr('data-style',style).find('.frame-edit .frame-text').removeClass('normal italic').addClass('bold').focus();
+                $(this).closest('.frame-container').attr('data-style',style).find('.frame-edit .frame-text').removeClass('normal italic').addClass('bold'); // .focus();
             }
             fitToContent($(this).closest('.frame-container').find('.frame-text'),$(this).closest('.frame-container').height());
             updateFrame(parseInt($(this).parent().attr('id').substring(1)));
@@ -1613,7 +1626,7 @@ header.hidden {
         });
 
         $(document).on('click','.frame-colour .colour:not(.custom)',function(){
-            $(this).closest('.frame-container').find('.frame-text').focus();
+            $(this).closest('.frame-container').find('.frame-text'); // .focus();
         });
 
         $(document).on('click','.frame-colour .colour.custom',function(e){
