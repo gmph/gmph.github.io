@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=100" />
+<style type="text/css">
+/* IE CSS HERE */
+<style>
+<![endif]-->
+
+<html id="top">
+
+<head>
+
+<title>{{ page.title }} | Graham Macphee</title>
+<meta name="author" content="Graham Macphee" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta charset="utf-8">
+{% feed_meta %}
+<meta property="og:title" content="{{ page.title }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ site.baseurl }}/{{ page.path }}">
+<meta property="og:site_name" content="Graham Macphee">
+<meta property="og:description" content="">
+<meta property="twitter:account_id" content="87261538" /> <!-- Twitter ID, currently for @gmph -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#8B67FF">
+<link rel="shortcut icon" href="{{ site.baseurl }}/res/img/ptlogooutline.png">
+<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400' rel='stylesheet' type='text/css'>
+<link href="{{ site.baseurl }}/res/css/main.css" rel="stylesheet" type="text/css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+{% if page.url == "/404.html" %}
+	<meta http-equiv="refresh" content="10; url=/">
+{% endif %}
+
+</head>
+
+<body>
+
+		<img class="loadimg" src="{{ site.baseurl }}/res/img/ptlogo.png"/>
+
+		<div class="block">
+
+			<a class="backbutton" href="/"><svg height="100%" width="100%"><g><path fill="#555" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path></g></svg></a>
+
+			<h1 class="heading">{{ page.heading }}</h1>
+
+			{% if page.private %}
+			<h2 class="subheading">This article is currently a private draft.</h2>
+			{% else if page.subheading %}
+			<h2 class="subheading">{{ page.subheading }}</h2>
+			{% endif %}
+
+			<span class="littleline"></span>
+
+			{{ content }}
+
+			<a href="/"><img class="footerimg" src="{{ site.baseurl }}/res/img/ptfooter.png"/></a>
+
+		</div>
+
+</body>
+
+
+<script language="javascript">
+
+	$(window).scroll(function(e){
+		console.log(e);
+	});
+
+    $('.block').css('opacity','0');
+
+    $('body').css('overflow-y','hidden');
+
+    $('.loadimg').css('opacity','0');
+
+    $('a').each(function() {
+	    if ($(this).find('img,svg').length) {
+	        $(this).css('border','none');
+	    }
+	});
+
+    $(document).ready(function(){
+    	setTimeout(function(){
+    		$('.loadimg').css('opacity','1');
+    		setTimeout(function(){
+	    		$('.loadimg').css('opacity','0');
+	    		setTimeout(function(){
+		    		$('.block').css('opacity','1');
+		    		$('body').css('overflow-y','scroll');
+		    	},400);
+	    	},1200);
+    	},200);
+	});
+
+	$(function() {
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({
+              scrollTop: (target.offset().top - 30)
+		  	}, 400);
+            return false;
+          }
+        }
+      });
+    });
+
+</script>
+
+{% if page.url == "/404.html" %}
+	<script language="javascript">
+		$('.block').css('margin-top','24vh');
+		$('p.meta').css('display','none');
+		$('p.social').css('display','none');
+	</script>
+{% endif %}
+
+<!-- Landy -->
+<script>var JavaScript={load:function(e,t){var a,l=document.createElement("script");l.setAttribute("src",e),t&&(l.onreadystatechange=l.onload=function(){a||t(),a=!0});var o=document.getElementsByTagName("head")[0];o.insertBefore(l,o.firstChild)}},config={g:[{"event":"click","value":".postlist .postitem"},{"event":"click","value":".menu .purple"},{"event":"click","value":".menu .twitter, .menu .instagram, .menu .foursquare"}],modelId:"a6e6703d313e900ef8d1786f",user:"JELjJCCiqsNAHrPAf",url:"http://gmph.co",type:"ab",subtype:"contains"};JavaScript.load("https://d2mnlxdd0x11jg.cloudfront.net/landy.min.js",function(){landy.init(config)});</script>
+<!-- End Landy -->
+
+</html>

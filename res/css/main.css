@@ -69,14 +69,30 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
     background: rgba(139,103,255,.2);
 }
 
-body {
+textarea, input {
+    outline: none;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -moz-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+:focus {
+    outline-color: transparent;
+    outline-style: none;
+}
+
+html,body {
 	background:#fff;
+    overflow-x:hidden;
 }
 
 .block {
 	position: relative;
     top:0;
     left:0;
+    z-index: 1;
     -webkit-transform:translateX(-20px);
     transform:translateX(-20px);
 	height:100vh;
@@ -283,6 +299,172 @@ span.littleline {
 	width:40px;
 	background: #ddd;
 	margin:2px 0 -10px 0;
+}
+
+.contact-form {
+    display: block;
+    position: relative;
+    top:0;
+    left:0;
+    width:100%;
+    height:auto;
+    margin:10px auto 0 auto;
+    padding:0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.contact-form .contact-title {
+    position: relative;
+    left:2px;
+    margin-top: -6px;
+}
+
+input, textarea {
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height:auto;
+    margin:10px 0 0 0;
+    padding: 13px 15px;
+    background: #fff;
+    border-radius: 3px;
+    border: solid 1px rgba(0,0,0,.075);
+    resize: none;
+    color:#444;
+	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+    line-height: 1.4em;
+    font-size: 17px;
+}
+
+input:focus, textarea:focus {
+    top:-2px;
+    border: solid 1px rgba(0,0,0,0.14);
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+input.invalid, textarea.invalid {
+    border: solid 1px #f26161;
+    border-color: #f26161 !important;
+}
+
+.contact-form .contact-method {
+    margin-top:20px;
+    margin-bottom: 10px;
+}
+
+.contact-form .contact-message {
+    margin-bottom:20px;
+}
+
+.contact-form .contact-email {
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 48%;
+    min-width: 100px;
+    height:auto;
+    margin:10px 0 0 0;
+    padding: 14px 15px 15px 15px;
+    border-radius: 3px;
+    border: solid 1px rgba(0,0,0,0);
+	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+    font-size: 17px;
+    color: #888;
+    font-weight: 400;
+    text-align: center;
+    background: #eee;
+    cursor:pointer;
+    border:none !important;
+}
+
+.contact-form .contact-email:hover {
+    background: #e9e9e9;
+    color: #797979;
+}
+
+.contact-form .contact-submit {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 48%;
+    height:auto;
+    min-width: 90px;
+    margin:0;
+    padding: 14px 15px 15px 15px;
+    background: #8B67FF;
+    border: solid 1px rgba(0,0,0,0);
+    border-radius: 3px;
+	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+    font-size: 17px;
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    cursor:pointer;
+}
+
+.contact-form .contact-submit:hover {
+    background: #8360f2;
+}
+
+.contact-form .contact-email:hover, .contact-form .contact-submit:hover {
+    border: solid 1px rgba(0,0,0,.125);
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+.contact-form .contact-submit.sent {
+    opacity: 0.7;
+}
+
+.contact-messages {
+    display: block;
+    position: relative;
+    top:0;
+    left:0;
+    width:100%;
+    height:auto;
+    margin:40px auto 0 auto;
+    padding:0;
+	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+    font-size: 17px;
+    font-weight: 400;
+    text-align: left;
+}
+
+.contact-messages .message {
+    display: block;
+    position: relative;
+    top:0;
+    left:0;
+    width:100%;
+    height:auto;
+    margin:0 auto 30px auto;
+    padding:30px 30px 60px 30px;
+    background: #f8f8f8;
+    border-radius: 4px;
+}
+
+.contact-messages .message .text {
+    display: block;
+    font-size: 20px;
+    font-weight:300;
+    line-height: 1.4em;
+    color:#333;
+    text-align: left;
+}
+
+.contact-messages .message .meta {
+    display: block;
+    position: absolute;
+    bottom:28px;
+    right:28px;
+    font-size: 14px;
+    color:#aaa;
+    text-align: right;
 }
 
 .block h1 {
@@ -583,7 +765,7 @@ img.loadimg {
 	position: fixed;
 	top:50%;
 	left:48%;
-	z-index: -1;
+	z-index: 0;
 	width:200px;
 	height: 200px;
 	margin: -100px 0 -100px -75px;
@@ -753,7 +935,7 @@ a img.footerimg:hover {
 		position: fixed;
 		top:48%;
 		left:50%;
-		z-index: -1;
+		z-index: 0;
 		width:100px;
 		height: 100px;
 		margin: -50px 0 0 -50px;
@@ -764,6 +946,21 @@ a img.footerimg:hover {
 		height: auto;
 		margin:45px auto 0 auto;
 	}
+
+    .contact-form {
+        display: block;
+        position: relative;
+        top:0;
+        left:0;
+        width:100%;
+        margin:10px 0 0 0;
+        padding:0;
+        border-radius: 0;
+    }
+
+    .contact-form .contact-method, .contact-form .contact-subject, .contact-form .contact-message, .contact-form .contact-submit, .contact-form .contact-email {
+        font-size: 15px;
+    }
 
     .block h2.subheading {
         display: none;
