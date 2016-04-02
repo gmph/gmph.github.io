@@ -52,19 +52,69 @@
 		transition:.15s all ease-out;
 	    -webkit-transition:.15s all ease-out;
 	    -moz-transition:.15s all ease-out;
-	    -o-transition:.15s all ease-out
+	    -o-transition:.15s all ease-out;
+		box-sizing:border-box;
+		-webkit-touch-callout: none; /* iOS Safari */
+		-webkit-user-select: none;   /* Chrome/Safari/Opera */
+		-khtml-user-select: none;    /* Konqueror */
+		-moz-user-select: none;      /* Firefox */
+		-ms-user-select: none;       /* IE/Edge */
+		user-select: none;           /* non-prefixed version, currently
+									    not supported by any browser */
+}
+
+	html, body {
+		overflow: hidden;
+		margin:0;
 	}
 
 	.strawbee {
 		display:block;
-		position: absolute;
-		top:50%;
-		left:50%;
-		transform: translate(-50%,-50%);
-		padding: 100px;
+		position: relative;;
+		width:100vw;
+		height:100vh;
+		margin:0;
+		padding:0;
+		border:solid 30px #fff;
 		background: #F7AEFF;
 		color:#fff;
-		font-size:30px;
+		font-size:20px;
+		text-align: center;
+	}
+
+	.rolls{
+		display: block;
+		position: relative;
+		top:0;
+		left:0;
+		width:80%;
+		margin:20% auto 5% auto;
+		padding:30px;
+		text-align: center;
+		background: #fff;
+		color: #F7AEFF;
+	}
+
+	.rolls .dice {
+		display: inline-block;
+		margin:10px;
+		padding:13px 20px;
+		background: #F7AEFF;
+		color:#fff;
+	}
+
+	.fewer, .more {
+		display: inline-block;
+		position: relative;
+		top:0;
+		left:0;
+		width:40%;
+		max-width:120px;
+		margin:40px 20px;
+		padding:20px;
+		text-align: center;
+		background: #fff;
+		color: #F7AEFF;
 	}
 
 </style>
@@ -73,12 +123,18 @@
 
 <body>
 
-	<div class="strawbee"></div>
+	<div class="strawbee">
+		<div class="rolls"></div>
+		<div class="fewer">-</div><div class="more">+</div>
+	</div>
 
 </body>
 
 
 <script language="javascript">
+
+	var numberOfDice = 5;
+	displayDiceRollInElement($('.rolls'));
 
 	function getRandomInt(min, max) {
 	 return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -87,19 +143,35 @@
 	function getStringOfNRandomInts(n,min,max){
 		var value = "";
 		for (var i = 0; i < n;i++){
-			value += getRandomInt(min,max) + " "
+			value += '<span class="dice">' + getRandomInt(min,max) + '</span>'
 		}
 		return value
 	}
 
-	function getDiceRoll(element){
-		$(element).text(getStringOfNRandomInts(5,1,6));
+	function displayDiceRollInElement(element){
+		$(element).html(getStringOfNRandomInts(numberOfDice,1,6));
 	}
 
-	$(document).click(function(e){
+	$('.rolls').click(function(e){
 		e.stopPropagation();
-		getDiceRoll($('.strawbee'));
-	})
+		displayDiceRollInElement($('.rolls'));
+	});
+
+	$('.fewer').click(function(e){
+		e.stopPropagation();
+		if (numberOfDice - 1 < 0){
+			numberOfDice = 0;
+		} else {
+			numberOfDice--;
+		}
+		displayDiceRollInElement($('.rolls'));
+	});
+
+	$('.more').click(function(e){
+		e.stopPropagation();
+		numberOfDice++;
+		displayDiceRollInElement($('.rolls'));
+	});
 
 </script>
 

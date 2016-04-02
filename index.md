@@ -7,9 +7,9 @@ published: true
 format: markdown
 ---
 
-I tend to think about puppies, pizza and equality. I enjoy being creative: writing, taking photos, playing ukulele and singing. I'm quiet and thoughtful, and like nature and quiet nights.
+I tend to think about puppies, pizza and equality. I enjoy being creative: writing, taking photos, playing ukulele and singing. I'm quiet and thoughtful. I like nature and quiet nights.
 
-I am a designer and front-end developer with 4 years industry experience working with startups around the world; currently with [Snipandshare](http://snipandshare.com). Previously I worked as a writer and review manager for UltraLinx, and other online publications.
+I am a designer with 4 years industry experience working for startups around the world; currently at [Yavi](http://yavi.co) building delightful tools for workers. Previously I worked as a writer and review manager for UltraLinx, and for other online publications.
 
 <!-- If you would like to discuss a role at your company, please [email me](mailto:hi@grahammacphee.co.uk) to arrange a call. -->
 
