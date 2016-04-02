@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=100" />
+<style type="text/css">
+/* IE CSS HERE */
+<style>
+<![endif]-->
+
+<html id="top">
+
+<head>
+
+<title>Perudo</title>
+<meta name="author" content="Graham Macphee" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta charset="utf-8">
+<meta property="og:title" content="">
+<meta property="og:type" content="website">
+<meta property="og:url" content="">
+<meta property="og:site_name" content="Graham Macphee">
+<meta property="og:description" content="">
+<meta property="twitter:account_id" content="87261538" /> <!-- Twitter ID, currently for @gmph -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="">
+<link rel="shortcut icon" href="http://gmph.co/res/img/ptlogooutline.png">
+<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400' rel='stylesheet' type='text/css'>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<style type="text/css">
+
+	@font-face {
+		font-family: 'Helvetica Neue';
+		src: url('../res/font/hnl.ttf') format('truetype');
+		font-weight: 300;
+	}
+
+	@font-face {
+		font-family: 'Helvetica Neue';
+		src: url('../res/font/hnm.ttf') format('truetype');
+		font-weight: 400;
+	}
+
+	@font-face {
+		font-family: 'Helvetica Neue';
+		src: url('../res/font/hnb.ttf') format('truetype');
+		font-weight: 700;
+	}
+
+	* {
+		font-family: 'Helvetica Neue';
+		transition:.15s all ease-out;
+	    -webkit-transition:.15s all ease-out;
+	    -moz-transition:.15s all ease-out;
+	    -o-transition:.15s all ease-out
+	}
+
+	.strawbee {
+		display:block;
+		position: absolute;
+		top:50%;
+		left:50%;
+		transform: translate(-50%,-50%);
+		padding: 100px;
+		background: #F7AEFF;
+		color:#fff;
+		font-size:30px;
+	}
+
+</style>
+
+</head>
+
+<body>
+
+	<div class="strawbee"></div>
+
+</body>
+
+
+<script language="javascript">
+
+	function getRandomInt(min, max) {
+	 return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	function getStringOfNRandomInts(n,min,max){
+		var value = "";
+		for (var i = 0; i < n;i++){
+			value += getRandomInt(min,max) + " "
+		}
+		return value
+	}
+
+	function getDiceRoll(element){
+		$(element).text(getStringOfNRandomInts(5,1,6));
+	}
+
+	$(document).click(function(e){
+		e.stopPropagation();
+		getDiceRoll($('.strawbee'));
+	})
+
+</script>
+
+</html>
