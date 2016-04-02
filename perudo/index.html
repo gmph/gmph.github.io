@@ -54,17 +54,15 @@
 	    -moz-transition:.15s all ease-out;
 	    -o-transition:.15s all ease-out;
 		box-sizing:border-box;
-		-webkit-touch-callout: none; /* iOS Safari */
-		-webkit-user-select: none;   /* Chrome/Safari/Opera */
-		-khtml-user-select: none;    /* Konqueror */
-		-moz-user-select: none;      /* Firefox */
-		-ms-user-select: none;       /* IE/Edge */
-		user-select: none;           /* non-prefixed version, currently
-									    not supported by any browser */
-}
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
 
 	html, body {
-		overflow: hidden;
 		margin:0;
 	}
 
@@ -73,12 +71,13 @@
 		position: relative;;
 		width:100vw;
 		height:100vh;
+		min-height:550px;
 		margin:0;
 		padding:0;
-		border:solid 30px #fff;
+		border:solid 25px #fff;
 		background: #F7AEFF;
 		color:#fff;
-		font-size:20px;
+		font-size:18px;
 		text-align: center;
 	}
 
@@ -109,7 +108,7 @@
 		top:0;
 		left:0;
 		width:40%;
-		max-width:120px;
+		max-width:80px;
 		margin:40px 20px;
 		padding:20px;
 		text-align: center;
