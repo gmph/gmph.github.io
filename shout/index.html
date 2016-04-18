@@ -1791,7 +1791,7 @@ header.hidden {
                 console.log('horOffset: '+horOffset);
                 ctxs[frameNumber].drawImage(img, horOffset, 0, newWidth, defaultFrameHeight);
             }
-            if ($inputList.eq(frameNumber).hasClass('image-only')){
+            if (!$frame.hasClass('image-only')){
                 ctxs[frameNumber].fillStyle = "rgba(0,0,0,.4)";
                 ctxs[frameNumber].fillRect(0,0,$canvasList[frameNumber].width, $canvasList[frameNumber].height);
             }
