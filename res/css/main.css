@@ -547,6 +547,10 @@ input.invalid, textarea.invalid {
 	margin: 20px 0 0 0;
 }
 
+ul ul {
+    margin-top:0;
+}
+
 ul, ol {
 	margin: 20px 0 0 40px;
 }
