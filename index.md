@@ -17,30 +17,55 @@ This is where I publish my thoughts on technology, psychology, politics and more
 
 <br/>
 
-##### Recent Articles
+<div class="postview">
+    
+    <h5 class="posttabs">
 
-<ul class="postlist">
-    {% for post in site.posts limit:20 %}
-        {% unless post.private %}
+        {% assign sorted_cats = site.categories | sort %}
+        {% for category in sorted_cats %}
+            {% if forloop.index0 == 0 %}
+                {% assign active_class = "active" %}
+            {% else %}
+                {% assign active_class = "" %}
+            {% endif %}
+            <span class="posttab {{ active_class }}" data-tab="{{ category[0] }}" data-id="{{ forloop.index0 }}">{{ category[0] }}s</span>&nbsp; &nbsp; 
+        {% endfor %}
+
+     </h5>
+
+    {% assign sorted_cats = site.categories | sort %}
+    {% for category in sorted_cats %}
+        {% assign sorted_posts = category[1] | reversed %}
+        {% if forloop.index0 == 0 %}
+            {% assign active_class = "active" %}
+        {% else %}
+            {% assign active_class = "" %}
+        {% endif %}
+        <ul class="postlist {{ category[0] }} {{ active_class }}" data-id="{{ forloop.index0 }}">
+            {% for post in sorted_posts %}
+            {% unless post.private %}
             <li class="postitem">
 
-            {% if post.redirect %}
-                <a href="{{ post.redirect }}" target="_blank">
-            {% else %}
-                <a href="{{ post.url }}">
-            {% endif %}
+                {% if post.redirect %}
+                    <a href="{{ post.redirect }}" target="_blank">
+                {% else %}
+                    <a href="{{ post.url }}">
+                {% endif %}
 
-                    <span class="postitemtitle">{{ post.title }}</span> <span class="postitemmeta">{{ post.date | date: "%B %-d, %Y" }}</span>
+                        <span class="postitemtitle">{{ post.title }}</span> <span class="postitemmeta">{{ post.date | date: "%B %-d, %Y" }}</span>
 
-                    <div class="positemdescription">
+                        <div class="positemdescription">
 
-                    <p>{{ post.content | strip_html | truncatewords:55 }}</p></div>
+                        <p>{{ post.content | strip_html | truncatewords:55 }}</p></div>
 
-                </a>
-            </li>
-        {% endunless %}
+                    </a>
+                </li>
+            {% endunless %}
+            {% endfor %}
+        </ul>
     {% endfor %}
-</ul>
+
+</div>
 
 
 You can email me at [hi@gmph.co](mailto:hi@gmph.co?subject=&body=Hey%20Graham%2C%0A%0AI%27d%20really%20like%20to%20talk%20to%20you%20about...) to say hello – I love talking about design. You can read more about this website in its [colophon]({{ site.baseurl }}/colophon).

@@ -3,6 +3,7 @@ layout: default
 title: On Investigatory Powers
 heading: On Investigatory Powers
 date: 13th November 2015
+category: article
 published: true
 private: false
 format: markdown

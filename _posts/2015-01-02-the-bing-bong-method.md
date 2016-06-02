@@ -4,6 +4,7 @@ title: The Bing Bong Method
 heading: The Bing Bong Method
 subheading: A brief guide to public speaking for politicians.
 date: 2nd January 2016
+category: article
 published: true
 private: true
 format: markdown

@@ -3,6 +3,7 @@ layout: default
 title: The Language of Gender
 heading: The Language of Gender
 date: 26th February 2016
+category: article
 published: true
 private: false
 format: markdown

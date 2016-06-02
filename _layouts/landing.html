@@ -81,21 +81,20 @@
 
 	var titleVariation = 0;
 
-    $('.block').css('opacity','0');
-
-    $('body').css('overflow-y','hidden');
-
-    $('.loadimg').css('opacity','0');
-
-    $('a').each(function() {
-	    if ($(this).find('img').length) {
-	        $(this).css('border','none');
-	    }
+    initLoadingState();
+    $(document).ready(function(){
+    	attachEvents();
+		setStyling();
+    	animLoadingState();
 	});
 
-    $(document).ready(function(){
-		$('.title').html('Graham Macphee');
-		$('.cursor').addClass('blink');
+    function initLoadingState(){
+    	$('.block').css('opacity','0');
+	    $('body').css('overflow-y','hidden');
+	    $('.loadimg').css('opacity','0');
+    }
+
+    function animLoadingState(){
     	setTimeout(function(){
     		$('.loadimg').css('opacity','1');
     		setTimeout(function(){
@@ -104,24 +103,57 @@
 		    		$('.block').css('opacity','1');
 		    		$('body').css('overflow-y','scroll');
 					setTimeout(function(){
-						backspaceThis("Macphee".length,"is a designer.",0);
+						startLoopTitle();
 					},3000);
 		    	},400);
 	    	},1200);
     	},200);
-	});
+    }
 
-	$( ".menubutton, .bigclose" ).on( "touchstart", function(e) {
-		e.preventDefault();
-		controlMenu();
-	} );
+    function setStyling(){
+    	$('.title').html('Graham Macphee');
+		$('.cursor').addClass('blink');
+    	$('a').each(function() {
+		    if ($(this).find('img').length) {
+		        $(this).css('border','none');
+		    }
+		});
+    }
 
-	$( ".menubutton, .bigclose" ).on( "click", function() {
-		controlMenu();
-	} );
+    function attachEvents(){
+    	$(document).on('click','.posttab',function(){
+			var $activeTab = $(this);
+			var category = $activeTab.attr('data-tab');
+			var id = parseInt($activeTab.attr('data-id'));
 
+			$('.posttab,.postlist').removeClass('active before after');
+			$activeTab.addClass('active');
+			$('.postlist.'+category).addClass('active');
 
-	function controlMenu(){
+			$('.posttab').each(function(){
+				var $thisTab = $(this);
+				if (parseInt($thisTab.attr('data-id')) < id){
+					$thisTab.addClass('before');
+					$('.postlist[data-id="'+$thisTab.attr('data-id')+'"]').addClass('before');
+				} else if (parseInt($thisTab.attr('data-id')) > id){
+					$thisTab.addClass('after');
+					$('.postlist[data-id="'+$thisTab.attr('data-id')+'"]').addClass('after');
+				}
+			});
+
+		});
+
+		$(document).on( "touchstart", ".menubutton, .bigclose" , function(e) {
+			e.preventDefault();
+			controlMenu();
+		} );
+
+		$(document).on( "click", ".menubutton, .bigclose" , function() {
+			controlMenu();
+		} );
+    }
+
+    function controlMenu(){
 		$('.menubutton').toggleClass('close');
 		if ($('.menubutton').hasClass('close')){ // open menu
 			openMenu();
@@ -141,6 +173,10 @@
 		$('.menu').addClass('closed');
 		$('html,body').css('overflow','auto');
 	}
+
+    function startLoopTitle(){
+    	backspaceThis("Macphee".length,"is a designer.",0);
+    }
 
 	function animLoopTitle(){
 		setTimeout(function(){

@@ -3,6 +3,7 @@ layout: default
 title: Mental Health and Me
 heading: Mental Health and Me
 date: 31st August 2015
+category: article
 published: true
 private: false
 format: markdown

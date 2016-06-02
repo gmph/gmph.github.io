@@ -3,6 +3,7 @@ layout: default
 title: Let's Fix the World
 heading: Let's fix the world.
 date: 29th April 2015
+category: article
 published: true
 format: markdown
 version: 1.0

@@ -4,6 +4,7 @@ title: On Trigger Warnings
 heading: On Trigger Warnings
 subheading: What are trigger warnings and why do we need them?
 date: 5th February 2016
+category: article
 published: true
 private: false
 format: markdown
