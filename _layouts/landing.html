@@ -86,6 +86,7 @@
     	attachEvents();
 		setStyling();
     	animLoadingState();
+    	navigateToHashCategory();
 	});
 
     function initLoadingState(){
@@ -120,7 +121,14 @@
 		});
     }
 
+    function navigateToHashCategory(){
+    	var hash = location.hash.slice(1,-1);
+    	console.log('hash is '+hash);
+    	$('.posttab[data-tab="'+hash+'"]').click();
+    }
+
     function attachEvents(){
+
     	$(document).on('click','.posttab',function(){
 			var $activeTab = $(this);
 			var category = $activeTab.attr('data-tab');
@@ -151,6 +159,7 @@
 		$(document).on( "click", ".menubutton, .bigclose" , function() {
 			controlMenu();
 		} );
+
     }
 
     function controlMenu(){

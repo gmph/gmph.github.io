@@ -679,7 +679,8 @@ p.meta {
 
 .postview {
     position: relative;
-    width:100%;
+    width:calc(100% + 8px);
+    padding-right:8px;
     overflow-x: visible;
     overflow-y: hidden;
 }
