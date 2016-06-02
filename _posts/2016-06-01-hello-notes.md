@@ -2,7 +2,7 @@
 layout: default
 title: Hello Notes
 heading: Hello, Notes.
-date: 2nd June 2016
+date: 1st June 2016
 category: note
 published: true
 private: false
