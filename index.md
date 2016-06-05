@@ -55,8 +55,8 @@ This is where I publish my thoughts on technology, psychology, politics and more
                         <span class="postitemtitle">{{ post.title }}</span> <span class="postitemmeta">{{ post.date | date: "%B %-d, %Y" }}</span>
 
                         <div class="positemdescription">
-
-                        <p>{{ post.content | strip_html | truncatewords:55 }}</p></div>
+                            <p>{{ post.content | strip_html | truncatewords:55 }}</p>
+                        </div>
 
                     </a>
                 </li>

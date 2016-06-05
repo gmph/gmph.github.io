@@ -1,0 +1,19 @@
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@gmph">
+<meta name="twitter:creator" content="@gmph">
+{% if page.title %}
+  <meta name="twitter:title" content="{{ page.title }}">
+{% else %}
+  <meta name="twitter:title" content="{{ site.title }}">
+{% endif %}
+{% if page.url %}
+  <meta name="twitter:url" content="{{ site.url }}{{ page.url }}">
+{% endif %}
+{% if page.thumbnail %}
+	<meta name="twitter:description" content="{{ page.content | strip_html | truncatewords:55 }}">
+{% elseif page.description %}
+  <meta name="twitter:description" content="{{ page.description }}">
+{% else %}
+  <meta name="twitter:description" content="{{ site.description }}">
+{% endif %}
+<meta name="twitter:image:src" content="{{ site.url }}/res/ptlogooutline.png">

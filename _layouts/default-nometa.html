@@ -29,6 +29,9 @@
 <link href="{{ site.baseurl }}/res/css/main.css" rel="stylesheet" type="text/css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
+{% include fbmeta.html %}
+{% include twittermeta.html %}
+
 {% if page.url == "/404.html" %}
 	<meta http-equiv="refresh" content="10; url=/">
 {% endif %}
