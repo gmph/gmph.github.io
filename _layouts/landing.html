@@ -122,35 +122,51 @@
 		        $(this).css('border','none');
 		    }
 		});
+
+		$('.postlist').each(function(){
+			for (var i = 0; i < $(this).find('.postitem').length; i++){
+				$(this).find('.postitem').eq(i).css('transition','.3s all ease-out '+(150*i)+'ms');
+				$(this).find('.postitem').eq(i).css('-webkit-transition','.3s all ease-out '+(150*i)+'ms');
+			}
+		});
     }
 
     function navigateToHashCategory(){
     	var hash = location.hash.slice(1,-1);
-    	console.log('hash is '+hash);
     	$('.posttab[data-tab="'+hash+'"]').click();
     }
 
     function attachEvents(){
 
-    	$(document).on('click','.posttab',function(){
+    	$(document).on('click','.posttab:not(.active)',function(){
 			var $activeTab = $(this);
 			var category = $activeTab.attr('data-tab');
 			var id = parseInt($activeTab.attr('data-id'));
-
-			$('.posttab,.postlist').removeClass('active before after');
+			$('.posttab').removeClass('active before after');
 			$activeTab.addClass('active');
-			$('.postlist.'+category).addClass('active');
+			$('.postlist').css({'opacity':'0','top':'15px'});
+			$('html,body').animate({
+				"scrollTop" : $activeTab.closest('.postview').offset().top - 20,
+			},300);
 
-			$('.posttab').each(function(){
-				var $thisTab = $(this);
-				if (parseInt($thisTab.attr('data-id')) < id){
-					$thisTab.addClass('before');
-					$('.postlist[data-id="'+$thisTab.attr('data-id')+'"]').addClass('before');
-				} else if (parseInt($thisTab.attr('data-id')) > id){
-					$thisTab.addClass('after');
-					$('.postlist[data-id="'+$thisTab.attr('data-id')+'"]').addClass('after');
-				}
-			});
+			setTimeout(function(){
+				$('.postlist').removeClass('active before after');
+				$('.postlist.'+category).addClass('active');
+
+				$('.posttab').each(function(){
+					var $thisTab = $(this);
+					if (parseInt($thisTab.attr('data-id')) < id){
+						$thisTab.addClass('before');
+						$('.postlist[data-id="'+$thisTab.attr('data-id')+'"]').addClass('before');
+					} else if (parseInt($thisTab.attr('data-id')) > id){
+						$thisTab.addClass('after');
+						$('.postlist[data-id="'+$thisTab.attr('data-id')+'"]').addClass('after');
+					}
+				});
+
+			
+				$('.postlist').css({'opacity':'','top':''});
+			},400);
 
 		});
 

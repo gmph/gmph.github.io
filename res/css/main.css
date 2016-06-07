@@ -110,7 +110,7 @@ html,body {
     transform:translateX(80px);
 }
 
-.block.menuopen h1, .block.menuopen h2, .block.menuopen h3, .block.menuopen h4, .block.menuopen h5, .block.menuopen h6, .block.menuopen p, .block.menuopen ul, .block.menuopen ol, .block.menuopen .littleline {
+.block.menuopen h1, .block.menuopen h2, .block.menuopen h3, .block.menuopen h4, .block.menuopen h5, .block.menuopen h6, .block.menuopen p, .block.menuopen ul:not(.postlist), .block.menuopen ol, .block.menuopen .littleline {
     opacity: 0.3 !important;
 }
 
@@ -679,14 +679,19 @@ p.meta {
 
 .postview {
     position: relative;
+    top:0;
+    left:0%;
     width:calc(100% + 8px);
-    padding-right:8px;
+    margin:-20px 0 0 0;
+    padding: 20px 8px 0 0;
     overflow-x: visible;
     overflow-y: hidden;
 }
 
 .postview .posttabs {
-    padding-bottom:20px;
+    width:100%;
+    margin:0 auto;
+    padding-bottom:10px;
 }
 
 .postview .posttabs .posttab {
@@ -708,28 +713,47 @@ ul.postlist {
     top:0;
     left:0;
     width:100%;
-    margin: 0;
+    margin:0;
     list-style-type: none !important;
     opacity: 0;
-    pointer-events: none;
     height:0;
+    /*transform: scale(0.9);*/
+    pointer-events: none;
     overflow: visible;
+    background: none;
+
+    transition:.3s all ease-out;
+    -webkit-transition:.3s all ease-out;
+    -moz-transition:.3s all ease-out;
+    -o-transition:.3s all ease-out
 }
 
 ul.postlist.active {
     top:0;
-    left:0;
+    z-index:3;
+    height: auto;
     opacity: 1;
     pointer-events: all;
-    height:auto;
+}
+
+ul.postlist.before li.postitem, ul.postlist.after li.postitem {
+    margin: 0 auto 100px auto;
+    opacity: 0;
 }
 
 li.postitem {
+    position: relative;
+    top:0;
+    left:0;
+    width:100%
     font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
     font-size:19px;
     font-weight: 700;
-    margin:0;
-    padding: 10px 0 55px 0;
+    margin:0 auto;
+    padding: 20px 0;
+    border-radius: 3px;
+    /*border: solid 1px #fff;*/
+
 }
 
 li.postitem a {
@@ -748,6 +772,10 @@ li.postitem a {
 li.postitem a:hover {
     left:8px;
     opacity: 1;
+}
+
+li.postitem h2 {
+    margin:0;
 }
 
 span.postitemmeta {

@@ -39,7 +39,7 @@ This is where I publish my thoughts on technology, psychology, politics and more
         {% if forloop.index0 == 0 %}
             {% assign active_class = "active" %}
         {% else %}
-            {% assign active_class = "" %}
+            {% assign active_class = "after" %}
         {% endif %}
         <ul class="postlist {{ category[0] }} {{ active_class }}" data-id="{{ forloop.index0 }}">
             {% for post in sorted_posts %}
@@ -52,7 +52,7 @@ This is where I publish my thoughts on technology, psychology, politics and more
                     <a href="{{ post.url }}">
                 {% endif %}
 
-                        <span class="postitemtitle">{{ post.title }}</span> <span class="postitemmeta">{{ post.date | date: "%B %-d, %Y" }}</span>
+                        <h2><span class="postitemtitle">{{ post.title }}</span> <span class="postitemmeta">{{ post.date | date: "%B %-d, %Y" }}</span></h2>
 
                         <div class="positemdescription">
                             <p>{{ post.content | strip_html | truncatewords:55 }}</p>
