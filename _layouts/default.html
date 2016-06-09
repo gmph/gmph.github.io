@@ -132,7 +132,7 @@
     //
     // on click, increment the like count
 
-    var domainName = window.location.hostname;
+    var domainName = window.location.hostname.replace('.','-');
 
     var pageName = window.location.pathname;
     if (pageName[0] == '/'){
