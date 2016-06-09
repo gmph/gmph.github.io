@@ -672,6 +672,13 @@ code {
 	margin:80px 0 0 0;
 	opacity:1;
     text-align: center;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .gmph-button {
