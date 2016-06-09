@@ -223,6 +223,7 @@ html,body {
     top:0;
     left:0;
     border-bottom: none !important;
+    background: none !important;
     opacity:.85;
 
     font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
@@ -272,12 +273,14 @@ a.backbutton {
     left:-40px;
     width:24px !important;
     height:24px;
-    opacity:0.2;
+    opacity:0.25 !important;
+    background: none !important
+
 }
 
 a.backbutton:hover {
     left:-43px;
-    opacity:0.4;
+    opacity:0.45 !important;
 }
 
 svg {
@@ -578,14 +581,16 @@ blockquote p:first-child {
 }
 
 .block a {
+    opacity: 0.95;
 	height:auto;
 	text-decoration: none;
-	border-bottom: solid 2px rgba(85,255,199,.25);
+	border-bottom: solid 2px rgba(85,255,199,.3);
 }
 
 .block a:hover {
-	color:#222;
+	opacity: 1;
 	border-bottom: solid 2px rgba(85,255,199,.5);
+    background: rgba(85,255,199,.1);
 }
 
 .block img, .block a img {
@@ -663,39 +668,122 @@ code {
 	background:#f1e3ff;
 }
 
-p.social {
-	margin:20px 0 0 0;
-	opacity:.7;
+.social {
+	margin:80px 0 0 0;
+	opacity:1;
+    text-align: center;
 }
 
-.gmph-like-button {
+.gmph-button {
     display: inline-block;
     position: relative;
     top:-8px;
     left:0;
     font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
     font-weight: 500;
-    font-size:16px;
+    font-size:18px;
     margin:0 8px 0 0;
-    padding:5px 9px 6px 9px;
-    background: #fff;
-    border: solid 1px #eee;
+    padding:11px 15px 13px 14px;
+    background: #fff !important;
+    border: solid 1px #eee !important;
     color: #bbb;
     border-radius: 4px;
     cursor: pointer;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-.gmph-like-button:hover {
-    border-color: #ddd;
+.gmph-button:hover {
+    border-color: #ddd !important;
 }
 
-p.meta {
+.gmph-button.disabled {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.gmph-button.label {
+    vertical-align: top;
+    font-size: 15px;
+    font-weight:400;
+    padding:10px 3px;
+    border:none !important;
+}
+
+.twitter-logo-text {
+    display: inline-block;
+    position: relative;
+    top:0;
+    left:0;
+    margin:-2px 3px -5px 4px;
+    width:22px;
+    height:22px;
+    font-size: inherit;
+    background: url(../img/twitter.png);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.meta {
+    position: relative;
+    top:0;
+    left:0;
 	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
 	font-size: 19px;
 	font-weight: 300;
-	line-height: 1.6em;
+	line-height: 1.4em;
 	margin: 60px 0 0 0;
-	color:#666;
+	color:#444;
+}
+
+.gmph-profile-picture {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    top:0;
+    left:0;
+    width:80px;
+    height:80px;
+    margin:0;
+    border-radius: 100px;
+}
+
+.gmph-profile-text {
+    display: inline-block;
+    position: absolute;
+    top:50%;
+    left:100px;
+    transform: translate(0,-50%);
+    width:calc(100% - 100px);
+    width:-webkit-calc(100% - 100px);
+    padding: 4px 0 0 0;
+    font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+    font-size: 19px;
+    font-weight: 300;
+    line-height: 1.4em;
+}
+
+.gmph-profile-text .name {
+    padding: 0 0 2px 0;
+    font-weight: 400;
+}
+
+.gmph-profile-text .name a {
+    border-bottom:none !important;
+}
+
+.gmph-profile-text .bio {
+    font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.4em;
+    color: #aaa;
 }
 
 .postview {
@@ -789,7 +877,6 @@ li.postitem a {
 }
 
 li.postitem a:hover {
-    left:8px;
     opacity: 1;
 }
 
@@ -1088,9 +1175,17 @@ a img.footerimg:hover {
 		font-size: 15px;
 	}
 
-	p.meta {
+	.meta {
 		font-size: 17px;
 	}
+
+    .gmph-profile-text {
+        font-size: 17px;
+    }
+
+    .gmph-profile-text .bio {
+        font-size: 14px;
+    }
 
 	span.littleline {
 		margin: 0 0 4px 0;
