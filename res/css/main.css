@@ -668,6 +668,27 @@ p.social {
 	opacity:.7;
 }
 
+.gmph-like-button {
+    display: inline-block;
+    position: relative;
+    top:-8px;
+    left:0;
+    font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+    font-weight: 500;
+    font-size:16px;
+    margin:0 8px 0 0;
+    padding:5px 9px 6px 9px;
+    background: #fff;
+    border: solid 1px #eee;
+    color: #bbb;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.gmph-like-button:hover {
+    border-color: #ddd;
+}
+
 p.meta {
 	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
 	font-size: 19px;

@@ -28,6 +28,7 @@
 <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400' rel='stylesheet' type='text/css'>
 <link href="{{ site.baseurl }}/res/css/main.css" rel="stylesheet" type="text/css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
 
 {% include fbmeta.html %}
 {% include twittermeta.html %}
@@ -61,7 +62,8 @@
 			<p class="meta"><a href="http://github.com/gmph/gmph.github.io/commits/master/{{ page.path }}" title="See versions on GitHub" target="_blank">Version {{ page.version }}</a>, posted on {{ page.date | date: "%B %-d, %Y" }} by <a href="/">Graham Macphee</a>. Graham is a Designer from Edinburgh,&nbsp;UK.</p>
 
 			<p class="social">
-				<a href="https://twitter.com/gmph" class="twitter-follow-button" data-show-count="false" data-size="large" data-dnt="true">Follow @gmph</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>&nbsp;
+				<div class="gmph-like-button">👍 <span class="like-count">0</span></div>
+				<!-- <a href="https://twitter.com/gmph" class="twitter-follow-button" data-show-count="false" data-size="large" data-dnt="true">Follow @gmph</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>&nbsp; -->
 				<a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="gmph" data-size="large" data-dnt="true">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 			</p>
 
@@ -119,6 +121,52 @@
         }
       });
     });
+
+    // Likes:
+    //
+	// get path, replace slashes
+	//
+    // get likes from firebase for path
+    //    - if null, create an object with 0 likes
+    //    - if number, display the number
+    //
+    // on click, increment the like count
+
+    var domainName = window.location.hostname;
+
+    var pageName = window.location.pathname;
+    if (pageName[0] == '/'){
+    	pageName = pageName.substring(1);
+    };
+    pageName = pageName.replace(/[^\x00-\x7F]/g, "-");
+
+	var fPosts = firebase.initializeApp({
+		apiKey: "AIzaSyADZwqY2285Jd8X5-Z1zGoeOOcrbXoenqg",
+		authDomain: "project-7565141284569736729.firebaseapp.com",
+		databaseURL: "https://project-7565141284569736729.firebaseio.com",
+		storageBucket: "",
+	});
+
+	var postRef = fPosts.database().ref(domainName+'/posts/'+pageName);
+	postRef.on('value', function(snapshot) {
+		var likes = snapshot.child('likes').val();
+		$('.gmph-like-button .like-count').text(likes);
+		if (likes == null){
+			postRef.update({
+				'likes' : 0
+			});
+		}
+	});
+
+	$(document).on('click','.gmph-like-button',function(){
+
+		postRef.child('likes').transaction(function(likes) {
+		    return  (likes || 0) + 1;
+		});
+
+	})
+
+
 
 </script>
 
