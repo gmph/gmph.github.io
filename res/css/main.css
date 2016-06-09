@@ -766,15 +766,13 @@ li.postitem {
     position: relative;
     top:0;
     left:0;
-    width:100%
+    width:100%;
     font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
     font-size:19px;
     font-weight: 700;
     margin:0 auto;
-    padding: 20px 0;
+    padding: 25px 0;
     border-radius: 3px;
-    /*border: solid 1px #fff;*/
-
 }
 
 li.postitem a {
