@@ -1,7 +1,7 @@
 ---
 layout: landing
 title: Graham Macphee
-heading: Graham Macphee is&nbsp;a&nbsp;designer.
+heading: Graham Macphee
 date: 28th April 2015
 published: true
 format: markdown
@@ -18,20 +18,6 @@ This is where I publish my thoughts on technology, psychology, politics and more
 <br/>
 
 <div class="postview">
-    
-    <h5 class="posttabs">
-
-        {% assign sorted_cats = site.categories | sort %}
-        {% for category in sorted_cats %}
-            {% if forloop.index0 == 0 %}
-                {% assign active_class = "active" %}
-            {% else %}
-                {% assign active_class = "" %}
-            {% endif %}
-            <span class="posttab {{ active_class }}" data-tab="{{ category[0] }}" data-id="{{ forloop.index0 }}">{{ category[0] }}s</span>&nbsp; &nbsp; 
-        {% endfor %}
-
-     </h5>
 
     {% assign sorted_cats = site.categories | sort %}
     {% for category in sorted_cats %}

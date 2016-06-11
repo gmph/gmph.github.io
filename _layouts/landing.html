@@ -36,11 +36,32 @@
 
 <body>
 
+		<div class="posttabs">
+			<div class="content">
+
+		        {% assign sorted_cats = site.categories | sort %}
+		        {% for category in sorted_cats %}
+		            {% if forloop.index0 == 0 %}
+		                {% assign active_class = "active" %}
+		            {% else %}
+		                {% assign active_class = "" %}
+		            {% endif %}
+		            <div class="posttab {{ active_class }}" data-tab="{{ category[0] }}" data-id="{{ forloop.index0 }}">{{ category[0] }}s</div>
+		        {% endfor %}
+		        <!-- <br /><br /> -->
+		        <a href="{{ site.baseurl }}/portfolio" class="purple">Portfolio</a>
+				<a href="http://twitter.com/gmph" target="_blank" class="twitter">Twitter</a>
+				<!-- <a href="http://instagr.am/gmph" class="instagram">Instagram</a>
+				<a href="https://foursquare.com/gmph" class="foursquare">Foursquare</a> -->
+
+			</div>
+	    </div>
+
 		<img class="loadimg" src="{{ site.baseurl }}/res/img/ptlogo.png"/>
 
 		<div class="block landing">
 
-			<div class="menubutton">
+			<!-- <div class="menubutton">
 				<div class="hamburgerpart"></div>
 				<div class="hamburgerpart"></div>
 				<div class="hamburgerpart"></div>
@@ -52,13 +73,14 @@
 
 				<a href="{{ site.baseurl }}/portfolio" class="purple">Portfolio</a>
 				<a href="http://twitter.com/gmph" class="twitter">Twitter</a>
-				<!-- <a href="http://dribbble.com/gmph" class="dribbble">Dribbble</a> -->
 				<a href="http://instagr.am/gmph" class="instagram">Instagram</a>
 				<a href="https://foursquare.com/gmph" class="foursquare">Foursquare</a>
 
-			</div>
+			</div> -->
 
-			<h1><span class="title">{{ page.heading }}</span><span class="cursor blink">&#124;</span></h1>
+			<h1 class="nomo"><span class="title">{{ page.heading }}</span><span class="cursor blink">&#124;</span></h1>
+
+			<h1 class="moon"><span class="mobile-title">{{ page.heading }}</span></h1>
 
 			<span class="littleline"></span>
 
@@ -73,7 +95,7 @@
 				<a href="http://google.co.uk/search?q=graham+macphee+designer" title="Google me..."><span class="upabit">...</span></a>
 			</div> -->
 
-			<a href="/"><img class="footerimg" src="{{ site.baseurl }}/res/img/ptfooter.png"/></a>
+			<a href="{{ site.url }}"><div class="footerimg"></div></a>
 
 		</div>
 
@@ -93,7 +115,7 @@
 	});
 
     function initLoadingState(){
-    	$('.block').css('opacity','0');
+    	$('.block, .posttabs').css('opacity','0');
 	    $('body').css('overflow-y','hidden');
 	    $('.loadimg').css('opacity','0');
     }
@@ -104,7 +126,7 @@
     		setTimeout(function(){
 	    		$('.loadimg').css('opacity','0');
 	    		setTimeout(function(){
-		    		$('.block').css('opacity','1');
+		    		$('.block, .posttabs').css('opacity','1');
 		    		$('body').css('overflow-y','scroll');
 					setTimeout(function(){
 						startLoopTitle();
@@ -123,6 +145,12 @@
 		    }
 		});
 
+		if ($(window).scrollTop() <= 50){
+			$('.posttabs').addClass('no-active');
+		} else {
+			$('.posttabs').removeClass('no-active');
+		}
+
 		$('.postlist').each(function(){
 			for (var i = 0; i < $(this).find('.postitem').length; i++){
 				$(this).find('.postitem').eq(i).css('transition','.3s all ease-out '+(150*i)+'ms');
@@ -138,36 +166,46 @@
 
     function attachEvents(){
 
-    	$(document).on('click','.posttab:not(.active)',function(){
+    	$(document).on('scroll',function(){
+			if ($(window).scrollTop() <= 50){
+				$('.posttabs').addClass('no-active');
+			} else {
+				$('.posttabs').removeClass('no-active');
+			}
+		});
+
+    	$(document).on('click','.posttab',function(){
 			var $activeTab = $(this);
-			var category = $activeTab.attr('data-tab');
-			var id = parseInt($activeTab.attr('data-id'));
-			$('.posttab').removeClass('active before after');
-			$activeTab.addClass('active');
-			$('.postlist').css({'opacity':'0','top':'15px'});
-			$('html,body').animate({
-				"scrollTop" : $activeTab.closest('.postview').offset().top - 20,
-			},300);
+			if (!$activeTab.hasClass('active') || $(window).scrollTop() <= 50){
+				var category = $activeTab.attr('data-tab');
+				var id = parseInt($activeTab.attr('data-id'));
+				if (!$activeTab.hasClass('active')){
+					$('.postlist').css({'opacity':'0','top':'15px'});
+				}
+				$('.posttab').removeClass('active before after');
+				$activeTab.addClass('active');
+				$('html,body').animate({
+					"scrollTop" : $('.postlist[data-id="'+id+'"]').closest('.postview').offset().top - 17,
+				},300);
+				setTimeout(function(){
+					$('.postlist').removeClass('active before after');
+					$('.postlist.'+category).addClass('active');
 
-			setTimeout(function(){
-				$('.postlist').removeClass('active before after');
-				$('.postlist.'+category).addClass('active');
+					$('.posttab').each(function(){
+						var $thisTab = $(this);
+						if (parseInt($thisTab.attr('data-id')) < id){
+							$thisTab.addClass('before');
+							$('.postlist[data-id="'+$thisTab.attr('data-id')+'"]').addClass('before');
+						} else if (parseInt($thisTab.attr('data-id')) > id){
+							$thisTab.addClass('after');
+							$('.postlist[data-id="'+$thisTab.attr('data-id')+'"]').addClass('after');
+						}
+					});
 
-				$('.posttab').each(function(){
-					var $thisTab = $(this);
-					if (parseInt($thisTab.attr('data-id')) < id){
-						$thisTab.addClass('before');
-						$('.postlist[data-id="'+$thisTab.attr('data-id')+'"]').addClass('before');
-					} else if (parseInt($thisTab.attr('data-id')) > id){
-						$thisTab.addClass('after');
-						$('.postlist[data-id="'+$thisTab.attr('data-id')+'"]').addClass('after');
-					}
-				});
-
-			
-				$('.postlist').css({'opacity':'','top':''});
-			},400);
-
+				
+					$('.postlist').css({'opacity':'','top':''});
+				},400);
+			}
 		});
 
 		$(document).on( "touchstart", ".menubutton, .bigclose" , function(e) {

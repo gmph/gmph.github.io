@@ -41,11 +41,19 @@
 
 <body>
 
+		<div class="posttabs default">
+			<div class="content">
+		        <a href="{{ site.url }}" class="back"><span class="arrow">&larr;</span> Home</a>
+		        <a href="https://twitter.com/home?status={{ page.title }}%20{{ site.url }}{{ site.baseurl }}{{ page.url }}%20by%20%40gmph" target="_blank" class="twitter-solid right-align">Tweet</a>
+		        <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ site.baseurl }}{{ page.url }}" target="_blank" class="facebook-solid right-align">Share</a>
+	        </div>
+	    </div>
+
 		<img class="loadimg" src="{{ site.baseurl }}/res/img/ptlogo.png"/>
 
 		<div class="block">
 
-			<a class="backbutton" href="/"><svg height="100%" width="100%"><g><path fill="#555" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path></g></svg></a>
+			<!-- <a class="backbutton" href="/"><svg height="100%" width="100%"><g><path fill="#555" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path></g></svg></a> -->
 
 			<h1 class="heading">{{ page.heading }}</h1>
 
@@ -63,7 +71,8 @@
 
 			<div class="social">
 				<div class="gmph-button like">👍 <span class="like-count">0</span></div>
-				<a class="gmph-button twitter" href="https://twitter.com/home?status={{ page.title }}%20{{ site.url }}{{ site.baseurl }}{{ page.url | relative_urls_to_absolute }}%20by%20%40gmph" target="_blank"><span class="twitter-logo-text"></span></a>
+				<div class="gmph-button label like">Good read?</div>
+				<!-- <a class="gmph-button twitter" href="https://twitter.com/home?status={{ page.title }}%20{{ site.url }}{{ site.baseurl }}{{ page.url | relative_urls_to_absolute }}%20by%20%40gmph" target="_blank"><span class="twitter-logo-text"></span></a> -->
 			</div>
 
 			<div class="meta">
@@ -86,7 +95,7 @@
 			</div>
 
 
-			<a href="/"><img class="footerimg" src="{{ site.baseurl }}/res/img/ptfooter.png"/></a>
+			<a href="{{ site.url }}"><div class="footerimg"></div></a>
 
 		</div>
 
@@ -146,9 +155,21 @@
 
 	var postRef = fPosts.database().ref(domainName+'/posts/'+pageName);
 
+	var likeIncreaseTimeout;
+	function increaseLikeCountIfNeeded(likes){
+		console.log('int = '+ parseInt($('.gmph-button.like .like-count').text()));
+		if (parseInt($('.gmph-button.like .like-count').text()) < likes){
+			$('.gmph-button.like .like-count').text(parseInt($('.gmph-button.like .like-count').text()) + 1);
+			likeIncreaseTimeout = setTimeout(function(){
+				increaseLikeCountIfNeeded(likes);
+			},40);
+		}
+	}
+
 	postRef.on('value', function(snapshot) {
 		var likes = snapshot.child('likes').val();
-		$('.gmph-button.like .like-count').text(likes);
+		increaseLikeCountIfNeeded(likes);
+		// $('.gmph-button.like .like-count').text(likes);
 		if (likes == null){
 			postRef.update({
 				'likes' : 0
@@ -162,7 +183,7 @@
 		$('.gmph-button.like').addClass('disabled');
 		likeTimeout = setTimeout(function(){
 			$('.gmph-button.like').removeClass('disabled');
-		},800);
+		},500);
 		postRef.child('likes').transaction(function(likes) {
 		    return  (likes || 0) + 1;
 		});
