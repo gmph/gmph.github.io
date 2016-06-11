@@ -843,6 +843,8 @@ code {
     font-size:18px;
     font-weight: 400;
     text-transform: capitalize;
+    background: #fff;
+    border-bottom: solid 1px rgba(0,0,0,0);
 }
 
 .posttabs.default {
