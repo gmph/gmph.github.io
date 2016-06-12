@@ -698,10 +698,10 @@ code {
     top:-8px;
     left:0;
     font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
-    font-weight: 500;
+    font-weight: 400;
     font-size:18px;
     margin:0 8px 0 0;
-    padding:14px 18px 16px 17px;
+    padding:14px 19px 14px 16px;
     background: #fff !important;
     border: solid 1px #eee !important;
     color: #bbb;
@@ -717,12 +717,17 @@ code {
 }
 
 .gmph-button:hover {
+    color:#aaa;
     border-color: #ddd !important;
 }
 
 .gmph-button.disabled {
     opacity: 0.7;
     pointer-events: none;
+}
+
+.gmph-button.like {
+    font-weight: 500;
 }
 
 .gmph-button.label {
@@ -734,19 +739,27 @@ code {
     border:none !important;
 }
 
-.twitter-logo-text {
+.twitter-logo-text, .facebook-logo-text {
     display: inline-block;
     position: relative;
     top:0;
     left:0;
-    margin:-2px 3px -5px 4px;
-    width:22px;
-    height:22px;
+    margin:-2px 8px -5px 2px;
+    width:23px;
+    height:23px;
     font-size: inherit;
     background: url(../img/twitter.png);
-    background-size: 100% auto;
-    background-repeat: no-repeat;
-    background-position: center;
+    background-size: 100% auto !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+}
+
+.facebook-logo-text {
+    top:-1px;
+    width:22px;
+    height:22px;
+    background: url(../img/facebook.png);
+    border-radius: 2px;
 }
 
 .meta {
@@ -826,7 +839,11 @@ code {
 
 .posttabs .back {
     margin-left:-23px !important;
-    margin-bottom: 34px;
+    /*margin-bottom: 34px;*/
+}
+
+.posttabs .back:hover {
+    color: #888 !important;
 }
 
 .posttabs {
@@ -845,6 +862,13 @@ code {
     text-transform: capitalize;
     background: #fff;
     border-bottom: solid 1px rgba(0,0,0,0);
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .posttabs.default {
@@ -863,17 +887,21 @@ code {
     color: #aaa;
     cursor: pointer;
 
-    transition:.1s all ease-out;
-    -webkit-transition:.1s all ease-out;
-    -moz-transition:.1s all ease-out;
-    -o-transition:.1s all ease-out;
+    transition:.15s all ease-out;
+    -webkit-transition:.15s all ease-out;
+    -moz-transition:.15s all ease-out;
+    -o-transition:.15s all ease-out;
 }
 
-.posttabs .posttab:not(.active):hover, .posttabs.no-active .posttab:hover {
-    color: #888 !important;
+.posttabs .posttab:not(.active):hover, .posttabs.no-active .posttab:hover, .posttabs a:not(.active):hover {
+    color: #888;
 }
 
 .posttabs:not(.no-active) .posttab.active {
+    color: #8B67FF;
+}
+
+.posttabs .posttab.home.active {
     color: #8B67FF;
 }
 
@@ -1208,6 +1236,13 @@ a div.footerimg {
         line-height: 1.7em;
         text-align: left;
         text-transform: capitalize;
+
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 
     .posttabs .content {
@@ -1230,6 +1265,7 @@ a div.footerimg {
     }
 
     .posttabs .right-align {
+        margin: 0 0 0 10px;
         float: right;
     }
 
@@ -1304,6 +1340,32 @@ a div.footerimg {
 
     .gmph-profile-text .bio {
         font-size: 14px;
+    }
+
+    .gmph-button {
+        font-size:15px;
+        margin: 0 1px 0 0;
+        padding:9px 10px 10px 8px;
+        background: #fff !important;
+        border: solid 1px #eee !important;
+        color: #bbb;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .twitter-logo-text, .facebook-logo-text {
+        top:-1px;
+        margin:-2px 4px -5px 2px;
+        width:18px;
+        height:18px;
+    }
+
+    .facebook-logo-text {
+        top:-1px;
+        width:18px;
+        height:18px;
+        background: url(../img/facebook.png);
+        border-radius: 1px;
     }
 
 	span.littleline {

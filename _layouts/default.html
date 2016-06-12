@@ -44,8 +44,7 @@
 		<div class="posttabs default">
 			<div class="content">
 		        <a href="{{ site.url }}" class="back"><span class="arrow">&larr;</span> Home</a>
-		        <a href="https://twitter.com/home?status={{ page.title }}%20{{ site.url }}{{ site.baseurl }}{{ page.url }}%20by%20%40gmph" target="_blank" class="twitter-solid right-align">Tweet</a>
-		        <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ site.baseurl }}{{ page.url }}" target="_blank" class="facebook-solid right-align">Share</a>
+		        <a href="#social" class="right-align">Share</a>
 	        </div>
 	    </div>
 
@@ -69,10 +68,11 @@
 
 			<!-- <p class="meta"><a href="http://github.com/gmph/gmph.github.io/commits/master/{{ page.path }}" title="See versions on GitHub" target="_blank">Version {{ page.version }}</a>, posted on {{ page.date | date: "%B %-d, %Y" }} by <a href="/">Graham Macphee</a>. Graham is a Designer from Edinburgh,&nbsp;UK.</p> -->
 
-			<div class="social">
-				<div class="gmph-button like">👍 <span class="like-count">0</span></div>
-				<div class="gmph-button label like">Good read?</div>
-				<!-- <a class="gmph-button twitter" href="https://twitter.com/home?status={{ page.title }}%20{{ site.url }}{{ site.baseurl }}{{ page.url | relative_urls_to_absolute }}%20by%20%40gmph" target="_blank"><span class="twitter-logo-text"></span></a> -->
+			<div id="social" class="social">
+				<!-- <div class="gmph-button label like">Liked this?</div> -->
+				<div class="gmph-button like">&nbsp;🎉 <span class="like-count">0</span></div>
+				<a class="gmph-button twitter" href="https://twitter.com/home?status={{ page.title }}%20{{ site.url }}{{ site.baseurl }}{{ page.url }}%20by%20%40gmph" target="_blank"><span class="twitter-logo-text"></span> Tweet</a>
+				<a class="gmph-button facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ site.baseurl }}{{ page.url }}" target="_blank"><span class="facebook-logo-text"></span> Share</a>
 			</div>
 
 			<div class="meta">
@@ -130,7 +130,7 @@
           target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
           if (target.length) {
             $('html,body').animate({
-              scrollTop: (target.offset().top - 30)
+              scrollTop: (target.offset().top - 70)
 		  	}, 400);
             return false;
           }
@@ -143,7 +143,10 @@
     var pageName = window.location.pathname;
     if (pageName[0] == '/'){
     	pageName = pageName.substring(1);
-    };
+    }
+    if (pageName[pageName.length - 1] == '/'){
+    	pageName = pageName.slice(0,pageName.length - 1);
+    }
     pageName = pageName.replace(/[^a-z0-9]/gi,'-');
 
 	var fPosts = firebase.initializeApp({
