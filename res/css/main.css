@@ -481,6 +481,56 @@ input.invalid, textarea.invalid {
     text-align: right;
 }
 
+.block a[href*="gmph=link"] {
+    display: block;
+    position: relative;
+    width:100%;
+    margin:30px auto 30px auto !important;
+    padding:20px 24px 20px 24px;
+    opacity: 1;
+    font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.4em;
+    background: #fbfbfb !important;
+    border-bottom: solid 2px #f2f2f2 !important;
+    border-radius: 2px;
+}
+
+.block a[href*="gmph=link"]:hover {
+    background: rgba(85,255,199,.1) !important;
+    border-bottom: solid 2px rgba(85,255,199,.5) !important;
+}
+
+/*.block a[href*="gmph=link"]::before {
+    content: "↩";
+    display: block;
+    position: absolute;
+    top:50%;
+    right:24px;
+    transform: translate(0,-40%);
+    font-size: 24px;
+    font-weight: 400;
+    opacity: 0.3;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}*/
+
+.block a[href*="gmph=link"]::after {
+    content: attr(href);
+    display: block;
+    position: relative;
+    width:100%;
+    margin:5px 0 0 0;
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 0.3;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 .block h1 {
 	position: relative;
 	top:0;
@@ -807,7 +857,11 @@ code {
 }
 
 .gmph-profile-text .name a {
-    border-bottom:none !important;
+    border-bottom: solid 2px rgba(85,255,199,0);
+}
+
+.gmph-profile-text .name a:hover {
+    border-bottom: solid 2px rgba(85,255,199,.3);
 }
 
 .gmph-profile-text .bio {
@@ -1298,6 +1352,10 @@ a div.footerimg {
         font-size: 15px;
     }
 
+    .block a[href*="gmph=link"] {
+        font-size: 16px;
+    }
+
     .block h2.subheading {
         display: none;
     }
@@ -1396,7 +1454,7 @@ a div.footerimg {
 	a div.footerimg {
 		position: relative;
 		top:0;
-		left:-8px;
+		left:0px;
 	}
 
 }
