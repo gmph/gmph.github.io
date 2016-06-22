@@ -1,7 +1,23 @@
+{% assign simpleImageURL = site.url | append:"/res/ptlogooutline.png" %}
+{% assign imageURL = simpleImageURL %}
+{% assign images = page.content | split:"<img " | reverse %}
+{% for image in images %}
+	{% if image contains 'src=' %}
+		{% assign imageMarkup = image | split:">" | first %}
+		{% assign imageAttrs = imageMarkup | split:" " %}
+		{% for attr in imageAttrs %}
+			{% if image contains 'src=' %}
+				{% assign imageURL = attr | slice: 4, (attr.size - 4) | remove:"'" | remove:'"' %}
+	 			{% break %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+{% endfor %}
+
 <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
 <meta property="og:type" content="{% if page.thumbnail %}article{% else %}website{% endif %}">
 <meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-<meta property="og:image" content="{% if page.thumbnail %}{{ page.thumbnail | prepend: site.baseurl | prepend: site.url }}{% else %}{{ {{baseurl}}/res/ptlogooutline.png | prepend: site.baseurl | prepend: site.url }}{% endif %}">
+<meta property="og:image" content="{{ imageURL }}">
 <meta property="og:description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 160 }}{% endif %}">
 <meta property="og:site_name" content="{{ site.title }}">
 <meta property="og:locale" content="{{ site.locale }}">

@@ -1,19 +1,40 @@
+{% assign simpleImageURL = site.url | append:"/res/ptlogooutline.png" %}
+{% assign imageURL = simpleImageURL %}
+{% assign images = page.content | split:"<img " | reverse %}
+{% for image in images %}
+	{% if image contains 'src=' %}
+		{% assign imageMarkup = image | split:">" | first %}
+		{% assign imageAttrs = imageMarkup | split:" " %}
+		{% for attr in imageAttrs %}
+			{% if image contains 'src=' %}
+				{% assign imageURL = attr | slice: 4, (attr.size - 4) | remove:"'" | remove:'"' %}
+	 			{% break %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+{% endfor %}
+
+{% if imageURL == simpleImageURL %}
 <meta name="twitter:card" content="summary">
+{% else %}
+<meta name="twitter:card" content="summary_image_large">
+{% endif %}
 <meta name="twitter:site" content="@gmph">
 <meta name="twitter:creator" content="@gmph">
 {% if page.title %}
-  <meta name="twitter:title" content="{{ page.title }}">
+<meta name="twitter:title" content="{{ page.title }}">
 {% else %}
-  <meta name="twitter:title" content="{{ site.title }}">
+<meta name="twitter:title" content="{{ site.title }}">
 {% endif %}
 {% if page.url %}
-  <meta name="twitter:url" content="{{ site.url }}{{ page.url }}">
+<meta name="twitter:url" content="{{ site.url }}{{ page.url }}">
 {% endif %}
 {% if page.thumbnail %}
-	<meta name="twitter:description" content="{{ page.content | strip_html | truncatewords:55 }}">
+<meta name="twitter:description" content="{{ page.content | strip_html | truncatewords:55 }}">
 {% elsif page.description %}
-  <meta name="twitter:description" content="{{ page.description }}">
+<meta name="twitter:description" content="{{ page.description }}">
 {% else %}
-  <meta name="twitter:description" content="{{ site.description }}">
+<meta name="twitter:description" content="{{ site.description }}">
 {% endif %}
-<meta name="twitter:image:src" content="{{ site.url }}/res/ptlogooutline.png">
+<meta name="twitter:image:src" content="{{ imageURL }}">
+
