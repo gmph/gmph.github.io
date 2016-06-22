@@ -14,11 +14,11 @@
 	{% endif %}
 {% endfor %}
 
-{% if imageURL == simpleImageURL %}
+{% comment %}{% if imageURL == simpleImageURL %}{% endcomment %}
 <meta name="twitter:card" content="summary">
-{% else %}
+{% comment %}{% else %}
 <meta name="twitter:card" content="summary_image_large">
-{% endif %}
+{% endif %}{% endcomment %}
 <meta name="twitter:site" content="@gmph">
 <meta name="twitter:creator" content="@gmph">
 {% if page.title %}
