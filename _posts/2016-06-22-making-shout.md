@@ -8,7 +8,7 @@ published: true
 private: false
 format: markdown
 permalink: /making-shout
-version: 1.0
+version: 1.1
 ---
 
 ![Shout]({{site.url}}/shout/shout-banner.png){:style="box-shadow: 0 1px 4px rgba(0,0,0,.1)"}
@@ -25,13 +25,13 @@ This seemed like a simple output. I had no idea how to achieve it, or even if it
 
 From this single frame I started to build programatic text setting. I added an input next to a canvas and drew that text input on the canvas when a button was clicked. The next step seemed to be creating a GIF from multiple canvases. I had two static frames which I could export as data URIs and then use the [GIFEncoderJS](https://github.com/antimatter15/jsgif) library to create a GIF from them. I set the final GIF data URI to be the source of an image on the page. Everything was working nicely and I had a rendered GIF.
 
-Prioritising a simple, releasable version, I worked on the styling and started to format the input so that it would look exactly like the canvas it would create. After lots of fiddling with line-heights, scaling and positioning in the canvas code, I had a page which would create two animated text slides from the input.
+Prioritising a simple, releasable version, I worked on the styling and started to format the input so that it would look exactly like the canvas it would create. After lots of fiddling with line-heights, scaling and positioning in the canvas code, I had a page which would create two animated text frames from the input.
 
 ![Shout Backgrounds]({{site.url}}/res/posts/shout_backgrounds.gif){:class="white-edges"}
 
 After some more styling, I added some preset background colour options. These named colours were shown on each frame and were got on GIF creation to set the background of each frame independently. 
 
-Next I needed some refactoring to create the final GIF more generically from reading the HTML elements on the page. My code would now loop through each frame and collect the text and styling data, then create a frame and append it to the GIF sequence. Now that I had separated the GIF creation from any hard-coded elements on the page, I could add features like removing frames. A step up from that was re-ordering slides which called for another library. [Sortable.js](https://github.com/RubaXa/Sortable) to the rescue: after a couple of lines of JS and CSS I had re-ordering working by dragging frames up and down. After a few more lines to manage frame indices, GIF creation with reordering and removing frames seemed to be working.
+Next I needed some refactoring to create the final GIF more generically from reading the HTML elements on the page. My code would now loop through each frame and collect the text and styling data, then create a frame and append it to the GIF sequence. Now that I had separated the GIF creation from any hard-coded elements on the page, I could add features like removing frames. A step up from that was re-ordering frames which called for another library. [Sortable.js](https://github.com/RubaXa/Sortable) to the rescue: after a couple of lines of JS and CSS I had re-ordering working by dragging frames up and down. After a few more lines to manage frame indices, GIF creation with reordering and removing frames seemed to be working.
 
 At this point it seemed like I had the basic features sorted. I played with the tool and tried unexpected inputs. New-lines were not being so friendly to me, and the frame timings seemed a little odd. To tackle the first I added some restrictions to the text inputs with JS, managing new-lines specially. For the timing issue, I created a function to calculate reading time of a frame and switched timings to use that – tweaking this till it felt right took some time.
 
