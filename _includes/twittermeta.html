@@ -27,10 +27,13 @@
 {% endif %}
 {% if page.thumbnail %}
 <meta name="twitter:description" content="{{ page.content | strip_html | truncatewords:55 }}">
+<meta name="twitter:text:description" content="{{ page.content | strip_html | truncatewords:55 }}">
 {% elsif page.description %}
 <meta name="twitter:description" content="{{ page.description }}">
+<meta name="twitter:text:description" content="{{ page.description }}">
 {% else %}
 <meta name="twitter:description" content="{{ site.description }}">
+<meta name="twitter:text:description" content="{{ site.description }}">
 {% endif %}
 <meta name="twitter:image:src" content="{{ imageURL }}">
 
