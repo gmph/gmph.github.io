@@ -1,6 +1,7 @@
 title: "Graham Macphee"
 url: http://gmph.co
 author: "Graham Macphee"
+locale: "en_GB"
 permalink: /:title
 excerpt_separator: "<!--MORE-->"
 defaults:
