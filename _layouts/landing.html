@@ -57,8 +57,6 @@
 			</div>
 	    </div>
 
-		<img class="loadimg" src="{{ site.baseurl }}/res/img/ptlogo.png"/>
-
 		<div class="block landing">
 
 			<!-- <div class="menubutton">
@@ -101,9 +99,9 @@
 				<a href="http://google.co.uk/search?q=graham+macphee+designer" title="Google me..."><span class="upabit">...</span></a>
 			</div> -->
 
-			<a href="{{ site.url }}"><div class="footerimg"></div></a>
-
 		</div>
+
+		<a href="#top"><div class="footerimg"><div class="img"></div></div></a>
 
 </body>
 
@@ -112,8 +110,8 @@
 
 	var titleVariation = 0;
 
-    initLoadingState();
     $(document).ready(function(){
+    	initLoadingState();
     	attachEvents();
 		setStyling();
     	animLoadingState();
@@ -121,25 +119,25 @@
 	});
 
     function initLoadingState(){
-    	$('.block, .posttabs').css('opacity','0');
+    	$('.block, .posttabs, .footerimg').css('opacity','0');
 	    $('body').css('overflow-y','hidden');
 	    $('.loadimg').css('opacity','0');
     }
 
     function animLoadingState(){
     	setTimeout(function(){
-    		$('.loadimg').css('opacity','1');
+    		$('.loadimg').css('opacity','0');
     		setTimeout(function(){
 	    		$('.loadimg').css('opacity','0');
 	    		setTimeout(function(){
-		    		$('.block, .posttabs').css('opacity','1');
+		    		$('.block, .posttabs, .footerimg').css('opacity','1');
 		    		$('body').css('overflow-y','scroll');
 					setTimeout(function(){
 						startLoopTitle();
 					},3000);
 		    	},400);
-	    	},1200);
-    	},200);
+	    	},0);
+    	},0);
     }
 
     function setStyling(){

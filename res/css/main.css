@@ -112,6 +112,10 @@ html,body {
     /*overflow: hidden;*/
 }
 
+.block.landing {
+    padding-bottom:280px;
+}
+
 .block.menuopen {
     -webkit-transform:translateX(80px);
     transform:translateX(80px);
@@ -830,34 +834,35 @@ code {
 }
 
 .gmph-profile-picture {
-    display: inline-block;
+    display: block;
     position: relative;
     vertical-align: middle;
     top:0;
     left:0;
-    width:80px;
-    height:80px;
+    width:200px;
+    height:200px;
     margin:0;
-    border-radius: 100px;
+    border-radius: 0;
 }
 
 .gmph-profile-text {
-    display: inline-block;
-    position: absolute;
-    top:50%;
-    left:100px;
-    transform: translate(0,-50%);
-    width:calc(100% - 100px);
-    width:-webkit-calc(100% - 100px);
-    padding: 4px 0 0 0;
+    display: block;
+    position: relative;
+    top:0;
+    left:0;
+    width:100%;
+    max-width: 230px;
+    margin: 0 auto 100px auto;
+    padding: 0;
     font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
     font-size: 19px;
     font-weight: 300;
     line-height: 1.4em;
+    text-align: center;
 }
 
 .gmph-profile-text .name {
-    padding: 0 0 2px 0;
+    padding: 0 0 3px 0;
     font-weight: 400;
 }
 
@@ -1092,11 +1097,12 @@ div.block div.links a {
 img.loadimg {
 	position: fixed;
 	top:50%;
-	left:48%;
+	left:50%;
+    transform: translate(-50%,-50%);
 	z-index: 0;
 	width:200px;
 	height: 200px;
-	margin: -100px 0 -100px -75px;
+    margin:0 0 0 8px;
 	opacity: 1;
 
     -webkit-touch-callout: none;
@@ -1109,21 +1115,12 @@ img.loadimg {
 
 a div.footerimg {
     display: block;
-	position: relative;
-	top:0;
+	position: absolute;
+    bottom:0;
 	left:0;
+    height:240px;
     width:100%;
-    height:200px;
-    max-width: 400px;
-	margin: 30px auto 0 auto;
-	/*max-width:448px;*/
-	/*width:90%;*/
-    width:auto;
-	height:200px;
-    background: url(../img/ptfooter.png);
-    background-size: contain;
-    background-position: bottom center;
-    background-repeat: no-repeat;
+    overflow: hidden;
 
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -1131,6 +1128,33 @@ a div.footerimg {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+div.footerimg div.img {
+    display: block;
+    position: absolute;
+    top:96%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    height:400px;
+    width:400px;
+    margin: 0 !important;
+    background: url(../img/grahamfade.png);
+    background-size: auto 100%;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+div.footerimg div.img:hover {
+    top:92%;
 }
 
 @media (max-width:800px){
@@ -1397,6 +1421,11 @@ a div.footerimg {
 		font-size: 17px;
 	}
 
+    .gmph-profile-picture {
+        width:160px;
+        height:160px;
+    }
+
     .gmph-profile-text {
         font-size: 17px;
     }
@@ -1455,11 +1484,5 @@ a div.footerimg {
         font-size:15px;
     	padding:10px 14px 8px 14px;
     }
-
-	a div.footerimg {
-		position: relative;
-		top:0;
-		left:0px;
-	}
 
 }
