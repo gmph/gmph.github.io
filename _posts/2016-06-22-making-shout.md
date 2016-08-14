@@ -13,7 +13,7 @@ version: 1.1
 
 ![Shout]({{site.url}}/shout/shout-banner.png){:style="box-shadow: 0 1px 4px rgba(0,0,0,.1)"}
 
-Thinking back over the recent work I have done, I don't think I gave enough time to document my experience with a little side project I from the start of the year: "Shout" is a web app which creates colourful animated GIFs from text and images.
+Thinking back over the recent work I have done, I don't think I gave enough time to document my experience with a little side project from the start of the year: "Shout" is a web app which creates colourful animated GIFs from text and images.
 
 [Shout – Create colourful animated GIFs from text and images](http://gmph.co/shout){:target="_blank"}{:data-gmph="link"}
 
