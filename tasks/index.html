@@ -414,11 +414,18 @@ body {
         firebase.auth().getRedirectResult().then(function(result) {
 
             var gotExistingUser = getExistingUser();
-            if (gotExistingUser){
+            
+            if (result.user){
+                console.log('new user');
+                user = result.user;
+                removeCookie('gmphtasks_user');
+                setCookie('gmphtasks_user', JSON.stringify(user), 30);
+                resetSorting();
+                getInitialData();
+            } else if (gotExistingUser){
+                console.log('existing user');
                 var gotExistingUser = getExistingUser();
                 var now = new Date().getTime();
-                console.log('now: ' + now);
-                console.log('exp: ' + user.stsTokenManager.expirationTime);
                 if (gotExistingUser && user.stsTokenManager.expirationTime > now){
                     removeCookie('gmphtasks_user');
                     setCookie('gmphtasks_user', JSON.stringify(user), 30);
@@ -429,20 +436,14 @@ body {
                     firebase.auth().signInWithRedirect(provider);
                 }
             } else {
-                user = result.user;
-                if (user == null){
-                    var provider = new firebase.auth.TwitterAuthProvider();
-                    firebase.auth().signInWithRedirect(provider);
-                } else {
-                    removeCookie('gmphtasks_user');
-                    setCookie('gmphtasks_user', JSON.stringify(user), 30);
-                    resetSorting();
-                    getInitialData();
-                }
+                console.log('no user');
+                var provider = new firebase.auth.TwitterAuthProvider();
+                firebase.auth().signInWithRedirect(provider);
             }
 
         }).catch(function(error) {
-            removeCookie('gmphtasks_user');
+            console.log('user error');
+            console.log(error);
             var provider = new firebase.auth.TwitterAuthProvider();
             firebase.auth().signInWithRedirect(provider);
         });
