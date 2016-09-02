@@ -371,6 +371,12 @@ body {
             getUserFromLoginDetails();
         }
 
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (!user){
+                getUserFromLoginDetails();
+            }
+        });
+
         attachEvents();
         
     }
@@ -662,7 +668,7 @@ body {
         if (sortedFrameList != undefined) sortedFrameList.destroy();
 
         sortedFrameList = Sortable.create(frameList, {
-            delay: 0,
+            delay: 100,
             animation: 100,
             ghostClass: "sort-ghost",
             chosenClass: "sort-dragging",
