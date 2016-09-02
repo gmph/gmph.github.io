@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+
+<!--
+
+Tasks – your personal kanban board
+Your personal kanban board for managing tasks. Sign in with Twitter.
+
+A personal project by Graham Macphee. Graham is a Designer from
+Edinburgh, UK. See more of his work: http://gmph.co/portfolio
+
+Copyright 2016, Graham Macphee. All rights reserved.
+
+-->
+
+<html id="top">
+<head>
+
+<title>Tasks – your personal kanban board</title>
+<meta name="author" content="Graham Macphee" />
+<meta name="description" content="Your personal kanban board for managing tasks. Sign in with Twitter." />
+<meta name="keywords" content="Your personal kanban board for managing tasks. Sign in with Twitter."/>
+<meta charset="utf-8">
+
+<!-- Facebook -->
+<meta property="og:url"                content="http://gmph.co/tasks/" />
+<meta property="og:type"               content="article" />
+<meta property="og:title"              content="Tasks – your personal kanban board" />
+<meta property="og:description"        content="Your personal kanban board for managing tasks. Sign in with Twitter." />
+
+<!-- Twitter -->
+<meta name="twitter:card"              content="summary">
+<meta name="twitter:site"              content="@gmph">
+<meta name="twitter:creator"           content="@gmph">
+<meta name="twitter:title"             content="Tasks – your personal kanban board">
+<meta name="twitter:description"       content="Your personal kanban board for managing tasks. Sign in with Twitter.">
+<meta property="twitter:account_id"    content="87261538" /> <!-- @gmph -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="/res/img/ptlogooutline.png">
+<meta name="theme-color" content="#f8f8f8">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<style type="text/css">
+
+/* CSS RESET */
+
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav ul{list-style-type:none!important}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{background-color:#ff9;color:#000;text-decoration:none}mark{background-color:#ff9;color:#000;font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}input,select{vertical-align:middle}a{text-decoration:none;color:inherit}*{font-feature-settings:kern;text-ren­der­ing:optimizeLegibility!important;-webkit-box-sizing:border-box!important;-moz-box-sizing:border-box!important;box-sizing:border-box!important;-webkit-font-smoothing:antialiased;-moz-font-smoothing:antialiased;font-smoothing:antialiased;transition:.25s all ease-out;-webkit-transition:.25s all ease-out;-moz-transition:.25s all ease-out;-o-transition:.25s all ease-out;-webkit-style:none;}
+
+textarea, input {
+    outline: none;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -moz-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+:focus {
+    outline-color: transparent;
+    outline-style: none;
+}
+
+/* END CSS RESET */
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('../res/font/hnl.ttf') format('truetype');
+  	font-weight: 300;
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('../res/font/hnn.ttf') format('truetype');
+  	font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('../res/font/hnm.ttf') format('truetype');
+  	font-weight: 500;
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('../res/font/hnb.ttf') format('truetype');
+  	font-weight: 700;
+}
+
+body {
+	background:#f8f8f8;
+    padding:24px 0 16px 0;
+}
+
+.frame-container, .loading {
+    display: block;
+    position: relative;
+    width:90%;
+    max-width:400px;
+    height:auto;
+    overflow: hidden;
+    margin:8px auto 8px auto;
+    border-radius: 4px;
+    opacity: 0.99;
+    box-shadow: 0 1px 3px rgba(0,0,0,.2);
+    background: #fff;
+    color: #222;
+    cursor: pointer;
+}
+
+.frame-list .heading {
+    display: block;
+    position: relative;
+    width:90%;
+    max-width:400px;
+    height:auto;
+    overflow: hidden;
+    margin:24px auto 8px auto;
+    border-radius: 4px;
+    opacity: 0.99;
+    color: #666;
+    cursor: pointer;
+    font-family: "Helvetica Neue", Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size:18px;
+    line-height: 1.3em;
+}
+
+.frame-container.done {
+    box-shadow: 0 1px 3px rgba(0,0,0,0);
+    background: rgba(255,255,255,0);
+}
+
+.frame-container.done .frame-text {
+    opacity: 0.3;
+    text-decoration: line-through;
+    padding: 2px 0;
+}
+
+.frame-container::after {
+    content: "";
+    display: block;
+    position: absolute;
+    padding-top: 56.25%; /* 16:9 */
+}
+
+.frame-container.sort-ghost {
+    opacity: 0.3 !important;
+    cursor: grabing !important;
+    cursor: -webkit-grabbing !important;
+    box-shadow: none !important;
+    transform: scale(0.98) !important;
+    color: rgba(0,0,0,0) !important;
+    background: rgba(0,0,0,.2) !important;
+}
+
+.frame-container.sort-ghost:first-child {
+    background: red !important;
+    color: red !important;
+}
+
+.frame-container.sort-dragging {
+    opacity: 0.98;
+}
+
+.frame-container.sort-touched {
+    opacity: 0.7;
+}
+
+.loading {
+    background: none;
+    box-shadow: none;
+    opacity: 0.3;
+    text-align: center;
+    margin:40px auto 0 auto;
+    padding: 32px;
+    line-height: 1.32em;
+    font-family: "Helvetica Neue", Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size:18px;
+}
+
+.frame-container .frame {
+    width:100%;
+    height:100%;
+    opacity: 0;
+}
+
+
+.frame-container:hover .remove, .frame-container.show-controls .remove {
+    top:18px;
+    pointer-events: all;
+    opacity: 0.6;
+}
+
+.frame-container:hover .remove:hover, .frame-container.show-controls .remove:hover, .popup .close:hover {
+    transform:scale(1.1);
+    opacity: 0.9;
+}
+
+.frame-container .remove::after, .popup .close::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%) rotate(-45deg);
+    width:3px;
+    height:80%;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.frame-container .remove::before, .popup .close::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%) rotate(45deg);
+    width:3px;
+    height:80%;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.frame-container[data-colour="white"]:not(.image) .remove::after, .popup .close::after  {
+    background: #aaa;
+}
+
+.frame-container[data-colour="white"]:not(.image) .remove::before, .popup .close::before  {
+    background: #aaa;
+}
+
+.frame-container .frame-edit {
+    display: block;
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+
+    -webkit-touch-callout: text;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+.frame-container .frame-text {
+    display: block;
+    position: relative;
+    top:0;
+    left:0;
+    z-index: 2;
+    width:100%;
+    height:auto;
+    margin:0 auto;
+    padding: 16px;
+    line-height: 1.32em;
+    font-family: "Helvetica Neue", Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size:18px;
+    text-align: left;
+    color: inherit;
+    background: none;
+    border:none;
+    resize: none;
+    overflow: hidden !important;
+
+    -webkit-touch-callout: text;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+
+    transition: .0s all ease-out;
+    -webkit-transition: .0s all ease-out;
+    -moz-transition: .0s all ease-out;
+    -o-transition: .0s all ease-out
+}
+
+.frame-container .frame-text:focus {
+    z-index:3;
+    cursor:text;
+    pointer-events:auto;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="frame-list">
+    <div class="loading">Loading...</div>
+</div>
+
+<script src="sortable.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+
+<script language="javascript">
+
+    var $frameList = $('.frame-list');
+    var sortedFrameList;
+    var user = null;
+    var dataLoadedOnce = false;
+    previousData = {};
+    latestData = {};
+
+    var defaultData = {
+        0 : {
+            'name' : 'Done',
+            'items' : {}
+        },
+        1 : {
+            'name' : 'Doing',
+            'items' : {}
+        },
+        2 : {
+            'name' : 'Todo',
+            'items' : {
+                0 : "",
+            }
+        }
+    }
+
+    var headingHTML = ['<div data-index="','" class="heading">','</div>'];
+    var itemHTML = ['<div data-index="','" class="frame-container"><div class="frame-text" contenteditable="true">','</div></div>'];
+
+    $(document).ready(function(){
+        init();
+    });
+
+    function init(){
+
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyClNoCyn2M7FctuvKUKwoxcDj1xqYvRGeI",
+            authDomain: "gmphtasks.firebaseapp.com",
+            databaseURL: "https://gmphtasks.firebaseio.com",
+            storageBucket: "gmphtasks.appspot.com",
+        };
+        firebase.initializeApp(config);
+
+        if (!firebase.auth().currentUser){
+            getUserFromLoginDetails();
+        }
+
+        attachEvents();
+        
+    }
+
+    function attachEvents(){
+
+        $(document).on('keyup','.frame-text', function(){
+            writeData(getObjectFromList($('.frame-list')));
+        });
+
+        $(document).on('keydown','.frame-text', function(e){
+            if (e.keyCode == 13 || e.which == 13){
+                if (getCaretCharacterOffsetWithin($(this).get(0)) == 0){
+                    e.preventDefault();
+                    addEmptyListItem($(this).parent(),false);
+                } else if (getCaretCharacterOffsetWithin($(this).get(0)) == $(this).text().length){
+                    e.preventDefault();
+                    addEmptyListItem($(this).parent(),true);
+                }
+            } else if (e.keyCode == 8 || e.which == 8) {
+                if ($(this).text() == ""){
+                    $(this).parent().remove();
+                    writeData(getObjectFromList($('.frame-list')));
+                    displayListFromObject(latestData);
+                }
+            }
+        });
+
+        $(document).on('click','.heading', function(){
+            addEmptyListItem($(this),true);
+        });
+
+    }
+
+    function getInitialData(){
+        var tasksForUserRef = firebase.database().ref('tasks/' + user.uid);
+        tasksForUserRef.once('value', function(snapshot) {
+            if (snapshot.exists()){
+                previousData = latestData;
+                latestData = snapshot.val();
+                updateListFromObjects(latestData,previousData);
+            } else {
+                displayListFromObject(defaultData);
+            }
+            handleDataUpdates();
+        });
+    }
+
+    function handleDataUpdates(){
+        var tasksForUserRef = firebase.database().ref('tasks/' + user.uid);
+        tasksForUserRef.on('value', function(snapshot) {
+            previousData = latestData;
+            latestData = snapshot.val();
+            updateListFromObjects(latestData,previousData);
+        });
+    }
+
+    function getUserFromLoginDetails(){
+        firebase.auth().getRedirectResult().then(function(result) {
+            if (result.credential) {
+                // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
+                // You can use these server side with your app's credentials to access the Twitter API.
+                var token = result.credential.accessToken;
+                var secret = result.credential.secret;
+                // ...
+            }
+            // The signed-in user info.
+            user = result.user;
+            if (user != null || getExistingUser()){
+                setCookie('gmphtasks_user', JSON.stringify(user), 30);
+                resetSorting();
+                getInitialData();
+            } else {
+                var provider = new firebase.auth.TwitterAuthProvider();
+                firebase.auth().signInWithRedirect(provider);
+            }
+        }).catch(function(error) {
+            var provider = new firebase.auth.TwitterAuthProvider();
+            firebase.auth().signInWithRedirect(provider);
+        });
+    }
+
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        var expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + JSON.stringify(cvalue) + "; " + expires;
+    }
+
+    function removeCookie(cname) {
+        document.cookie = cname + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1);
+            if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+        }
+        return "";
+    }
+
+    function getExistingUser() {
+        var local_user = JSON.parse(JSON.parse(getCookie("gmphtasks_user")));
+        if (local_user != "" && local_user != null && local_user != undefined && local_user != {}){
+            user = local_user;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function logInWithTwitter(){
+        var provider = new firebase.auth.TwitterAuthProvider();
+        firebase.auth().signInWithRedirect(provider);
+    }
+
+    function writeData(listObject){
+        firebase.database().ref('tasks/' + user.uid).set(listObject);
+    }
+
+    function addEmptyListItem(relativeElement,isAfter){
+        var $listItems = $('.frame-list > *');
+        var $relativeElement = $(relativeElement);
+        var relativeElementPosition = $listItems.index($relativeElement.get(0));
+        var newPositionNumber = isAfter ? relativeElementPosition + 1 : relativeElementPosition;
+        if (isAfter){
+            $relativeElement.after(itemHTML.join(''));
+        } else {
+            $relativeElement.before(itemHTML.join(''));
+        }
+        writeData(getObjectFromList($('.frame-list')));
+        displayListFromObject(latestData);
+        console.log('NEW POSITION: ' + newPositionNumber);
+        $('.frame-list > *').eq(newPositionNumber).find('.frame-text').focus();
+    }
+
+    function updateListFromObjects(newListObject,oldListObject){
+
+        if (newListObject != null && oldListObject != null && newListObject != {} && oldListObject != {}) {
+
+            var newListLength = Object.keys(newListObject).length;
+            var oldListLength = Object.keys(oldListObject).length;
+
+            if (newListLength == oldListLength){
+
+                var listItemCount = 0;
+
+                for (var i = 0; i < newListLength; i++){
+
+                    $('.frame-container .heading').eq(i).text(newListObject[i]['name']);
+                    listItemCount++;
+
+                    if (newListObject[i]['items'] != null && newListObject[i]['items'] != null){
+
+                        var newListItemsLength = Object.keys(newListObject[i]['items']).length;
+                        var oldListItemsLength = Object.keys(oldListObject[i]['items']).length;
+
+                        if (newListItemsLength == oldListItemsLength){
+                            for (var j = 0; j < newListItemsLength; j++){
+                                $('.frame-list > *').eq(listItemCount).find('frame-text').text(newListObject[i]['items'][j]);
+                                listItemCount++;
+                            }
+                        } else {
+                            displayListFromObject(newListObject);
+                            break;
+                        }
+
+                    }
+                    
+                }
+                dataLoadedOnce = true;
+            } else {
+                displayListFromObject(newListObject);
+            }
+        } else {
+            displayListFromObject(newListObject);
+        }
+
+    }
+
+    function displayListFromObject(listObject){
+        if (listObject != null) {
+            var numberOfHeadings = Object.keys(listObject).length;
+
+            if (listObject == {} || numberOfHeadings == 0){
+                listObject = defaultData;
+            }
+
+            var listHTML = "";
+            for (var i = 0; i < numberOfHeadings; i++){
+                listHTML += headingHTML[0] + i + headingHTML[1] + listObject[i]['name'] + headingHTML[2];
+                if (listObject[i]['items'] != null){
+                    for (var j = 0; j < Object.keys(listObject[i]['items']).length; j++){
+                        listHTML += itemHTML[0] + j + itemHTML[1] + listObject[i]['items'][j] + itemHTML[2];
+                    }
+                }
+            }
+            $frameList.html(listHTML);
+            dataLoadedOnce = true;
+            onListOrderUpdated();
+        }
+    }
+
+    function getObjectFromList(listElement){
+
+        var $list = $(listElement);
+        var $listItems = $list.find(' > *');
+
+        var listData = {};
+
+        $listItems.each(function(index){
+            var $item = $(this);
+            var lastHeadingIndex = Object.keys(listData).length-1 > -1 ? Object.keys(listData).length-1 : -1;
+            if (lastHeadingIndex > -1){
+                var lastHeadingItemIndex = Object.keys(listData[lastHeadingIndex]['items']).length-1;
+            }
+            if ($item.hasClass('heading')){
+                listData[lastHeadingIndex+1] = {
+                    'name' : $item.text(),
+                    'items' : {},
+                }
+            } else if ($item.hasClass('frame-container')){
+                listData[lastHeadingIndex]['items'][lastHeadingItemIndex+1] = $item.text();
+            }
+        });
+
+        return listData;
+
+    }
+
+    function resetSorting(){
+
+        var frameList = $frameList.get(0);
+
+        if (sortedFrameList != undefined) sortedFrameList.destroy();
+
+        sortedFrameList = Sortable.create(frameList, {
+            delay: 0,
+            animation: 100,
+            ghostClass: "sort-ghost",
+            chosenClass: "sort-dragging",
+            filter: ".heading",
+            onUpdate: onListOrderUpdated,
+            scrollSensitivity: 60,
+        });
+
+        onListOrderUpdated();
+
+    }
+
+    function onListOrderUpdated(){
+        var $listItems = $('.frame-list > *');
+        var $headings = $('.frame-list .heading');
+        var indexOfFirstHeadingInList = $listItems.index($headings.get(0));
+        var indexOfSecondHeadingInList = $listItems.index($headings.get(1));
+
+        $listItems.each(function(){
+            var $listItem = $(this);
+            if ($listItem.hasClass('frame-container') && $listItems.index($listItem.get(0)) > indexOfFirstHeadingInList && $listItems.index($listItem.get(0)) < indexOfSecondHeadingInList){
+                $listItem.addClass('done');
+            } else if ($listItems.index($listItem.get(0)) < indexOfFirstHeadingInList){
+                $listItem.remove();
+            } else {
+                $listItem.removeClass('done');
+            }
+        });
+
+        if (dataLoadedOnce) writeData(getObjectFromList($('.frame-list')));
+
+    }
+
+    function getCaretCharacterOffsetWithin(element) {
+        var caretOffset = 0;
+        var doc = element.ownerDocument || element.document;
+        var win = doc.defaultView || doc.parentWindow;
+        var sel;
+        if (typeof win.getSelection != "undefined") {
+            sel = win.getSelection();
+            if (sel.rangeCount > 0) {
+                var range = win.getSelection().getRangeAt(0);
+                var preCaretRange = range.cloneRange();
+                preCaretRange.selectNodeContents(element);
+                preCaretRange.setEnd(range.endContainer, range.endOffset);
+                caretOffset = preCaretRange.toString().length;
+            }
+        } else if ( (sel = doc.selection) && sel.type != "Control") {
+            var textRange = sel.createRange();
+            var preCaretTextRange = doc.body.createTextRange();
+            preCaretTextRange.moveToElementText(element);
+            preCaretTextRange.setEndPoint("EndToEnd", textRange);
+            caretOffset = preCaretTextRange.text.length;
+        }
+        return caretOffset;
+    }
+
+    if (!Object.keys) {
+        Object.keys = function (obj) {
+            var keys = [],
+                k;
+            for (k in obj) {
+                if (Object.prototype.hasOwnProperty.call(obj, k)) {
+                    keys.push(k);
+                }
+            }
+            return keys;
+        };
+    }
+
+    Array.prototype.removeByValue = function() {
+        var what, a = arguments, L = a.length, ax;
+        while (L && this.length) {
+            what = a[--L];
+            while ((ax = this.indexOf(what)) !== -1) {
+                this.splice(ax, 1);
+            }
+        }
+        return this;
+    };
+
+    $.fn.reflow = function () {
+        this[0].offsetHeight;   // force redrawing of element
+        return this;
+    };
+
+    $.fn.cssStatic = function (name, value) {
+        return this
+            .css('transition', 'none')
+            .css(name, value)
+            .reflow()
+            .css('transition', '');
+    };
+
+</script>
+
+</body>
+
+</html>
