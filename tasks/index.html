@@ -137,6 +137,11 @@ body {
 }
 
 .frame-container.done .frame-text {
+    background: rgba(255,255,255,0) !important;
+    border:solid 1px rgba(0,0,0,0) !important;
+}
+
+.frame-container.done .frame-text {
     opacity: 0.3;
     text-decoration: line-through;
     padding: 2px 0;
@@ -157,6 +162,10 @@ body {
     transform: scale(0.98) !important;
     color: rgba(0,0,0,0) !important;
     background: rgba(0,0,0,.2) !important;
+}
+
+.frame-container.sort-ghost .frame-text {
+    background: rgba(0,0,0,0) !important;
 }
 
 .frame-container.sort-ghost:first-child {
@@ -267,8 +276,9 @@ body {
     font-size:18px;
     text-align: left;
     color: inherit;
-    background: none;
-    border:none;
+    background: rgba(252,252,252,1);
+    border:solid 1px rgba(0,0,0,0);
+    border-radius: 4px;
     resize: none;
     overflow: hidden !important;
 
@@ -289,6 +299,9 @@ body {
     z-index:3;
     cursor:text;
     pointer-events:auto;
+    background: rgba(255,255,255,1);
+    border:solid 1px rgba(0,0,0,.2);
+    color:#000;
 }
 
 </style>
@@ -315,29 +328,23 @@ body {
 
     var defaultData = {
         0 : {
-            'name' : 'Ready',
+            'name' : 'Done',
             'items' : {
-                0 : "Make a task app",
+                0 : "Sign in with Twitter",
             }
         },
         1 : {
-            'name' : 'Done',
+            'name' : 'Doing',
             'items' : {
-                0 : "Drag items between sections",
+                0 : "Try the task app",
             }
         },
         2 : {
-            'name' : 'Doing',
-            'items' : {
-                0 : "Edit a task",
-                1 : "Drag tasks to the top to remove them",
-            }
-        },
-        3 : {
             'name' : 'To do',
             'items' : {
                 0 : "Drag items between sections",
-                1 : "Press enter to add a task",
+                1 : "Click a heading to add a task",
+                2 : "Drag tasks to the top to remove",
             }
         }
     }
@@ -374,6 +381,37 @@ body {
             writeData(getObjectFromList($('.frame-list')));
         });
 
+        $(document).on('blur','.frame-text', function(){
+            if ($(this).text().replace(/\w/g,'') == ""){
+                $(this).parent().remove();
+                writeData(getObjectFromList($('.frame-list')));
+            }
+        });
+
+        $(document).on('keydown','*', function(e){
+            if ((e.keyCode == 13 || e.which == 13) && !$('.frame-text:focus').length){
+                e.preventDefault();
+                var $listItems = $('.frame-list > *');
+                var $headings = $('.frame-list .heading');
+                var indexOfLastHeadingInList = $listItems.index($headings.get($headings.length-1));
+                addEmptyListItem($headings.eq(indexOfLastHeadingInList+1),true);
+            } else if ((e.keyCode == 38 || e.which == 38) || (e.keyCode == 40 || e.which == 40)){
+                var indexShift = (e.keyCode == 38 || e.which == 38) ? -1 : 1;
+                e.preventDefault();
+                e.stopPropagation();
+                var $listOfFrames = $('.frame-container');
+                var $focussedFrame = $('.frame-text:focus').parent();
+                var indexOfFocussedFrame = $listOfFrames.index($focussedFrame);
+                if ($listOfFrames.eq(indexOfFocussedFrame+indexShift).find('.frame-text').length){
+                    var $element = $listOfFrames.eq(indexOfFocussedFrame+indexShift).find('.frame-text');
+                    $element.focus();
+                } else {
+                    $listOfFrames.eq(0).find('.frame-text').focus();
+                }
+            }
+
+        });
+
         $(document).on('keydown','.frame-text', function(e){
             if (e.keyCode == 13 || e.which == 13){
                 if (getCaretCharacterOffsetWithin($(this).get(0)) == 0){
@@ -390,6 +428,10 @@ body {
                     displayListFromObject(latestData);
                 }
             }
+        });
+
+        $(document).on('focus','.frame-text',function(e){
+            cursorManager.setEndOfContenteditable(e.target);
         });
 
         $(document).on('click','.heading', function(){
@@ -428,14 +470,12 @@ body {
             var gotExistingUser = getExistingUser();
             
             if (result.user){
-                console.log('new user');
                 user = result.user;
                 removeCookie('gmphtasks_user');
                 setCookie('gmphtasks_user', JSON.stringify(user), 30);
                 resetSorting();
                 getInitialData();
             } else if (gotExistingUser){
-                console.log('existing user');
                 var gotExistingUser = getExistingUser();
                 var now = new Date().getTime();
                 if (gotExistingUser && user.stsTokenManager.expirationTime > now){
@@ -448,13 +488,11 @@ body {
                     firebase.auth().signInWithRedirect(provider);
                 }
             } else {
-                console.log('no user');
                 var provider = new firebase.auth.TwitterAuthProvider();
                 firebase.auth().signInWithRedirect(provider);
             }
 
         }).catch(function(error) {
-            console.log('user error');
             console.log(error);
             var provider = new firebase.auth.TwitterAuthProvider();
             firebase.auth().signInWithRedirect(provider);
@@ -681,6 +719,68 @@ body {
         }
         return caretOffset;
     }
+
+    (function( cursorManager ) {
+
+        var voidNodeTags = ['AREA', 'BASE', 'BR', 'COL', 'EMBED', 'HR', 'IMG', 'INPUT', 'KEYGEN', 'LINK', 'MENUITEM', 'META', 'PARAM', 'SOURCE', 'TRACK', 'WBR', 'BASEFONT', 'BGSOUND', 'FRAME', 'ISINDEX'];
+
+        Array.prototype.contains = function(obj) {
+            var i = this.length;
+            while (i--) {
+                if (this[i] === obj) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function canContainText(node) {
+            if(node.nodeType == 1) { //is an element node
+                return !voidNodeTags.contains(node.nodeName);
+            } else { //is not an element node
+                return false;
+            }
+        };
+
+        function getLastChildElement(el){
+            var lc = el.lastChild;
+            while(lc && lc.nodeType != 1) {
+                if(lc.previousSibling)
+                    lc = lc.previousSibling;
+                else
+                    break;
+            }
+            return lc;
+        }
+
+        cursorManager.setEndOfContenteditable = function(contentEditableElement)
+        {
+
+            while(getLastChildElement(contentEditableElement) &&
+                  canContainText(getLastChildElement(contentEditableElement))) {
+                contentEditableElement = getLastChildElement(contentEditableElement);
+            }
+
+            var range,selection;
+            if(document.createRange)//Firefox, Chrome, Opera, Safari, IE 9+
+            {    
+                range = document.createRange();//Create a range (a range is a like the selection but invisible)
+                range.selectNodeContents(contentEditableElement);//Select the entire contents of the element with the range
+                range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
+                selection = window.getSelection();//get the selection object (allows you to change selection)
+                selection.removeAllRanges();//remove any selections already made
+                selection.addRange(range);//make the range you have just created the visible selection
+            }
+            else if(document.selection)//IE 8 and lower
+            { 
+                range = document.body.createTextRange();//Create a range (a range is a like the selection but invisible)
+                range.moveToElementText(contentEditableElement);//Select the entire contents of the element with the range
+                range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
+                range.select();//Select the range (make it the visible selection
+            }
+        }
+
+    }( window.cursorManager = window.cursorManager || {}));
 
     if (!Object.keys) {
         Object.keys = function (obj) {
