@@ -95,7 +95,7 @@ textarea, input {
 
 body {
 	background:#f8f8f8;
-    padding:24px 0 16px 0;
+    padding:16px 0 48px 0;
 }
 
 .frame-container, .loading {
@@ -315,17 +315,29 @@ body {
 
     var defaultData = {
         0 : {
-            'name' : 'Done',
-            'items' : {}
+            'name' : 'Ready',
+            'items' : {
+                0 : "Make a task app",
+            }
         },
         1 : {
-            'name' : 'Doing',
-            'items' : {}
+            'name' : 'Done',
+            'items' : {
+                0 : "Drag items between sections",
+            }
         },
         2 : {
-            'name' : 'Todo',
+            'name' : 'Doing',
             'items' : {
-                0 : "",
+                0 : "Edit a task",
+                1 : "Drag tasks to the top to remove them",
+            }
+        },
+        3 : {
+            'name' : 'To do',
+            'items' : {
+                0 : "Drag items between sections",
+                1 : "Press enter to add a task",
             }
         }
     }
