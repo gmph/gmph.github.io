@@ -410,25 +410,39 @@ body {
     }
 
     function getUserFromLoginDetails(){
+
         firebase.auth().getRedirectResult().then(function(result) {
-            if (result.credential) {
-                // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
-                // You can use these server side with your app's credentials to access the Twitter API.
-                var token = result.credential.accessToken;
-                var secret = result.credential.secret;
-                // ...
-            }
-            // The signed-in user info.
-            user = result.user;
-            if (user != null || getExistingUser()){
-                setCookie('gmphtasks_user', JSON.stringify(user), 30);
-                resetSorting();
-                getInitialData();
+
+            var gotExistingUser = getExistingUser();
+            if (gotExistingUser){
+                var gotExistingUser = getExistingUser();
+                var now = new Date().getTime();
+                console.log('now: ' + now);
+                console.log('exp: ' + user.stsTokenManager.expirationTime);
+                if (gotExistingUser && user.stsTokenManager.expirationTime > now){
+                    removeCookie('gmphtasks_user');
+                    setCookie('gmphtasks_user', JSON.stringify(user), 30);
+                    resetSorting();
+                    getInitialData();
+                } else {
+                    var provider = new firebase.auth.TwitterAuthProvider();
+                    firebase.auth().signInWithRedirect(provider);
+                }
             } else {
-                var provider = new firebase.auth.TwitterAuthProvider();
-                firebase.auth().signInWithRedirect(provider);
+                user = result.user;
+                if (user == null){
+                    var provider = new firebase.auth.TwitterAuthProvider();
+                    firebase.auth().signInWithRedirect(provider);
+                } else {
+                    removeCookie('gmphtasks_user');
+                    setCookie('gmphtasks_user', JSON.stringify(user), 30);
+                    resetSorting();
+                    getInitialData();
+                }
             }
+
         }).catch(function(error) {
+            removeCookie('gmphtasks_user');
             var provider = new firebase.auth.TwitterAuthProvider();
             firebase.auth().signInWithRedirect(provider);
         });
@@ -457,13 +471,18 @@ body {
     }
 
     function getExistingUser() {
-        var local_user = JSON.parse(JSON.parse(getCookie("gmphtasks_user")));
-        if (local_user != "" && local_user != null && local_user != undefined && local_user != {}){
-            user = local_user;
-            return true;
-        } else {
+        try {
+            var local_user = JSON.parse(JSON.parse(getCookie("gmphtasks_user")));
+            if (local_user != "" && local_user != null && local_user != undefined && local_user != {}){
+                user = local_user;
+                return true;
+            } else {
+                return false;
+            }
+        } catch (e){
             return false;
         }
+        
     }
 
     function logInWithTwitter(){
