@@ -355,7 +355,9 @@ body {
         });
 
         $(document).on('keyup','.frame-text', function(){
-            writeData(getObjectFromList($('.frame-list')));
+            setTimeout(function(){
+                writeData(getObjectFromList($('.frame-list')));
+            },300);
         });
 
         $(document).on('blur','.frame-text', function(){
