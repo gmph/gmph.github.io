@@ -139,9 +139,6 @@ body {
 .frame-container.done .frame-text {
     background: rgba(255,255,255,0) !important;
     border:solid 1px rgba(0,0,0,0) !important;
-}
-
-.frame-container.done .frame-text {
     opacity: 0.3;
     text-decoration: line-through;
     padding: 2px 0;
@@ -255,6 +252,7 @@ body {
     var sortedFrameList;
     var user = null;
     var dataLoadedOnce = false;
+    var isFocussedWindow = false;
     previousData = {};
     latestData = {};
 
@@ -297,15 +295,16 @@ body {
             databaseURL: "https://gmphtasks.firebaseio.com",
             storageBucket: "gmphtasks.appspot.com",
         };
+
         firebase.initializeApp(config);
 
         if (!firebase.auth().currentUser){
-            getUserFromLoginDetails();
+            getUser();
         }
 
         firebase.auth().onAuthStateChanged(function (user) {
-            if (!user){
-                getUserFromLoginDetails();
+            if (!firebase.auth().currentUser){
+                getUser();
             }
         });
 
@@ -313,13 +312,56 @@ body {
         
     }
 
+    function getUser(){
+        if (getExistingUser()){
+            var olduser = user;
+            var request = new XMLHttpRequest();
+            request.addEventListener("load", function(data){
+                response = JSON.parse(data.currentTarget.response);
+                user['stsTokenManager']['accessToken'] = response['access_token'];
+                user['stsTokenManager']['refreshToken'] = response['refresh_token'];
+                // firebase.auth().currentUser = user;
+                setCookie('gmphtasks_user', JSON.stringify(user), 30);
+                resetAndGetData();
+            });
+            request.open("POST", "https://securetoken.googleapis.com/v1/token?key=AIzaSyDQJOQNtvd0-mEKu-2veoiz3QMnLf01kis", true);
+            request.withCredentials = false;
+            request.send(JSON.stringify({
+                "grant_type" : "refresh_token",
+                "refresh_token" : user.stsTokenManager.refreshToken,
+            }));
+        } else {
+            getUserFromLoginDetails();
+        }
+    }
+
     function attachEvents(){
+
+        $(document).on('blur focus','*', function(e) {
+            var prevType = $(this).data("prevType");
+            if (prevType != e.type) {   // reduce double fire issues
+                switch (e.type) {
+                    case "blur":
+                        if (!$(':focus').length){
+                            isFocussedWindow = false;
+                        }
+                        break;
+                    case "focus":
+                        isFocussedWindow = true;
+                        break;
+                }
+            }
+            $(this).data("prevType", e.type);
+        });
 
         $(document).on('keyup','.frame-text', function(){
             writeData(getObjectFromList($('.frame-list')));
         });
 
         $(document).on('blur','.frame-text', function(){
+            if (!$(':focus').length){
+                isFocussedWindow = false;
+            }
             if ($(this).text().replace(/\w/g,'') == ""){
                 $(this).parent().remove();
                 writeData(getObjectFromList($('.frame-list')));
@@ -370,12 +412,18 @@ body {
 
         $(document).on('focus','.frame-text',function(e){
             cursorManager.setEndOfContenteditable(e.target);
+            isFocussedWindow = true;
         });
 
         $(document).on('click','.heading', function(){
             addEmptyListItem($(this),true);
         });
 
+    }
+
+    function resetAndGetData(){
+        resetSorting();
+        getInitialData();
     }
 
     function getInitialData(){
@@ -389,6 +437,8 @@ body {
                 displayListFromObject(defaultData);
             }
             handleDataUpdates();
+        }, function(error){
+            getUserFromLoginDetails();
         });
     }
 
@@ -404,34 +454,18 @@ body {
     function getUserFromLoginDetails(){
 
         firebase.auth().getRedirectResult().then(function(result) {
-
-            var gotExistingUser = getExistingUser();
             
             if (result.user){
                 user = result.user;
                 removeCookie('gmphtasks_user');
                 setCookie('gmphtasks_user', JSON.stringify(user), 30);
-                resetSorting();
-                getInitialData();
-            } else if (gotExistingUser){
-                var gotExistingUser = getExistingUser();
-                var now = new Date().getTime();
-                if (gotExistingUser && user.stsTokenManager.expirationTime > now){
-                    removeCookie('gmphtasks_user');
-                    setCookie('gmphtasks_user', JSON.stringify(user), 30);
-                    resetSorting();
-                    getInitialData();
-                } else {
-                    var provider = new firebase.auth.TwitterAuthProvider();
-                    firebase.auth().signInWithRedirect(provider);
-                }
+                resetAndGetData();
             } else {
                 var provider = new firebase.auth.TwitterAuthProvider();
                 firebase.auth().signInWithRedirect(provider);
             }
 
         }).catch(function(error) {
-            console.log(error);
             var provider = new firebase.auth.TwitterAuthProvider();
             firebase.auth().signInWithRedirect(provider);
         });
@@ -464,6 +498,7 @@ body {
             var local_user = JSON.parse(JSON.parse(getCookie("gmphtasks_user")));
             if (local_user != "" && local_user != null && local_user != undefined && local_user != {}){
                 user = local_user;
+                firebase.auth().currentUser = user;
                 return true;
             } else {
                 return false;
@@ -495,13 +530,12 @@ body {
         }
         writeData(getObjectFromList($('.frame-list')));
         displayListFromObject(latestData);
-        console.log('NEW POSITION: ' + newPositionNumber);
         $('.frame-list > *').eq(newPositionNumber).find('.frame-text').focus();
     }
 
     function updateListFromObjects(newListObject,oldListObject){
 
-        if (newListObject != null && oldListObject != null && newListObject != {} && oldListObject != {}) {
+        if (newListObject != null && oldListObject != null && newListObject != {} && oldListObject != {} && isFocussedWindow) {
 
             var newListLength = Object.keys(newListObject).length;
             var oldListLength = Object.keys(oldListObject).length;
