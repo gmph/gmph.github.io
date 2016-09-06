@@ -548,24 +548,28 @@ body {
 
                 for (var i = 0; i < newListLength; i++){
 
-                    $('.frame-container .heading').eq(i).text(newListObject[i]['name']);
-                    listItemCount++;
+                    try {
+                        $('.frame-container .heading').eq(i).text(newListObject[i]['name']);
+                        listItemCount++;
 
-                    if (newListObject[i]['items'] != null && newListObject[i]['items'] != null){
+                        if (newListObject[i]['items'] != null && newListObject[i]['items'] != null){
 
-                        var newListItemsLength = Object.keys(newListObject[i]['items']).length;
-                        var oldListItemsLength = Object.keys(oldListObject[i]['items']).length;
+                            var newListItemsLength = Object.keys(newListObject[i]['items']).length;
+                            var oldListItemsLength = Object.keys(oldListObject[i]['items']).length;
 
-                        if (newListItemsLength == oldListItemsLength){
-                            for (var j = 0; j < newListItemsLength; j++){
-                                $('.frame-list > *').eq(listItemCount).find('frame-text').text(newListObject[i]['items'][j]);
-                                listItemCount++;
+                            if (newListItemsLength == oldListItemsLength){
+                                for (var j = 0; j < newListItemsLength; j++){
+                                    $('.frame-list > *').eq(listItemCount).find('frame-text').text(newListObject[i]['items'][j]);
+                                    listItemCount++;
+                                }
+                            } else {
+                                displayListFromObject(newListObject);
+                                break;
                             }
-                        } else {
-                            displayListFromObject(newListObject);
-                            break;
-                        }
 
+                        }
+                    } catch (e){
+                        // Disallowed heading
                     }
                     
                 }
@@ -589,11 +593,15 @@ body {
 
             var listHTML = "";
             for (var i = 0; i < numberOfHeadings; i++){
-                listHTML += headingHTML[0] + i + headingHTML[1] + listObject[i]['name'] + headingHTML[2];
-                if (listObject[i]['items'] != null){
-                    for (var j = 0; j < Object.keys(listObject[i]['items']).length; j++){
-                        listHTML += itemHTML[0] + j + itemHTML[1] + listObject[i]['items'][j] + itemHTML[2];
+                try {
+                    listHTML += headingHTML[0] + i + headingHTML[1] + listObject[i]['name'] + headingHTML[2];
+                    if (listObject[i]['items'] != null){
+                        for (var j = 0; j < Object.keys(listObject[i]['items']).length; j++){
+                            listHTML += itemHTML[0] + j + itemHTML[1] + listObject[i]['items'][j] + itemHTML[2];
+                        }
                     }
+                } catch (e){
+                    // Disallowed heading
                 }
             }
             $frameList.html(listHTML);
