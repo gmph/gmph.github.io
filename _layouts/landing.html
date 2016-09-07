@@ -242,9 +242,8 @@
 				var latestLocation = locationData[locationData.length-1];
 
 				var $locationContainer;
-				var $mapImage = $('<div class="location-map-container"></div>').append($('<img class="location-map" src="'+latestLocation.mapImageURL+'"/>'));
+				var $mapImage = $('<div class="location-map-container"></div>').append($('<img class="location-map" src="'+latestLocation.mapImageURL+'&key='+randomString+'"/>'));
 				var $locationDescription = $('<div class="song-description">'+description+'</div>');
-				var latestMapCenter = getParameterByName("center",latestLocation.mapImageURL);
 
 				var $locationContainer = $('<a href="'+latestLocation.linkURL+'" target="_blank"></a>').append($('<div class="location-container"></div>').append($mapImage).append(($('<div class="location-info"></div>').append($('<div class="location-description">'+description+'</div>'))).append($('<div class="location-name">'+latestLocation.name+'</div>'))));
 
