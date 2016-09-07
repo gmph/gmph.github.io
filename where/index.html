@@ -198,16 +198,81 @@
 
 <script language="javascript">
 
-	var $latestLocation = $('#latestLocation');
+	var locationManager = function($){
 
-	var randomString = "AIzaSyDQJOQNtvd0-mEKu-2veoiz3QMnLf01kis";
-	var mapZoomLevel = "14";
+		var $locationContainer = $('#latestLocation');
 
-	var locationDataText;
-	var locationData = [];
+		var randomString = "AIzaSyDQJOQNtvd0-mEKu-2veoiz3QMnLf01kis";
+		var mapZoomLevel = "14";
+
+		var locationDataText;
+		var locationData = [];
+		var eventLocationDataProcessed = new Event('locationDataProcessed');
+
+		function init(callback){
+			getDataFromTextFile("https://dl.dropboxusercontent.com/u/17016249/Data/location.txt");
+			if (callback){
+				document.addEventListener('locationDataProcessed', callback, false);
+			}
+		}
+
+		function getParameterByName(name, url) {
+		    if (!url) url = window.location.href;
+		    name = name.replace(/[\[\]]/g, "\\$&");
+		    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+		        results = regex.exec(url);
+		    if (!results) return null;
+		    if (!results[2]) return '';
+		    return decodeURIComponent(results[2].replace(/\+/g, " "));
+		}
+
+	    function getDataFromTextFile(file){
+	        var rawFile = new XMLHttpRequest();
+	        rawFile.open("GET", file, true);
+	        rawFile.onreadystatechange = function (){
+	            if(rawFile.readyState === 4){
+	                if(rawFile.status === 200 || rawFile.status == 0){
+	                    locationDataText = rawFile.responseText;
+						processLocationData();
+	                }
+	            }
+	        }
+	        rawFile.send(null);
+	    }
+
+		function processLocationData(){
+			var locationDataTextSplit = locationDataText.split("/%/");
+			locationDataTextSplit.pop();
+			for (i=0;i<locationDataTextSplit.length;i++){
+				locationData.push(JSON.parse(locationDataTextSplit[i]));
+			}
+			document.dispatchEvent(eventLocationDataProcessed);
+		}
+
+		function displayLatestLocationName(){
+			var numberOfLocations = locationData.length-1;
+			var latestLocation = locationData[numberOfLocations];
+			var latestValidName = ' <a href="'+latestValidURL+'" target="_blank"><div class="name">' + latestLocation.name + "</div></a>";
+			var latestValidURL = latestLocation.linkURL;
+			var latestMapCenter = getParameterByName("center",locationData[numberOfLocations].mapImageURL);
+			$('#map').attr('src','https://www.google.com/maps/embed/v1/view?center='+latestMapCenter+'&zoom='+mapZoomLevel+'&key='+randomString);
+			updateText = '<a href="'+latestValidURL+'" target="_blank"><div class="region">' + latestLocation.name + "</div></a>" + '<a href="'+latestValidURL+'" target="_blank"><!--<div class="date">' + latestLocation.date.slice(0,-2) + latestLocation.date.substring(latestLocation.date.length-2).toLowerCase() + '</div>--></a>';
+			$locationContainer.html(updateText);
+		}
+
+		return {
+			init : init,
+			displayLatestLocationName : displayLatestLocationName,
+		}
+
+	}($);
 
 	$(document).ready(function(){
-		readTextFile("https://dl.dropboxusercontent.com/u/17016249/Data/location.txt");
+		locationManager.init(function(){
+			setStyleLoading();
+			locationManager.displayLatestLocationName();
+			setStyleReady();
+		});
 		$('#latestLocation,.title').hover(function(){
 			$('.content').addClass('location-hover');
 		},function(){
@@ -220,53 +285,6 @@
 		});
 	});
 
-	function getParameterByName(name, url) {
-	    if (!url) url = window.location.href;
-	    name = name.replace(/[\[\]]/g, "\\$&");
-	    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-	        results = regex.exec(url);
-	    if (!results) return null;
-	    if (!results[2]) return '';
-	    return decodeURIComponent(results[2].replace(/\+/g, " "));
-	}
-
-    function readTextFile(file){
-        var rawFile = new XMLHttpRequest();
-        rawFile.open("GET", file, true);
-        rawFile.onreadystatechange = function (){
-            if(rawFile.readyState === 4){
-                if(rawFile.status === 200 || rawFile.status == 0){
-                    locationDataText = rawFile.responseText;
-					processLocationData();
-                }
-            }
-        }
-        rawFile.send(null);
-    }
-
-	function processLocationData(){
-		var locationDataTextSplit = locationDataText.split("/%/");
-		locationDataTextSplit.pop();
-		for (i=0;i<locationDataTextSplit.length;i++){
-			locationData.push(JSON.parse(locationDataTextSplit[i]));
-		}
-
-		displayLatestLocation();
-		console.log(locationData);
-	}
-
-	function displayLatestLocation(){
-		setStyleLoading();
-		var numberOfLocations = locationData.length-1;
-		var latestLocation = locationData[numberOfLocations];
-		var latestValidName = ' <a href="'+latestValidURL+'" target="_blank"><div class="name">' + latestLocation.name + "</div></a>";
-		var latestValidURL = latestLocation.linkURL;
-		var latestMapCenter = getParameterByName("center",locationData[numberOfLocations].mapImageURL);
-		$('#map').attr('src','https://www.google.com/maps/embed/v1/view?center='+latestMapCenter+'&zoom='+mapZoomLevel+'&key='+randomString);
-		updateText = '<a href="'+latestValidURL+'" target="_blank"><div class="region">' + latestLocation.name + "</div></a>" + '<a href="'+latestValidURL+'" target="_blank"><!--<div class="date">' + latestLocation.date.slice(0,-2) + latestLocation.date.substring(latestLocation.date.length-2).toLowerCase() + '</div>--></a>';
-		$latestLocation.html(updateText);
-		setStyleReady();
-	}
 
 	function setStyleLoading(){
 		$('.content').addClass('hidden');

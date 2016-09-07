@@ -53,5 +53,21 @@ This is where I publish my thoughts on technology, psychology, politics and more
 
 </div>
 
+<h2>More about me</h2>
+
+<p>
+    <div class="song-container most-listened">
+        <div class="song-info">
+            <div class="song-description">Loading most played song...</div>
+        </div>
+    </div>
+    <div class="location-container latest-trip">
+        <div class="location-info">
+            <div class="location-description">Loading most recent trip...</div>
+        </div>
+    </div>
+</p>
+
+<br/>
 
 You can email me at [hi@gmph.co](mailto:hi@gmph.co?subject=&body=Hey%20Graham%2C%0A%0AI%27d%20really%20like%20to%20talk%20to%20you%20about...) to say hello – I love talking about design. You can read more about this website in its [colophon]({{ site.baseurl }}/colophon).
