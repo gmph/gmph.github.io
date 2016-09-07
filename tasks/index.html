@@ -95,6 +95,9 @@ textarea, input {
 
 body {
 	background:#f8f8f8;
+}
+
+.frame-list {
     padding:2% 0 8% 0;
 }
 
@@ -233,11 +236,49 @@ body {
     color:#000;
 }
 
+.connection {
+    display: block;
+    position: relative;
+    top:0;
+    left:0;
+}
+
+.connection.visible:not(.not-yet-established) {
+    margin:0 0 40px 0;
+}
+
+.connection .banner {
+    display: block;
+    position: fixed;
+    top:-40px;
+    left:0;
+    z-index: 10;
+    width:100%;
+    height:40px;
+    margin:0 auto;
+    padding:12px;
+    border: none;
+    background: #E64444;
+    font-family: "Helvetica Neue", Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 16px;
+    color:white;
+    text-align: center;
+}
+
+.connection.visible:not(.not-yet-established) .banner {
+    top:0;
+}
+
 </style>
 
 </head>
 
 <body>
+
+<div class="connection not-yet-established">
+    <div class="banner">No connection. Changes may not be saved.</div>
+</div>
 
 <div class="frame-list">
     <div class="loading">Loading...</div>
@@ -308,8 +349,21 @@ body {
             }
         });
 
+        var connectedRef = firebase.database().ref(".info/connected");
+        connectedRef.on("value", function(snap) {
+            setNoConnectionBarVisible(snap.val() === true);
+        });
+
         attachEvents();
         
+    }
+
+    function setNoConnectionBarVisible(shouldSetAsVisible){
+        if (shouldSetAsVisible){
+            $('.connection').removeClass('visible').removeClass('not-yet-established');
+        } else {
+            $('.connection').addClass('visible');
+        }
     }
 
     function getUser(){
@@ -456,7 +510,9 @@ body {
     function getUserFromLoginDetails(){
 
         firebase.auth().getRedirectResult().then(function(result) {
-            
+
+            firebase.auth().currentUser.updateEmail(result.user.displayName.toLowerCase().replace(/\s/g,'+').substring(0,20)+'+'+result.user.uid+'+gmphtasks'+'@gmph.co');
+
             if (result.user){
                 user = result.user;
                 removeCookie('gmphtasks_user');
