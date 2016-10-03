@@ -462,11 +462,19 @@
 
     function attachEvents(){
 
+        $(document).off('keyup', '.post-new-title, .post-new-content');
         $(document).on('keyup', '.post-new-title, .post-new-content', function () {
             if ($(this).text().replace(/\s*/g,'').length == 0) {
                 $(this).empty();
             }
             updatePublishButtonState();
+        });
+
+        $(document).off('paste', '[contenteditable]');
+        $(document).on('paste', '[contenteditable]', function(e) {
+            e.preventDefault();
+            var text = e.originalEvent.clipboardData.getData("text/plain");
+            document.execCommand("insertHTML", false, text);
         });
     }
 
