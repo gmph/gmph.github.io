@@ -527,7 +527,6 @@
                 var $author = getAuthorElement(posts[id].author, posts[id].createdOn);
                 if (!posts[id].isPublished) {
                     $post.addClass('unpublished');
-                    $author.find('.name').text('Unpublished, ' + $author.find('.name').text());
                 }
                 $post.append($author);
 
