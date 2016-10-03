@@ -3,7 +3,7 @@ layout: default
 title: Hello Notes
 heading: Hello, Notes.
 date: 1st June 2016
-category: note
+category: article
 published: true
 private: false
 format: markdown
@@ -20,3 +20,5 @@ Jhwgdiu efihoirj o jihfe wofewk fh eifh eofh ekfh ewkfh ewkjfh ekjfho ewfoewf ih
 Look at that garbage.
 
 I could never publish an article with that. But I can leave this lovely, low-quality note for you to read. Ah, freedom.
+
+To see more notes, and even contribute one of your own, check out [gmph.co/notes](http://gmph.co/notes).

@@ -28,6 +28,7 @@
 <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400' rel='stylesheet' type='text/css'>
 <link href="{{ site.baseurl }}/res/css/main.css" rel="stylesheet" type="text/css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
 
 {% include fbmeta.html %}
 {% include twittermeta.html %}
@@ -40,11 +41,15 @@
 
 <body>
 
-		<img class="loadimg" src="{{ site.baseurl }}/res/img/ptlogo.png"/>
+		<div class="posttabs default">
+			<div class="content">
+		        <a href="{{ site.url }}" class="back"><span class="arrow">&larr;</span> Home</a>
+	        </div>
+	    </div>
 
 		<div class="block">
 
-			<a class="backbutton" href="/"><svg height="100%" width="100%"><g><path fill="#555" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path></g></svg></a>
+			<!-- <a class="backbutton" href="/"><svg height="100%" width="100%"><g><path fill="#555" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path></g></svg></a> -->
 
 			<h1 class="heading">{{ page.heading }}</h1>
 
@@ -58,8 +63,6 @@
 
 			{{ content }}
 
-			<a href="/"><img class="footerimg" src="{{ site.baseurl }}/res/img/ptfooter.png"/></a>
-
 		</div>
 
 </body>
@@ -67,33 +70,19 @@
 
 <script language="javascript">
 
-	$(window).scroll(function(e){
-		console.log(e);
-	});
-
-    $('.block').css('opacity','0');
-
-    $('body').css('overflow-y','hidden');
-
-    $('.loadimg').css('opacity','0');
-
-    $('a').each(function() {
-	    if ($(this).find('img,svg').length) {
-	        $(this).css('border','none');
-	    }
-	});
-
     $(document).ready(function(){
-    	setTimeout(function(){
-    		$('.loadimg').css('opacity','1');
-    		setTimeout(function(){
-	    		$('.loadimg').css('opacity','0');
-	    		setTimeout(function(){
-		    		$('.block').css('opacity','1');
-		    		$('body').css('overflow-y','scroll');
-		    	},400);
-	    	},1200);
-    	},200);
+    	$('.block, .posttabs').css('opacity','0');
+	    $('body').css('overflow-y','hidden');
+		setTimeout(function(){
+    		$('.block, .posttabs').css('opacity','1');
+    		$('body').css('overflow-y','scroll');
+    	},400);
+	});
+
+	$('a').each(function() {
+	    if ($(this).find('img,svg').length) {
+	        $(this).css({'border':'none','background':'none'});
+	    }
 	});
 
 	$(function() {
@@ -103,13 +92,69 @@
           target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
           if (target.length) {
             $('html,body').animate({
-              scrollTop: (target.offset().top - 30)
+              scrollTop: (target.offset().top - 70)
 		  	}, 400);
             return false;
           }
         }
       });
     });
+
+    var domainName =  window.location.hostname.replace(/[^a-z0-9]/gi,'-');
+
+    var pageName = window.location.pathname;
+    if (pageName[0] == '/'){
+    	pageName = pageName.substring(1);
+    }
+    if (pageName[pageName.length - 1] == '/'){
+    	pageName = pageName.slice(0,pageName.length - 1);
+    }
+    pageName = pageName.replace(/[^a-z0-9]/gi,'-');
+
+	var fPosts = firebase.initializeApp({
+		apiKey: "AIzaSyADZwqY2285Jd8X5-Z1zGoeOOcrbXoenqg",
+		authDomain: "project-7565141284569736729.firebaseapp.com",
+		databaseURL: "https://project-7565141284569736729.firebaseio.com",
+		storageBucket: "",
+	});
+
+	var postRef = fPosts.database().ref(domainName+'/posts/'+pageName);
+
+	var likeIncreaseTimeout;
+	function increaseLikeCountIfNeeded(likes){
+		console.log('int = '+ parseInt($('.gmph-button.like .like-count').text()));
+		if (parseInt($('.gmph-button.like .like-count').text()) < likes){
+			$('.gmph-button.like .like-count').text(parseInt($('.gmph-button.like .like-count').text()) + 1);
+			likeIncreaseTimeout = setTimeout(function(){
+				increaseLikeCountIfNeeded(likes);
+			},40);
+		}
+	}
+
+	postRef.on('value', function(snapshot) {
+		var likes = snapshot.child('likes').val();
+		increaseLikeCountIfNeeded(likes);
+		// $('.gmph-button.like .like-count').text(likes);
+		if (likes == null){
+			postRef.update({
+				'likes' : 0
+			});
+		}
+	});
+
+	var likeTimeout;
+
+	$(document).on('click','.gmph-button.like',function(){
+		$('.gmph-button.like').addClass('disabled');
+		likeTimeout = setTimeout(function(){
+			$('.gmph-button.like').removeClass('disabled');
+		},500);
+		postRef.child('likes').transaction(function(likes) {
+		    return  (likes || 0) + 1;
+		});
+	})
+
+
 
 </script>
 

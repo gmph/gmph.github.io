@@ -3,7 +3,7 @@ layout: default
 title: Designing Messaging
 heading: Designing Messaging
 date: 2nd June 2016
-category: note
+category: article
 published: true
 private: false
 format: markdown
@@ -11,7 +11,7 @@ permalink: /designing-messaging
 version: 1.0
 ---
 
-Since joining the team at [Yavi](http://yavi.co) in March to design new tools for shift-workers, I have been working on a messaging app. 
+Since joining the team at [Yavi](http://yavi.co) in March to design new tools for shift-workers, I have been working on a messaging app.
 
 This is a transitional period for messaging, with bots, AI and assistants slipping into everyday communication. Messaging now more than ever allows you to design an extensible product. It is perfectly suited to atomic design. Each message can be a step in a flow and built up of flexible components. We have been designing Yavi's messaging to take advantage of this.
 

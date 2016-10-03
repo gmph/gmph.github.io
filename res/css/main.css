@@ -112,6 +112,10 @@ html,body {
     /*overflow: hidden;*/
 }
 
+.block.visible {
+    opacity: 1;
+}
+
 .block.landing {
     padding-bottom:280px;
 }
@@ -332,12 +336,6 @@ span.littleline {
     overflow: hidden;
 }
 
-.contact-form .contact-title {
-    position: relative;
-    left:2px;
-    margin-top: -6px;
-}
-
 input, textarea {
     display: block;
     position: relative;
@@ -368,25 +366,21 @@ input.invalid, textarea.invalid {
     border-color: #f26161 !important;
 }
 
-.contact-form .contact-method {
-    margin-top:20px;
-    margin-bottom: 10px;
+.contact-form .contact-subject, .contact-form .contact-message, .contact-form .contact-method {
+    margin: 16px 0 0 0;
 }
 
-.contact-form .contact-message {
-    margin-bottom:20px;
-}
-
-.contact-form .contact-email {
+.contact-form .contact-email, .contact-form .contact-submit, .button {
     display: block;
     position: relative;
     top: 0;
     left: 0;
-    width: 48%;
+    float: left;
+    width: 49%;
     min-width: 100px;
     height:auto;
-    margin:10px 0 0 0;
-    padding: 14px 15px 15px 15px;
+    margin: 16px 0 0 0;
+    padding: 16px;
     border-radius: 3px;
     border: solid 1px rgba(0,0,0,0);
 	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
@@ -396,7 +390,14 @@ input.invalid, textarea.invalid {
     text-align: center;
     background: #eee;
     cursor:pointer;
-    border:none !important;
+}
+
+.button {
+    width: 100%;
+    float:none;
+    color: #fff;
+    font-weight: 500;
+    background: #8B67FF;
 }
 
 .contact-form .contact-email:hover {
@@ -405,31 +406,17 @@ input.invalid, textarea.invalid {
 }
 
 .contact-form .contact-submit {
-    display: block;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 48%;
-    height:auto;
-    min-width: 90px;
-    margin:0;
-    padding: 14px 15px 15px 15px;
-    background: #8B67FF;
-    border: solid 1px rgba(0,0,0,0);
-    border-radius: 3px;
-	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
-    font-size: 17px;
+    float: right;
     color: #fff;
     font-weight: 500;
-    text-align: center;
-    cursor:pointer;
+    background: #8B67FF;
 }
 
 .contact-form .contact-submit:hover {
     background: #8360f2;
 }
 
-.contact-form .contact-email:hover, .contact-form .contact-submit:hover {
+.contact-form .contact-email:hover, .contact-form .contact-submit:hover, .button:hover {
     border: solid 1px rgba(0,0,0,.125);
     box-shadow: 0 1px 2px rgba(0,0,0,.05);
 }
@@ -460,26 +447,21 @@ input.invalid, textarea.invalid {
     left:0;
     width:100%;
     height:auto;
-    margin:0 auto 30px auto;
-    padding:30px 30px 60px 30px;
-    background: #f8f8f8;
+    margin:0 auto 48px auto;
+    padding: 0;
     border-radius: 4px;
 }
 
-.contact-messages .message .text {
-    display: block;
-    font-size: 20px;
-    font-weight:300;
-    line-height: 1.4em;
-    color:#333;
-    text-align: left;
+.contact-messages .message h2.message-title {
+    margin: 0 0 8px 0;
 }
 
 .contact-messages .message .meta {
     display: block;
-    position: absolute;
-    bottom:28px;
-    right:28px;
+    position: relative;
+    width: 100%;
+    margin: 10px auto 0 auto;
+    padding: 0;
     font-size: 14px;
     color:#aaa;
     text-align: right;
@@ -535,7 +517,7 @@ input.invalid, textarea.invalid {
     overflow: hidden;
 }
 
-.block h1 {
+.block h1, .display-as-h1 {
 	position: relative;
 	top:0;
 	left: -1px;
@@ -606,7 +588,7 @@ input.invalid, textarea.invalid {
     color:#999 !important;
 }
 
-.block p, ul, ol, blockquote, .block h6 {
+.block p, ul, ol, blockquote, .block h6, .display-as-p {
 	font-family: 'Libre Baskerville', serif;
 	font-size: 16px;
     font-weight: 400;
@@ -656,6 +638,11 @@ blockquote p:first-child {
 	opacity: 1;
 	border-bottom: solid 2px rgba(85,255,199,.5);
     background: rgba(85,255,199,.1);
+}
+
+.no-underline a {
+    border-bottom: none !important;
+    background: none !important;
 }
 
 .block img, .block a img {
@@ -736,6 +723,10 @@ code {
 	line-height: 1.6em;
 	padding:2px 5px 3px 5px;
 	background:#f1e3ff;
+}
+
+.sans-serif {
+    font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
 }
 
 .social {
@@ -1166,7 +1157,7 @@ div.block div.links a {
     margin:0;
     padding:0;
     font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
-    font-size:20px;
+    font-size:18px;
     font-weight: 400;
     line-height: 1.4em;
     color: rgba(0,0,0,.8);
@@ -1257,7 +1248,7 @@ div.block div.links a {
     margin: 0;
     padding:0;
     font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
-    font-size:20px;
+    font-size:18px;
     font-weight: 400;
     line-height: 1.4em;
     color: rgba(0,0,0,.8);
@@ -1324,6 +1315,13 @@ div.footerimg div.img {
 
 div.footerimg div.img:hover {
     top:92%;
+}
+
+.reset-input {
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
 }
 
 @media (max-width:800px){

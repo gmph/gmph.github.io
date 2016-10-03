@@ -49,6 +49,7 @@
 		            <div class="posttab {{ active_class }}" data-tab="{{ category[0] }}" data-id="{{ forloop.index0 }}">{{ category[0] }}s</div>
 		        {% endfor %}
 		        <!-- <br /><br /> -->
+				<a href="{{ site.baseurl }}/notes" class="purple">Notes</a>
 		        <a href="{{ site.baseurl }}/portfolio" class="purple">Portfolio</a>
 				<a href="http://twitter.com/gmph" target="_blank" class="twitter">Twitter</a>
 				<!-- <a href="http://instagr.am/gmph" class="instagram">Instagram</a>
@@ -233,7 +234,7 @@
 			} catch (e){
 				$locationContainer.remove();
 			}
-			
+
 		}
 
 		function displayLatestTrip(description,element){
@@ -368,7 +369,7 @@
 						}
 					});
 
-				
+
 					$('.postlist').css({'opacity':'','top':''});
 				},400);
 			}

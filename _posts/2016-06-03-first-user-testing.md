@@ -3,7 +3,7 @@ layout: default
 title: My First User Testing
 heading: My First User Testing
 date: 3rd June 2016
-category: note
+category: article
 published: true
 private: false
 format: markdown
