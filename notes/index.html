@@ -343,8 +343,8 @@
             <div class="post-child">
                 <div class="post-content"></div>
                 <div id="social" class="social">
-    				<a class="gmph-button twitter" href="https://twitter.com/home?status={{ page.title }}%20{{ site.url }}{{ site.baseurl }}{{ page.url }}%20by%20%40gmph" target="_blank"><span class="twitter-logo-text"></span> Tweet</a>
-    				<a class="gmph-button facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ site.baseurl }}{{ page.url }}" target="_blank"><span class="facebook-logo-text"></span> Share</a>
+    				<a class="gmph-button twitter" href="https://twitter.com/home?status=Notes%20|Graham%20Macphee%20http://gmph.co/notes%20by%20%40gmph" target="_blank"><span class="twitter-logo-text"></span> Tweet</a>
+    				<a class="gmph-button facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://gmph.co/notes" target="_blank"><span class="facebook-logo-text"></span> Share</a>
     			</div>
             </div>
             <div class="user-block">
@@ -567,10 +567,10 @@
         if (post.isPublished || isAdmin || post.author.uid == firebase.auth().currentUser.uid) {
             var isPreview = isPreview && isPreview != null && isPreview === true ? true : false;
             var $post = $('<div class="post"></div>').attr('data-id',post.createdOn);
-            var content = isPreview ? truncateStringToXWords(post.content,75) : post.content;
-            var title = post.isPublished ? '# ['+post.title+'](#'+getURLSafeString(post.title)+')' : '# '+post.title;
-            $post.append($('<div class="title">').append($(marked(title))));
-            $post.append($('<div class="content">').append($(post.isPublished ? marked(content) : '<p>'+content.split('\n').join('</p><p>')+'</p>')));
+            var $content = !post.isPublished ? $('<p>'+content.split('\n').join('</p><p>')+'</p>') : isPreview ? $(marked(truncateStringToXWords(post.content,75))) : $(marked(post.content));
+            var $title = post.isPublished ? $('<h1><a href="#'+getURLSafeString(post.title)+'">'+post.title+'</a></h1>') : $('<h1>'+post.title+'</h1>');
+            $post.append($('<div class="title">').append($title));
+            $post.append($('<div class="content">').append($content));
 
             var $author = getAuthorElement(post.author, post.createdOn);
             if (!post.isPublished) {
