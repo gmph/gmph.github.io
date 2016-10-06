@@ -153,6 +153,10 @@
         background: #fff;
     }
 
+    .blog-posts-container.child-page .posts, .blog-posts-container.child-page .user-block, .blog-posts-container.child-page .log-in, .blog-posts-container .post-child:not(.visible) {
+        display: none !important;
+    }
+
     .blog-posts-container .post {
         margin: 0 auto 80px auto;
     }
@@ -290,8 +294,10 @@
     }
 
     .button-light {
+        font-size: 16px;
+        font-weight: 400;
         color: #888 !important;
-        background: #f9f9f9 !important;
+        background: none !important;
         border: none !important;
     }
 
@@ -334,6 +340,13 @@
     <div class="block">
 
         <div class="blog-posts-container">
+            <div class="post-child">
+                <div class="post-content"></div>
+                <div id="social" class="social">
+    				<a class="gmph-button twitter" href="https://twitter.com/home?status={{ page.title }}%20{{ site.url }}{{ site.baseurl }}{{ page.url }}%20by%20%40gmph" target="_blank"><span class="twitter-logo-text"></span> Tweet</a>
+    				<a class="gmph-button facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ site.baseurl }}{{ page.url }}" target="_blank"><span class="facebook-logo-text"></span> Share</a>
+    			</div>
+            </div>
             <div class="user-block">
                 <div class="post-new">
                     <div class="post-new-title display-as-h1" data-placeholder="A brief title" contenteditable="true"></div>
@@ -354,10 +367,12 @@
 
     <script language="javascript">
 
-    var ADMIN_UID = "69qylk8SQUgVxYecQuIoQq8HRp72";
+    var ADMIN_UID = "69qylk8SQUgVxYecQuIoQq8HRp72"; // for display only, not permissions
     var user = null;
     var fPosts;
     var publishImmediately = true;
+    var isChildPage = false;
+    var returnToScrollPosition = 0;
 
     $(document).ready(function(){
         init();
@@ -476,6 +491,19 @@
             var text = e.originalEvent.clipboardData.getData("text/plain");
             document.execCommand("insertHTML", false, text);
         });
+
+        $(document).off('click','.back');
+        $(document).on('click','.back', function(e){
+            if (isChildPage){
+                e.preventDefault();
+                closeChildPage();
+            }
+        });
+
+        $(document).off('click','.posts .post:not(.unpublished)');
+        $(document).on('click','.posts .post:not(.unpublished)', function(){
+            openChildPage($(this).attr('data-id'));
+        });
     }
 
     function updatePublishButtonState(){
@@ -517,33 +545,52 @@
 
     function displayDataFromSnapshot(posts){
         $('.blog-posts-container .posts').html('');
-        var isAdmin = firebase.auth().currentUser && firebase.auth().currentUser.uid == ADMIN_UID;
+        var childPostId = null;
         for (var id in posts){
-            if (posts[id].isPublished || isAdmin || posts[id].author.uid == firebase.auth().currentUser.uid) {
-                var $post = $('<div class="post"></div>').attr('data-id',id);
-                $post.append($('<div class="title">').append($(marked('# '+posts[id].title))));
-                $post.append($('<div class="content">').append($(posts[id].isPublished ? marked(posts[id].content) : '<p>'+posts[id].content.split('\n').join('</p><p>')+'</p>')));
+            if (getURLSafeString(getUrlHash()) == getURLSafeString(posts[id].title) && posts[id].isPublished) childPostId = posts[id].createdOn;
+            $('.blog-posts-container .posts').prepend(getPostElementFromPost(posts[id]));
+        }
+        if (childPostId != null) openChildPage(childPostId);
+    }
 
-                var $author = getAuthorElement(posts[id].author, posts[id].createdOn);
-                if (!posts[id].isPublished) {
-                    $post.addClass('unpublished');
-                }
-                $post.append($author);
+    function getURLSafeString(string){
+        return removeFromArrayByValue(((string.toLowerCase().replace(/\s+/g,'-')).replace(/[^a-z0-9\-]/ig,'').split('-')).map(x => (x.length > 2 && x != "and" && x != "but") ? x : ''),'').join('-');
+    }
 
-                if (isAdmin || (firebase.auth().currentUser && posts[id].author.uid == firebase.auth().currentUser.uid)) {
-                    if (isAdmin){
-                        if (posts[id].isPublished) {
-                            $post.append($('<div class="post-unpublish button button-light">Unpublish</div>').attr('onclick','unpublishPost('+id+')'));
-                        } else {
-                            $post.append($('<div class="post-publish button button-light">Publish</div>').attr('onclick','publishPost('+id+')'));
-                        }
-                        $post.append($('<div class="post-edit button button-light admin-only visible">Edit</div>').attr('onclick','getPostByID('+id+', loadPost)'));
-                    }
-                    $post.append($('<div class="post-delete button button-light admin-only visible">Delete</div>').attr('onclick','deletePost('+id+')'));
-                }
+    function truncateStringToXWords(string,x){
+        var parts = removeFromArrayByValue(string.split(' ').map((s,i) => (s.length && i < x+1) ? s : ''),'');
+        return parts.join(' ') + (parts.length >= 75 ? '...' : '');
+    }
 
-                $('.blog-posts-container .posts').prepend($post);
+    function getPostElementFromPost(post,isPreview){
+        var isAdmin = firebase.auth().currentUser && firebase.auth().currentUser.uid == ADMIN_UID;
+        if (post.isPublished || isAdmin || post.author.uid == firebase.auth().currentUser.uid) {
+            var isPreview = isPreview && isPreview != null && isPreview === true ? true : false;
+            var $post = $('<div class="post"></div>').attr('data-id',post.createdOn);
+            var content = isPreview ? truncateStringToXWords(post.content,75) : post.content;
+            var title = post.isPublished ? '# ['+post.title+'](#'+getURLSafeString(post.title)+')' : '# '+post.title;
+            $post.append($('<div class="title">').append($(marked(title))));
+            $post.append($('<div class="content">').append($(post.isPublished ? marked(content) : '<p>'+content.split('\n').join('</p><p>')+'</p>')));
+
+            var $author = getAuthorElement(post.author, post.createdOn);
+            if (!post.isPublished) {
+                $post.addClass('unpublished');
             }
+            $post.append($author);
+
+            if (isAdmin || (firebase.auth().currentUser && post.author.uid == firebase.auth().currentUser.uid)) {
+                if (isAdmin){
+                    if (post.isPublished) {
+                        $post.append($('<div class="post-unpublish button button-light">Unpublish</div>').attr('onclick','unpublishPost('+post.createdOn+')'));
+                    } else {
+                        $post.append($('<div class="post-publish button button-light">Publish</div>').attr('onclick','publishPost('+post.createdOn+')'));
+                    }
+                    $post.append($('<div class="post-edit button button-light admin-only visible">Edit</div>').attr('onclick','getPostByID('+post.createdOn+', loadPost)'));
+                }
+                $post.append($('<div class="post-delete button button-light admin-only visible">Delete</div>').attr('onclick','deletePost('+post.createdOn+')'));
+            }
+
+            return $post;
         }
     }
 
@@ -602,6 +649,7 @@
         } else {
             if (publishImmediately) changePublishingMode();
         }
+        closeChildPage();
         $('.post-new-title').text(post.title);
         $('.post-new-content').text(post.content).focus();
         $('.post-new').attr('data-id', post.createdOn);
@@ -613,6 +661,7 @@
     }
 
     function deletePost(id){
+        closeChildPage();
         writeData(id,null);
     }
 
@@ -641,6 +690,34 @@
         } else {
             $('.post-new-publish').text('Save draft');
         }
+    }
+
+    function openChildPage(id){
+        isChildPage = true;
+        returnToScrollPosition = $('body').scrollTop();
+        getPostByID(id,loadChildPage);
+        $('.blog-posts-container').addClass('child-page');
+        $('.back').html('&larr; Back');
+        $('.post-child').addClass('visible');
+        setTimeout(function(){
+            $('html,body').scrollTop(0);
+        },0)
+    }
+
+    function loadChildPage(post){
+        window.location.hash = getURLSafeString(post.title);
+        $('.post-child .post-content').empty().append(getPostElementFromPost(post));
+        $('.post-child .gmph-button.twitter').attr('href','https://twitter.com/home?status='+encodeURIComponent(post.title)+'%20'+encodeURIComponent(window.location.href)+'%20by%20%40gmph');
+        $('.post-child .gmph-button.facebook').attr('href','https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href));
+    }
+
+    function closeChildPage(){
+        isChildPage = false;
+        window.location.hash = "";
+        $('.blog-posts-container').removeClass('child-page');
+        $('.back').html('&larr; Home');
+        $('.post-child').removeClass('visible');
+        $('html,body').scrollTop(returnToScrollPosition);
     }
 
     function isAdmin(){
@@ -754,6 +831,22 @@
         var sec = a.getSeconds();
         var formatted = month + ' ' + date + ', ' + year;
         return formatted;
+    }
+
+    // Get #hash text value from current URL
+    function getUrlHash(name, url) {
+        return decodeURI((window.location.hash || "").replace(/#/g,''));
+    }
+
+    function removeFromArrayByValue(arr) {
+        var what, a = arguments, L = a.length, ax;
+        while (L > 1 && arr.length) {
+            what = a[--L];
+            while ((ax= arr.indexOf(what)) !== -1) {
+                arr.splice(ax, 1);
+            }
+        }
+        return arr;
     }
 
     if (!Object.keys) {
