@@ -229,7 +229,7 @@
     }
 
     .blog-posts-container .post-new .post-new-content {
-        margin: 0 0 40px 0;
+        margin: 20px 0;
     }
 
     .blog-posts-container .post-new .post-new-publish-container {
@@ -570,6 +570,7 @@
             var $post = $('<div class="post"></div>').attr('data-id',post.createdOn);
             var $content = isPreview ? $(marked(truncateStringToXWords(post.content,75))) : $(marked(post.content));
             var $title = post.isPublished ? $('<h1><a href="#'+getURLSafeString(post.title)+'">'+post.title+'</a></h1>') : $('<h1>'+post.title+'</h1>');
+            $content.find('a').attr('target','_blank');
             $post.append($('<div class="title">').append($title));
             $post.append($('<div class="content">').append($content));
 
