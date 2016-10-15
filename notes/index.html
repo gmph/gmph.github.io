@@ -260,6 +260,7 @@
         right:0;
         vertical-align: middle;
         width: 36%;
+        max-width: 120px;
         margin: 16px 0;
         padding: 10px 10px 10px 10px;
     }
@@ -567,7 +568,7 @@
         if (post.isPublished || isAdmin || post.author.uid == firebase.auth().currentUser.uid) {
             var isPreview = isPreview && isPreview != null && isPreview === true ? true : false;
             var $post = $('<div class="post"></div>').attr('data-id',post.createdOn);
-            var $content = !post.isPublished ? $('<p>'+content.split('\n').join('</p><p>')+'</p>') : isPreview ? $(marked(truncateStringToXWords(post.content,75))) : $(marked(post.content));
+            var $content = isPreview ? $(marked(truncateStringToXWords(post.content,75))) : $(marked(post.content));
             var $title = post.isPublished ? $('<h1><a href="#'+getURLSafeString(post.title)+'">'+post.title+'</a></h1>') : $('<h1>'+post.title+'</h1>');
             $post.append($('<div class="title">').append($title));
             $post.append($('<div class="content">').append($content));
