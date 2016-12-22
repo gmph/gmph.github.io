@@ -850,8 +850,8 @@
     function setUpChrono(){
 
         var wholeMonthRefiner = new chrono.Refiner();
-        wholeMonthRefiner.refine = (text, results, opt) => {
-            return results.map(r => {
+        wholeMonthRefiner.refine = function(text, results, opt){
+            return results.map(function(r){
                 if (!isOnlyCertainMonth(r.start) && r.end && !isOnlyCertainMonth(r.end)) return r
 
                 if (!r.end) r.end = r.start.clone()
@@ -875,8 +875,8 @@
         }
 
         var gbDatesRefiner = new chrono.Refiner();
-        gbDatesRefiner.refine = (text, results, opt) => {
-            return results.map(r => {
+        gbDatesRefiner.refine = function(text, results, opt){
+            return results.map(function(r){
                 if (r.start.isCertain('month') && r.start.isCertain('day') && r.start.get('day') <= 12) {
                     var month = r.start.get('month');
                     var day = r.start.get('day');
@@ -1075,7 +1075,7 @@
         $('.blog-posts-container .posts').html('');
         var childPostId = null;
         eventDates = [];
-        itemList.forEach((item) => {
+        itemList.forEach(function(item){
             var postDateId = parseInt(item.date.replace(/ [0-2][0-9]:[0-5][0-9]/,'').split('/').join(''));
             if (getURLSafeString(getUrlHash()) == getURLSafeString(item.createdOn.toString()) && item.isPublished) childPostId = item.createdOn;
             item.postDateId = postDateId;
@@ -1093,11 +1093,19 @@
     }
 
     function getURLSafeString(string){
-        return removeFromArrayByValue(((string.toLowerCase().replace(/\s+/g,'-')).replace(/[^a-z0-9\-]/ig,'').split('-')).map(x => (x.length > 2 && x != "and" && x != "but") ? x : ''),'').join('-');
+        return removeFromArrayByValue(
+            string
+                .toLowerCase()
+                .replace(/\s+/g,'-')
+                .replace(/[^a-z0-9\-]/ig,'')
+                .split('-')
+                .map(function(x){ return (x.length > 2 && x != "and" && x != "but") ? x : ''})
+                .join('-');
+            , '')
     }
 
     function truncateStringToXWords(string,x){
-        var parts = removeFromArrayByValue(string.split(' ').map((s,i) => (s.length && i < x+1) ? s : ''),'');
+        var parts = removeFromArrayByValue(string.split(' ').map(function(s,i){ return (s.length && i < x+1) ? s : ''}),'');
         return parts.join(' ') + (parts.length >= 75 ? '...' : '');
     }
 
@@ -1175,7 +1183,7 @@
             updatedOn: unix,
             date: parsedDate
         }
-        writeData(createdOnOrNow, post, () => { closeNewPost(true) });
+        writeData(createdOnOrNow, post, function(){ closeNewPost(true) });
     }
 
     function openNewPost(post){
