@@ -233,7 +233,9 @@
         z-index: 30;
         transform: translate(-50%, -50%);
         -webkit-transform: translate(-50%, -50%);
+        max-width: 240px;
         margin: 0;
+        pointer-events: all;
     }
 
     .gmph-sign-in.visible {
@@ -736,7 +738,7 @@
         </div>
     </div>
 
-    <p class="gmph-sign-in visible"><a class="button">Sign in with Twitter</a></p>
+    <div class="gmph-sign-in visible button">Sign in with Twitter</div>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
@@ -797,6 +799,7 @@
 
         firebase.initializeApp(config);
         manageAuth();
+        attachEvents();
 
     }
 
@@ -897,9 +900,6 @@
 
     function attachEvents(){
 
-        $(document).off('click touchstart', '.gmph-sign-in');
-        $(document).on('click touchstart', '.gmph-sign-in', getUserFromLoginDetails);
-
         $(document).off('mouseenter', '.navigation-timeline');
         $(document).off('mouseleave', '.navigation-timeline');
         $(document).on('mouseenter', '.navigation-timeline', function(){
@@ -976,14 +976,20 @@
         $(document).on('click','.posts .post:not(.unpublished)', function(){
             getPostByID($(this).attr('data-id'), openNewPost);
         });
+
+        $(document).off('click', '.gmph-sign-in');
+        $(document).on('click', '.gmph-sign-in', getUser);
+
     }
 
     function displayTimelineMinAndMax(){
         var $posts = $('.posts .post');
         var firstDate = moment(chron.parseDate($posts.eq($posts.length - 1).find('.author').text())).format('MMM D, [<strong>]YYYY[</strong>]');
         var lastDate = moment(chron.parseDate($posts.eq(0).find('.author').text())).format('MMM D, [<strong>]YYYY[</strong>]');
-        $('.navigation-timeline .first-date').html(firstDate);
-        $('.navigation-timeline .last-date').html(lastDate);
+        if (firstDate.toLowerCase() != "invalid date" && lastDate.toLowerCase() != "invalid date"){
+            $('.navigation-timeline .first-date').html(firstDate);
+            $('.navigation-timeline .last-date').html(lastDate);
+        }
     }
 
     function highlightPostForXSeconds(id, s){
