@@ -998,7 +998,7 @@
     function handleTimeTravel(e){
         if (eventDates.length){
             var elm = $(e.target);
-            var xPos = (e.pageX || e.originalEvent.touches[0].pageX) - elm.offset().left;
+            var xPos = (e.pageX || e.originalEvent.touches[0].pageX || e.originalEvent.changedTouches[0].pageX) - elm.offset().left;
             var width = elm.outerWidth();
             var xPerc = xPos / width;
             var earliestDate = eventDates[0] - 200;
