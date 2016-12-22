@@ -736,7 +736,7 @@
         </div>
     </div>
 
-    <p class="gmph-sign-in visible"><a class="button" onClick="getUserFromLoginDetails()">Sign in with Twitter</a></p>
+    <p class="gmph-sign-in visible"><a class="button">Sign in with Twitter</a></p>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
@@ -896,6 +896,9 @@
     }
 
     function attachEvents(){
+
+        $(document).off('click touchstart', '.gmph-sign-in');
+        $(document).on('click touchstart', '.gmph-sign-in', getUserFromLoginDetails);
 
         $(document).off('mouseenter', '.navigation-timeline');
         $(document).off('mouseleave', '.navigation-timeline');
