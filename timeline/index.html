@@ -727,7 +727,7 @@
                 </div>
             </div>
             <div class="posts"></div>
-            <p class="log-in">To contribute a note to be published here, <a class="cursor-pointer" onClick="logIn()">sign in with Twitter</a>. All notes are reviewed and may be edited before publishing.</p>
+            <p class="log-in visible">To contribute a note to be published here, <a class="cursor-pointer" onClick="logIn()">sign in with Twitter</a>. All notes are reviewed and may be edited before publishing.</p>
         </div>
 
     </div>
@@ -832,9 +832,7 @@
     }
 
     function getUser(){
-        // if (!getExistingUser()){
-            getUserFromLoginDetails();
-        // }
+        getUserFromLoginDetails();
     }
 
     function setUpChrono(){
