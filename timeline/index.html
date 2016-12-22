@@ -236,6 +236,7 @@
         max-width: 240px;
         margin: 0;
         pointer-events: all;
+        cursor: pointer;
     }
 
     .gmph-sign-in.visible {
@@ -927,6 +928,7 @@
         $(document).off(clickEventString, '.navigation-timeline');
         $(document).on(clickEventString, '.navigation-timeline', function(e){
             var postId = $(this).find('.timeline-label').attr('data-id');
+            e.stopPropagation();
             $('.posts .post').scrollTop(0);
             if (postId != null && postId != undefined && postId != ""){
                 var $post = $('.posts .post[data-id="'+postId+'"]').eq(0);
@@ -969,6 +971,7 @@
         $(document).off(clickEventString,'.back');
         $(document).on(clickEventString,'.back', function(e){
             if (isChildPage){
+                e.stopPropagation();
                 e.preventDefault();
                 closeChildPage();
             }
@@ -976,11 +979,15 @@
 
         $(document).off(clickEventString,'.posts .post:not(.unpublished)');
         $(document).on(clickEventString,'.posts .post:not(.unpublished)', function(){
+            e.stopPropagation();
             getPostByID($(this).attr('data-id'), openNewPost);
         });
 
         $('.gmph-sign-in').off(clickEventString);
-        $('.gmph-sign-in').on(clickEventString, getUser);
+        $('.gmph-sign-in').on(clickEventString, function(e){
+            e.stopPropagation();
+            getUser();
+        });
 
     }
 
