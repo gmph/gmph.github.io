@@ -1210,8 +1210,6 @@
         var createdOnOrNow = createdOn != null && createdOn != undefined && createdOn != "" && !isNaN(createdOn) ? createdOn : unix;
         var parsedDate = parseDateTimestamp(document.querySelectorAll('.post-new .post-new-date')[0].innerText);
         parsedDate = parsedDate ? parsedDate : parseDateTimestamp(createdOnOrNow);
-        console.log('Published post with parsed date:');
-        console.log(parsedDate);
         var user = firebase.auth().currentUser
         var post = {
             author : getCurrentAuthor(),
@@ -1313,8 +1311,7 @@
             $('.navigation-block').addClass('visible');
             $('.sign-in.popup').removeClass('visible');
 
-            var domainName =  window.location.hostname.replace(/[^a-z0-9]/gi,'-');
-            fPosts = firebase.database().ref(domainName + "/" + firebase.auth().currentUser.uid + "/timelines/" + defaultTimelineKey + "/events/");
+            fPosts = firebase.database().ref(firebase.auth().currentUser.uid + "/timelines/" + defaultTimelineKey + "/events/");
 
             setUpChrono();
             attachEvents();
