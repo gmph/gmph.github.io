@@ -532,7 +532,7 @@
         opacity: 0.4;
     }
 
-    .post .button, .post .button.admin-only {
+    .post .button {
         display: inline-block !important;
         width: auto !important;
         min-width: 0 !important;
@@ -564,17 +564,6 @@
     .button:not(.button-light):hover, a.button:not(.button-light):hover {
         background: #8360f2 !important;
         border-bottom: none;
-    }
-
-    .admin-only {
-        margin-top:8px;
-        display: none !important;
-        pointer-events: none !important;
-    }
-
-    .admin-only.visible {
-        display: block !important;
-        pointer-events: all !important;
     }
 
     .cursor-pointer {
@@ -751,7 +740,6 @@
 
     <script language="javascript">
 
-    var ADMIN_UID = "ePX6xVNfJrOO2gTnGaWERu40zWk2"; // for display only, not security
     var user = null;
     var fPosts;
     var connectedRef;
@@ -1090,8 +1078,7 @@
     }
 
     function getPostElementFromPost(post,isPreview){
-        var isAdmin = firebase.auth().currentUser && firebase.auth().currentUser.uid == ADMIN_UID;
-        if (post.isPublished || isAdmin || post.author.uid == firebase.auth().currentUser.uid) {
+        if (post.isPublished /*|| post.author.uid == firebase.auth().currentUser.uid*/) {
             var isPreview = isPreview && isPreview != null && isPreview === true ? true : false;
             var $post = $('<div class="post"></div>').attr('data-id', post.createdOn);
             var $title = $('<h1>'+post.title+'</h1>');
@@ -1109,8 +1096,8 @@
             }
             $post.append($author);
 
-            if (isAdmin || (firebase.auth().currentUser && post.author.uid == firebase.auth().currentUser.uid)) {
-                $post.append($('<div class="post-delete button button-light admin-only visible">Delete</div>').attr('onclick','deletePost('+post.createdOn+')'));
+            if (firebase.auth().currentUser && post.author.uid == firebase.auth().currentUser.uid) {
+                $post.append($('<div class="post-delete button button-light">Delete</div>').attr('onclick','deletePost('+post.createdOn+')'));
             }
 
             return $post;
@@ -1143,13 +1130,6 @@
     function addCurrentAuthorToNewPost(){
         $('.blog-posts-container .post-new .author').remove();
         var $author = getMetaElement(getCurrentAuthor(), null, true);
-        var verb = isAdmin() ? (publishImmediately ? 'Publishing' : 'Drafting') : 'Contributing';
-        $author.find('.name').text(verb).append('<div class="post-new-signout sans-serif cursor-pointer" onclick="signOut()">Sign out</div>');
-        if (isAdmin()) {
-            $author.addClass('cursor-pointer');
-        } else {
-            $('.post-new-publish').text('Send');
-        }
         $('.blog-posts-container .post-new-publish-container').prepend($author);
     }
 
@@ -1166,7 +1146,7 @@
             author : getCurrentAuthor(),
             content : document.querySelectorAll('.post-new .post-new-content')[0].innerText,
             createdOn : createdOnOrNow,
-            isPublished : isAdmin() ? publishImmediately : false,
+            isPublished : true,
             title : document.querySelectorAll('.post-new .post-new-title')[0].innerText,
             updatedOn: unix,
             date: parsedDate
@@ -1256,17 +1236,11 @@
         $('html,body').scrollTop(returnToScrollPosition);
     }
 
-    function isAdmin(){
-        var user = firebase.auth().currentUser;
-        return user && user.uid == ADMIN_UID;
-    }
-
     function onUserLoggedIn(){
         if (firebase.auth().currentUser) {
             addCurrentAuthorToNewPost();
             $('.navigation-block').addClass('visible');
             $('.log-in').removeClass('visible');
-            isAdmin() ? $('.admin-only').addClass('visible') : $('.admin-only').removeClass('visible');
 
             var domainName =  window.location.hostname.replace(/[^a-z0-9]/gi,'-');
             fPosts = firebase.database().ref(domainName + "/" + firebase.auth().currentUser.uid + "/timelines/" + defaultTimelineKey + "/events/");
@@ -1277,7 +1251,6 @@
         } else {
             $('.post-new, .navigation-block').removeClass('visible');
             $('.log-in').addClass('visible');
-            $('.admin-only').removeClass('visible');
         }
     }
 
