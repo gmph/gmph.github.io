@@ -900,6 +900,8 @@
 
     function attachEvents(){
 
+        var clickEventString = 'click touchstart';
+
         $(document).off('mouseenter', '.navigation-timeline');
         $(document).off('mouseleave', '.navigation-timeline');
         $(document).on('mouseenter', '.navigation-timeline', function(){
@@ -922,8 +924,8 @@
             $(document).off('mousemove', '.navigation-timeline');
         });
 
-        $(document).off('click', '.navigation-timeline');
-        $(document).on('click', '.navigation-timeline', function(e){
+        $(document).off(clickEventString, '.navigation-timeline');
+        $(document).on(clickEventString, '.navigation-timeline', function(e){
             var postId = $(this).find('.timeline-label').attr('data-id');
             $('.posts .post').scrollTop(0);
             if (postId != null && postId != undefined && postId != ""){
@@ -946,8 +948,8 @@
             updateDatePrediction();
         });
 
-        $(document).off('click', '.posts .post a, .posts .post .button, .posts .post .button-light');
-        $(document).on('click', '.posts .post a, .posts .post .button, .posts .post .button-light', function(e){
+        $(document).off(clickEventString, '.posts .post a, .posts .post .button, .posts .post .button-light');
+        $(document).on(clickEventString, '.posts .post a, .posts .post .button, .posts .post .button-light', function(e){
             e.stopPropagation();
         });
 
@@ -964,21 +966,21 @@
             document.execCommand("insertHTML", false, text);
         });
 
-        $(document).off('click','.back');
-        $(document).on('click','.back', function(e){
+        $(document).off(clickEventString,'.back');
+        $(document).on(clickEventString,'.back', function(e){
             if (isChildPage){
                 e.preventDefault();
                 closeChildPage();
             }
         });
 
-        $(document).off('click','.posts .post:not(.unpublished)');
-        $(document).on('click','.posts .post:not(.unpublished)', function(){
+        $(document).off(clickEventString,'.posts .post:not(.unpublished)');
+        $(document).on(clickEventString,'.posts .post:not(.unpublished)', function(){
             getPostByID($(this).attr('data-id'), openNewPost);
         });
 
-        $(document).off('click', '.gmph-sign-in');
-        $(document).on('click', '.gmph-sign-in', getUser);
+        $(document).off(clickEventString, '.gmph-sign-in');
+        $(document).on(clickEventString, '.gmph-sign-in', getUser);
 
     }
 
