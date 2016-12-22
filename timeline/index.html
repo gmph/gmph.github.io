@@ -98,6 +98,35 @@
         padding: 24px 0 0 0;
     }
 
+    .popup {
+        display: block;
+        position: fixed;
+        top: 55%;
+        left: 50%;
+        z-index: 20;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        width: 90%;
+        max-width: 640px;
+        max-height: 90vh;
+        margin: 0 -4px 0 0;
+        padding: 40px;
+        background-color: #fff;
+        box-shadow: 0 1px 4px rgba(0,0,0,.1), 0 4px 24px rgba(0,0,0,.15);
+        border-radius: 4px;
+        vertical-align: top;
+        opacity: 0;
+        pointer-events: none;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .popup.visible {
+        top: 50%;
+        opacity: 1;
+        pointer-events: all;
+    }
+
     .loading {
         display: block;
         position: absolute;
@@ -250,29 +279,6 @@
         padding: 32px 24px 16px 24px;
     }
 
-    .blog-posts-container .post-new {
-        display: block;
-        position: fixed;
-        top: 55%;
-        left: 50%;
-        z-index: 20;
-        transform: translate(-50%, -50%);
-        -webkit-transform: translate(-50%, -50%);
-        width: 90%;
-        max-width: 640px;
-        max-height: 90vh;
-        margin: 0 -4px 0 0;
-        padding: 40px 40px 32px 40px;
-        background-color: #fff;
-        box-shadow: 0 1px 4px rgba(0,0,0,.1), 0 4px 24px rgba(0,0,0,.15);
-        border-radius: 4px;
-        vertical-align: top;
-        opacity: 0;
-        pointer-events: none;
-        overflow-y: scroll;
-        overflow-x: hidden;
-    }
-
     .blog-posts-container .navigation-block {
         display: block;
         position: static;
@@ -421,11 +427,15 @@
         box-shadow: 0 1px 0 #eee;
     }
 
+    .blog-posts-container .post-new .post-new-title {
+        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+        font-size: 28px;
+    }
+
     .blog-posts-container .post-new .post-new-content, .blog-posts-container .post-new .post-new-date {
         font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
         font-size: 18px;
     }
-
 
     .blog-posts-container .post-new .post-new-title:focus, .blog-posts-container .post-new .post-new-content:focus, .blog-posts-container .post-new .post-new-date:focus {
         box-shadow: 0 2px 0 #8B67FF;
@@ -536,6 +546,13 @@
         min-height: 1em;
         cursor: text;
         white-space: pre-wrap;
+        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        box-shadow: 0 1px 0 #eee;
+    }
+
+    [contenteditable="true"]:focus,[contentedatible=""]:focus {
+        box-shadow: 0 2px 0 #8B67FF;
     }
 
     [contenteditable="true"]:empty:before, [contentedatible=""]:empty:before {
@@ -673,23 +690,7 @@
     }
 
     .blog-posts-container .post-child {
-        display: block;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        z-index: 10;
-        transform: translate(-50%, -50%);
-        -webkit-transform: translate(-50%, -50%);
-        width: 90%;
-        max-width: 640px;
-        max-height: 90vh;
-        margin: 0;
         padding: 56px;
-        background: #fff;
-        border-radius: 4px;
-        box-shadow: 0 1px 4px rgba(0,0,0,.1), 0 4px 24px rgba(0,0,0,.15);
-        overflow-y: scroll !important;
-        overflow-x: hidden !important;
     }
 
     .blog-posts-container .post-child .post-content .post {
@@ -699,6 +700,26 @@
     .block {
         display: block;
         overflow: hidden;
+    }
+
+    .sign-in {
+        z-index: 50;
+    }
+
+    .sign-in .display-as-h1 {
+        font-size: 24px;
+        margin: 0 auto 32px auto !important;
+    }
+
+    .sign-in .display-as-p {
+        margin: 0 auto 28px auto !important;
+        padding-bottom: 8px !important;
+    }
+
+    .sign-in .sign-in-password {
+        -webkit-text-security: disc;
+        -webkit-appearance: textfield;
+        -webkit-user-select: text;
     }
 
     @media (max-width: 560px){
@@ -720,7 +741,7 @@
     <div class="block">
         <div class="blog-posts-container">
             <div class="post-new-open" onclick="openNewPost()"></div>
-            <div class="post-child">
+            <div class="post-child popup">
                 <div class="post-content"></div>
                 <div class="button back sans-serif" onclick="closeChildPage()">Close</div>
             </div>
@@ -734,7 +755,7 @@
                     </div>
                 </div>
             </div>
-            <div class="post-new">
+            <div class="post-new popup">
                 <div class="post-new-title display-as-h1" data-placeholder="Title" contenteditable="true"></div>
                 <div class="post-new-date display-as-p" data-placeholder="Type a date (e.g. May 5 1996)" contenteditable="true"></div>
                 <div class="post-new-content display-as-p" data-placeholder="Type some details about this event (optional)" contenteditable="true"></div>
@@ -747,7 +768,14 @@
         </div>
     </div>
 
-    <div class="gmph-sign-in visible button">Sign in with Twitter</div>
+    <div class="sign-in popup">
+        <h1 class="display-as-h1">Sign in</h1>
+        <div class="sign-in-email display-as-p" data-placeholder="Email address" contenteditable="true"></div>
+        <div class="sign-in-password display-as-p" data-placeholder="Password" contenteditable="true"></div>
+        <div class="sign-in-submit button">Sign in</div>
+    </div>
+
+    <!-- <div class="gmph-sign-in visible button">Sign in with Twitter</div> -->
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
@@ -834,11 +862,7 @@
     function manageAuth(){
 
         firebase.auth().onAuthStateChanged(function (user) {
-            if (!firebase.auth().currentUser){
-                // getUser();
-            } else {
-                onUserLoggedIn();
-            }
+            setSignInOrUserState();
         });
 
     }
@@ -982,15 +1006,24 @@
         });
 
         $(document).off(clickEventString,'.posts .post:not(.unpublished)');
-        $(document).on(clickEventString,'.posts .post:not(.unpublished)', function(){
+        $(document).on(clickEventString,'.posts .post:not(.unpublished)', function(e){
             e.stopPropagation();
             getPostByID($(this).attr('data-id'), openNewPost);
         });
 
-        $('.gmph-sign-in').off(clickEventString);
-        $('.gmph-sign-in').on(clickEventString, function(e){
+        $(document).off(clickEventString, '.gmph-sign-in');
+        $(document).on(clickEventString, '.gmph-sign-in', function(e){
             e.stopPropagation();
             getUser();
+        });
+
+        $(document).off(clickEventString, '.sign-in .sign-in-submit');
+        $(document).on(clickEventString, '.sign-in .sign-in-submit', function(e){
+            e.stopPropagation();
+            var $form = $(this).closest('.sign-in');
+            var email = $form.find('.sign-in-email').text()
+            var password = $form.find('.sign-in-password').text();
+            signInOrCreateUserWithEmailAndPassword(email, password);
         });
 
     }
@@ -1274,11 +1307,11 @@
         $('html,body').scrollTop(returnToScrollPosition);
     }
 
-    function onUserLoggedIn(){
+    function setSignInOrUserState(){
         if (firebase.auth().currentUser) {
             addCurrentAuthorToNewPost();
             $('.navigation-block').addClass('visible');
-            $('.gmph-sign-in').removeClass('visible');
+            $('.sign-in.popup').removeClass('visible');
 
             var domainName =  window.location.hostname.replace(/[^a-z0-9]/gi,'-');
             fPosts = firebase.database().ref(domainName + "/" + firebase.auth().currentUser.uid + "/timelines/" + defaultTimelineKey + "/events/");
@@ -1288,7 +1321,7 @@
             getInitialData();
         } else {
             $('.post-new, .navigation-block').removeClass('visible');
-            $('.gmph-sign-in').addClass('visible');
+            $('.sign-in.popup').addClass('visible');
         }
     }
 
@@ -1306,12 +1339,17 @@
         return timestamp = parsedDate.length ? moment(parsedDate[0].start.date()).format('YYYY/MM/DD HH:mm') : false;
     }
 
+    function signInOrCreateUserWithEmailAndPassword(email, password){
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+            if (error.code === "auth/user-not-found"){
+                return firebase.auth().createUserWithEmailAndPassword(email, password);
+            }
+        });
+    }
+
     function getUserFromLoginDetails(){
 
         firebase.auth().getRedirectResult().then(function(result) {
-
-            firebase.auth().currentUser.updateEmail(result.user.displayName.toLowerCase().replace(/\s/g,'+').substring(0,20)+'+'+result.user.uid+'+gmphblog'+'@gmph.co');
-
             if (result.user){
                 user = result.user;
                 removeCookie('gmphblog_user');
@@ -1320,7 +1358,6 @@
                 var provider = new firebase.auth.TwitterAuthProvider();
                 firebase.auth().signInWithRedirect(provider);
             }
-
         }).catch(function(error) {
             var provider = new firebase.auth.TwitterAuthProvider();
             firebase.auth().signInWithRedirect(provider);
