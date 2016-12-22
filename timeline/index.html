@@ -308,7 +308,7 @@
     }
 
     .blog-posts-container:not(.child-page) .navigation-block .navigation-timeline::after {
-        content: "Hover and click to time travel";
+        content: "Time travel";
         display: block;
         position: absolute;
         top: 50%;
@@ -328,7 +328,7 @@
     }
 
     .blog-posts-container .navigation-block .navigation-timeline:hover::after {
-        content: "Hover and click to time travel";
+        content: "Time travel";
         display: block;
         position: absolute;
         top: -50%;
@@ -908,23 +908,17 @@
         $(document).off('mouseenter', '.navigation-timeline');
         $(document).off('mouseleave', '.navigation-timeline');
         $(document).on('mouseenter', '.navigation-timeline', function(){
-            $(document).on('mousemove', '.navigation-timeline', function(e){
-                if (eventDates.length){
-                    var elm = $(this);
-                    var xPos = e.pageX - elm.offset().left;
-                    var width = elm.outerWidth();
-                    var xPerc = xPos / width;
-                    var earliestDate = eventDates[0] - 200;
-                    var latestDate = eventDates[eventDates.length - 1] + 200;
-                    var xDate = parseInt(earliestDate + ((latestDate - earliestDate) * xPerc));
-                    var closestDate = closestNumberInArray(xDate, eventDates);
-                    var datePerc = eventDates.indexOf(closestDate) / eventDates.length;
-                    var $post = $('[data-dateid="' + closestDate + '"]').eq(0);
-                    elm.find('.timeline-label').html($post.attr('data-date').replace(/, /,', <strong>') + "</strong>").attr('data-id',$post.attr('data-id')).attr('data-perc', datePerc).css('left', (100 * (0.05 + (xPerc * 0.9))) + "%");
-                }
-            });
+            $(document).on('mousemove', '.navigation-timeline', handleTimeTravel);
         }).on('mouseleave', function(){
             $(document).off('mousemove', '.navigation-timeline');
+        });
+
+        $(document).off('touchstart', '.navigation-timeline');
+        $(document).off('touchend', '.navigation-timeline');
+        $(document).on('touchstart', '.navigation-timeline', function(){
+            $(document).on('touchmove', '.navigation-timeline', handleTimeTravel);
+        }).on('touchend', function(){
+            $(document).off('touchmove', '.navigation-timeline');
         });
 
         $(document).off(clickEventString, '.navigation-timeline');
@@ -991,6 +985,22 @@
             getUser();
         });
 
+    }
+
+    function handleTimeTravel(e){
+        if (eventDates.length){
+            var elm = $(e.target);
+            var xPos = e.pageX - elm.offset().left;
+            var width = elm.outerWidth();
+            var xPerc = xPos / width;
+            var earliestDate = eventDates[0] - 200;
+            var latestDate = eventDates[eventDates.length - 1] + 200;
+            var xDate = parseInt(earliestDate + ((latestDate - earliestDate) * xPerc));
+            var closestDate = closestNumberInArray(xDate, eventDates);
+            var datePerc = eventDates.indexOf(closestDate) / eventDates.length;
+            var $post = $('[data-dateid="' + closestDate + '"]').eq(0);
+            elm.find('.timeline-label').html($post.attr('data-date').replace(/, /,', <strong>') + "</strong>").attr('data-id',$post.attr('data-id')).attr('data-perc', datePerc).css('left', (100 * (0.05 + (xPerc * 0.9))) + "%");
+        }
     }
 
     function displayTimelineMinAndMax(){
