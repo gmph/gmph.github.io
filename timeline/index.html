@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+
+<html id="top">
+<head>
+
+    <title>Timeline | Graham Macphee</title>
+    <meta name="author" content="Graham Macphee" />
+    <meta name="description" content="" />
+    <meta name="keywords" content=""/>
+    <meta charset="utf-8">
+
+    <!-- Facebook -->
+    <meta property="og:url"                content="http://gmph.co/timeline/" />
+    <meta property="og:type"               content="article" />
+    <meta property="og:title"              content="Timeline | Graham Macphee" />
+    <meta property="og:description"        content="" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card"              content="summary">
+    <meta name="twitter:site"              content="@gmph">
+    <meta name="twitter:creator"           content="@gmph">
+    <meta name="twitter:title"             content="Timeline | Graham Macphee">
+    <meta name="twitter:description"       content="">
+    <meta property="twitter:account_id"    content="87261538" /> <!-- @gmph -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400' rel='stylesheet' type='text/css'>
+
+    <link rel="shortcut icon" href="/res/img/ptlogooutline.png">
+    <meta name="theme-color" content="#f8f8f8">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link href="/res/css/main.css" rel="stylesheet" type="text/css">
+
+
+    <style type="text/css">
+
+    /* CSS RESET */
+
+    textarea, input {
+        outline: none;
+    }
+
+    * {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -moz-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-touch-callout: none;
+        /*-webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;*/
+    }
+
+    :focus {
+        outline-color: transparent;
+        outline-style: none;
+    }
+
+    /* END CSS RESET */
+
+    @font-face {
+        font-family: 'Helvetica Neue';
+        src: url('/res/font/hnl.ttf') format('truetype');
+        font-weight: 300;
+    }
+
+    @font-face {
+        font-family: 'Helvetica Neue';
+        src: url('/res/font/hnn.ttf') format('truetype');
+        font-weight: 400;
+    }
+
+    @font-face {
+        font-family: 'Helvetica Neue';
+        src: url('/res/font/hnm.ttf') format('truetype');
+        font-weight: 500;
+    }
+
+    @font-face {
+        font-family: 'Helvetica Neue';
+        src: url('/res/font/hnb.ttf') format('truetype');
+        font-weight: 700;
+    }
+
+    html, body, .posttabs, .blog-posts-container {
+        background: #f8f8f8 !important;
+    }
+
+    .block {
+        width: 100%;
+        z-index: none;
+        transform: none;
+        -webkit-transform:none;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 24px 0 0 0;
+    }
+
+    .loading {
+        display: block;
+        position: absolute;
+        width:100%;
+        max-width:800px;
+        height:auto;
+        overflow: hidden;
+        border-radius: 4px;
+        opacity: 0.99;
+        color: #222;
+        opacity: 0;
+        text-align: center;
+        margin:40px auto 0 auto;
+        padding: 32px;
+        line-height: 1.32em;
+        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+        font-size:18px;
+        pointer-events: none;
+    }
+
+    .loading.visible {
+        opacity: 0.3;
+        pointer-events: all;
+    }
+
+    .connection {
+        display: block;
+        position: relative;
+        top:0;
+        left:0;
+    }
+
+    .connection.visible:not(.not-yet-established) {
+        margin:0 0 40px 0;
+    }
+
+    .connection .banner {
+        display: block;
+        position: fixed;
+        top:-40px;
+        left:0;
+        z-index: 30;
+        width:100%;
+        height:40px;
+        margin:0 auto;
+        padding:12px;
+        border: none;
+        background: #E64444;
+        font-family: "Helvetica Neue", Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        line-height: 16px;
+        color:white;
+        text-align: center;
+    }
+
+    .connection.visible:not(.not-yet-established) .banner {
+        top:0;
+    }
+
+    .blog-posts-container {
+        width: 100%;
+        margin: 0 auto 0 auto;
+        padding: 0;
+        background: #fff;
+    }
+
+    .blog-posts-container.child-page .posts, .blog-posts-container.child-page .navigation-block, .blog-posts-container.child-page .log-in, .blog-posts-container.child-page .post-new-open {
+        opacity: 0.15 !important;
+        pointer-events: none !important
+    }
+
+    .blog-posts-container .post-child:not(.visible) {
+        top: 55% !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+
+    .blog-posts-container .post {
+        margin: 0 auto 80px auto;
+    }
+
+    .blog-posts-container .post.unpublished {
+        opacity: 1;
+    }
+
+    .blog-posts-container .author {
+        display: block;
+        position: relative;
+        top:0;
+        left:0;
+        max-width: 100%;
+        height: 40px;
+        margin: 20px 0 16px 0;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .blog-posts-container .author img {
+        display: block;
+        position: absolute;
+        top:0;
+        left:0;
+        width: auto;
+        height: 100%;
+        margin:0;
+        border-radius: 20px;
+        transform: translateZ(0);
+    }
+
+    .blog-posts-container .author .name {
+        display: inline-block;
+        position: relative;
+        width: auto;
+        height: auto;
+        max-width: -webkit-calc(100% - 24px);
+        max-width: calc(100% - 24px);
+        /*margin: 8px 0 8px 56px;*/
+        margin: 8px 0;
+        padding: 0;
+        color: #666;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .blog-posts-container .log-in {
+        display: none;
+    }
+
+    .blog-posts-container .log-in.visible {
+        display: block;
+        margin: 40px 0 0 0;
+    }
+
+    .blog-posts-container .user-block {
+        display: block;
+        position: relative;
+        padding: 32px 24px 16px 24px;
+    }
+
+    .blog-posts-container .post-new {
+        display: block;
+        position: fixed;
+        top: 55%;
+        left: 50%;
+        z-index: 20;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        width: 90%;
+        max-width: 640px;
+        max-height: 90vh;
+        margin: 0 -4px 0 0;
+        padding: 40px 40px 32px 40px;
+        background-color: #fff;
+        box-shadow: 0 1px 4px rgba(0,0,0,.1), 0 4px 24px rgba(0,0,0,.15);
+        border-radius: 4px;
+        vertical-align: top;
+        opacity: 0;
+        pointer-events: none;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .blog-posts-container .navigation-block {
+        display: block;
+        position: static;
+        width: 100%;
+        margin: 0;
+        padding: 4px 8px;
+        background-color: transparent;
+        vertical-align: top;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .blog-posts-container .navigation-block h1 {
+        font-size: 24px;
+        line-height: 1.2em;
+        margin: 0;
+        padding: 0;
+    }
+
+    .blog-posts-container .navigation-block .navigation-timeline {
+        display: block;
+        position: absolute;
+        top: 26px;
+        left: 200px;
+        width: -webkit-calc(100% - 320px);
+        width: calc(100% - 320px);
+        height: 48px;
+        margin: 0 auto 0 auto;
+        background: #eee;
+        border-radius: 24px;
+        box-shadow: -24px 0 0 #eee, 24px 0 0 #eee;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    .blog-posts-container:not(.child-page) .navigation-block .navigation-timeline::after {
+        content: "Hover and click to time travel";
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transform: -webkit-translate(-50%, -50%);
+        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        color: #888;
+        opacity: 1;
+        pointer-events: none;
+
+        transition:.1s all ease-out;
+        -webkit-transition:.1s all ease-out;
+        -moz-transition:.1s all ease-out;
+        -o-transition:.1s all ease-out;
+    }
+
+    .blog-posts-container .navigation-block .navigation-timeline:hover::after {
+        content: "Hover and click to time travel";
+        display: block;
+        position: absolute;
+        top: -50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transform: -webkit-translate(-50%, -50%);
+        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        color: #888;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .blog-posts-container .navigation-block .navigation-timeline .timeline-label {
+        display: block;
+        position: absolute;
+        top: 150%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transform: -webkit-translate(-50%, -50%);
+        width: auto;
+        height: auto;
+        margin: 0;
+        padding: 0 8px;
+        white-space: nowrap;
+        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        color: #222;
+        pointer-events: none;
+        opacity: 0;
+
+        -webkit-transition: 0s, .1s opacity ease-in-out, .15s top ease-in-out;
+        -moz-transition: 0s, .1s opacity ease-in-out, .15s top ease-in-out;
+        -ms-transition: 0s, .1s opacity ease-in-out, .15s top ease-in-out;
+        -o-transition: 0s, .1s opacity ease-in-out, .15s top ease-in-out;
+        transition: 0s, .1s opacity ease-in-out, .15s top ease-in-out;
+    }
+
+    .blog-posts-container .navigation-block .navigation-timeline:hover .timeline-label {
+        top: 50%;
+        opacity: 1;
+    }
+
+    .blog-posts-container .navigation-block .navigation-timeline .first-date, .blog-posts-container .navigation-block .navigation-timeline .last-date {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 4px;
+        bottom: auto;
+        right: auto;
+        transform: translate(0, -50%);
+        transform: -webkit-translate(0, -50%);
+        width: auto;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        white-space: nowrap;
+        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        color: #aaa;
+        pointer-events: none;
+        opacity: 1;
+    }
+
+    .blog-posts-container .navigation-block .navigation-timeline:hover .first-date, .blog-posts-container .navigation-block .navigation-timeline:hover .last-date {
+        opacity: 0.2;
+    }
+
+    .blog-posts-container .navigation-block .navigation-timeline .last-date {
+        left: auto;
+        right: 4px;
+    }
+
+    .blog-posts-container .post-new.visible, .blog-posts-container .navigation-block.visible {
+        top: 50%;
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .blog-posts-container .post-new .post-new-title, .blog-posts-container .post-new .post-new-content, .blog-posts-container .post-new .post-new-date {
+        min-height: 28px;
+        padding-bottom: 10px;
+        background: #fff;
+        box-shadow: 0 1px 0 #eee;
+    }
+
+    .blog-posts-container .post-new .post-new-content, .blog-posts-container .post-new .post-new-date {
+        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+        font-size: 18px;
+    }
+
+
+    .blog-posts-container .post-new .post-new-title:focus, .blog-posts-container .post-new .post-new-content:focus, .blog-posts-container .post-new .post-new-date:focus {
+        box-shadow: 0 2px 0 #8B67FF;
+    }
+
+    .blog-posts-container .post-new .post-new-date {
+        margin: 32px 0;
+    }
+
+    .blog-posts-container .post-new .post-new-content {
+        height: auto;
+        min-height: 28px;
+        max-height: -webkit-calc(90vh - 300px);
+        max-height: calc(90vh - 300px);
+        white-space: normal;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    .blog-posts-container .post-new .post-new-publish-container {
+        margin: 0;
+    }
+
+    .blog-posts-container .post-new .author {
+        display: inline-block;
+        width: auto;
+        margin: 48px 0 0 0;
+    }
+
+    .blog-posts-container .post-new-signout {
+        display: inline-block;
+        position: relative;
+        width: auto;
+        margin: 0 0 0 16px;
+        padding: 0;
+        color: #999;
+    }
+
+    .blog-posts-container .post-new-open {
+        display: block;
+        position: fixed;;
+        top: 24px;
+        left: auto;
+        bottom: auto;
+        right: 24px;
+        z-index: 5;
+        width: 48px;
+        height: 48px;
+        background-color: #888;
+        background-image: url(add.png);
+        background-size: 32px 32px;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 32px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0);
+        cursor: pointer;
+    }
+
+    .blog-posts-container .post-new-open:hover {
+        transform: scale(1.05);
+        transform: -webkit-scale(1.05);
+        box-shadow: 0 4px 8px rgba(0,0,0,.4);
+        background-color: #8B67FF;
+    }
+
+    .post-new-publish-container {
+        display: block;
+        position: relative;
+    }
+
+    .blog-posts-container .post-new-close {
+        display: inline-block;
+        position: absolute;
+        top: auto;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        vertical-align: middle;
+        width: 40%;
+        max-width: 120px;
+        margin: 0;
+        padding: 10px 10px 12px 10px;
+        background: #aaa;
+    }
+
+    .blog-posts-container .post-new-close.button:not(.button-light):hover {
+        background: #999 !important;
+    }
+
+    .blog-posts-container .post-new-publish {
+        display: inline-block;
+        position: absolute;
+        top: auto;
+        left: auto;
+        bottom: 0;
+        right: 0;
+        vertical-align: middle;
+        width: 36%;
+        max-width: 120px;
+        margin: 0;
+        padding: 10px 10px 12px 10px;
+    }
+
+    [contenteditable="true"],[contentedatible=""] {
+        display: block;
+        position: relative;
+        width: 100%;
+        min-height: 1em;
+        cursor: text;
+        white-space: pre-wrap;
+    }
+
+    [contenteditable="true"]:empty:before, [contentedatible=""]:empty:before {
+        content: attr(data-placeholder);
+        display: block;
+        position: absolute;
+        top:0;
+        left:0;
+        opacity: 0.4;
+    }
+
+    .post .button, .post .button.admin-only {
+        display: inline-block !important;
+        width: auto !important;
+        min-width: 0 !important;
+        margin: 0 16px 0 -8px;
+        padding: 8px;
+        background: none !important;
+        box-shadow: none !important;
+        text-align: left;
+    }
+
+    .button-light {
+        font-size: 14px;
+        font-weight: 500;
+        color: #888 !important;
+        background: none !important;
+        border: none !important;
+        color: #8B67FF !important;
+    }
+
+    .button.disabled {
+        opacity: 0.5 !important;
+        pointer-events: none;
+    }
+
+    .button, a.button {
+        border-bottom: none;
+    }
+
+    .button:not(.button-light):hover, a.button:not(.button-light):hover {
+        background: #8360f2 !important;
+        border-bottom: none;
+    }
+
+    .admin-only {
+        margin-top:8px;
+        display: none !important;
+        pointer-events: none !important;
+    }
+
+    .admin-only.visible {
+        display: block !important;
+        pointer-events: all !important;
+    }
+
+    .cursor-pointer {
+        cursor: pointer !important;
+    }
+
+    .blog-posts-container {
+        display: block;
+        position: absolute;
+        top:0;
+        left:0;
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    .posts {
+        display: block;
+        position: absolute;;
+        top: 96px;
+        left:0;
+        width: 100%;
+        height: -webkit-calc(100vh - 96px);
+        height: calc(100vh - 96px);
+        padding: 12px 12px 32px 12px;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+        direction: rtl;
+        text-align: left;
+    }
+
+    .posts .post {
+        position: relative;
+        top:0;
+        left:0;
+        width: 100%;
+        max-width: 300px;
+        max-height: 100%;
+        display: inline-block;
+        vertical-align: top;
+        margin: 0 12px;
+        padding: 20px;
+        box-shadow: 0 1px 4px rgba(0,0,0,.1);
+        background-color: #fff;
+        border-radius: 4px;
+        text-align: left;
+        cursor: pointer;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        direction: ltr;
+    }
+
+    .posts .post:hover {
+        box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    }
+
+    .posts .post * {
+        direction: ltr;
+        text-align: left;
+        white-space: normal;
+    }
+
+    .posts .post h1 {
+        position: static;
+        font-size: 20px;
+        line-height: 1.5em;
+    }
+
+    .posts .post img, .posts .post a, .posts .post h2, .posts .post h3, .posts .post h4, .posts .post ul, .posts .post ol, .posts .post li {
+        position: static;
+    }
+
+    .posts .post p {
+        position: static;
+        margin-top: 8px;
+    }
+
+    .posts .post a {
+        opacity: 1;
+    }
+
+    .posts .post p, .posts .post ul, .posts .post ol, .posts .post blockquote, .posts .post code {
+        margin-top: 8px;
+        font-size: 15px;
+    }
+
+    .posts .post .author {
+        margin: 8px 0;
+    }
+
+    .blog-posts-container .post-child {
+        display: block;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        z-index: 10;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        width: 90%;
+        max-width: 640px;
+        max-height: 90vh;
+        margin: 0;
+        padding: 56px;
+        background: #fff;
+        border-radius: 4px;
+        box-shadow: 0 1px 4px rgba(0,0,0,.1), 0 4px 24px rgba(0,0,0,.15);
+        overflow-y: scroll !important;
+        overflow-x: hidden !important;
+    }
+
+    .blog-posts-container .post-child .post-content .post {
+        margin-bottom: 40px;
+    }
+
+    .block {
+        display: block;
+        overflow: hidden;
+    }
+
+    html, body {
+        min-height: 100vh;
+    }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="connection not-yet-established">
+        <div class="banner">No connection. Changes may not be saved.</div>
+    </div>
+
+    <div class="block">
+        <div class="blog-posts-container">
+            <div class="post-new-open" onclick="openNewPost()"></div>
+            <div class="post-child">
+                <div class="post-content"></div>
+                <div class="button back sans-serif" onclick="closeChildPage()">Close</div>
+            </div>
+            <div class="user-block">
+                <div class="navigation-block">
+                    <h1>Timeline</h1>
+                    <div class="navigation-timeline">
+                        <div class="first-date"></div>
+                        <div class="last-date"></div>
+                        <div class="timeline-label"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="post-new">
+                <div class="post-new-title display-as-h1" data-placeholder="Title" contenteditable="true"></div>
+                <div class="post-new-date display-as-p" data-placeholder="Type a date (e.g. May 5 1996)" contenteditable="true"></div>
+                <div class="post-new-content display-as-p" data-placeholder="Type some details about this event (optional)" contenteditable="true"></div>
+                <div class="post-new-publish-container">
+                    <div class="post-new-close button" onclick="closeNewPost()">Cancel</div>
+                    <div class="post-new-publish button disabled" onclick="createPost()">Save</div>
+                </div>
+            </div>
+            <div class="posts"></div>
+            <p class="log-in">To contribute a note to be published here, <a class="cursor-pointer" onClick="logIn()">sign in with Twitter</a>. All notes are reviewed and may be edited before publishing.</p>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/chrono/1.2.5/chrono.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.js"></script>
+
+    <script language="javascript">
+
+    var ADMIN_UID = "ePX6xVNfJrOO2gTnGaWERu40zWk2"; // for display only, not security
+    var user = null;
+    var fPosts;
+    var connectedRef;
+    var defaultTimelineKey = 0;
+    var publishImmediately = true;
+    var manualDateSet = false;
+    var isChildPage = false;
+    var returnToScrollPosition = 0;
+    var chron = new chrono.Chrono();
+    var eventDates = [];
+
+    $(document).ready(function(){
+        init();
+    });
+
+    var loading = function(){
+
+        var isLoading = false;
+
+        function show(bool){
+            var bool = bool === false ? false : true;
+            if (bool){
+                $('.loading').addClass('visible');
+                isLoading = true;
+            } else {
+                $('.block').addClass('visible');
+                $('.loading').removeClass('visible');
+                isLoading = false;
+            }
+        }
+
+        return {
+            isLoading : isLoading,
+            show : show
+        }
+
+    }()
+
+    function init(){
+
+        // Firebase
+        var config = {
+            apiKey: "AIzaSyDyGLTluIS4SwTQefYdFXjczodfnSZSAJA",
+            authDomain: "gmphtimeline.firebaseapp.com",
+            databaseURL: "https://gmphtimeline.firebaseio.com",
+            storageBucket: "gmphtimeline.appspot.com",
+            messagingSenderId: "854285682295"
+        };
+
+        firebase.initializeApp(config);
+        manageAuth();
+
+    }
+
+    function closeNewPost(didPost){
+        window.location.hash = "";
+        manualDateSet = false;
+        if (didPost === true) {
+            var originaltext = $('.post-new-publish').text();
+            $('.post-new-publish').addClass('disabled').text('Done!');
+            setTimeout(function(){
+                $('.post-new-publish').text(originaltext);
+            },2000);
+        }
+        $('.blog-posts-container').removeClass('child-page')
+        setTimeout(function(){
+            $('.post-new-title, .post-new-content, .post-new-date').text('');
+        },500);
+        $('.post-new').attr('data-id','').removeClass('visible');
+    };
+
+    function manageAuth(){
+
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (!firebase.auth().currentUser){
+                getUser();
+            } else {
+                onUserLoggedIn();
+            }
+        });
+
+    }
+
+    function setNoConnectionBarVisible(shouldSetAsVisible){
+        if (shouldSetAsVisible){
+            $('.connection').removeClass('visible').removeClass('not-yet-established');
+        } else {
+            $('.connection').addClass('visible');
+        }
+    }
+
+    function getUser(){
+        // if (!getExistingUser()){
+            getUserFromLoginDetails();
+        // }
+    }
+
+    function setUpChrono(){
+
+        var wholeMonthRefiner = new chrono.Refiner();
+        wholeMonthRefiner.refine = (text, results, opt) => {
+            return results.map(r => {
+                if (!isOnlyCertainMonth(r.start) && r.end && !isOnlyCertainMonth(r.end)) return r
+
+                if (!r.end) r.end = r.start.clone()
+
+                r.start.imply('day', 1)
+                r.start.imply('hour', 0)
+                r.start.imply('minute', 0)
+                r.start.imply('second', 0)
+                r.start.imply('millisecond', 0)
+
+                var momentEnd = moment(r.end.date()).endOf('month')
+                r.end.assign('month', momentEnd.get('month') + 1)
+                r.end.imply('day', momentEnd.get('date'))
+                r.end.imply('hour', momentEnd.get('hour'))
+                r.end.imply('minute', momentEnd.get('minute'))
+                r.end.imply('second', momentEnd.get('second'))
+                r.end.imply('millisecond', momentEnd.get('millisecond'))
+
+                return r
+            });
+        }
+
+        var gbDatesRefiner = new chrono.Refiner();
+        gbDatesRefiner.refine = (text, results, opt) => {
+            return results.map(r => {
+                if (r.start.isCertain('month') && r.start.isCertain('day') && r.start.get('day') <= 12) {
+                    var month = r.start.get('month');
+                    var day = r.start.get('day');
+                    r.start.assign('month', day);
+                    r.start.assign('day', month);
+                }
+                return r;
+            });
+        }
+
+        chron.refiners.push(wholeMonthRefiner);
+        // chron.refiners.push(gbDatesRefiner);
+
+    }
+
+    function isOnlyCertainMonth (date) {
+        return date.isCertain('month')
+        && !date.isCertain('day')
+        && !date.isCertain('hour')
+        && !date.isCertain('minute')
+        && !date.isCertain('second')
+        && !date.isCertain('millisecond')
+    }
+
+    function attachEvents(){
+
+        $(document).off('mouseenter', '.navigation-timeline');
+        $(document).off('mouseleave', '.navigation-timeline');
+        $(document).on('mouseenter', '.navigation-timeline', function(){
+            $(document).on('mousemove', '.navigation-timeline', function(e){
+                if (eventDates.length){
+                    var elm = $(this);
+                    var xPos = e.pageX - elm.offset().left;
+                    var width = elm.outerWidth();
+                    var xPerc = xPos / width;
+                    var earliestDate = eventDates[0] - 200;
+                    var latestDate = eventDates[eventDates.length - 1] + 200;
+                    var xDate = parseInt(earliestDate + ((latestDate - earliestDate) * xPerc));
+                    var closestDate = closestNumberInArray(xDate, eventDates);
+                    var datePerc = eventDates.indexOf(closestDate) / eventDates.length;
+                    var $post = $('[data-dateid="' + closestDate + '"]').eq(0);
+                    elm.find('.timeline-label').html($post.attr('data-date').replace(/, /,', <strong>') + "</strong>").attr('data-id',$post.attr('data-id')).attr('data-perc', datePerc).css('left', (100 * (0.05 + (xPerc * 0.9))) + "%");
+                }
+            });
+        }).on('mouseleave', function(){
+            $(document).off('mousemove', '.navigation-timeline');
+        });
+
+        $(document).off('click', '.navigation-timeline');
+        $(document).on('click', '.navigation-timeline', function(e){
+            var postId = $(this).find('.timeline-label').attr('data-id');
+            $('.posts .post').scrollTop(0);
+            if (postId != null && postId != undefined && postId != ""){
+                var $post = $('.posts .post[data-id="'+postId+'"]').eq(0);
+                $('.posts').animate({
+                    scrollLeft: $('.posts').get(0).scrollWidth * parseFloat($('.navigation-timeline .timeline-label').attr('data-perc')) - 64,
+                });
+                highlightPostForXSeconds(postId,1);
+            }
+        });
+
+        $(document).off('keyup', '.post-new-title, .post-new-content, .post-new-date');
+        $(document).on('keyup', '.post-new-title, .post-new-content, .post-new-date', function () {
+            if ($(this).text().replace(/\s*/g,'').length == 0) {
+                $(this).empty();
+            } else if ($(this).hasClass('post-new-date')){
+                manualDateSet = true;
+            }
+            updatePublishButtonState();
+            updateDatePrediction();
+        });
+
+        $(document).off('click', '.posts .post a, .posts .post .button, .posts .post .button-light');
+        $(document).on('click', '.posts .post a, .posts .post .button, .posts .post .button-light', function(e){
+            e.stopPropagation();
+        });
+
+        $(document).off('blur', '.post-new-date');
+        $(document).on('blur', '.post-new-date', function () {
+            var datePrediction = getTimeTextFromString(parseDateTimestamp($(this).text()), true);
+            if (datePrediction) $(this).text(datePrediction);
+        });
+
+        $(document).off('paste', '[contenteditable]');
+        $(document).on('paste', '[contenteditable]', function(e) {
+            e.preventDefault();
+            var text = e.originalEvent.clipboardData.getData("text/plain");
+            document.execCommand("insertHTML", false, text);
+        });
+
+        $(document).off('click','.back');
+        $(document).on('click','.back', function(e){
+            if (isChildPage){
+                e.preventDefault();
+                closeChildPage();
+            }
+        });
+
+        $(document).off('click','.posts .post:not(.unpublished)');
+        $(document).on('click','.posts .post:not(.unpublished)', function(){
+            getPostByID($(this).attr('data-id'), openNewPost);
+        });
+    }
+
+    function displayTimelineMinAndMax(){
+        var $posts = $('.posts .post');
+        var firstDate = moment(chron.parseDate($posts.eq($posts.length - 1).find('.author').text())).format('MMM D, [<strong>]YYYY[</strong>]');
+        var lastDate = moment(chron.parseDate($posts.eq(0).find('.author').text())).format('MMM D, [<strong>]YYYY[</strong>]');
+        $('.navigation-timeline .first-date').html(firstDate);
+        $('.navigation-timeline .last-date').html(lastDate);
+    }
+
+    function highlightPostForXSeconds(id, s){
+        $('.posts .post').css('background-color','').reflow();
+        var $post = $('.posts .post[data-id="'+id+'"]').eq(0);
+        $post.css('background-color','#f4f1ff');
+        setTimeout(function(){
+            $post.css('background-color','').reflow();
+        }, (s * 1000));
+    }
+
+    function closestNumberInArray(num, arr){
+        var curr = arr[0];
+        var diff = Math.abs (num - curr);
+        for (var val = 0; val < arr.length; val++) {
+            var newdiff = Math.abs (num - arr[val]);
+            if (newdiff < diff) {
+                diff = newdiff;
+                curr = arr[val];
+            }
+        }
+        return curr;
+    }
+
+    function updateDatePrediction(){
+        if (!manualDateSet || !$('.post-new-date').text().replace(/\s+/,'').length){
+            var datePrediction = getTimeTextFromString(parseDateTimestamp($('.post-new-content').text()), true);
+            if (datePrediction) $('.post-new-date').text(datePrediction);
+        }
+    }
+
+    function updatePublishButtonState(){
+        if ($('.post-new-title').text().length > 0 && parseDateTimestamp($('.post-new-date').text())){
+            $('.post-new-publish').removeClass('disabled');
+        } else {
+            $('.post-new-publish').addClass('disabled');
+        }
+    }
+
+    function getInitialData(){
+        loading.show();
+        fPosts.orderByChild('date').once('value', function(snapshot) {
+            var items = [];
+            snapshot.forEach(function(child) {
+                items.push(child.val());
+            });
+            displayDataFromSnapshot(items);
+            handleDataUpdates();
+            loading.show(false);
+        }, function(error){
+            console.log('Get initial data error:')
+            console.warn(error);
+        });
+
+        connectedRef = firebase.database().ref(".info/connected");
+        connectedRef.on('value', function(snap) {
+            setNoConnectionBarVisible(snap.val() === true);
+        });
+    }
+
+    function handleDataUpdates(){
+        fPosts.orderByChild('date').on('value', function(snapshot) {
+            var items = [];
+            snapshot.forEach(function(child) {
+                items.push(child.val());
+            });
+            displayDataFromSnapshot(items);
+        });
+    }
+
+    function displayDataFromSnapshot(itemList){
+        $('.blog-posts-container .posts').html('');
+        var childPostId = null;
+        eventDates = [];
+        itemList.forEach((item) => {
+            var postDateId = parseInt(item.date.replace(/ [0-2][0-9]:[0-5][0-9]/,'').split('/').join(''));
+            if (getURLSafeString(getUrlHash()) == getURLSafeString(item.createdOn.toString()) && item.isPublished) childPostId = item.createdOn;
+            item.postDateId = postDateId;
+            $('.blog-posts-container .posts').prepend(getPostElementFromPost(item));
+            if (item.date) eventDates.push(postDateId);
+        })
+        displayTimelineMinAndMax();
+        if (childPostId != null) getPostByID(childPostId,openNewPost);
+    }
+
+    function getZeroPaddedNumber(num, size) {
+        var s = num+"";
+        while (s.length < size) s = "0" + s;
+        return s;
+    }
+
+    function getURLSafeString(string){
+        return removeFromArrayByValue(((string.toLowerCase().replace(/\s+/g,'-')).replace(/[^a-z0-9\-]/ig,'').split('-')).map(x => (x.length > 2 && x != "and" && x != "but") ? x : ''),'').join('-');
+    }
+
+    function truncateStringToXWords(string,x){
+        var parts = removeFromArrayByValue(string.split(' ').map((s,i) => (s.length && i < x+1) ? s : ''),'');
+        return parts.join(' ') + (parts.length >= 75 ? '...' : '');
+    }
+
+    function getPostElementFromPost(post,isPreview){
+        var isAdmin = firebase.auth().currentUser && firebase.auth().currentUser.uid == ADMIN_UID;
+        if (post.isPublished || isAdmin || post.author.uid == firebase.auth().currentUser.uid) {
+            var isPreview = isPreview && isPreview != null && isPreview === true ? true : false;
+            var $post = $('<div class="post"></div>').attr('data-id', post.createdOn);
+            var $title = $('<h1>'+post.title+'</h1>');
+            $post.append($('<div class="title">').append($title));
+            $post.attr('data-dateid', post.postDateId);
+            $post.attr('data-date', moment(chron.parseDate(post.date.replace(/ [0-2][0-9]:[0-5][0-9]/,''))).format('MMM D, YYYY'));
+            if (post.content){
+                var $content = isPreview ? $(marked(truncateStringToXWords(post.content || "",75))) : $(marked(post.content || ""));
+                $content.find('a').attr('target','_blank');
+                $post.append($('<div class="content">').append($content));
+            }
+            var $author = getMetaElement(post.author, post.date);
+            if (!post.isPublished) {
+                $post.addClass('unpublished');
+            }
+            $post.append($author);
+
+            if (isAdmin || (firebase.auth().currentUser && post.author.uid == firebase.auth().currentUser.uid)) {
+                $post.append($('<div class="post-delete button button-light admin-only visible">Delete</div>').attr('onclick','deletePost('+post.createdOn+')'));
+            }
+
+            return $post;
+        }
+    }
+
+    function getMetaElement(author, date, inNewPost){
+        if (inNewPost) {
+            var $author = $('<div class="author no-underline"></div>');
+            var $signOutLink = $('<div>').addClass('button-light').attr('onClick','signOut()');
+            $author.append($signOutLink).addClass('name sans-serif');
+        } else {
+            var $author = $('<div class="author no-underline"></div>');
+            var timeText = getTimeTextFromString(date) ? 'Date: ' + getTimeTextFromString(date) : "";
+            $author.append($(marked(timeText)).addClass('name sans-serif'));
+        }
+        return $author;
+    }
+
+    function getCurrentAuthor(){
+        var user = firebase.auth().currentUser;
+        return {
+            image : user.photoURL,
+            link : "https://twitter.com/intent/user?user_id=" + user.providerData[0].uid,
+            name : user.displayName,
+            uid : user.uid,
+        }
+    }
+
+    function addCurrentAuthorToNewPost(){
+        $('.blog-posts-container .post-new .author').remove();
+        var $author = getMetaElement(getCurrentAuthor(), null, true);
+        var verb = isAdmin() ? (publishImmediately ? 'Publishing' : 'Drafting') : 'Contributing';
+        $author.find('.name').text(verb).append('<div class="post-new-signout sans-serif cursor-pointer" onclick="signOut()">Sign out</div>');
+        if (isAdmin()) {
+            $author.addClass('cursor-pointer');
+        } else {
+            $('.post-new-publish').text('Send');
+        }
+        $('.blog-posts-container .post-new-publish-container').prepend($author);
+    }
+
+    function createPost(){
+        var unix =  (new Date).getTime();
+        var createdOn = parseInt($('.post-new').attr('data-id'));
+        var createdOnOrNow = createdOn != null && createdOn != undefined && createdOn != "" && !isNaN(createdOn) ? createdOn : unix;
+        var parsedDate = parseDateTimestamp(document.querySelectorAll('.post-new .post-new-date')[0].innerText);
+        parsedDate = parsedDate ? parsedDate : parseDateTimestamp(createdOnOrNow);
+        console.log('Published post with parsed date:');
+        console.log(parsedDate);
+        var user = firebase.auth().currentUser
+        var post = {
+            author : getCurrentAuthor(),
+            content : document.querySelectorAll('.post-new .post-new-content')[0].innerText,
+            createdOn : createdOnOrNow,
+            isPublished : isAdmin() ? publishImmediately : false,
+            title : document.querySelectorAll('.post-new .post-new-title')[0].innerText,
+            updatedOn: unix,
+            date: parsedDate
+        }
+        writeData(createdOnOrNow, post, () => { closeNewPost(true) });
+    }
+
+    function openNewPost(post){
+        closeChildPage();
+        if (post){
+            window.location.hash = getURLSafeString(post.createdOn.toString());
+            if (post.isPublished != publishImmediately) changePublishingMode();
+            $('.post-new-title').text(post.title);
+            $('.post-new-content').text(post.content).focus();
+            $('.post-new-date').text(getTimeTextFromString(post.date, true));
+            $('.post-new').attr('data-id', post.createdOn);
+            manualDateSet = true;
+        } else {
+            $('.post-new-title').text('').focus();
+            $('.post-new-content').text('')
+            $('.post-new-date').text('');
+            manualDateSet = false;
+        }
+        $('.post-new').addClass('visible');
+        $('.blog-posts-container').addClass('child-page');
+        updatePublishButtonState();
+        $('html, body').animate({
+            scrollTop : 0,
+        }, 200);
+    }
+
+    function deletePost(id){
+        closeChildPage();
+        writeData(id,null);
+    }
+
+    function publishPost(id){
+        writeData(id+'/isPublished',true);
+    }
+
+    function unpublishPost(id){
+        writeData(id+'/isPublished',false);
+    }
+
+    function getPostByID(id, callback){
+        fPosts.child(id).once('value', function(snapshot) {
+            callback(snapshot.val());
+        }, function(error){
+            console.log('Get post by ID error:')
+            console.warn(error);
+        });
+    }
+
+    function changePublishingMode(){
+        publishImmediately = !publishImmediately;
+        addCurrentAuthorToNewPost();
+        if (publishImmediately){
+            $('.post-new-publish').text('Publish');
+        } else {
+            $('.post-new-publish').text('Save draft');
+        }
+    }
+
+    function openChildPage(id){
+        isChildPage = true;
+        returnToScrollPosition = $('body').scrollTop();
+        getPostByID(id,loadChildPage);
+        $('.blog-posts-container').addClass('child-page');
+        $('.post-child').addClass('visible');
+        setTimeout(function(){
+            $('html,body').scrollTop(0);
+        },0)
+    }
+
+    function loadChildPage(post){
+        window.location.hash = getURLSafeString(post.createdOn.toString());
+        $('.post-child .post-content').empty().append(getPostElementFromPost(post));
+        $('.post-child .gmph-button.twitter').attr('href','https://twitter.com/home?status='+encodeURIComponent(post.title)+'%20'+encodeURIComponent(window.location.href)+'%20by%20%40gmph');
+        $('.post-child .gmph-button.facebook').attr('href','https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href));
+    }
+
+    function closeChildPage(){
+        isChildPage = false;
+        window.location.hash = "";
+        $('.blog-posts-container').removeClass('child-page');
+        $('.post-child').removeClass('visible');
+        $('html,body').scrollTop(returnToScrollPosition);
+    }
+
+    function isAdmin(){
+        var user = firebase.auth().currentUser;
+        return user && user.uid == ADMIN_UID;
+    }
+
+    function onUserLoggedIn(){
+        if (firebase.auth().currentUser) {
+            addCurrentAuthorToNewPost();
+            $('.navigation-block').addClass('visible');
+            $('.log-in').removeClass('visible');
+            isAdmin() ? $('.admin-only').addClass('visible') : $('.admin-only').removeClass('visible');
+
+            var domainName =  window.location.hostname.replace(/[^a-z0-9]/gi,'-');
+            fPosts = firebase.database().ref(domainName + "/" + firebase.auth().currentUser.uid + "/timelines/" + defaultTimelineKey + "/events/");
+
+            setUpChrono();
+            attachEvents();
+            getInitialData();
+        } else {
+            $('.post-new, .navigation-block').removeClass('visible');
+            $('.log-in').addClass('visible');
+            $('.admin-only').removeClass('visible');
+        }
+    }
+
+    function writeData(key,value, callback){
+        if (callback != undefined) {
+            fPosts.child(key).set(value, callback);
+        } else {
+            fPosts.child(key).set(value);
+        }
+
+    }
+
+    function parseDateTimestamp(string){
+        var parsedDate = chron.parse(string);
+        return timestamp = parsedDate.length ? moment(parsedDate[0].start.date()).format('YYYY/MM/DD HH:mm') : false;
+    }
+
+    function getUserFromLoginDetails(){
+
+        firebase.auth().getRedirectResult().then(function(result) {
+
+            firebase.auth().currentUser.updateEmail(result.user.displayName.toLowerCase().replace(/\s/g,'+').substring(0,20)+'+'+result.user.uid+'+gmphblog'+'@gmph.co');
+
+            if (result.user){
+                user = result.user;
+                removeCookie('gmphblog_user');
+                setCookie('gmphblog_user', JSON.stringify(user), 30);
+            } else {
+                var provider = new firebase.auth.TwitterAuthProvider();
+                firebase.auth().signInWithRedirect(provider);
+            }
+
+        }).catch(function(error) {
+            var provider = new firebase.auth.TwitterAuthProvider();
+            firebase.auth().signInWithRedirect(provider);
+        });
+    }
+
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        var expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + JSON.stringify(cvalue) + "; " + expires;
+    }
+
+    function removeCookie(cname) {
+        document.cookie = cname + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1);
+            if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+        }
+        return "";
+    }
+
+    function getExistingUser() {
+        try {
+            var local_user = JSON.parse(JSON.parse(getCookie("gmphblog_user")));
+            if (local_user != "" && local_user != null && local_user != undefined && local_user != {}){
+                user = local_user;
+                firebase.auth().currentUser = user;
+                return true;
+            } else {
+                return false;
+            }
+        } catch (e){
+            return false;
+        }
+
+    }
+
+    function logInWithTwitter(){
+        var provider = new firebase.auth.TwitterAuthProvider();
+        firebase.auth().signInWithRedirect(provider);
+    }
+
+    function signOut(){
+        firebase.auth().signOut().then(getInitialData);
+    }
+
+    function getTimeTextFromString(string, includeTime){
+        try {
+            var includeTime = includeTime === true;
+            var format = includeTime ? 'MMM D, YYYY [at] HH:mm' : 'MMM D, YYYY'
+            return moment(chron.parse(string)[0].start.date()).format(format);
+        } catch (e){
+            return false;
+        }
+    }
+
+    function getTimeTextFromUnix(unix){
+        var a = new Date(parseInt(unix));
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var hour = a.getHours();
+        var min = a.getMinutes();
+        var sec = a.getSeconds();
+        var formatted = month + ' ' + date + ', ' + year;
+        return formatted;
+    }
+
+    // Get #hash text value from current URL
+    function getUrlHash(name, url) {
+        return decodeURI((window.location.hash || "").replace(/#/g,''));
+    }
+
+    function removeFromArrayByValue(arr) {
+        var what, a = arguments, L = a.length, ax;
+        while (L > 1 && arr.length) {
+            what = a[--L];
+            while ((ax= arr.indexOf(what)) !== -1) {
+                arr.splice(ax, 1);
+            }
+        }
+        return arr;
+    }
+
+    if (!Object.keys) {
+        Object.keys = function (obj) {
+            var keys = [],
+            k;
+            for (k in obj) {
+                if (Object.prototype.hasOwnProperty.call(obj, k)) {
+                    keys.push(k);
+                }
+            }
+            return keys;
+        };
+    }
+
+    Array.prototype.removeByValue = function() {
+        var what, a = arguments, L = a.length, ax;
+        while (L && this.length) {
+            what = a[--L];
+            while ((ax = this.indexOf(what)) !== -1) {
+                this.splice(ax, 1);
+            }
+        }
+        return this;
+    };
+
+    $.fn.reflow = function () {
+        this[0].offsetHeight;   // force redrawing of element
+        return this;
+    };
+
+    $.fn.cssStatic = function (name, value) {
+        return this
+        .css('transition', 'none')
+        .css(name, value)
+        .reflow()
+        .css('transition', '');
+    };
+
+    (function ($) {
+
+        // This code is only valid for Mac
+        // if (!navigator.userAgent.match(/Macintosh/)) {
+        //     return;
+        // }
+
+        // Detect browsers
+        // http://stackoverflow.com/questions/5899783/detect-safari-using-jquery
+        var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+        var is_safari = navigator.userAgent.indexOf("Safari") > -1;
+        var is_firefox = navigator.userAgent.indexOf('Firefox') > -1;
+
+        // Handle scroll events in Chrome, Safari, and Firefox
+        if (is_chrome || is_safari || is_firefox) {
+
+            // TODO: This only prevents scroll when reaching the topmost or leftmost
+            // positions of a container. It doesn't handle rightmost or bottom,
+            // and Lion scroll can be triggered by scrolling right (or bottom) and then
+            // scrolling left without raising your fingers from the scroll position.
+            $(window).on('mousewheel', function (e) {
+
+                var prevent_left, prevent_up;
+
+                // If none of the parents can be scrolled left when we try to scroll left
+                prevent_left = e.deltaX < 0 && $(e.target).scrollLeft() <= 0 && $(e.target).parents().filter(function() {
+                    return $(this).scrollLeft() > 0;
+                }).length === 0;
+
+
+                // If none of the parents can be scrolled up when we try to scroll up
+                prevent_up = e.deltaY > 0 && $(e.target).scrollTop() <= 0 && !$(e.target).parents().filter(function() {
+                    return $(this).scrollTop() > 0;
+                }).length === 0;
+
+                // Prevent futile scroll, which would trigger the Back/Next page event
+                if (prevent_left || prevent_up) {
+                    e.preventDefault();
+                }
+            });
+
+        }
+
+    }(jQuery));
+
+</script>
+
+</body>
+
+</html>
