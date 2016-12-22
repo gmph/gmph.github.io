@@ -83,8 +83,9 @@
         font-weight: 700;
     }
 
-    html, body, .posttabs, .blog-posts-container {
+    html, body, .blog-posts-container {
         background: #f8f8f8 !important;
+        min-height: 100vh;
     }
 
     .block {
@@ -390,6 +391,11 @@
         font-size: 16px;
         color: #aaa;
         pointer-events: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
         opacity: 1;
     }
 
@@ -695,8 +701,10 @@
         overflow: hidden;
     }
 
-    html, body {
-        min-height: 100vh;
+    @media (max-width: 560px){
+        .blog-posts-container .navigation-block .navigation-timeline {
+            display: none !important;
+        }
     }
 
     </style>
