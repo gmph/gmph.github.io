@@ -163,7 +163,7 @@
         background: #fff;
     }
 
-    .blog-posts-container.child-page .posts, .blog-posts-container.child-page .navigation-block, .blog-posts-container.child-page .log-in, .blog-posts-container.child-page .post-new-open {
+    .blog-posts-container.child-page .posts, .blog-posts-container.child-page .navigation-block, .blog-posts-container.child-page .post-new-open {
         opacity: 0.15 !important;
         pointer-events: none !important
     }
@@ -225,13 +225,19 @@
         text-overflow: ellipsis;
     }
 
-    .blog-posts-container .log-in {
+    .gmph-sign-in {
         display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        z-index: 30;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        margin: 0;
     }
 
-    .blog-posts-container .log-in.visible {
+    .gmph-sign-in.visible {
         display: block;
-        margin: 40px 0 0 0;
     }
 
     .blog-posts-container .user-block {
@@ -727,14 +733,14 @@
                 </div>
             </div>
             <div class="posts"></div>
-            <p class="log-in visible">To contribute a note to be published here, <a class="cursor-pointer" onClick="logIn()">sign in with Twitter</a>. All notes are reviewed and may be edited before publishing.</p>
         </div>
-
     </div>
+
+    <p class="gmph-sign-in visible"><a class="button" onClick="getUserFromLoginDetails()">Sign in with Twitter</a></p>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/chrono/1.2.5/chrono.min.js"></script>
+    <script type="text/javascript" src="chrono.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.js"></script>
 
@@ -815,7 +821,7 @@
 
         firebase.auth().onAuthStateChanged(function (user) {
             if (!firebase.auth().currentUser){
-                getUser();
+                // getUser();
             } else {
                 onUserLoggedIn();
             }
@@ -1238,7 +1244,7 @@
         if (firebase.auth().currentUser) {
             addCurrentAuthorToNewPost();
             $('.navigation-block').addClass('visible');
-            $('.log-in').removeClass('visible');
+            $('.gmph-sign-in').removeClass('visible');
 
             var domainName =  window.location.hostname.replace(/[^a-z0-9]/gi,'-');
             fPosts = firebase.database().ref(domainName + "/" + firebase.auth().currentUser.uid + "/timelines/" + defaultTimelineKey + "/events/");
@@ -1248,7 +1254,7 @@
             getInitialData();
         } else {
             $('.post-new, .navigation-block').removeClass('visible');
-            $('.log-in').addClass('visible');
+            $('.gmph-sign-in').addClass('visible');
         }
     }
 
