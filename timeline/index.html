@@ -1100,8 +1100,8 @@
                 .replace(/[^a-z0-9\-]/ig,'')
                 .split('-')
                 .map(function(x){ return (x.length > 2 && x != "and" && x != "but") ? x : ''})
-                .join('-');
-            , '')
+                .join('-')
+            , '');
     }
 
     function truncateStringToXWords(string,x){
