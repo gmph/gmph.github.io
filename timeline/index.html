@@ -460,7 +460,7 @@
 
     .blog-posts-container .post-new-open {
         display: block;
-        position: fixed;;
+        position: fixed;
         top: 24px;
         left: auto;
         bottom: auto;
@@ -593,7 +593,7 @@
 
     .posts {
         display: block;
-        position: absolute;;
+        position: absolute;
         top: 96px;
         left:0;
         width: 100%;
@@ -1077,7 +1077,7 @@
         eventDates = [];
         itemList.forEach(function(item){
             var postDateId = parseInt(item.date.replace(/ [0-2][0-9]:[0-5][0-9]/,'').split('/').join(''));
-            if (getURLSafeString(getUrlHash()) == getURLSafeString(item.createdOn.toString()) && item.isPublished) childPostId = item.createdOn;
+            if (getUrlHash() == item.createdOn.toString() && item.isPublished) childPostId = item.createdOn;
             item.postDateId = postDateId;
             $('.blog-posts-container .posts').prepend(getPostElementFromPost(item));
             if (item.date) eventDates.push(postDateId);
@@ -1090,18 +1090,6 @@
         var s = num+"";
         while (s.length < size) s = "0" + s;
         return s;
-    }
-
-    function getURLSafeString(string){
-        return removeFromArrayByValue(
-            string
-                .toLowerCase()
-                .replace(/\s+/g,'-')
-                .replace(/[^a-z0-9\-]/ig,'')
-                .split('-')
-                .map(function(x){ return (x.length > 2 && x != "and" && x != "but") ? x : ''})
-                .join('-')
-            , '');
     }
 
     function truncateStringToXWords(string,x){
@@ -1189,7 +1177,7 @@
     function openNewPost(post){
         closeChildPage();
         if (post){
-            window.location.hash = getURLSafeString(post.createdOn.toString());
+            window.location.hash = post.createdOn.toString();
             if (post.isPublished != publishImmediately) changePublishingMode();
             $('.post-new-title').text(post.title);
             $('.post-new-content').text(post.content).focus();
@@ -1254,7 +1242,7 @@
     }
 
     function loadChildPage(post){
-        window.location.hash = getURLSafeString(post.createdOn.toString());
+        window.location.hash = post.createdOn.toString();
         $('.post-child .post-content').empty().append(getPostElementFromPost(post));
         $('.post-child .gmph-button.twitter').attr('href','https://twitter.com/home?status='+encodeURIComponent(post.title)+'%20'+encodeURIComponent(window.location.href)+'%20by%20%40gmph');
         $('.post-child .gmph-button.facebook').attr('href','https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href));
