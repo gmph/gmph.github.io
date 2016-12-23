@@ -121,7 +121,6 @@
         pointer-events: none;
         overflow-y: scroll;
         overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
 
     }
 
@@ -468,7 +467,6 @@
         white-space: normal;
         overflow-x: hidden;
         overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
     }
 
     .blog-posts-container .post-new .post-new-publish-container {
@@ -680,17 +678,19 @@
         padding: 12px 12px 32px 12px;
         overflow-x: scroll;
         overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
         white-space: nowrap;
         direction: rtl;
         text-align: left;
     }
 
     .posts .post {
+        display: inline-block;
+        position: relative;
+        top: 0;
+        left: 0;
         width: 100%;
         max-width: 300px;
         max-height: 100%;
-        display: inline-block;
         vertical-align: top;
         margin: 0 12px;
         padding: 20px;
@@ -701,8 +701,6 @@
         cursor: pointer;
         overflow-y: scroll;
         overflow-x: hidden;
-        -webkit-overflow-scrolling: auto;
-        -webkit-transform: translate3d(0,0,0) translateZ(0px);
         direction: ltr;
     }
 
