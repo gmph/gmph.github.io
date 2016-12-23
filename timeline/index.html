@@ -45,6 +45,7 @@
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         -moz-tap-highlight-color: rgba(0, 0, 0, 0);
         -webkit-touch-callout: none;
+        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
         /*-webkit-user-select: none;
         -khtml-user-select: none;
         -moz-user-select: none;
@@ -127,6 +128,10 @@
         pointer-events: all;
     }
 
+    .popup h1 {
+        margin-bottom: 32px !important;
+    }
+
     .loading {
         display: block;
         position: absolute;
@@ -193,7 +198,7 @@
         background: #fff;
     }
 
-    .blog-posts-container.child-page .posts, .blog-posts-container.child-page .navigation-block, .blog-posts-container.child-page .post-new-open {
+    .blog-posts-container.child-page .posts, .blog-posts-container.child-page .navigation-block, .blog-posts-container.child-page .post-new-open, .blog-posts-container.child-page .settings-open {
         opacity: 0.15 !important;
         pointer-events: none !important
     }
@@ -276,7 +281,7 @@
     .blog-posts-container .user-block {
         display: block;
         position: relative;
-        padding: 32px 24px 16px 24px;
+        padding: 0;
     }
 
     .blog-posts-container .navigation-block {
@@ -284,27 +289,34 @@
         position: static;
         width: 100%;
         margin: 0;
-        padding: 4px 8px;
+        padding: 0;
         background-color: transparent;
         vertical-align: top;
         opacity: 0;
         pointer-events: none;
     }
 
-    .blog-posts-container .navigation-block h1 {
-        font-size: 24px;
+    .blog-posts-container .navigation-block .navigation-title {
+        position: fixed;
+        top: 38px;
+        left: 24px;
+        font-size: 22px;
         line-height: 1.2em;
         margin: 0;
         padding: 0;
+        max-width: 200px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     .blog-posts-container .navigation-block .navigation-timeline {
         display: block;
-        position: absolute;
+        position: fixed;
         top: 26px;
-        left: 200px;
-        width: -webkit-calc(100% - 320px);
-        width: calc(100% - 320px);
+        left: 240px;
+        width: -webkit-calc(100% - 360px);
+        width: calc(100% - 360px);
         height: 48px;
         margin: 0 auto 0 auto;
         background: #eee;
@@ -328,10 +340,10 @@
         opacity: 1;
         pointer-events: none;
 
-        transition:.1s all ease-out;
-        -webkit-transition:.1s all ease-out;
-        -moz-transition:.1s all ease-out;
-        -o-transition:.1s all ease-out;
+        transition:.15s all ease-out;
+        -webkit-transition:.15s all ease-out;
+        -moz-transition:.15s all ease-out;
+        -o-transition:.15s all ease-out;
     }
 
     .blog-posts-container .navigation-block .navigation-timeline:hover::after {
@@ -474,7 +486,7 @@
         color: #999;
     }
 
-    .blog-posts-container .post-new-open {
+    .blog-posts-container .settings-open {
         display: block;
         position: fixed;
         top: 24px;
@@ -484,13 +496,36 @@
         z-index: 5;
         width: 48px;
         height: 48px;
-        background-color: #888;
-        background-image: url(add.png);
-        background-size: 32px 32px;
+        background-color: #eee;
+        background-image: url(calendar.png);
+        background-size: 28px 28px;
         background-position: center;
         background-repeat: no-repeat;
         border-radius: 32px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0);
+        cursor: pointer;
+    }
+
+    .blog-posts-container .settings-open:hover {
+        background-color: #ddd;
+    }
+
+    .blog-posts-container .post-new-open {
+        display: block;
+        position: fixed;
+        top: auto;
+        left: auto;
+        bottom: 24px;
+        right: 24px;
+        z-index: 5;
+        width: 64px;
+        height: 64px;
+        background-color: #8B67FF;
+        background-image: url(add.png);
+        background-size: 36px 36px;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 32px;
+        box-shadow: 0 2px 6px rgba(0,0,0,.4);
         cursor: pointer;
     }
 
@@ -498,7 +533,7 @@
         transform: scale(1.05);
         transform: -webkit-scale(1.05);
         box-shadow: 0 4px 8px rgba(0,0,0,.4);
-        background-color: #8B67FF;
+        background-color: #8360f2;
     }
 
     .post-new-publish-container {
@@ -506,40 +541,40 @@
         position: relative;
     }
 
-    .blog-posts-container .post-new-close {
-        display: inline-block;
-        position: absolute;
+    .button.side-button-left, .button.side-button-right {
+        display: block;
+        position: static;
+        float: left;
         top: auto;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        vertical-align: middle;
+        left: 40px;
+        bottom: -40px;
+        right: auto;
+        vertical-align: bottom;
         width: 40%;
-        max-width: 120px;
-        margin: 0;
+        max-width: 136px;
+        margin: 40px 0 0 0;
         padding: 10px 10px 12px 10px;
-        background: #aaa;
+        background: #aaa !important;
     }
 
-    .blog-posts-container .post-new-close.button:not(.button-light):hover {
+    .button.side-button-right {
+        float: right;
+        top: auto;
+        left: auto;
+        bottom: -40px;
+        right: 40px;
+        background: #8B67FF !important;
+    }
+
+    .button.side-button-left:hover {
         background: #999 !important;
     }
 
-    .blog-posts-container .post-new-publish {
-        display: inline-block;
-        position: absolute;
-        top: auto;
-        left: auto;
-        bottom: 0;
-        right: 0;
-        vertical-align: middle;
-        width: 36%;
-        max-width: 120px;
-        margin: 0;
-        padding: 10px 10px 12px 10px;
+    .button.side-button-right:hover {
+        background: #8360f2 !important;
     }
 
-    [contenteditable="true"],[contentedatible=""] {
+    [contenteditable="true"], [contentedatible=""] {
         display: block;
         position: relative;
         width: 100%;
@@ -549,6 +584,7 @@
         font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
         font-size: 18px;
         box-shadow: 0 1px 0 #eee;
+        padding-bottom: 8px !important;
     }
 
     [contenteditable="true"]:focus,[contentedatible=""]:focus {
@@ -580,8 +616,23 @@
         font-weight: 500;
         color: #888 !important;
         background: none !important;
+        margin: 0 !important;
+        padding: 6px 8px !important;
         border: none !important;
+        border-radius: 4px !important;
         color: #8B67FF !important;
+    }
+
+    .button-light:hover {
+        background: rgba(0,0,0,.05) !important;
+    }
+
+    .post .button-light {
+        background: rgba(0,0,0,.04) !important;
+    }
+
+    .post .button-light:hover {
+        background: rgba(0,0,0,.08) !important;
     }
 
     .button.disabled {
@@ -594,7 +645,7 @@
     }
 
     .button:not(.button-light):hover, a.button:not(.button-light):hover {
-        background: #8360f2 !important;
+        background: #8360f2;
         border-bottom: none;
     }
 
@@ -708,11 +759,10 @@
 
     .sign-in .display-as-h1 {
         font-size: 24px;
-        margin: 0 auto 32px auto !important;
     }
 
     .sign-in .display-as-p {
-        margin: 0 auto 28px auto !important;
+        margin: 28px auto 0 auto !important;
         padding-bottom: 8px !important;
     }
 
@@ -720,6 +770,60 @@
         -webkit-text-security: disc;
         -webkit-appearance: textfield;
         -webkit-user-select: text;
+    }
+
+    .settings .timeline-list {
+        margin: -8px auto -12px auto;
+    }
+
+    .settings .timeline-list .timeline {
+        display: block;
+        position: relative;
+        top:0;
+        left:0;
+        width: 100%;
+        margin: 12px 0;
+        padding: 16px;
+        background: #fff;
+        border-radius: 3px;
+        box-shadow: 0 0 0 1px rgba(0,0,0,.04), 0 1px 4px rgba(0,0,0,.1);
+        cursor: pointer;
+    }
+
+    .settings .timeline-list .timeline:hover {
+        box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.2);
+    }
+
+    .settings .timeline-list .timeline .title {
+        display: inline-block;
+        width: auto;
+        margin: 0 16px 0 0;
+        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        vertical-align: middle;
+    }
+
+    .settings .timeline-list .timeline .date {
+        display: inline-block;
+        width: auto;
+        margin: 0 16px 0 0;
+        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #888;
+        margin: 4px 0 0 0;
+        padding: 0 0 2px 0;
+        vertical-align: middle;
+    }
+
+    .settings .timeline-list .timeline .timeline-delete {
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translate(0, -50%);
+        -webkit-transform: translate(0, -50%);
+        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+        font-size: 16px;
     }
 
     @media (max-width: 560px){
@@ -740,14 +844,15 @@
 
     <div class="block">
         <div class="blog-posts-container">
-            <div class="post-new-open" onclick="openNewPost()"></div>
+            <div class="post-new-open"></div>
+            <div class="settings-open"></div>
             <div class="post-child popup">
                 <div class="post-content"></div>
                 <div class="button back sans-serif" onclick="closeChildPage()">Close</div>
             </div>
             <div class="user-block">
                 <div class="navigation-block">
-                    <h1>Timeline</h1>
+                    <h1 class="navigation-title">Timeline</h1>
                     <div class="navigation-timeline">
                         <div class="first-date"></div>
                         <div class="last-date"></div>
@@ -755,24 +860,36 @@
                     </div>
                 </div>
             </div>
-            <div class="post-new popup">
+            <div class="post-new popup buttoned">
                 <div class="post-new-title display-as-h1" data-placeholder="Title" contenteditable="true"></div>
                 <div class="post-new-date display-as-p" data-placeholder="Type a date (e.g. May 5 1996)" contenteditable="true"></div>
                 <div class="post-new-content display-as-p" data-placeholder="Type some details about this event (optional)" contenteditable="true"></div>
-                <div class="post-new-publish-container">
-                    <div class="post-new-close button" onclick="closeNewPost()">Cancel</div>
-                    <div class="post-new-publish button disabled" onclick="createPost()">Save</div>
-                </div>
+                <div class="post-new-close button side-button-left">Cancel</div>
+                <div class="post-new-publish button side-button-right disabled">Save</div>
             </div>
             <div class="posts"></div>
         </div>
     </div>
 
-    <div class="sign-in popup">
+    <div class="sign-in popup buttoned">
         <h1 class="display-as-h1">Sign in</h1>
         <div class="sign-in-email display-as-p" data-placeholder="Email address" contenteditable="true"></div>
         <div class="sign-in-password display-as-p" data-placeholder="Password" contenteditable="true"></div>
-        <div class="sign-in-submit button">Sign in</div>
+        <div class="sign-in-submit side-button-right button">Sign in</div>
+    </div>
+
+    <div class="settings popup buttoned">
+        <h1 class="display-as-h1">Timelines</h1>
+        <div class="timeline-list"></div>
+        <div class="settings-close side-button-left button">Close</div>
+        <div class="timeline-new-open side-button-right button">Create new</div>
+    </div>
+
+    <div class="timeline-new popup buttoned">
+        <h1 class="display-as-h1">Create a timeline</h1>
+        <div class="timeline-new-name display-as-p" data-placeholder="Title (e.g. John Smith WW2)" contenteditable="true"></div>
+        <div class="timeline-new-create side-button-right button">Create</div>
+        <div class="timeline-new-close side-button-left button">Close</div>
     </div>
 
     <!-- <div class="gmph-sign-in visible button">Sign in with Twitter</div> -->
@@ -785,15 +902,19 @@
 
     <script language="javascript">
 
+    var rootRef;
+    var userRef;
     var timelineRef;
+    var eventsRef;
     var connectedRef;
-    var defaultTimelineKey = 0;
-    var publishImmediately = true;
+
     var manualDateSet = false;
     var isChildPage = false;
-    var returnToScrollPosition = 0;
-    var chron = new chrono.Chrono();
+
+    var userData = null;
     var eventDates = [];
+
+    var chron = new chrono.Chrono();
 
     document.onclick = function () {};
 
@@ -836,6 +957,7 @@
         };
 
         firebase.initializeApp(config);
+        rootRef = firebase.database().ref('/');
         manageAuth();
         attachEvents();
 
@@ -982,6 +1104,82 @@
             e.stopPropagation();
         });
 
+        $(document).off(clickEventString, '.post-new-open');
+        $(document).on(clickEventString, '.post-new-open', function(e){
+            e.stopPropagation();
+            openNewPost();
+        });
+
+        $(document).off(clickEventString, '.post-new-close');
+        $(document).on(clickEventString, '.post-new-close', function(e){
+            e.stopPropagation();
+            closeNewPost();
+        });
+
+        $(document).off(clickEventString, '.post-new-publish');
+        $(document).on(clickEventString, '.post-new-publish', function(e){
+            e.stopPropagation();
+            createPost();
+        });
+
+        $(document).off(clickEventString, '.settings-open');
+        $(document).on(clickEventString, '.settings-open', function(e){
+            e.stopPropagation();
+            openSettings();
+        });
+
+        $(document).off(clickEventString, '.settings-close');
+        $(document).on(clickEventString, '.settings-close', function(e){
+            e.stopPropagation();
+            closeSettings();
+        });
+
+        $(document).off(clickEventString, '.settings .timeline-list .timeline');
+        $(document).on(clickEventString, '.settings .timeline-list .timeline', function(e){
+            e.stopPropagation();
+            closeSettings();
+            openTimeline($(this).attr('data-id'));
+        });
+
+        $(document).off(clickEventString, '.settings .timeline-new-open');
+        $(document).on(clickEventString, '.settings .timeline-new-open', function(e){
+            e.stopPropagation();
+            closeSettings();
+            openNewTimeline();
+        });
+
+        $(document).off(clickEventString, '.timeline-new .timeline-new-close');
+        $(document).on(clickEventString, '.timeline-new .timeline-new-close', function(e){
+            e.stopPropagation();
+            closeNewTimeline();
+        });
+
+        $(document).off(clickEventString, '.timeline-new .timeline-new-create');
+        $(document).on(clickEventString, '.timeline-new .timeline-new-create', function(e){
+            e.stopPropagation();
+            var name = $(this).parent().find('.timeline-new-name').text();
+            createTimeline(name, function(id){
+                updateUserData(function(){
+                    openTimeline(id);
+                    closeSettings();
+                });
+            });
+        });
+
+        $(document).off(clickEventString, '.timeline-list .timeline .timeline-delete');
+        $(document).on(clickEventString, '.timeline-list .timeline .timeline-delete', function(e){
+            e.stopPropagation();
+            var timelineId = $(this).parent().attr('data-id');
+            archiveTimeline(timelineId, function(){
+                updateUserData(function(){
+                    displayTimelineList();
+                    if (timelineId == timelineRef.key){
+                        openTimeline();
+                    }
+                });
+            });
+        });
+
         $(document).off('blur', '.post-new-date');
         $(document).on('blur', '.post-new-date', function () {
             var datePrediction = getTimeTextFromString(parseDateTimestamp($(this).text()), true);
@@ -1028,8 +1226,8 @@
     }
 
     function handleTimeTravel(e){
+        var elm = $(e.target);
         if (eventDates.length){
-            var elm = $(e.target);
             var xPos = (e.pageX || e.originalEvent.touches[0].pageX || e.originalEvent.changedTouches[0].pageX) - elm.offset().left;
             var width = elm.outerWidth();
             var xPerc = xPos / width;
@@ -1040,6 +1238,8 @@
             var datePerc = eventDates.indexOf(closestDate) / eventDates.length;
             var $post = $('[data-dateid="' + closestDate + '"]').eq(0);
             elm.find('.timeline-label').html($post.attr('data-date').replace(/, /,', <strong>') + "</strong>").attr('data-id',$post.attr('data-id')).attr('data-perc', datePerc).css('left', (100 * (0.05 + (xPerc * 0.9))) + "%");
+        } else {
+            elm.find('.timeline-label').empty();
         }
     }
 
@@ -1047,10 +1247,10 @@
         var $posts = $('.posts .post');
         var firstDate = moment(chron.parseDate($posts.eq($posts.length - 1).find('.author').text())).format('MMM D, [<strong>]YYYY[</strong>]');
         var lastDate = moment(chron.parseDate($posts.eq(0).find('.author').text())).format('MMM D, [<strong>]YYYY[</strong>]');
-        if (firstDate.toLowerCase() != "invalid date" && lastDate.toLowerCase() != "invalid date"){
-            $('.navigation-timeline .first-date').html(firstDate);
-            $('.navigation-timeline .last-date').html(lastDate);
-        }
+        firstDate = firstDate.toLowerCase() != "invalid date" ? firstDate : "";
+        lastDate = lastDate.toLowerCase() != "invalid date" ? lastDate : "";
+        $('.navigation-timeline .first-date').html(firstDate);
+        $('.navigation-timeline .last-date').html(lastDate);
     }
 
     function highlightPostForXSeconds(id, s){
@@ -1092,7 +1292,14 @@
 
     function getInitialData(){
         loading.show();
-        timelineRef.orderByChild('date').once('value', function(snapshot) {
+        timelineRef.child('name').once('value', function(snapshot) {
+            var name = snapshot.val();
+            if (name == null || name == undefined || name == "") name = "Timeline";
+            $('.navigation-block .navigation-title').text(name);
+        }, function(error){
+            console.warn(error);
+        });
+        eventsRef.orderByChild('date').once('value', function(snapshot) {
             var items = [];
             snapshot.forEach(function(child) {
                 items.push(child.val());
@@ -1101,18 +1308,17 @@
             handleDataUpdates();
             loading.show(false);
         }, function(error){
-            console.log('Get initial data error:')
             console.warn(error);
         });
 
-        connectedRef = firebase.database().ref(".info/connected");
+        connectedRef = rootRef.child(".info/connected");
         connectedRef.on('value', function(snap) {
             setNoConnectionBarVisible(snap.val() === true);
         });
     }
 
     function handleDataUpdates(){
-        timelineRef.orderByChild('date').on('value', function(snapshot) {
+        eventsRef.orderByChild('date').on('value', function(snapshot) {
             var items = [];
             snapshot.forEach(function(child) {
                 items.push(child.val());
@@ -1223,14 +1429,13 @@
             updatedOn: unix,
             date: parsedDate
         };
-        writeData(timelineRef, createdOnOrNow, post, function(){ closeNewPost(true) });
+        writeData(eventsRef, createdOnOrNow, post, function(){ closeNewPost(true) });
     }
 
     function openNewPost(post){
         closeChildPage();
-        if (post){
+        if (typeof post === 'object' && post.createdOn){
             window.location.hash = getPublicReferenceFromId('e', post.createdOn)
-            if (post.isPublished != publishImmediately) changePublishingMode();
             $('.post-new-title').text(post.title);
             $('.post-new-content').text(post.content).focus();
             $('.post-new-date').text(getTimeTextFromString(post.date, true));
@@ -1252,19 +1457,19 @@
 
     function deletePost(id){
         closeChildPage();
-        writeData(timelineRef, id, null);
+        writeData(eventsRef, id, null);
     }
 
     function publishPost(id){
-        writeData(timelineRef, id+'/isPublished', true);
+        writeData(eventsRef, id+'/isPublished', true);
     }
 
     function unpublishPost(id){
-        writeData(timelineRef, id+'/isPublished', false);
+        writeData(eventsRef, id+'/isPublished', false);
     }
 
     function getPostByID(id, callback){
-        timelineRef.child(id).once('value', function(snapshot) {
+        eventsRef.child(id).once('value', function(snapshot) {
             callback(snapshot.val());
         }, function(error){
             console.log('Get post by ID error:')
@@ -1272,19 +1477,8 @@
         });
     }
 
-    function changePublishingMode(){
-        publishImmediately = !publishImmediately;
-        addCurrentAuthorToNewPost();
-        if (publishImmediately){
-            $('.post-new-publish').text('Publish');
-        } else {
-            $('.post-new-publish').text('Save draft');
-        }
-    }
-
     function openChildPage(id){
         isChildPage = true;
-        returnToScrollPosition = $('body').scrollTop();
         getPostByID(id,loadChildPage);
         $('.blog-posts-container').addClass('child-page');
         $('.post-child').addClass('visible');
@@ -1305,7 +1499,77 @@
         window.location.hash = "";
         $('.blog-posts-container').removeClass('child-page');
         $('.post-child').removeClass('visible');
-        $('html,body').scrollTop(returnToScrollPosition);
+    }
+
+    function openSettings(){
+        $('.settings.popup').addClass('loading-timeline-list');
+        updateUserData(function(){
+            displayTimelineList(function(){
+                $('.blog-posts-container').addClass('child-page');
+                $('.settings.popup').addClass('visible');
+            });
+        });
+    }
+
+    function closeSettings(){
+        $('.blog-posts-container').removeClass('child-page');
+        $('.settings.popup').removeClass('visible');
+        setTimeout(function(){
+            $('.settings.popup .timeline-list').empty();
+        }, 500);
+    }
+
+    function displayTimelineList(callback){
+        $('.settings .timeline-list').empty();
+        var timelineIds = Object.keys(userData.timelines);
+        for (var i = 0; i < timelineIds.length; i++){
+            rootRef.child('timelines/' + timelineIds[i]).once('value', function(snapshot){
+                    $('.settings.popup .timeline-list').append(getTimelineListItemElementFromTimeline(snapshot.val(), snapshot.key));
+                    if (callback) callback.call(this);
+                setTimeout(function(){
+                    $('.settings.popup').removeClass('loading-timeline-list');
+                }, 500);
+            }, function(error){
+                console.warn(error);
+            });
+        }
+    }
+
+    function getTimelineListItemElementFromTimeline(timeline, id){
+        if (timeline.isArchived == undefined || timeline.isArchived !== true){
+            var name = timeline.name;
+            if (name == null || name == undefined || name == "") name = "Timeline";
+            var date = getTimeTextFromUnix(timeline.createdOn)
+            var $timeline = $('<div>')
+                .addClass('timeline')
+                .attr('data-id',id);
+            var $title = $('<div>')
+                .addClass('title')
+                .text(name);
+            var $date = $('<div>')
+                .addClass('date')
+                .text(date);
+            var $deleteButton = $('<div>')
+                .addClass('timeline-delete button-light')
+                .text('Delete');
+            $timeline.append($title, $date, $deleteButton);
+            return $timeline;
+        } else {
+            return null;
+        }
+    }
+
+    function openNewTimeline(){
+        $('.blog-posts-container').addClass('child-page');
+        $('.timeline-new.popup').addClass('visible');
+        $('.timeline-new .timeline-new-name').focus();
+    }
+
+    function closeNewTimeline(isFinished){
+        $('.blog-posts-container').removeClass('child-page');
+        $('.timeline-new.popup').removeClass('visible');
+        $('.timeline-new .timeline-new-name').text('');
+        if (isFinished !== true) openSettings();
     }
 
     function setSignInOrUserState(){
@@ -1315,18 +1579,74 @@
             $('.sign-in.popup').removeClass('visible');
             setUpChrono();
             attachEvents();
-            openTimeline();
+            updateUserData(openTimeline);
         } else {
             $('.post-new, .navigation-block').removeClass('visible');
             $('.sign-in.popup').addClass('visible');
+            $('.sign-in .sign-in-email').focus();
         }
     }
 
-    function openTimeline(id){
+    function updateUserData(callback){
         var userId = firebase.auth().currentUser.uid;
-        var timelineId = id ? id : defaultTimelineKey;
-        timelineRef = firebase.database().ref(userId + "/timelines/" + timelineId + "/events/");
-        getInitialData();
+        userRef = rootRef.child("/users/" + userId);
+        userRef.once('value', function(snapshot){
+            userData = snapshot.val();
+            if (callback) { console.log(callback); callback.call(this); }
+        }, function (error){
+            userData = null;
+            console.warn(error);
+        });
+    }
+
+    function openTimeline(id){
+        if (userData != null && userData != {} && userData.timelines && userData.timelines != null){
+            var timelineId = userData.timelines[id] != undefined ? id : Object.keys(userData.timelines)[0];
+            timelineRef = rootRef.child("timelines/" + timelineId);
+            eventsRef = rootRef.child("events/" + timelineId);
+            getInitialData();
+        } else if (id === undefined){
+            createTimeline(false, openTimeline);
+        } else {
+            return false;
+        }
+    }
+
+    function createTimeline(name, callback){
+        console.log('createTimeline called');
+        if (firebase.auth().currentUser){
+            var unix = (new Date).getTime();
+            rootRef.child('timelines').push({
+                "name" : name ? name : "Timeline",
+                "owner" : firebase.auth().currentUser.uid,
+                "isPublic" : false,
+                "createdOn" : unix,
+                "isArchived" : false,
+            }).catch(function(error){
+                console.warn(error);
+            }).then(function(ref){
+                var userId = firebase.auth().currentUser.uid;
+                var key = ref.key;
+                rootRef.child('users/' + userId + '/timelines/' + ref.key).set(unix).catch(function(error){
+                    console.warn(error);
+                }).then(function(ref){
+                    closeNewTimeline(true);
+                    if (callback) callback.call(this, key);
+                });
+            });
+        } else {
+            return false;
+        }
+    }
+
+    function archiveTimeline(id, callback){
+        if (firebase.auth().currentUser){
+            writeData(rootRef, 'timelines/' + id + '/isArchived', true, function(){
+                if (callback) callback.call(this, id);
+            });
+        } else {
+            return false;
+        }
     }
 
     function writeData(ref, key, value, callback){
