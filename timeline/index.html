@@ -685,13 +685,11 @@
     }
 
     .posts .post {
-        position: static;
         width: 100%;
         max-width: 300px;
         max-height: 100%;
         display: inline-block;
         vertical-align: top;
-        -webkit-transform: translate3d(0,0,0) translateZ(0px);
         margin: 0 12px;
         padding: 20px;
         box-shadow: 0 1px 4px rgba(0,0,0,.1);
@@ -701,7 +699,8 @@
         cursor: pointer;
         overflow-y: scroll;
         overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
+        -webkit-overflow-scrolling: auto;
+        -webkit-transform: translate3d(0,0,0) translateZ(0px);
         direction: ltr;
     }
 
