@@ -119,6 +119,8 @@
         pointer-events: none;
         overflow-y: scroll;
         overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+
     }
 
     .popup.visible {
@@ -464,6 +466,7 @@
         white-space: normal;
         overflow-x: hidden;
         overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
     }
 
     .blog-posts-container .post-new .post-new-publish-container {
@@ -675,6 +678,7 @@
         padding: 12px 12px 32px 12px;
         overflow-x: scroll;
         overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
         white-space: nowrap;
         direction: rtl;
         text-align: left;
@@ -698,6 +702,7 @@
         cursor: pointer;
         overflow-y: scroll;
         overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
         direction: ltr;
     }
 
@@ -1791,6 +1796,18 @@
         .css('transition', '');
     };
 
+    $.fn.isHScrollable = function () {
+        return this[0].scrollWidth > this[0].clientWidth;
+    };
+
+    $.fn.isVScrollable = function () {
+        return this[0].scrollHeight > this[0].clientHeight;
+    };
+
+    $.fn.isScrollable = function () {
+        return this[0].scrollWidth > this[0].clientWidth || this[0].scrollHeight > this[0].clientHeight;
+    };
+
     (function ($) {
 
         // This code is only valid for Mac
@@ -1814,15 +1831,16 @@
             $(window).on('mousewheel', function (e) {
 
                 var prevent_left, prevent_up;
+                var $target = $(e.target);
 
                 // If none of the parents can be scrolled left when we try to scroll left
-                prevent_left = e.deltaX < 0 && $(e.target).scrollLeft() <= 0 && $(e.target).parents().filter(function() {
+                prevent_left = e.deltaX < 0 && ($target.isHScrollable() && $target.scrollLeft() <= 0) && $target.parents().filter(function() {
                     return $(this).scrollLeft() > 0;
                 }).length === 0;
 
 
                 // If none of the parents can be scrolled up when we try to scroll up
-                prevent_up = e.deltaY > 0 && $(e.target).scrollTop() <= 0 && !$(e.target).parents().filter(function() {
+                prevent_up = e.deltaY > 0 && ($target.isVScrollable() && $target.scrollTop() <= 0) && $target.parents().filter(function() {
                     return $(this).scrollTop() > 0;
                 }).length === 0;
 
