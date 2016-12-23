@@ -88,6 +88,7 @@
     html, body, .blog-posts-container {
         background: #f8f8f8 !important;
         min-height: 100vh;
+        overflow: hidden;
     }
 
     .block {
@@ -348,7 +349,7 @@
         -o-transition:.15s all ease-out;
     }
 
-    .blog-posts-container .navigation-block .navigation-timeline:hover::after {
+    .blog-posts-container .navigation-block .navigation-timeline:hover::after, .blog-posts-container .navigation-block .navigation-timeline.active::after {
         content: "Time travel";
         display: block;
         position: absolute;
@@ -388,7 +389,7 @@
         transition: 0s, .1s opacity ease-in-out, .15s top ease-in-out;
     }
 
-    .blog-posts-container .navigation-block .navigation-timeline:hover .timeline-label {
+    .blog-posts-container .navigation-block .navigation-timeline:hover .timeline-label, .blog-posts-container .navigation-block .navigation-timeline.active .timeline-label {
         top: 50%;
         opacity: 1;
     }
@@ -419,7 +420,7 @@
         opacity: 1;
     }
 
-    .blog-posts-container .navigation-block .navigation-timeline:hover .first-date, .blog-posts-container .navigation-block .navigation-timeline:hover .last-date {
+    .blog-posts-container .navigation-block .navigation-timeline:hover .first-date, .blog-posts-container .navigation-block .navigation-timeline:hover .last-date, .blog-posts-container .navigation-block .navigation-timeline.active .first-date, .blog-posts-container .navigation-block .navigation-timeline.active .last-date {
         opacity: 0.2;
     }
 
@@ -552,7 +553,7 @@
         bottom: -40px;
         right: auto;
         vertical-align: bottom;
-        width: 40%;
+        width: 45%;
         max-width: 136px;
         margin: 40px 0 0 0;
         padding: 10px 10px 12px 10px;
@@ -947,7 +948,6 @@
     }()
 
     function init(){
-
         // Firebase
         var config = {
             apiKey: "AIzaSyDyGLTluIS4SwTQefYdFXjczodfnSZSAJA",
@@ -961,7 +961,6 @@
         rootRef = firebase.database().ref('/');
         manageAuth();
         attachEvents();
-
     }
 
     function closeNewPost(didPost){
@@ -1060,6 +1059,10 @@
 
         var clickEventString = 'click';
 
+        window.onbeforeunload = function(e) {
+            return 'Are you sure you want to leave?';
+        };
+
         $(document).off('mouseenter', '.navigation-timeline');
         $(document).off('mouseleave', '.navigation-timeline');
         $(document).on('mouseenter', '.navigation-timeline', function(){
@@ -1072,8 +1075,20 @@
         $(document).off('touchend', '.navigation-timeline');
         $(document).on('touchstart', '.navigation-timeline', function(){
             $(document).on('touchmove', '.navigation-timeline', handleTimeTravel);
-        }).on('touchend', function(){
+            $(this).addClass('active');
+        }).on('touchend', '.navigation-timeline', function(e){
             $(document).off('touchmove', '.navigation-timeline');
+            var postId = $(this).find('.timeline-label').attr('data-id');
+            e.stopPropagation();
+            $('.posts .post').scrollTop(0);
+            if (postId != null && postId != undefined && postId != ""){
+                var $post = $('.posts .post[data-id="'+postId+'"]').eq(0);
+                $('.posts').animate({
+                    scrollLeft: $('.posts').get(0).scrollWidth * parseFloat($('.navigation-timeline .timeline-label').attr('data-perc')) - 64,
+                });
+                highlightPostForXSeconds(postId,1);
+            }
+            $(this).removeClass('active');
         });
 
         $(document).off(clickEventString, '.navigation-timeline');
@@ -1474,7 +1489,7 @@
         eventsRef.child(id).once('value', function(snapshot) {
             callback(snapshot.val());
         }, function(error){
-            console.log('Get post by ID error:')
+            console.warn('Get post by ID error:')
             console.warn(error);
         });
     }
@@ -1548,13 +1563,10 @@
             var $title = $('<div>')
                 .addClass('title')
                 .text(name);
-            var $date = $('<div>')
-                .addClass('date')
-                .text(date);
             var $deleteButton = $('<div>')
                 .addClass('timeline-delete button-light')
                 .text('Delete');
-            $timeline.append($title, $date, $deleteButton);
+            $timeline.append($title, $deleteButton);
             return $timeline;
         } else {
             return null;
@@ -1600,7 +1612,7 @@
         userRef = rootRef.child("/users/" + userId);
         userRef.once('value', function(snapshot){
             userData = snapshot.val();
-            if (callback) { console.log(callback); callback.call(this); }
+            if (callback) { callback.call(this); }
         }, function (error){
             userData = null;
             console.warn(error);
@@ -1621,7 +1633,6 @@
     }
 
     function createTimeline(name, callback){
-        console.log('createTimeline called');
         if (firebase.auth().currentUser){
             var unix = (new Date).getTime();
             rootRef.child('timelines').push({
@@ -1793,64 +1804,6 @@
         .reflow()
         .css('transition', '');
     };
-
-    $.fn.isHScrollable = function () {
-        return this[0].scrollWidth > this[0].clientWidth;
-    };
-
-    $.fn.isVScrollable = function () {
-        return this[0].scrollHeight > this[0].clientHeight;
-    };
-
-    $.fn.isScrollable = function () {
-        return this[0].scrollWidth > this[0].clientWidth || this[0].scrollHeight > this[0].clientHeight;
-    };
-
-    (function ($) {
-
-        // This code is only valid for Mac
-        // if (!navigator.userAgent.match(/Macintosh/)) {
-        //     return;
-        // }
-
-        // Detect browsers
-        // http://stackoverflow.com/questions/5899783/detect-safari-using-jquery
-        var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
-        var is_safari = navigator.userAgent.indexOf("Safari") > -1;
-        var is_firefox = navigator.userAgent.indexOf('Firefox') > -1;
-
-        // Handle scroll events in Chrome, Safari, and Firefox
-        if (is_chrome || is_safari || is_firefox) {
-
-            // TODO: This only prevents scroll when reaching the topmost or leftmost
-            // positions of a container. It doesn't handle rightmost or bottom,
-            // and Lion scroll can be triggered by scrolling right (or bottom) and then
-            // scrolling left without raising your fingers from the scroll position.
-            $(window).on('mousewheel', function (e) {
-
-                var prevent_left, prevent_up;
-                var $target = $(e.target);
-
-                // If none of the parents can be scrolled left when we try to scroll left
-                prevent_left = e.deltaX < 0 && ($target.isHScrollable() && $target.scrollLeft() <= 0) && $target.parents().filter(function() {
-                    return $(this).scrollLeft() > 0;
-                }).length === 0;
-
-
-                // If none of the parents can be scrolled up when we try to scroll up
-                prevent_up = e.deltaY > 0 && ($target.isVScrollable() && $target.scrollTop() <= 0) && $target.parents().filter(function() {
-                    return $(this).scrollTop() > 0;
-                }).length === 0;
-
-                // Prevent futile scroll, which would trigger the Back/Next page event
-                if (prevent_left || prevent_up) {
-                    e.preventDefault();
-                }
-            });
-
-        }
-
-    }(jQuery));
 
 </script>
 
