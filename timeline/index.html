@@ -785,8 +785,7 @@
 
     <script language="javascript">
 
-    var user = null;
-    var fPosts;
+    var timelineRef;
     var connectedRef;
     var defaultTimelineKey = 0;
     var publishImmediately = true;
@@ -1093,7 +1092,7 @@
 
     function getInitialData(){
         loading.show();
-        fPosts.orderByChild('date').once('value', function(snapshot) {
+        timelineRef.orderByChild('date').once('value', function(snapshot) {
             var items = [];
             snapshot.forEach(function(child) {
                 items.push(child.val());
@@ -1113,7 +1112,7 @@
     }
 
     function handleDataUpdates(){
-        fPosts.orderByChild('date').on('value', function(snapshot) {
+        timelineRef.orderByChild('date').on('value', function(snapshot) {
             var items = [];
             snapshot.forEach(function(child) {
                 items.push(child.val());
@@ -1128,13 +1127,17 @@
         eventDates = [];
         itemList.forEach(function(item){
             var postDateId = parseInt(item.date.replace(/ [0-2][0-9]:[0-5][0-9]/,'').split('/').join(''));
-            if (getUrlHash() == item.createdOn.toString() && item.isPublished) childPostId = item.createdOn;
+            if (getUrlHash() == getPublicReferenceFromId('e', item.createdOn) && item.isPublished) childPostId = item.createdOn;
             item.postDateId = postDateId;
             $('.blog-posts-container .posts').prepend(getPostElementFromPost(item));
             if (item.date) eventDates.push(postDateId);
         })
         displayTimelineMinAndMax();
         if (childPostId != null) getPostByID(childPostId,openNewPost);
+    }
+
+    function getPublicReferenceFromId(r, id){
+        return r + reverseString(id.toString());
     }
 
     function getZeroPaddedNumber(num, size) {
@@ -1210,7 +1213,7 @@
         var createdOnOrNow = createdOn != null && createdOn != undefined && createdOn != "" && !isNaN(createdOn) ? createdOn : unix;
         var parsedDate = parseDateTimestamp(document.querySelectorAll('.post-new .post-new-date')[0].innerText);
         parsedDate = parsedDate ? parsedDate : parseDateTimestamp(createdOnOrNow);
-        var user = firebase.auth().currentUser
+        var user = firebase.auth().currentUser;
         var post = {
             author : getCurrentAuthor(),
             content : document.querySelectorAll('.post-new .post-new-content')[0].innerText,
@@ -1219,14 +1222,14 @@
             title : document.querySelectorAll('.post-new .post-new-title')[0].innerText,
             updatedOn: unix,
             date: parsedDate
-        }
-        writeData(createdOnOrNow, post, function(){ closeNewPost(true) });
+        };
+        writeData(timelineRef, createdOnOrNow, post, function(){ closeNewPost(true) });
     }
 
     function openNewPost(post){
         closeChildPage();
         if (post){
-            window.location.hash = post.createdOn.toString();
+            window.location.hash = getPublicReferenceFromId('e', post.createdOn)
             if (post.isPublished != publishImmediately) changePublishingMode();
             $('.post-new-title').text(post.title);
             $('.post-new-content').text(post.content).focus();
@@ -1249,19 +1252,19 @@
 
     function deletePost(id){
         closeChildPage();
-        writeData(id,null);
+        writeData(timelineRef, id, null);
     }
 
     function publishPost(id){
-        writeData(id+'/isPublished',true);
+        writeData(timelineRef, id+'/isPublished', true);
     }
 
     function unpublishPost(id){
-        writeData(id+'/isPublished',false);
+        writeData(timelineRef, id+'/isPublished', false);
     }
 
     function getPostByID(id, callback){
-        fPosts.child(id).once('value', function(snapshot) {
+        timelineRef.child(id).once('value', function(snapshot) {
             callback(snapshot.val());
         }, function(error){
             console.log('Get post by ID error:')
@@ -1291,7 +1294,7 @@
     }
 
     function loadChildPage(post){
-        window.location.hash = post.createdOn.toString();
+        window.location.hash = getPublicReferenceFromId('e', post.createdOn)
         $('.post-child .post-content').empty().append(getPostElementFromPost(post));
         $('.post-child .gmph-button.twitter').attr('href','https://twitter.com/home?status='+encodeURIComponent(post.title)+'%20'+encodeURIComponent(window.location.href)+'%20by%20%40gmph');
         $('.post-child .gmph-button.facebook').attr('href','https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href));
@@ -1310,25 +1313,25 @@
             addCurrentAuthorToNewPost();
             $('.navigation-block').addClass('visible');
             $('.sign-in.popup').removeClass('visible');
-
-            fPosts = firebase.database().ref(firebase.auth().currentUser.uid + "/timelines/" + defaultTimelineKey + "/events/");
-
             setUpChrono();
             attachEvents();
-            getInitialData();
+            openTimeline();
         } else {
             $('.post-new, .navigation-block').removeClass('visible');
             $('.sign-in.popup').addClass('visible');
         }
     }
 
-    function writeData(key,value, callback){
-        if (callback != undefined) {
-            fPosts.child(key).set(value, callback);
-        } else {
-            fPosts.child(key).set(value);
-        }
+    function openTimeline(id){
+        var userId = firebase.auth().currentUser.uid;
+        var timelineId = id ? id : defaultTimelineKey;
+        timelineRef = firebase.database().ref(userId + "/timelines/" + timelineId + "/events/");
+        getInitialData();
+    }
 
+    function writeData(ref, key, value, callback){
+        callback = callback ? callback : null;
+        ref.child(key).set(value, callback);
     }
 
     function parseDateTimestamp(string){
@@ -1339,7 +1342,17 @@
     function signInOrCreateUserWithEmailAndPassword(email, password){
         firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
             if (error.code === "auth/user-not-found"){
-                return firebase.auth().createUserWithEmailAndPassword(email, password);
+                firebase.auth().createUserWithEmailAndPassword(email, password).then(function(result){
+                    if (result.user){
+                        deleteLocalData('timeline_user');
+                        setLocalData('timeline_user', result.user);
+                    }
+                });
+            }
+        }).then(function(result){
+            if (result.user){
+                deleteLocalData('timeline_user');
+                setLocalData('timeline_user', result.user);
             }
         });
     }
@@ -1349,8 +1362,8 @@
         firebase.auth().getRedirectResult().then(function(result) {
             if (result.user){
                 user = result.user;
-                removeCookie('gmphblog_user');
-                setCookie('gmphblog_user', JSON.stringify(user), 30);
+                deleteLocalData('timeline_user');
+                setLocalData('timeline_user', user);
             } else {
                 var provider = new firebase.auth.TwitterAuthProvider();
                 firebase.auth().signInWithRedirect(provider);
@@ -1359,44 +1372,19 @@
             var provider = new firebase.auth.TwitterAuthProvider();
             firebase.auth().signInWithRedirect(provider);
         });
+
     }
 
-    function setCookie(cname, cvalue, exdays) {
-        var d = new Date();
-        d.setTime(d.getTime() + (exdays*24*60*60*1000));
-        var expires = "expires="+d.toUTCString();
-        document.cookie = cname + "=" + JSON.stringify(cvalue) + "; " + expires;
+    function setLocalData(key, value){
+        localStorage[key] = value;
     }
 
-    function removeCookie(cname) {
-        document.cookie = cname + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    function deleteLocalData(key){
+        localStorage[key] = null;
     }
 
-    function getCookie(cname) {
-        var name = cname + "=";
-        var ca = document.cookie.split(';');
-        for(var i=0; i<ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0)==' ') c = c.substring(1);
-            if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-        }
-        return "";
-    }
-
-    function getExistingUser() {
-        try {
-            var local_user = JSON.parse(JSON.parse(getCookie("gmphblog_user")));
-            if (local_user != "" && local_user != null && local_user != undefined && local_user != {}){
-                user = local_user;
-                firebase.auth().currentUser = user;
-                return true;
-            } else {
-                return false;
-            }
-        } catch (e){
-            return false;
-        }
-
+    function getLocalData(key){
+        return localStorage[key];
     }
 
     function logInWithTwitter(){
@@ -1436,6 +1424,11 @@
         return decodeURI((window.location.hash || "").replace(/#/g,''));
     }
 
+    function reverseString(s){
+        for (var i = s.length - 1, o = ''; i >= 0; o += s[i--]) { }
+        return o;
+    }
+
     function removeFromArrayByValue(arr) {
         var what, a = arguments, L = a.length, ax;
         while (L > 1 && arr.length) {
@@ -1459,17 +1452,6 @@
             return keys;
         };
     }
-
-    Array.prototype.removeByValue = function() {
-        var what, a = arguments, L = a.length, ax;
-        while (L && this.length) {
-            what = a[--L];
-            while ((ax = this.indexOf(what)) !== -1) {
-                this.splice(ax, 1);
-            }
-        }
-        return this;
-    };
 
     $.fn.reflow = function () {
         this[0].offsetHeight;   // force redrawing of element
