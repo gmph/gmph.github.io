@@ -976,6 +976,7 @@
             $('.post-new-title, .post-new-content, .post-new-date').text('');
         },500);
         $('.post-new').attr('data-id','').removeClass('visible');
+        blurAllFields();
     };
 
     function manageAuth(){
@@ -1568,6 +1569,11 @@
         $('.timeline-new.popup').removeClass('visible');
         $('.timeline-new .timeline-new-name').text('');
         if (isFinished !== true) openSettings();
+        blurAllFields();
+    }
+
+    function blurAllFields(){
+        $(':focus').blur();
     }
 
     function setSignInOrUserState(){
@@ -1578,6 +1584,7 @@
             setUpChrono();
             attachEvents();
             updateUserData(openTimeline);
+            blurAllFields()();
         } else {
             $('.post-new, .navigation-block').removeClass('visible');
             $('.sign-in.popup').addClass('visible');
