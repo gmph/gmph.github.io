@@ -717,13 +717,8 @@
         cursor: pointer;
         overflow-y: auto;
         overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
         transform: translate3d(0,0,0);
         direction: ltr;
-    }
-
-    .post * {
-        transform: translate3d(0,0,0);
     }
 
     .posts .post:hover {
@@ -896,8 +891,8 @@
 
     <div class="sign-in popup buttoned">
         <h1 class="display-as-h1">Sign in</h1>
-        <div class="sign-in-email display-as-p" data-placeholder="Email address" contenteditable="true"></div>
-        <div class="sign-in-password display-as-p" data-placeholder="Password" contenteditable="true"></div>
+        <div class="sign-in-email display-as-p" data-placeholder="Email address" contenteditable="true" type="email"></div>
+        <div class="sign-in-password display-as-p" data-placeholder="Password" contenteditable="true" type="password"></div>
         <div class="sign-in-submit side-button-right button">Sign in</div>
     </div>
 
