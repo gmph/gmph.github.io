@@ -120,9 +120,13 @@
         vertical-align: top;
         opacity: 0;
         pointer-events: none;
-        overflow-y: scroll;
+        overflow-y: auto;
         overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
 
+    .popup * {
+        transform: translate3d(0,0,0);
     }
 
     .popup.visible {
@@ -472,7 +476,12 @@
         max-height: calc(90vh - 300px);
         white-space: normal;
         overflow-x: hidden;
-        overflow-y: scroll;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .blog-posts-container .post-new .post-new-content * {
+        transform: translate3d(0,0,0);
     }
 
     .blog-posts-container .post-new .post-new-publish-container {
@@ -682,8 +691,9 @@
         height: -webkit-calc(100vh - 96px);
         height: calc(100vh - 96px);
         padding: 12px 12px 32px 12px;
-        overflow-x: scroll;
+        overflow-x: auto;
         overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
         white-space: nowrap;
         direction: rtl;
         text-align: left;
@@ -705,9 +715,15 @@
         border-radius: 4px;
         text-align: left;
         cursor: pointer;
-        overflow-y: scroll;
+        overflow-y: auto;
         overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        transform: translate3d(0,0,0);
         direction: ltr;
+    }
+
+    .post * {
+        transform: translate3d(0,0,0);
     }
 
     .posts .post:hover {
@@ -1065,7 +1081,7 @@
         var clickEventString = 'click';
 
         window.onbeforeunload = function(e) {
-            return 'Are you sure you want to leave?';
+            return 'Leave this website?';
         };
 
         $(document).off('mouseenter', '.navigation-timeline');
