@@ -200,7 +200,7 @@
         background: #fff;
     }
 
-    .blog-posts-container.child-page .posts, .blog-posts-container.child-page .navigation-block, .blog-posts-container.child-page .post-new-open, .blog-posts-container.child-page .settings-open {
+    .blog-posts-container.child-page .posts, .blog-posts-container.child-page .navigation-block, .blog-posts-container.child-page .post-new-open, .blog-posts-container.child-page .timelines-open {
         opacity: 0.15 !important;
         pointer-events: none !important
     }
@@ -493,7 +493,7 @@
         color: #999;
     }
 
-    .blog-posts-container .settings-open {
+    .blog-posts-container .timelines-open {
         display: block;
         position: fixed;
         top: 24px;
@@ -512,7 +512,7 @@
         cursor: pointer;
     }
 
-    .blog-posts-container .settings-open:hover {
+    .blog-posts-container .timelines-open:hover {
         background-color: #ddd;
     }
 
@@ -783,11 +783,11 @@
         -webkit-user-select: text;
     }
 
-    .settings .timeline-list {
+    .timelines .timeline-list {
         margin: -8px auto -12px auto;
     }
 
-    .settings .timeline-list .timeline {
+    .timelines .timeline-list .timeline {
         display: block;
         position: relative;
         top:0;
@@ -801,11 +801,11 @@
         cursor: pointer;
     }
 
-    .settings .timeline-list .timeline:hover {
+    .timelines .timeline-list .timeline:hover {
         box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.2);
     }
 
-    .settings .timeline-list .timeline .title {
+    .timelines .timeline-list .timeline .title {
         display: inline-block;
         width: auto;
         margin: 0 16px 0 0;
@@ -814,7 +814,7 @@
         vertical-align: middle;
     }
 
-    .settings .timeline-list .timeline .date {
+    .timelines .timeline-list .timeline .date {
         display: inline-block;
         width: auto;
         margin: 0 16px 0 0;
@@ -826,7 +826,7 @@
         vertical-align: middle;
     }
 
-    .settings .timeline-list .timeline .timeline-delete {
+    .timelines .timeline-list .timeline .timeline-delete {
         display: block;
         position: absolute;
         top: 50%;
@@ -856,7 +856,7 @@
     <div class="block">
         <div class="blog-posts-container">
             <div class="post-new-open"></div>
-            <div class="settings-open"></div>
+            <div class="timelines-open"></div>
             <div class="post-child popup">
                 <div class="post-content"></div>
                 <div class="button back sans-serif" onclick="closeChildPage()">Close</div>
@@ -889,10 +889,10 @@
         <div class="sign-in-submit side-button-right button">Sign in</div>
     </div>
 
-    <div class="settings popup buttoned">
+    <div class="timelines popup buttoned">
         <h1 class="display-as-h1">Timelines</h1>
         <div class="timeline-list"></div>
-        <div class="settings-close side-button-left button">Close</div>
+        <div class="timelines-close side-button-left button">Close</div>
         <div class="timeline-new-open side-button-right button">Create new</div>
     </div>
 
@@ -1148,29 +1148,29 @@
             createPost();
         });
 
-        $(document).off(clickEventString, '.settings-open');
-        $(document).on(clickEventString, '.settings-open', function(e){
+        $(document).off(clickEventString, '.timelines-open');
+        $(document).on(clickEventString, '.timelines-open', function(e){
             e.stopPropagation();
-            openSettings();
+            openTimelines();
         });
 
-        $(document).off(clickEventString, '.settings-close');
-        $(document).on(clickEventString, '.settings-close', function(e){
+        $(document).off(clickEventString, '.timelines-close');
+        $(document).on(clickEventString, '.timelines-close', function(e){
             e.stopPropagation();
-            closeSettings();
+            closeTimeslines();
         });
 
-        $(document).off(clickEventString, '.settings .timeline-list .timeline');
-        $(document).on(clickEventString, '.settings .timeline-list .timeline', function(e){
+        $(document).off(clickEventString, '.timelines .timeline-list .timeline');
+        $(document).on(clickEventString, '.timelines .timeline-list .timeline', function(e){
             e.stopPropagation();
-            closeSettings();
+            closeTimeslines();
             openTimeline($(this).attr('data-id'));
         });
 
-        $(document).off(clickEventString, '.settings .timeline-new-open');
-        $(document).on(clickEventString, '.settings .timeline-new-open', function(e){
+        $(document).off(clickEventString, '.timelines .timeline-new-open');
+        $(document).on(clickEventString, '.timelines .timeline-new-open', function(e){
             e.stopPropagation();
-            closeSettings();
+            closeTimeslines();
             openNewTimeline();
         });
 
@@ -1187,7 +1187,7 @@
             createTimeline(name, function(id){
                 updateUserData(function(){
                     openTimeline(id);
-                    closeSettings();
+                    closeTimeslines();
                 });
             });
         });
@@ -1527,33 +1527,33 @@
         $('.post-child').removeClass('visible');
     }
 
-    function openSettings(){
-        $('.settings.popup').addClass('loading-timeline-list');
+    function openTimelines(){
+        $('.timelines.popup').addClass('loading-timeline-list');
         updateUserData(function(){
             displayTimelineList(function(){
                 $('.blog-posts-container').addClass('child-page');
-                $('.settings.popup').addClass('visible');
+                $('.timelines.popup').addClass('visible');
             });
         });
     }
 
-    function closeSettings(){
+    function closeTimeslines(){
         $('.blog-posts-container').removeClass('child-page');
-        $('.settings.popup').removeClass('visible');
+        $('.timelines.popup').removeClass('visible');
         setTimeout(function(){
-            $('.settings.popup .timeline-list').empty();
+            $('.timelines.popup .timeline-list').empty();
         }, 500);
     }
 
     function displayTimelineList(callback){
-        $('.settings .timeline-list').empty();
+        $('.timelines .timeline-list').empty();
         var timelineIds = Object.keys(userData.timelines);
         for (var i = 0; i < timelineIds.length; i++){
             rootRef.child('timelines/' + timelineIds[i]).once('value', function(snapshot){
-                    $('.settings.popup .timeline-list').append(getTimelineListItemElementFromTimeline(snapshot.val(), snapshot.key));
+                    $('.timelines.popup .timeline-list').append(getTimelineListItemElementFromTimeline(snapshot.val(), snapshot.key));
                     if (callback) callback.call(this);
                 setTimeout(function(){
-                    $('.settings.popup').removeClass('loading-timeline-list');
+                    $('.timelines.popup').removeClass('loading-timeline-list');
                 }, 500);
             }, function(error){
                 console.warn(error);
@@ -1592,7 +1592,7 @@
         $('.blog-posts-container').removeClass('child-page');
         $('.timeline-new.popup').removeClass('visible');
         $('.timeline-new .timeline-new-name').text('');
-        if (isFinished !== true) openSettings();
+        if (isFinished !== true) openTimelines();
         blurAllFields();
     }
 
