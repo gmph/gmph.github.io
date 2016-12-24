@@ -477,11 +477,6 @@
         white-space: normal;
         overflow-x: hidden;
         overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .blog-posts-container .post-new .post-new-content * {
-        transform: translate3d(0,0,0);
     }
 
     .blog-posts-container .post-new .post-new-publish-container {
@@ -684,12 +679,13 @@
 
     .posts {
         display: block;
-        position: absolute;
-        top: 96px;
+        position: static;
+        top: 0;
         left:0;
         width: 100%;
         height: -webkit-calc(100vh - 96px);
         height: calc(100vh - 96px);
+        margin: 96px 0 0 0;
         padding: 12px 12px 32px 12px;
         overflow-x: auto;
         overflow-y: hidden;
