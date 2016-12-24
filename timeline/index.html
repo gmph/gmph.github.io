@@ -122,11 +122,6 @@
         pointer-events: none;
         overflow-y: auto;
         overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .popup * {
-        transform: translate3d(0,0,0);
     }
 
     .popup.visible {
@@ -689,10 +684,13 @@
         padding: 12px 12px 32px 12px;
         overflow-x: auto;
         overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
         white-space: nowrap;
         direction: rtl;
         text-align: left;
+    }
+
+    .posts * {
+        direction: ltr;
     }
 
     .posts .post {
@@ -713,7 +711,6 @@
         cursor: pointer;
         overflow-y: auto;
         overflow-x: hidden;
-        transform: translate3d(0,0,0);
         direction: ltr;
     }
 
