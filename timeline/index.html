@@ -200,7 +200,7 @@
         background: #fff;
     }
 
-    .blog-posts-container.child-page .posts, .blog-posts-container.child-page .navigation-block, .blog-posts-container.child-page .post-new-open, .blog-posts-container.child-page .timelines-open {
+    .blog-posts-container.child-page .posts, .blog-posts-container.child-page .navigation-block, .blog-posts-container.child-page .post-new-open {
         opacity: 0.15 !important;
         pointer-events: none !important
     }
@@ -300,25 +300,76 @@
 
     .blog-posts-container .navigation-block .navigation-title {
         position: fixed;
-        top: 38px;
+        top: 36px;
         left: 24px;
         font-size: 22px;
-        line-height: 1.2em;
+        line-height: 28px;
         margin: 0;
         padding: 0;
-        max-width: 200px;
+        max-width: 184px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .blog-posts-container .navigation-block .timelines-open {
+        position: fixed;
+        top: 24px;
+        left: 216px;
+        z-index: 5;
+        width: 48px;
+        height: 48px;
+        margin: 0;
+        padding: 0;
+        background-color: #eee;
+        background-image: url(menu.png);
+        background-size: 24px 24px;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 32px;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    .blog-posts-container .navigation-block .timelines-open:hover {
+        background-color: #ddd;
+    }
+
+    .blog-posts-container .overflow-open {
+        display: none; /* TODO */
+        position: fixed;
+        top: 24px;
+        left: auto;
+        bottom: auto;
+        right: 24px;
+        z-index: 5;
+        width: 48px;
+        height: 48px;
+        background-color: #eee;
+        background-image: url(overflow.png);
+        background-size: 28px 28px;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 32px;
+        cursor: pointer;
+    }
+
+    .blog-posts-container .overflow-open:hover {
+        background-color: #ddd;
     }
 
     .blog-posts-container .navigation-block .navigation-timeline {
         display: block;
         position: fixed;
-        top: 26px;
-        left: 240px;
-        width: -webkit-calc(100% - 360px);
-        width: calc(100% - 360px);
+        top: 24px;
+        left: 304px;
+        width: -webkit-calc(100% - 352px);
+        width: calc(100% - 352px);
         height: 48px;
         margin: 0 auto 0 auto;
         background: #eee;
@@ -491,29 +542,6 @@
         margin: 0 0 0 16px;
         padding: 0;
         color: #999;
-    }
-
-    .blog-posts-container .timelines-open {
-        display: block;
-        position: fixed;
-        top: 24px;
-        left: auto;
-        bottom: auto;
-        right: 24px;
-        z-index: 5;
-        width: 48px;
-        height: 48px;
-        background-color: #eee;
-        background-image: url(calendar.png);
-        background-size: 28px 28px;
-        background-position: center;
-        background-repeat: no-repeat;
-        border-radius: 32px;
-        cursor: pointer;
-    }
-
-    .blog-posts-container .timelines-open:hover {
-        background-color: #ddd;
     }
 
     .blog-posts-container .post-new-open {
@@ -856,7 +884,6 @@
     <div class="block">
         <div class="blog-posts-container">
             <div class="post-new-open"></div>
-            <div class="timelines-open"></div>
             <div class="post-child popup">
                 <div class="post-content"></div>
                 <div class="button back sans-serif" onclick="closeChildPage()">Close</div>
@@ -864,11 +891,13 @@
             <div class="user-block">
                 <div class="navigation-block">
                     <h1 class="navigation-title">Timeline</h1>
+                    <div class="timelines-open"></div>
                     <div class="navigation-timeline">
                         <div class="first-date"></div>
                         <div class="last-date"></div>
                         <div class="timeline-label"></div>
                     </div>
+                    <div class="overflow-open"></div>
                 </div>
             </div>
             <div class="post-new popup buttoned">
