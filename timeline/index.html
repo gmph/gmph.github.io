@@ -1976,9 +1976,9 @@
         window.onbeforeunload = function(e) {
             return 'Leave this website?';
         };
-        rootRef.child('timelines/' + getIdFromPublicReference(ref)).once('value', function(snapshot){
+        rootRef.child('timelines/' + getIdFromPublicReference(ref)).on('value', function(snapshot){
             onTimelineChanged(snapshot);
-            rootRef.child('events/' + getIdFromPublicReference(ref)).orderByChild('date').once('value', function(snapshot){
+            rootRef.child('events/' + getIdFromPublicReference(ref)).orderByChild('date').on('value', function(snapshot){
                 displayTimelineFromSnapshot(snapshot);
                 $('.events').scrollLeft(0);
             }, function(error){
