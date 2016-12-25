@@ -85,7 +85,7 @@
         font-weight: 700;
     }
 
-    html, body, .blog-posts-container {
+    html, body, .timeline-container {
         background: #f8f8f8 !important;
         min-height: 100vh;
         overflow: hidden;
@@ -134,29 +134,8 @@
         margin-bottom: 32px !important;
     }
 
-    .loading {
-        display: block;
-        position: absolute;
-        width:100%;
-        max-width:800px;
-        height:auto;
-        overflow: hidden;
-        border-radius: 4px;
-        opacity: 0.99;
-        color: #222;
-        opacity: 0;
-        text-align: center;
-        margin:40px auto 0 auto;
-        padding: 32px;
-        line-height: 1.32em;
-        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
-        font-size:18px;
-        pointer-events: none;
-    }
-
-    .loading.visible {
-        opacity: 0.3;
-        pointer-events: all;
+    .display-as-h1 {
+        font-size: 24px;
     }
 
     .connection {
@@ -193,33 +172,40 @@
         top:0;
     }
 
-    .blog-posts-container {
+    .timeline-container {
+        width: 100%;
+        height: 100%;
+        margin: 0 auto 0 auto;
+        padding: 0;
+    }
+
+    .timeline-container.child-page {
         width: 100%;
         margin: 0 auto 0 auto;
         padding: 0;
-        background: #fff;
+        background: #e9e9e9 !important;
     }
 
-    .blog-posts-container.child-page .posts, .blog-posts-container.child-page .navigation-block, .blog-posts-container.child-page .post-new-open {
-        opacity: 0.15 !important;
+    .timeline-container.child-page .events, .timeline-container.child-page .navigation-block, .timeline-container.child-page .event-new-open {
+        opacity: 0.1 !important;
         pointer-events: none !important
     }
 
-    .blog-posts-container .post-child:not(.visible) {
+    .timeline-container .event-child:not(.visible) {
         top: 55% !important;
         opacity: 0 !important;
         pointer-events: none !important;
     }
 
-    .blog-posts-container .post {
+    .timeline-container .event {
         margin: 0 auto 80px auto;
     }
 
-    .blog-posts-container .post.unpublished {
+    .timeline-container .event.unpublished {
         opacity: 1;
     }
 
-    .blog-posts-container .author {
+    .timeline-container .author {
         display: block;
         position: relative;
         top:0;
@@ -234,7 +220,7 @@
         user-select: none;
     }
 
-    .blog-posts-container .author img {
+    .timeline-container .author img {
         display: block;
         position: absolute;
         top:0;
@@ -246,7 +232,7 @@
         transform: translateZ(0);
     }
 
-    .blog-posts-container .author .name {
+    .timeline-container .author .name {
         display: inline-block;
         position: relative;
         width: auto;
@@ -280,13 +266,13 @@
         display: block;
     }
 
-    .blog-posts-container .user-block {
+    .timeline-container .user-block {
         display: block;
         position: relative;
         padding: 0;
     }
 
-    .blog-posts-container .navigation-block {
+    .timeline-container .navigation-block {
         display: block;
         position: static;
         width: 100%;
@@ -298,15 +284,15 @@
         pointer-events: none;
     }
 
-    .blog-posts-container .navigation-block .navigation-title {
+    .timeline-container .navigation-block .navigation-title {
         position: fixed;
         top: 36px;
         left: 24px;
         font-size: 22px;
-        line-height: 28px;
+        line-height: 24px;
         margin: 0;
-        padding: 0;
-        max-width: 184px;
+        padding: 0 0 0 48px;
+        max-width: 256px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -317,16 +303,15 @@
         user-select: none;
     }
 
-    .blog-posts-container .navigation-block .timelines-open {
+    .timeline-container .navigation-block .timelines-open {
         position: fixed;
-        top: 24px;
-        left: 216px;
+        top: 36px;
+        left: 24px;
         z-index: 5;
-        width: 48px;
-        height: 48px;
+        width: 24px;
+        height: 24px;
         margin: 0;
         padding: 0;
-        background-color: #eee;
         background-image: url(menu.png);
         background-size: 24px 24px;
         background-position: center;
@@ -334,14 +319,15 @@
         border-radius: 32px;
         overflow: hidden;
         cursor: pointer;
+        opacity: 0.85;
     }
 
-    .blog-posts-container .navigation-block .timelines-open:hover {
-        background-color: #ddd;
+    .timeline-container .navigation-block .timelines-open:hover {
+        opacity: 1;
     }
 
-    .blog-posts-container .overflow-open {
-        display: none; /* TODO */
+    .timeline-container .timeline-share-open {
+        display: block;
         position: fixed;
         top: 24px;
         left: auto;
@@ -351,25 +337,71 @@
         width: 48px;
         height: 48px;
         background-color: #eee;
-        background-image: url(overflow.png);
-        background-size: 28px 28px;
-        background-position: center;
+        background-image: url(invite.png);
+        background-size: 24px 24px;
+        background-position: 45% 50%;
         background-repeat: no-repeat;
         border-radius: 32px;
         cursor: pointer;
     }
 
-    .blog-posts-container .overflow-open:hover {
+    .timeline-container .timeline-share-open:hover {
         background-color: #ddd;
     }
 
-    .blog-posts-container .navigation-block .navigation-timeline {
+    .user-anonymous .timeline-container .navigation-block .navigation-timeline {
+        left: 48px;
+        width: -webkit-calc(100% - 296px);
+        width: calc(100% - 296px);
+    }
+
+    .user-anonymous .timeline-container .navigation-block .timelines-open, .user-anonymous .timeline-container .navigation-block .timeline-share-open, .user-anonymous .timeline-container .navigation-block .event-new-open {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .timeline-container .navigation-block .user-sign-in-refresh {
+        display: block;
+        position: fixed;
+        top: 24px;
+        left: auto;
+        bottom: auto;
+        right: 24px;
+        z-index: 5;
+        width: 184px;
+        height: 48px;
+        padding: 16px 24px;
+        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #fff;
+        background-color: #8B67FF;
+        border-radius: 32px;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .user-anonymous .timeline-container .navigation-block .user-sign-in-refresh {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .user-anonymous .timeline-container .user-sign-in-refresh:hover {
+        background-color: #8360f2;
+        box-shadow: 0 2px 6px rgba(0,0,0,.4);
+
+    }
+
+    .timeline-container .navigation-block .navigation-timeline {
         display: block;
         position: fixed;
         top: 24px;
         left: 304px;
-        width: -webkit-calc(100% - 352px);
-        width: calc(100% - 352px);
+        width: -webkit-calc(100% - 416px);
+        width: calc(100% - 416px);
         height: 48px;
         margin: 0 auto 0 auto;
         background: #eee;
@@ -384,7 +416,7 @@
         user-select: none;
     }
 
-    .blog-posts-container:not(.child-page) .navigation-block .navigation-timeline::after {
+    .timeline-container:not(.child-page) .navigation-block .navigation-timeline::after {
         content: "Time travel";
         display: block;
         position: absolute;
@@ -404,7 +436,7 @@
         -o-transition:.15s all ease-out;
     }
 
-    .blog-posts-container .navigation-block .navigation-timeline:hover::after, .blog-posts-container .navigation-block .navigation-timeline.active::after {
+    .timeline-container .navigation-block .navigation-timeline:hover::after, .timeline-container .navigation-block .navigation-timeline.active::after {
         content: "Time travel";
         display: block;
         position: absolute;
@@ -419,7 +451,7 @@
         pointer-events: none;
     }
 
-    .blog-posts-container .navigation-block .navigation-timeline .timeline-label {
+    .timeline-container .navigation-block .navigation-timeline .timeline-label {
         display: block;
         position: absolute;
         top: 150%;
@@ -444,12 +476,12 @@
         transition: 0s, .1s opacity ease-in-out, .15s top ease-in-out;
     }
 
-    .blog-posts-container .navigation-block .navigation-timeline:hover .timeline-label, .blog-posts-container .navigation-block .navigation-timeline.active .timeline-label {
+    .timeline-container .navigation-block .navigation-timeline:hover .timeline-label, .timeline-container .navigation-block .navigation-timeline.active .timeline-label {
         top: 50%;
         opacity: 1;
     }
 
-    .blog-posts-container .navigation-block .navigation-timeline .first-date, .blog-posts-container .navigation-block .navigation-timeline .last-date {
+    .timeline-container .navigation-block .navigation-timeline .first-date, .timeline-container .navigation-block .navigation-timeline .last-date {
         display: block;
         position: absolute;
         top: 50%;
@@ -475,49 +507,49 @@
         opacity: 1;
     }
 
-    .blog-posts-container .navigation-block .navigation-timeline:hover .first-date, .blog-posts-container .navigation-block .navigation-timeline:hover .last-date, .blog-posts-container .navigation-block .navigation-timeline.active .first-date, .blog-posts-container .navigation-block .navigation-timeline.active .last-date {
+    .timeline-container .navigation-block .navigation-timeline:hover .first-date, .timeline-container .navigation-block .navigation-timeline:hover .last-date, .timeline-container .navigation-block .navigation-timeline.active .first-date, .timeline-container .navigation-block .navigation-timeline.active .last-date {
         opacity: 0.2;
     }
 
-    .blog-posts-container .navigation-block .navigation-timeline .last-date {
+    .timeline-container .navigation-block .navigation-timeline .last-date {
         left: auto;
         right: 4px;
     }
 
-    .blog-posts-container .post-new.visible, .blog-posts-container .navigation-block.visible {
+    .timeline-container .event-new.visible, .timeline-container .navigation-block.visible {
         top: 50%;
         opacity: 1;
         pointer-events: all;
     }
 
-    .blog-posts-container .post-new .post-new-title, .blog-posts-container .post-new .post-new-content, .blog-posts-container .post-new .post-new-date {
+    .timeline-container .event-new .event-new-title, .timeline-container .event-new .event-new-content, .timeline-container .event-new .event-new-date {
         min-height: 28px;
         padding-bottom: 10px;
         background: #fff;
         box-shadow: 0 1px 0 #eee;
     }
 
-    .blog-posts-container .post-new .post-new-title {
+    .timeline-container .event-new .event-new-title {
         font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
-        font-size: 28px;
+        font-size: 28px !important;
     }
 
-    .blog-posts-container .post-new .post-new-content, .blog-posts-container .post-new .post-new-date {
+    .timeline-container .event-new .event-new-content, .timeline-container .event-new .event-new-date {
         font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
         font-size: 18px;
     }
 
-    .blog-posts-container .post-new .post-new-title:focus, .blog-posts-container .post-new .post-new-content:focus, .blog-posts-container .post-new .post-new-date:focus {
+    .timeline-container .event-new .event-new-title:focus, .timeline-container .event-new .event-new-content:focus, .timeline-container .event-new .event-new-date:focus {
         box-shadow: 0 2px 0 #8B67FF;
     }
 
-    .blog-posts-container .post-new .post-new-date {
+    .timeline-container .event-new .event-new-date {
         margin: 32px 0;
     }
 
-    .blog-posts-container .post-new .post-new-content {
+    .timeline-container .event-new .event-new-content {
         height: auto;
-        min-height: 28px;
+        min-height: 96px;
         max-height: -webkit-calc(90vh - 300px);
         max-height: calc(90vh - 300px);
         white-space: normal;
@@ -525,17 +557,17 @@
         overflow-y: auto;
     }
 
-    .blog-posts-container .post-new .post-new-publish-container {
+    .timeline-container .event-new .event-new-publish-container {
         margin: 0;
     }
 
-    .blog-posts-container .post-new .author {
+    .timeline-container .event-new .author {
         display: inline-block;
         width: auto;
         margin: 48px 0 0 0;
     }
 
-    .blog-posts-container .post-new-signout {
+    .timeline-container .event-new-signout {
         display: inline-block;
         position: relative;
         width: auto;
@@ -544,7 +576,7 @@
         color: #999;
     }
 
-    .blog-posts-container .post-new-open {
+    .timeline-container .event-new-open {
         display: block;
         position: fixed;
         top: auto;
@@ -564,16 +596,24 @@
         cursor: pointer;
     }
 
-    .blog-posts-container .post-new-open:hover {
+    .timeline-container .event-new-open:hover {
         transform: scale(1.05);
         transform: -webkit-scale(1.05);
         box-shadow: 0 4px 8px rgba(0,0,0,.4);
         background-color: #8360f2;
     }
 
-    .post-new-publish-container {
+    .event-new-publish-container {
         display: block;
         position: relative;
+    }
+
+    .button, .button-light {
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 
     .button.side-button-left, .button.side-button-right {
@@ -635,7 +675,7 @@
         opacity: 0.4;
     }
 
-    .post .button {
+    .event .button {
         display: inline-block !important;
         width: auto !important;
         min-width: 0 !important;
@@ -662,11 +702,11 @@
         background: rgba(0,0,0,.05) !important;
     }
 
-    .post .button-light {
+    .event .button-light {
         background: rgba(0,0,0,.04) !important;
     }
 
-    .post .button-light:hover {
+    .event .button-light:hover {
         background: rgba(0,0,0,.08) !important;
     }
 
@@ -688,7 +728,7 @@
         cursor: pointer !important;
     }
 
-    .blog-posts-container {
+    .timeline-container {
         display: block;
         position: absolute;
         top:0;
@@ -700,16 +740,16 @@
         overflow: hidden;
     }
 
-    .posts {
+    .events {
         display: block;
         position: static;
         top: 0;
         left:0;
         width: 100%;
-        height: -webkit-calc(100vh - 96px);
-        height: calc(100vh - 96px);
-        margin: 96px 0 0 0;
-        padding: 12px 12px 32px 12px;
+        height: -webkit-calc(100vh - 88px);
+        height: calc(100vh - 88px);
+        margin: 88px 0 0 0;
+        padding: 12px 12px 24px 12px;
         overflow-x: auto;
         overflow-y: hidden;
         white-space: nowrap;
@@ -717,17 +757,17 @@
         text-align: left;
     }
 
-    .posts * {
+    .events * {
         direction: ltr;
     }
 
-    .posts .post {
+    .events .event {
         display: inline-block;
         position: relative;
         top: 0;
         left: 0;
         width: 100%;
-        max-width: 300px;
+        max-width: 336px;
         max-height: 100%;
         vertical-align: top;
         margin: 0 12px;
@@ -742,49 +782,49 @@
         direction: ltr;
     }
 
-    .posts .post:hover {
+    .events .event:hover {
         box-shadow: 0 2px 8px rgba(0,0,0,.2);
     }
 
-    .posts .post * {
+    .events .event * {
         direction: ltr;
         text-align: left;
         white-space: normal;
     }
 
-    .posts .post h1 {
+    .events .event h1 {
         position: static;
         font-size: 20px;
         line-height: 1.5em;
     }
 
-    .posts .post img, .posts .post a, .posts .post h2, .posts .post h3, .posts .post h4, .posts .post ul, .posts .post ol, .posts .post li {
+    .events .event img, .events .event a, .events .event h2, .events .event h3, .events .event h4, .events .event ul, .events .event ol, .events .event li {
         position: static;
     }
 
-    .posts .post p {
+    .events .event p {
         position: static;
         margin-top: 8px;
     }
 
-    .posts .post a {
+    .events .event a {
         opacity: 1;
     }
 
-    .posts .post p, .posts .post ul, .posts .post ol, .posts .post blockquote, .posts .post code {
+    .events .event p, .events .event ul, .events .event ol, .events .event blockquote, .events .event code {
         margin-top: 8px;
         font-size: 15px;
     }
 
-    .posts .post .author {
+    .events .event .author {
         margin: 8px 0;
     }
 
-    .blog-posts-container .post-child {
+    .timeline-container .event-child {
         padding: 56px;
     }
 
-    .blog-posts-container .post-child .post-content .post {
+    .timeline-container .event-child .event-content .event {
         margin-bottom: 40px;
     }
 
@@ -811,35 +851,120 @@
         -webkit-user-select: text;
     }
 
-    .timelines .timeline-list {
-        margin: -8px auto -12px auto;
+    .timelines.popup {
+        top: 0;
+        left: -400px;
+        transform: none;
+        -webkit-transform: none;
+        height: 100vh;
+        max-height: 100vh;
+        width: 85vw;
+        max-width: 400px;
+        border-radius: 0;
+        padding: 32px;
     }
 
-    .timelines .timeline-list .timeline {
+    .timelines.popup.visible {
+        top: 0;
+        left: 0;
+    }
+
+    .timelines.popup h1 {
+        padding-top: 2px;
+        padding-left: 40px;
+        font-size: 22px;
+        line-height: 24px;
+    }
+
+    .timeline-container .navigation-block .timelines-open {
+        position: fixed;
+        top: 36px;
+        left: 24px;
+        z-index: 5;
+        width: 24px;
+        height: 24px;
+        margin: 0;
+        padding: 0;
+        background-image: url(menu.png);
+        background-size: 24px 24px;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 32px;
+        overflow: hidden;
+        cursor: pointer;
+        opacity: 0.85;
+    }
+
+    .timeline-container .navigation-block .timelines-open:hover {
+        opacity: 1;
+    }
+
+    .timelines.popup .timelines-close {
+        position: absolute;
+        top: 35px;
+        left: 28px;
+        z-index: 35;
+        width: 24px;
+        height: 24px;
+        margin: 0;
+        padding: 0;
+        background-image: url(back.png);
+        background-size: 24px 24px;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 32px;
+        overflow: hidden;
+        cursor: pointer;
+        opacity: 0.85;
+    }
+
+    .timelines.popup .timelines-close:hover {
+        opacity: 1;
+    }
+
+    .timelines .timeline-list {
+        margin: 0 auto;
+    }
+
+    .timelines .timeline {
         display: block;
         position: relative;
         top:0;
         left:0;
-        width: 100%;
-        margin: 12px 0;
+        width: -webkit-calc(100% + 40px);
+        width: calc(100% + 40px);
+        margin: 12px -20px;
         padding: 16px;
-        background: #fff;
-        border-radius: 3px;
-        box-shadow: 0 0 0 1px rgba(0,0,0,.04), 0 1px 4px rgba(0,0,0,.1);
+        background: rgba(0,0,0,0);
+        border-radius: 4px;
         cursor: pointer;
     }
 
-    .timelines .timeline-list .timeline:hover {
-        box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.2);
+    .timelines .timeline:hover {
+        background: rgba(0,0,0,.04);
     }
 
-    .timelines .timeline-list .timeline .title {
+    .timelines .timeline .title {
         display: inline-block;
         width: auto;
         margin: 0 16px 0 0;
         font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
         font-size: 18px;
+        color: #333;
         vertical-align: middle;
+    }
+
+    .timelines .timeline:hover .title {
+        color: #000;
+    }
+
+    .timelines .timeline.timeline-new-open .title {
+        color: #8B67FF;
+        font-weight: 500;
+]    }
+
+    .timelines .timeline.timeline-new-open:hover .title {
+        color: #8360f2;
     }
 
     .timelines .timeline-list .timeline .date {
@@ -865,10 +990,170 @@
         font-size: 16px;
     }
 
+    .color-destructive {
+        color: #E64444 !important;
+    }
+
+    [type="checkbox"]:not(:checked),
+    [type="checkbox"]:checked {
+        position: absolute;
+        left: -9999px;
+    }
+
+    [type="checkbox"]:not(:checked) + label,
+    [type="checkbox"]:checked + label {
+        display: inline-block;
+        position: relative;
+        margin: 32px 0 0 0;
+        padding: 8px 0 0 40px;
+        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 500;
+        color: #333;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    [type="checkbox"]:not(:checked) + label:before,
+    [type="checkbox"]:checked + label:before {
+        content: "";
+        position: absolute;
+        top: 8px;
+        left:0;
+        width: 24px;
+        height: 24px;
+        background-color: #bbb;
+        border-radius: 2px;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    [type="checkbox"]:not(:checked) + label:before:hover {
+        background-color: #999;
+    }
+
+    [type="checkbox"]:checked + label:before {
+        content: "";
+        background-color: #8B67FF;
+    }
+
+    [type="checkbox"]:not(:checked) + label:after,
+    [type="checkbox"]:checked + label:after {
+        content: "";
+        position: absolute;
+        top: 8px;
+        left: 0;
+        width: 24px;
+        height: 24px;
+        background-image: url(tick.png);
+        background-size: 24px;
+        background-position: center;
+        background-repeat: no-repeat;
+        -webkit-transition: all .2s ease-in-out;
+        -moz-transition: all .2s ease-in-out;
+        -ms-transition: all .2s ease-in-out;
+        -o-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    [type="checkbox"]:not(:checked) + label:after {
+        opacity: 0;
+    }
+
+    [type="checkbox"]:checked + label:after {
+        opacity: 1;
+    }
+
+    .timeline-share .display-as-p {
+        margin: -16px 0 0 0;
+    }
+
+    .timeline-share .timeline-share-url {
+        display: block;
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        margin: 16px auto 8px auto;
+        padding: 16px;
+        background: #eee;
+        border-radius: 3px;
+        overflow-y: hidden;
+        overflow-x: auto;
+        white-space: nowrap;
+        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        line-height: 16px;
+        font-weight: 400;
+        opacity: 0.3;
+        pointer-events: none;
+    }
+
+    .timeline-share .timeline-share-url.visible {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .timeline-share .timeline-share-url:not(.visible) {
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
     @media (max-width: 560px){
-        .blog-posts-container .navigation-block .navigation-timeline {
-            display: none !important;
+
+        .timeline-container .navigation-block .timelines-open, .timeline-container .navigation-block .navigation-title {
+            top: 24px;
         }
+
+        .navigation-block .timeline-share-open {
+            width: 24px;
+            height: 24px;
+            background-color: transparent !important;
+            border-radius: 0;
+        }
+
+        .timeline-container .event-new-open {
+            width: 48px;
+            height: 48px;
+            background-size: 32px;
+        }
+
+        .timeline-container .navigation-block .navigation-timeline {
+            top: auto;
+            bottom: 24px;
+            left: 48px;
+            width: -webkit-calc(100% - 176px);
+            width: calc(100% - 176px);
+        }
+
+        .timeline-container:not(.child-page) .navigation-block .navigation-timeline::after {
+            content:"" !important;
+        }
+
+        .events {
+            height: -webkit-calc(100vh - 60px);
+            height: calc(100vh - 60px);
+            margin: 60px 0 0 0;
+            padding-bottom: 96px;
+        }
+
     }
 
     </style>
@@ -881,11 +1166,10 @@
         <div class="banner">No connection. Changes may not be saved.</div>
     </div>
 
-    <div class="block">
-        <div class="blog-posts-container">
-            <div class="post-new-open"></div>
-            <div class="post-child popup">
-                <div class="post-content"></div>
+    <div class="block visible">
+        <div class="timeline-container">
+            <div class="event-child popup">
+                <div class="event-content"></div>
                 <div class="button back sans-serif" onclick="closeChildPage()">Close</div>
             </div>
             <div class="user-block">
@@ -897,17 +1181,19 @@
                         <div class="last-date"></div>
                         <div class="timeline-label"></div>
                     </div>
-                    <div class="overflow-open"></div>
+                    <div class="timeline-share-open"></div>
+                    <a class="user-sign-in-refresh">Create a timeline</a>
+                    <div class="event-new-open"></div>
                 </div>
             </div>
-            <div class="post-new popup buttoned">
-                <div class="post-new-title display-as-h1" data-placeholder="Title" contenteditable="true"></div>
-                <div class="post-new-date display-as-p" data-placeholder="Type a date (e.g. May 5 1996)" contenteditable="true"></div>
-                <div class="post-new-content display-as-p" data-placeholder="Type some details about this event (optional)" contenteditable="true"></div>
-                <div class="post-new-close button side-button-left">Cancel</div>
-                <div class="post-new-publish button side-button-right disabled">Save</div>
+            <div class="event-new popup buttoned">
+                <div class="event-new-title display-as-h1" data-placeholder="Title" contenteditable="true"></div>
+                <div class="event-new-date display-as-p" data-placeholder="Type a date (e.g. May 5 1996)" contenteditable="true"></div>
+                <div class="event-new-content display-as-p" data-placeholder="Type some details about this event (optional)" contenteditable="true"></div>
+                <div class="event-new-close button side-button-left">Cancel</div>
+                <div class="event-new-publish button side-button-right disabled">Save</div>
             </div>
-            <div class="posts"></div>
+            <div class="events"></div>
         </div>
     </div>
 
@@ -919,10 +1205,12 @@
     </div>
 
     <div class="timelines popup buttoned">
+        <div class="timelines-close"></div>
         <h1 class="display-as-h1">Timelines</h1>
         <div class="timeline-list"></div>
-        <div class="timelines-close side-button-left button">Close</div>
-        <div class="timeline-new-open side-button-right button">Create new</div>
+        <div class="timeline timeline-new-open">
+            <div class="title">Create new</div>
+        </div>
     </div>
 
     <div class="timeline-new popup buttoned">
@@ -932,7 +1220,14 @@
         <div class="timeline-new-close side-button-left button">Close</div>
     </div>
 
-    <!-- <div class="gmph-sign-in visible button">Sign in with Twitter</div> -->
+    <div class="timeline-share popup buttoned">
+        <h1 class="display-as-h1">Share timeline</h1>
+        <p class="display-as-p">Let your friends and family view this timeline by sharing a link with them. Only you can edit your timelines.</p>
+        <input type="checkbox" id="timeline-share-checkbox" />
+        <label for="timeline-share-checkbox">Enable sharing</label>
+        <div class="timeline-share-url">http://gmph.co/timeline#tQgdoj_us-2I82hXJdZK-</div>
+        <div class="timeline-share-close side-button-left button">Close</div>
+    </div>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
@@ -952,6 +1247,8 @@
     var isChildPage = false;
 
     var userData = null;
+    var timelineData = null;
+    var eventsData = null;
     var eventDates = [];
 
     var chron = new chrono.Chrono();
@@ -961,29 +1258,6 @@
     $(document).ready(function(){
         init();
     });
-
-    var loading = function(){
-
-        var isLoading = false;
-
-        function show(bool){
-            var bool = bool === false ? false : true;
-            if (bool){
-                $('.loading').addClass('visible');
-                isLoading = true;
-            } else {
-                $('.block').addClass('visible');
-                $('.loading').removeClass('visible');
-                isLoading = false;
-            }
-        }
-
-        return {
-            isLoading : isLoading,
-            show : show
-        }
-
-    }()
 
     function init(){
         // Firebase
@@ -997,34 +1271,32 @@
 
         firebase.initializeApp(config);
         rootRef = firebase.database().ref('/');
+        connectedRef = rootRef.child(".info/connected");
+        connectedRef.on('value', onConnectionChanged, warnError);
         manageAuth();
         attachEvents();
     }
 
-    function closeNewPost(didPost){
+    function closeNewEvent(didPost){
         window.location.hash = "";
         manualDateSet = false;
         if (didPost === true) {
-            var originaltext = $('.post-new-publish').text();
-            $('.post-new-publish').addClass('disabled').text('Done!');
+            var originaltext = $('.event-new-publish').text();
+            $('.event-new-publish').addClass('disabled').text('Done!');
             setTimeout(function(){
-                $('.post-new-publish').text(originaltext);
+                $('.event-new-publish').text(originaltext);
             },2000);
         }
-        $('.blog-posts-container').removeClass('child-page')
-        setTimeout(function(){
-            $('.post-new-title, .post-new-content, .post-new-date').text('');
-        },500);
-        $('.post-new').attr('data-id','').removeClass('visible');
+        $('.timeline-container').removeClass('child-page')
+        $('.event-new-title, .event-new-content, .event-new-date').text('');
+        $('.event-new').attr('data-id','').removeClass('visible');
         blurAllFields();
     };
 
     function manageAuth(){
-
         firebase.auth().onAuthStateChanged(function (user) {
             setSignInOrUserState();
         });
-
     }
 
     function setNoConnectionBarVisible(shouldSetAsVisible){
@@ -1096,10 +1368,7 @@
     function attachEvents(){
 
         var clickEventString = 'click';
-
-        window.onbeforeunload = function(e) {
-            return 'Leave this website?';
-        };
+        var onlyAuthenticatedUserString = 'body:not(.user-anonymous) ';
 
         $(document).off('mouseenter', '.navigation-timeline');
         $(document).off('mouseleave', '.navigation-timeline');
@@ -1116,127 +1385,124 @@
             $(this).addClass('active');
         }).on('touchend', '.navigation-timeline', function(e){
             $(document).off('touchmove', '.navigation-timeline');
-            var postId = $(this).find('.timeline-label').attr('data-id');
             e.stopPropagation();
-            $('.posts .post').scrollTop(0);
-            if (postId != null && postId != undefined && postId != ""){
-                var $post = $('.posts .post[data-id="'+postId+'"]').eq(0);
-                $('.posts').animate({
-                    scrollLeft: $('.posts').get(0).scrollWidth * parseFloat($('.navigation-timeline .timeline-label').attr('data-perc')) - 64,
-                });
-                highlightPostForXSeconds(postId,1);
-            }
-            $(this).removeClass('active');
+            e.preventDefault();
+            onNavigationTimelineClick(this);
         });
 
         $(document).off(clickEventString, '.navigation-timeline');
         $(document).on(clickEventString, '.navigation-timeline', function(e){
-            var postId = $(this).find('.timeline-label').attr('data-id');
-            e.stopPropagation();
-            $('.posts .post').scrollTop(0);
-            if (postId != null && postId != undefined && postId != ""){
-                var $post = $('.posts .post[data-id="'+postId+'"]').eq(0);
-                $('.posts').animate({
-                    scrollLeft: $('.posts').get(0).scrollWidth * parseFloat($('.navigation-timeline .timeline-label').attr('data-perc')) - 64,
-                });
-                highlightPostForXSeconds(postId,1);
-            }
+            e.preventDefault();
+            onNavigationTimelineClick(this);
         });
 
-        $(document).off('keyup', '.post-new-title, .post-new-content, .post-new-date');
-        $(document).on('keyup', '.post-new-title, .post-new-content, .post-new-date', function () {
+        $(document).off('keyup', onlyAuthenticatedUserString + '.event-new-title, .event-new-content, .event-new-date');
+        $(document).on('keyup', onlyAuthenticatedUserString + '.event-new-title, .event-new-content, .event-new-date', function () {
             if ($(this).text().replace(/\s*/g,'').length == 0) {
                 $(this).empty();
-            } else if ($(this).hasClass('post-new-date')){
+            } else if ($(this).hasClass('event-new-date')){
                 manualDateSet = true;
             }
             updatePublishButtonState();
             updateDatePrediction();
         });
 
-        $(document).off(clickEventString, '.posts .post a, .posts .post .button, .posts .post .button-light');
-        $(document).on(clickEventString, '.posts .post a, .posts .post .button, .posts .post .button-light', function(e){
+        $(document).off(clickEventString, '.events .event a, .events .event .button, .events .event .button-light');
+        $(document).on(clickEventString, '.events .event a, .events .event .button, .events .event .button-light', function(e){
             e.stopPropagation();
         });
 
-        $(document).off(clickEventString, '.post-new-open');
-        $(document).on(clickEventString, '.post-new-open', function(e){
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.event-new-open');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.event-new-open', function(e){
             e.stopPropagation();
-            openNewPost();
+            openNewEvent();
         });
 
-        $(document).off(clickEventString, '.post-new-close');
-        $(document).on(clickEventString, '.post-new-close', function(e){
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.event-new-close');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.event-new-close', function(e){
             e.stopPropagation();
-            closeNewPost();
+            closeNewEvent();
         });
 
-        $(document).off(clickEventString, '.post-new-publish');
-        $(document).on(clickEventString, '.post-new-publish', function(e){
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.event-new-publish');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.event-new-publish', function(e){
             e.stopPropagation();
-            createPost();
+            createEvent();
         });
 
-        $(document).off(clickEventString, '.timelines-open');
-        $(document).on(clickEventString, '.timelines-open', function(e){
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.timelines-open');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.timelines-open', function(e){
             e.stopPropagation();
             openTimelines();
         });
 
-        $(document).off(clickEventString, '.timelines-close');
-        $(document).on(clickEventString, '.timelines-close', function(e){
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.timelines-close');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.timelines-close', function(e){
             e.stopPropagation();
             closeTimeslines();
         });
 
-        $(document).off(clickEventString, '.timelines .timeline-list .timeline');
-        $(document).on(clickEventString, '.timelines .timeline-list .timeline', function(e){
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.timelines .timeline-list .timeline');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.timelines .timeline-list .timeline', function(e){
             e.stopPropagation();
             closeTimeslines();
             openTimeline($(this).attr('data-id'));
         });
 
-        $(document).off(clickEventString, '.timelines .timeline-new-open');
-        $(document).on(clickEventString, '.timelines .timeline-new-open', function(e){
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.timelines .timeline-new-open');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.timelines .timeline-new-open', function(e){
             e.stopPropagation();
             closeTimeslines();
             openNewTimeline();
         });
 
-        $(document).off(clickEventString, '.timeline-new .timeline-new-close');
-        $(document).on(clickEventString, '.timeline-new .timeline-new-close', function(e){
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.timeline-new .timeline-new-close');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.timeline-new .timeline-new-close', function(e){
             e.stopPropagation();
             closeNewTimeline();
         });
 
-        $(document).off(clickEventString, '.timeline-new .timeline-new-create');
-        $(document).on(clickEventString, '.timeline-new .timeline-new-create', function(e){
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.timeline-new .timeline-new-create');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.timeline-new .timeline-new-create', function(e){
             e.stopPropagation();
             var name = $(this).parent().find('.timeline-new-name').text();
             createTimeline(name, function(id){
-                updateUserData(function(){
-                    openTimeline(id);
-                    closeTimeslines();
-                });
+                openTimeline(id);
+                closeTimeslines();
             });
         });
 
-        $(document).off(clickEventString, '.timeline-list .timeline .timeline-delete');
-        $(document).on(clickEventString, '.timeline-list .timeline .timeline-delete', function(e){
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.timeline-list .timeline .timeline-delete');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.timeline-list .timeline .timeline-delete', function(e){
             e.stopPropagation();
             var timelineId = $(this).parent().attr('data-id');
             archiveTimeline(timelineId, function(){
-                updateUserData(function(){
-                    displayTimelineList();
-                    if (timelineId == timelineRef.key){
-                        openTimeline();
-                    }
-                });
+                if (timelineId == timelineRef.key){
+                    openTimeline();
+                }
             });
         });
 
-        $(document).off('blur', '.post-new-date');
-        $(document).on('blur', '.post-new-date', function () {
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.timeline-share-open');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.timeline-share-open', function(e){
+            e.stopPropagation();
+            openShareTimeline();
+        });
+
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.timeline-share-close');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.timeline-share-close', function(e){
+            e.stopPropagation();
+            closeShareTimeline();
+        });
+
+        $(document).off('change', onlyAuthenticatedUserString + '#timeline-share-checkbox');
+        $(document).on('change', onlyAuthenticatedUserString + '#timeline-share-checkbox', function(e){
+            e.stopPropagation();
+            toggleTimelineSharing();
+        });
+
+        $(document).off('blur', onlyAuthenticatedUserString + '.event-new-date');
+        $(document).on('blur', onlyAuthenticatedUserString + '.event-new-date', function () {
             var datePrediction = getTimeTextFromString(parseDateTimestamp($(this).text()), true);
             if (datePrediction) $(this).text(datePrediction);
         });
@@ -1257,10 +1523,10 @@
             }
         });
 
-        $(document).off(clickEventString,'.posts .post:not(.unpublished)');
-        $(document).on(clickEventString,'.posts .post:not(.unpublished)', function(e){
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.events .event:not(.unpublished)');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.events .event:not(.unpublished)', function(e){
             e.stopPropagation();
-            getPostByID($(this).attr('data-id'), openNewPost);
+            getEventByID($(this).attr('data-id'), openNewEvent);
         });
 
         $(document).off(clickEventString, '.gmph-sign-in');
@@ -1278,6 +1544,23 @@
             signInOrCreateUserWithEmailAndPassword(email, password);
         });
 
+        $(document).off(clickEventString, '.user-sign-in-refresh');
+        $(document).on(clickEventString, '.user-sign-in-refresh', function(e){
+            e.stopPropagation();
+            openRootUrl();
+        });
+
+    }
+
+    function onNavigationTimelineClick(element){
+        var eventId = $(element).find('.timeline-label').attr('data-id');
+        $('.events .event').scrollTop(0);
+        if (eventId != null && eventId != undefined && eventId != ""){
+            $('.events').animate({
+                scrollLeft: $('.events').get(0).scrollWidth * parseFloat($('.navigation-timeline .timeline-label').attr('data-perc')) - 64,
+            });
+            highlightEventForXSeconds(eventId,1);
+        }
     }
 
     function handleTimeTravel(e){
@@ -1291,29 +1574,29 @@
             var xDate = parseInt(earliestDate + ((latestDate - earliestDate) * xPerc));
             var closestDate = closestNumberInArray(xDate, eventDates);
             var datePerc = eventDates.indexOf(closestDate) / eventDates.length;
-            var $post = $('[data-dateid="' + closestDate + '"]').eq(0);
-            elm.find('.timeline-label').html($post.attr('data-date').replace(/, /,', <strong>') + "</strong>").attr('data-id',$post.attr('data-id')).attr('data-perc', datePerc).css('left', (100 * (0.05 + (xPerc * 0.9))) + "%");
+            var $event = $('[data-dateid="' + closestDate + '"]').eq(0);
+            elm.find('.timeline-label').html(($event.attr('data-date') || "").replace(/, /,', <strong>') + "</strong>").attr('data-id',$event.attr('data-id')).attr('data-perc', datePerc).css('left', (100 * (0.05 + (xPerc * 0.9))) + "%");
         } else {
             elm.find('.timeline-label').empty();
         }
     }
 
     function displayTimelineMinAndMax(){
-        var $posts = $('.posts .post');
-        var firstDate = moment(chron.parseDate($posts.eq($posts.length - 1).find('.author').text())).format('MMM D, [<strong>]YYYY[</strong>]');
-        var lastDate = moment(chron.parseDate($posts.eq(0).find('.author').text())).format('MMM D, [<strong>]YYYY[</strong>]');
+        var $events = $('.events .event');
+        var firstDate = moment(chron.parseDate($events.eq($events.length - 1).find('.author').text())).format('MMM D, [<strong>]YYYY[</strong>]');
+        var lastDate = moment(chron.parseDate($events.eq(0).find('.author').text())).format('MMM D, [<strong>]YYYY[</strong>]');
         firstDate = firstDate.toLowerCase() != "invalid date" ? firstDate : "";
         lastDate = lastDate.toLowerCase() != "invalid date" ? lastDate : "";
         $('.navigation-timeline .first-date').html(firstDate);
         $('.navigation-timeline .last-date').html(lastDate);
     }
 
-    function highlightPostForXSeconds(id, s){
-        $('.posts .post').css('background-color','').reflow();
-        var $post = $('.posts .post[data-id="'+id+'"]').eq(0);
-        $post.css('background-color','#f4f1ff');
+    function highlightEventForXSeconds(id, s){
+        $('.events .event').css('background-color','').reflow();
+        var $event = $('.events .event[data-id="'+id+'"]').eq(0);
+        $event.css('background-color','#f4f1ff');
         setTimeout(function(){
-            $post.css('background-color','').reflow();
+            $event.css('background-color','').reflow();
         }, (s * 1000));
     }
 
@@ -1331,74 +1614,76 @@
     }
 
     function updateDatePrediction(){
-        if (!manualDateSet || !$('.post-new-date').text().replace(/\s+/,'').length){
-            var datePrediction = getTimeTextFromString(parseDateTimestamp($('.post-new-content').text()), true);
-            if (datePrediction) $('.post-new-date').text(datePrediction);
+        if (!manualDateSet || !$('.event-new-date').text().replace(/\s+/,'').length){
+            var datePrediction = getTimeTextFromString(parseDateTimestamp($('.event-new-content').text()), true);
+            if (datePrediction) $('.event-new-date').text(datePrediction);
         }
     }
 
     function updatePublishButtonState(){
-        if ($('.post-new-title').text().length > 0 && parseDateTimestamp($('.post-new-date').text())){
-            $('.post-new-publish').removeClass('disabled');
+        if ($('.event-new-title').text().length > 0 && parseDateTimestamp($('.event-new-date').text())){
+            $('.event-new-publish').removeClass('disabled');
         } else {
-            $('.post-new-publish').addClass('disabled');
+            $('.event-new-publish').addClass('disabled');
         }
     }
 
+    function onTimelineChanged(snapshot){
+        timelineData = snapshot.val();
+        timelineData.id = snapshot.key;
+        var name = timelineData.name;
+        if (name == null || name == undefined || name == "") name = "Timeline";
+        $('.navigation-block .navigation-title').text(name);
+        updateTimelineSharing();
+    }
+
+    function onEventsChanged(snapshot){
+        displayTimelineFromSnapshot(snapshot);
+    }
+
+    function onConnectionChanged(snapshot) {
+        var isNotConnected = snapshot.val() === true;
+        setNoConnectionBarVisible(isNotConnected);
+    }
+
+    function warnError(error){
+        console.warn(error);
+    }
+
     function getInitialData(){
-        loading.show();
-        timelineRef.child('name').once('value', function(snapshot) {
-            var name = snapshot.val();
-            if (name == null || name == undefined || name == "") name = "Timeline";
-            $('.navigation-block .navigation-title').text(name);
-        }, function(error){
-            console.warn(error);
-        });
-        eventsRef.orderByChild('date').once('value', function(snapshot) {
-            var items = [];
-            snapshot.forEach(function(child) {
-                items.push(child.val());
-            });
-            displayDataFromSnapshot(items);
-            handleDataUpdates();
-            loading.show(false);
-        }, function(error){
-            console.warn(error);
-        });
-
-        connectedRef = rootRef.child(".info/connected");
-        connectedRef.on('value', function(snap) {
-            setNoConnectionBarVisible(snap.val() === true);
-        });
+        timelineRef.on('value', onTimelineChanged, warnError);
+        eventsRef.orderByChild('date').on('value', onEventsChanged, warnError);
     }
 
-    function handleDataUpdates(){
-        eventsRef.orderByChild('date').on('value', function(snapshot) {
-            var items = [];
-            snapshot.forEach(function(child) {
-                items.push(child.val());
-            });
-            displayDataFromSnapshot(items);
+    function displayTimelineFromSnapshot(snapshot){
+        var items = [];
+        snapshot.forEach(function(child) {
+            items.push(child.val());
         });
+        displayTimelineFromEventList(items);
     }
 
-    function displayDataFromSnapshot(itemList){
-        $('.blog-posts-container .posts').html('');
-        var childPostId = null;
+    function displayTimelineFromEventList(itemList){
+        $('.timeline-container .events').html('');
+        var childEventId = null;
         eventDates = [];
         itemList.forEach(function(item){
-            var postDateId = parseInt(item.date.replace(/ [0-2][0-9]:[0-5][0-9]/,'').split('/').join(''));
-            if (getUrlHash() == getPublicReferenceFromId('e', item.createdOn) && item.isPublished) childPostId = item.createdOn;
-            item.postDateId = postDateId;
-            $('.blog-posts-container .posts').prepend(getPostElementFromPost(item));
-            if (item.date) eventDates.push(postDateId);
+            var eventDateId = parseInt(item.date.replace(/ [0-2][0-9]:[0-5][0-9]/,'').split('/').join(''));
+            if (getUrlHash() == getPublicReferenceFromId('e', item.createdOn) && item.isPublished) childEventId = item.createdOn;
+            item.eventDateId = eventDateId;
+            $('.timeline-container .events').prepend(getEventElementFromEvent(item));
+            if (item.date) eventDates.push(eventDateId);
         })
         displayTimelineMinAndMax();
-        if (childPostId != null) getPostByID(childPostId,openNewPost);
+        if (childEventId != null) getEventByID(childEventId,openNewEvent);
     }
 
     function getPublicReferenceFromId(r, id){
         return r + reverseString(id.toString());
+    }
+
+    function getIdFromPublicReference(ref){
+        return reverseString(ref.substring(1,ref.length));
     }
 
     function getZeroPaddedNumber(num, size) {
@@ -1412,35 +1697,35 @@
         return parts.join(' ') + (parts.length >= 75 ? '...' : '');
     }
 
-    function getPostElementFromPost(post,isPreview){
-        if (post.isPublished /*|| post.author.uid == firebase.auth().currentUser.uid*/) {
+    function getEventElementFromEvent(event,isPreview){
+        if (event.isPublished) {
             var isPreview = isPreview && isPreview != null && isPreview === true ? true : false;
-            var $post = $('<div class="post"></div>').attr('data-id', post.createdOn);
-            var $title = $('<h1>'+post.title+'</h1>');
-            $post.append($('<div class="title">').append($title));
-            $post.attr('data-dateid', post.postDateId);
-            $post.attr('data-date', moment(chron.parseDate(post.date.replace(/ [0-2][0-9]:[0-5][0-9]/,''))).format('MMM D, YYYY'));
-            if (post.content){
-                var $content = isPreview ? $(marked(truncateStringToXWords(post.content || "",75))) : $(marked(post.content || ""));
+            var $event = $('<div class="event"></div>').attr('data-id', event.createdOn);
+            var $title = $('<h1>'+event.title+'</h1>');
+            $event.append($('<div class="title">').append($title));
+            $event.attr('data-dateid', event.eventDateId);
+            $event.attr('data-date', moment(chron.parseDate(event.date.replace(/ [0-2][0-9]:[0-5][0-9]/,''))).format('MMM D, YYYY'));
+            if (event.content){
+                var $content = isPreview ? $(marked(truncateStringToXWords(event.content || "",75))) : $(marked(event.content || ""));
                 $content.find('a').attr('target','_blank');
-                $post.append($('<div class="content">').append($content));
+                $event.append($('<div class="content">').append($content));
             }
-            var $author = getMetaElement(post.author, post.date);
-            if (!post.isPublished) {
-                $post.addClass('unpublished');
+            var $author = getMetaElement(event.author, event.date);
+            if (!event.isPublished) {
+                $event.addClass('unpublished');
             }
-            $post.append($author);
+            $event.append($author);
 
-            if (firebase.auth().currentUser && post.author.uid == firebase.auth().currentUser.uid) {
-                $post.append($('<div class="post-delete button button-light">Delete</div>').attr('onclick','deletePost('+post.createdOn+')'));
+            if (firebase.auth().currentUser && event.author.uid == firebase.auth().currentUser.uid) {
+                $event.append($('<div class="event-delete button button-light color-destructive">Delete</div>').attr('onclick','deleteEvent('+event.createdOn+')'));
             }
 
-            return $post;
+            return $event;
         }
     }
 
-    function getMetaElement(author, date, inNewPost){
-        if (inNewPost) {
+    function getMetaElement(author, date, inNewEvent){
+        if (inNewEvent) {
             var $author = $('<div class="author no-underline"></div>');
             var $signOutLink = $('<div>').addClass('button-light').attr('onClick','signOut()');
             $author.append($signOutLink).addClass('name sans-serif');
@@ -1462,147 +1747,154 @@
         }
     }
 
-    function addCurrentAuthorToNewPost(){
-        $('.blog-posts-container .post-new .author').remove();
+    function addCurrentAuthorToNewEvent(){
+        $('.timeline-container .event-new .author').remove();
         var $author = getMetaElement(getCurrentAuthor(), null, true);
-        $('.blog-posts-container .post-new-publish-container').prepend($author);
+        $('.timeline-container .event-new-publish-container').prepend($author);
     }
 
-    function createPost(){
+    function createEvent(){
         var unix =  (new Date).getTime();
-        var createdOn = parseInt($('.post-new').attr('data-id'));
+        var createdOn = parseInt($('.event-new').attr('data-id'));
         var createdOnOrNow = createdOn != null && createdOn != undefined && createdOn != "" && !isNaN(createdOn) ? createdOn : unix;
-        var parsedDate = parseDateTimestamp(document.querySelectorAll('.post-new .post-new-date')[0].innerText);
+        var parsedDate = parseDateTimestamp(document.querySelectorAll('.event-new .event-new-date')[0].innerText);
         parsedDate = parsedDate ? parsedDate : parseDateTimestamp(createdOnOrNow);
         var user = firebase.auth().currentUser;
-        var post = {
+        var event = {
             author : getCurrentAuthor(),
-            content : document.querySelectorAll('.post-new .post-new-content')[0].innerText,
+            content : document.querySelectorAll('.event-new .event-new-content')[0].innerText,
             createdOn : createdOnOrNow,
             isPublished : true,
-            title : document.querySelectorAll('.post-new .post-new-title')[0].innerText,
+            title : document.querySelectorAll('.event-new .event-new-title')[0].innerText,
             updatedOn: unix,
             date: parsedDate
         };
-        writeData(eventsRef, createdOnOrNow, post, function(){ closeNewPost(true) });
+        writeData(eventsRef, createdOnOrNow, event, function(){ closeNewEvent(true) });
+        updateUserTimelineTimestamp(timelineRef.key);
     }
 
-    function openNewPost(post){
+    function openNewEvent(event){
         closeChildPage();
-        if (typeof post === 'object' && post.createdOn){
-            window.location.hash = getPublicReferenceFromId('e', post.createdOn)
-            $('.post-new-title').text(post.title);
-            $('.post-new-content').text(post.content).focus();
-            $('.post-new-date').text(getTimeTextFromString(post.date, true));
-            $('.post-new').attr('data-id', post.createdOn);
+        if (typeof event === 'object' && event.createdOn){
+            window.location.hash = getPublicReferenceFromId('e', event.createdOn)
+            $('.event-new-title').text(event.title);
+            $('.event-new-content').text(event.content).focus();
+            $('.event-new-date').text(getTimeTextFromString(event.date, true));
+            $('.event-new').attr('data-id', event.createdOn);
             manualDateSet = true;
         } else {
-            $('.post-new-title').text('').focus();
-            $('.post-new-content').text('')
-            $('.post-new-date').text('');
+            $('.event-new-title').text('').focus();
+            $('.event-new-content').text('')
+            $('.event-new-date').text('');
             manualDateSet = false;
         }
-        $('.post-new').addClass('visible');
-        $('.blog-posts-container').addClass('child-page');
+        $('.event-new').addClass('visible');
+        $('.timeline-container').addClass('child-page');
         updatePublishButtonState();
         $('html, body').animate({
             scrollTop : 0,
         }, 200);
     }
 
-    function deletePost(id){
+    function deleteEvent(id){
         closeChildPage();
         writeData(eventsRef, id, null);
+        updateUserTimelineTimestamp(timelineRef.key);
     }
 
-    function publishPost(id){
+    function publishEvent(id){
         writeData(eventsRef, id+'/isPublished', true);
+        updateUserTimelineTimestamp(timelineRef.key);
     }
 
-    function unpublishPost(id){
+    function unpublishEvent(id){
         writeData(eventsRef, id+'/isPublished', false);
+        updateUserTimelineTimestamp(timelineRef.key);
     }
 
-    function getPostByID(id, callback){
+    function getEventByID(id, callback){
         eventsRef.child(id).once('value', function(snapshot) {
             callback(snapshot.val());
         }, function(error){
-            console.warn('Get post by ID error:')
+            console.warn('Get event by ID error:')
             console.warn(error);
         });
     }
 
     function openChildPage(id){
         isChildPage = true;
-        getPostByID(id,loadChildPage);
-        $('.blog-posts-container').addClass('child-page');
-        $('.post-child').addClass('visible');
+        getEventByID(id,loadChildPage);
+        $('.timeline-container').addClass('child-page');
+        $('.event-child').addClass('visible');
         setTimeout(function(){
             $('html,body').scrollTop(0);
         },0)
     }
 
-    function loadChildPage(post){
-        window.location.hash = getPublicReferenceFromId('e', post.createdOn)
-        $('.post-child .post-content').empty().append(getPostElementFromPost(post));
-        $('.post-child .gmph-button.twitter').attr('href','https://twitter.com/home?status='+encodeURIComponent(post.title)+'%20'+encodeURIComponent(window.location.href)+'%20by%20%40gmph');
-        $('.post-child .gmph-button.facebook').attr('href','https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href));
+    function loadChildPage(event){
+        window.location.hash = getPublicReferenceFromId('e', event.createdOn)
+        $('.event-child .event-content').empty().append(getEventElementFromEvent(event));
+        $('.event-child .gmph-button.twitter').attr('href','https://twitter.com/home?status='+encodeURIComponent(event.title)+'%20'+encodeURIComponent(window.location.href)+'%20by%20%40gmph');
+        $('.event-child .gmph-button.facebook').attr('href','https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href));
     }
 
     function closeChildPage(){
         isChildPage = false;
         window.location.hash = "";
-        $('.blog-posts-container').removeClass('child-page');
-        $('.post-child').removeClass('visible');
+        $('.timeline-container').removeClass('child-page');
+        $('.event-child').removeClass('visible');
     }
 
     function openTimelines(){
-        $('.timelines.popup').addClass('loading-timeline-list');
-        updateUserData(function(){
-            displayTimelineList(function(){
-                $('.blog-posts-container').addClass('child-page');
-                $('.timelines.popup').addClass('visible');
-            });
-        });
+        displayTimelineList();
+        $('.timeline-container').addClass('child-page');
+        $('.timelines.popup').addClass('visible');
     }
 
     function closeTimeslines(){
-        $('.blog-posts-container').removeClass('child-page');
+        $('.timeline-container').removeClass('child-page');
         $('.timelines.popup').removeClass('visible');
-        setTimeout(function(){
-            $('.timelines.popup .timeline-list').empty();
-        }, 500);
     }
 
-    function displayTimelineList(callback){
-        $('.timelines .timeline-list').empty();
+    function addTimelinesDataToUserData(){
         var timelineIds = Object.keys(userData.timelines);
         for (var i = 0; i < timelineIds.length; i++){
             rootRef.child('timelines/' + timelineIds[i]).once('value', function(snapshot){
-                    $('.timelines.popup .timeline-list').append(getTimelineListItemElementFromTimeline(snapshot.val(), snapshot.key));
-                    if (callback) callback.call(this);
-                setTimeout(function(){
-                    $('.timelines.popup').removeClass('loading-timeline-list');
-                }, 500);
+                var timeline = snapshot.val();
+                timeline.id = snapshot.key;
+                userData.timelines[timeline.id] = timeline;
             }, function(error){
                 console.warn(error);
             });
         }
     }
 
-    function getTimelineListItemElementFromTimeline(timeline, id){
+    function displayTimelineList(callback){
+        var $timelineList = $('.timelines .timeline-list');
+        $timelineList.empty();
+        var timelineIds = Object.keys(userData.timelines);
+        for (var i = 0; i < timelineIds.length; i++){
+            $('.timelines.popup .timeline-list').append(getTimelineListItemElementFromTimeline(userData.timelines[timelineIds[i]]));
+        }
+    }
+
+    function updateUserTimelineTimestamp(id){
+        writeData(userRef, 'timelines/' + id, (new Date()).getTime());
+    }
+
+    function getTimelineListItemElementFromTimeline(timeline){
         if (timeline.isArchived == undefined || timeline.isArchived !== true){
             var name = timeline.name;
             if (name == null || name == undefined || name == "") name = "Timeline";
             var date = getTimeTextFromUnix(timeline.createdOn)
             var $timeline = $('<div>')
                 .addClass('timeline')
-                .attr('data-id',id);
+                .attr('data-id', timeline.id);
             var $title = $('<div>')
                 .addClass('title')
                 .text(name);
             var $deleteButton = $('<div>')
-                .addClass('timeline-delete button-light')
+                .addClass('timeline-delete button-light color-destructive')
                 .text('Delete');
             $timeline.append($title, $deleteButton);
             return $timeline;
@@ -1612,45 +1904,127 @@
     }
 
     function openNewTimeline(){
-        $('.blog-posts-container').addClass('child-page');
+        $('.timeline-container').addClass('child-page');
         $('.timeline-new.popup').addClass('visible');
         $('.timeline-new .timeline-new-name').focus();
     }
 
     function closeNewTimeline(isFinished){
-        $('.blog-posts-container').removeClass('child-page');
+        $('.timeline-container').removeClass('child-page');
         $('.timeline-new.popup').removeClass('visible');
         $('.timeline-new .timeline-new-name').text('');
         if (isFinished !== true) openTimelines();
         blurAllFields();
     }
 
+    function openShareTimeline(){
+        $('.timeline-container').addClass('child-page');
+        $('.timeline-share.popup').addClass('visible');
+    }
+
+    function closeShareTimeline(){
+        $('.timeline-container').removeClass('child-page');
+        $('.timeline-share.popup').removeClass('visible');
+    }
+
+    function toggleTimelineSharing(){
+        writeData(timelineRef, 'isPublic', !timelineData.isPublic);
+        updateUserTimelineTimestamp(timelineRef.key);
+    }
+
+    function updateTimelineSharing(){
+        var isSharedTimeline = timelineData.isPublic;
+        if (isSharedTimeline){
+            $('.timeline-share .timeline-share-url')
+                .addClass('visible')
+                .text(getTimelineSharingUrlFromId(timelineData.id));
+            $(".timeline-share #timeline-share-checkbox").prop("checked", true);
+        } else {
+            $('.timeline-share .timeline-share-url')
+                .removeClass('visible')
+                .text('Enable sharing to get your link');
+            $(".timeline-share #timeline-share-checkbox").prop("checked", false);
+        }
+    }
+
+    function getTimelineSharingUrlFromId(id){
+        return getCurrentRootUrl() + "#" + getPublicReferenceFromId('t',id);
+    }
+
+    function getCurrentRootUrl(){
+        return window.location.protocol + "//" + window.location.hostname + (window.location.port ? ":" + window.location.port : "") +  window.location.pathname;
+    }
+
+    function openRootUrl(){
+        window.onbeforeunload = null;
+        window.location.href = getCurrentRootUrl();
+    }
+
     function blurAllFields(){
         $(':focus').blur();
     }
 
+    function isPublicTimelineId(hash){
+        var hash = hash.replace('#','');
+        return hash.charAt(0) === "t" && hash.length > 20 && hash.replace(/[^-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz]/g,'').length === hash.length;
+    }
+
+    function displayPublicTimeline(ref){
+        $('.navigation-block').addClass('visible');
+        $('body').addClass('user-anonymous');
+        $('.sign-in.popup').removeClass('visible');
+        window.onbeforeunload = function(e) {
+            return 'Leave this website?';
+        };
+        rootRef.child('timelines/' + getIdFromPublicReference(ref)).once('value', function(snapshot){
+            onTimelineChanged(snapshot);
+            rootRef.child('events/' + getIdFromPublicReference(ref)).orderByChild('date').once('value', function(snapshot){
+                displayTimelineFromSnapshot(snapshot);
+                $('.events').scrollLeft(0);
+            }, function(error){
+                openRootUrl();
+                warnError(error);
+            });
+        }, function(error){
+            openRootUrl();
+            warnError(error);
+        });
+    }
+
     function setSignInOrUserState(){
-        if (firebase.auth().currentUser) {
-            addCurrentAuthorToNewPost();
+        if (isPublicTimelineId(getUrlHash())){
+            displayPublicTimeline(getUrlHash().replace('#',''));
+        } else if (firebase.auth().currentUser) {
+            addCurrentAuthorToNewEvent();
             $('.navigation-block').addClass('visible');
             $('.sign-in.popup').removeClass('visible');
             setUpChrono();
             attachEvents();
-            updateUserData(openTimeline);
-            blurAllFields()();
+            updateUserData(function(){
+                if (timelineRef === undefined) openTimeline();
+            });
+            blurAllFields();
+            $('body').removeClass('user-anonymous');
+            window.onbeforeunload = function(e) {
+                return 'Leave this website?';
+            };
         } else {
-            $('.post-new, .navigation-block').removeClass('visible');
+            $('.event-new, .navigation-block').removeClass('visible');
             $('.sign-in.popup').addClass('visible');
             $('.sign-in .sign-in-email').focus();
+            $('body').addClass('user-anonymous');
+            window.onbeforeunload = null;
         }
     }
 
     function updateUserData(callback){
         var userId = firebase.auth().currentUser.uid;
         userRef = rootRef.child("/users/" + userId);
-        userRef.once('value', function(snapshot){
+        userRef.on('value', function(snapshot){
             userData = snapshot.val();
-            if (callback) { callback.call(this); }
+            userData.id = snapshot.key;
+            addTimelinesDataToUserData();
+            if (callback) callback.call(this);
         }, function (error){
             userData = null;
             console.warn(error);
@@ -1699,6 +2073,7 @@
     function archiveTimeline(id, callback){
         if (firebase.auth().currentUser){
             writeData(rootRef, 'timelines/' + id + '/isArchived', true, function(){
+                updateUserTimelineTimestamp(id);
                 if (callback) callback.call(this, id);
             });
         } else {
@@ -1707,8 +2082,12 @@
     }
 
     function writeData(ref, key, value, callback){
-        callback = callback ? callback : null;
-        ref.child(key).set(value, callback);
+        if (callback){
+            ref.child(key).set(value, callback);
+        } else {
+            ref.child(key).set(value);
+        }
+
     }
 
     function parseDateTimestamp(string){

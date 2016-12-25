@@ -522,7 +522,7 @@ input.invalid, textarea.invalid {
 	top:0;
 	left: -1px;
 	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
-	font-size:30px;
+	font-size: 30px;
 	display: block;
 	margin: 0 0 10px 0;
 	line-height: 1.1em;
