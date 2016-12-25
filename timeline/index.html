@@ -931,9 +931,9 @@
         position: relative;
         top:0;
         left:0;
-        width: -webkit-calc(100% + 40px);
-        width: calc(100% + 40px);
-        margin: 12px -20px;
+        width: -webkit-calc(100% + 36px);
+        width: calc(100% + 36px);
+        margin: 12px -18px;
         padding: 16px;
         background: rgba(0,0,0,0);
         border-radius: 4px;
@@ -1028,7 +1028,7 @@
         width: 24px;
         height: 24px;
         background-color: #bbb;
-        border-radius: 2px;
+        border-radius: 3px;
         -webkit-user-select: none;
         -khtml-user-select: none;
         -moz-user-select: none;
@@ -1078,7 +1078,7 @@
     }
 
     .timeline-share .display-as-p {
-        margin: -16px 0 0 0;
+        margin: -8px 0 0 0;
     }
 
     .timeline-share .timeline-share-url {
@@ -1101,9 +1101,10 @@
         font-weight: 400;
         opacity: 0.3;
         pointer-events: none;
+        cursor: pointer;
     }
 
-    .timeline-share .timeline-share-url.visible {
+    .timeline-share.visible .timeline-share-url.visible {
         opacity: 1;
         pointer-events: all;
     }
@@ -1114,6 +1115,42 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+    }
+
+    .timeline-share .timeline-share-url::after {
+        content: "Copied!";
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 8px;
+        width: 72px;
+        height: auto;
+        margin: 8px 0;
+        padding: 8px 0;
+        font-size: 16px;
+        line-height: 16px;
+        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+        text-align: center;
+        color: #fff;
+        background-color: #aaa;
+        border-radius: 2px;
+        opacity: 0;
+        pointer-events: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+        transition:.15s all ease-out;
+        -webkit-transition:.15s all ease-out;
+        -moz-transition:.15s all ease-out;
+        -o-transition:.15s all ease-out;
+    }
+
+    .timeline-share .timeline-share-url.alert-copied::after {
+        opacity: 1;
+        pointer-events: all;
     }
 
     @media (max-width: 560px){
@@ -1189,7 +1226,7 @@
             <div class="event-new popup buttoned">
                 <div class="event-new-title display-as-h1" data-placeholder="Title" contenteditable="true"></div>
                 <div class="event-new-date display-as-p" data-placeholder="Type a date (e.g. May 5 1996)" contenteditable="true"></div>
-                <div class="event-new-content display-as-p" data-placeholder="Type some details about this event (optional)" contenteditable="true"></div>
+                <div class="event-new-content display-as-p" data-placeholder="Type details about the event (optional)" contenteditable="true"></div>
                 <div class="event-new-close button side-button-left">Cancel</div>
                 <div class="event-new-publish button side-button-right disabled">Save</div>
             </div>
@@ -1501,6 +1538,12 @@
             toggleTimelineSharing();
         });
 
+        $(document).off('click', '.timeline-share-url');
+        $(document).on('click', '.timeline-share-url', function(e){
+            e.stopPropagation();
+            copyElementTextToClipboard($(this));
+        });
+
         $(document).off('blur', onlyAuthenticatedUserString + '.event-new-date');
         $(document).on('blur', onlyAuthenticatedUserString + '.event-new-date', function () {
             var datePrediction = getTimeTextFromString(parseDateTimestamp($(this).text()), true);
@@ -1617,6 +1660,32 @@
         if (!manualDateSet || !$('.event-new-date').text().replace(/\s+/,'').length){
             var datePrediction = getTimeTextFromString(parseDateTimestamp($('.event-new-content').text()), true);
             if (datePrediction) $('.event-new-date').text(datePrediction);
+        }
+    }
+
+    function copyElementTextToClipboard(element){
+        try {
+            var $element = $(element);
+            var DOMelement = $(element).get(0);
+            if (document.selection) {
+                var range = document.body.createTextRange();
+                range.moveToElementText(DOMelement);
+                range.select();
+            } else if (window.getSelection) {
+                var range = document.createRange();
+                range.selectNode(DOMelement);
+                window.getSelection().addRange(range);
+            }
+            var didCopy = document.execCommand('copy');
+            if (didCopy){
+                $element.addClass('alert-copied');
+                setTimeout(function(){
+                    $element.removeClass('alert-copied');
+                }, 2000);
+            }
+        } catch(e){
+            console.warn("Error copying to clipboard:");
+            console.warn(e);
         }
     }
 
