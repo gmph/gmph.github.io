@@ -138,6 +138,34 @@
         font-size: 24px;
     }
 
+    .scrollbar-custom::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+        padding: 2px;
+        background: transparent;
+    }
+
+    .scrollbar-custom::-webkit-scrollbar-track {
+        border-radius: 8px;
+        width: 4px;
+        height: 4px;
+        background: transparent;
+    }
+
+    .scrollbar-custom::-webkit-scrollbar-thumb {
+        width: 4px;
+        height: 4px;
+        margin: 2px;
+        border-radius: 8px;
+        background: rgba(0,0,0,.25);
+    }
+
+    .scrollbar-custom::-webkit-scrollbar-button {
+        width: 0;
+        height: 0;
+        display: none;
+    }
+
     .connection {
         display: block;
         position: relative;
@@ -1289,25 +1317,25 @@
                     <div class="event-new-open"></div>
                 </div>
             </div>
-            <div class="event-new popup buttoned">
+            <div class="event-new popup buttoned scrollbar-custom">
                 <div class="event-new-title display-as-h1" data-placeholder="Title" contenteditable="true"></div>
                 <div class="event-new-date display-as-p" data-placeholder="Type a date (e.g. May 5 1996)" contenteditable="true"></div>
                 <div class="event-new-content display-as-p" data-placeholder="Type details about the event (optional)" contenteditable="true"></div>
                 <div class="event-new-close button side-button-left">Cancel</div>
                 <div class="event-new-publish button side-button-right disabled">Save</div>
             </div>
-            <div class="events"></div>
+            <div class="events scrollbar-custom"></div>
         </div>
     </div>
 
-    <div class="sign-in popup buttoned">
+    <div class="sign-in popup buttoned scrollbar-custom">
         <h1 class="display-as-h1">Sign in</h1>
         <div class="sign-in-email display-as-p" data-placeholder="Email address" contenteditable="true" type="email"></div>
         <div class="sign-in-password display-as-p" data-placeholder="Password" contenteditable="true" type="password"></div>
         <div class="sign-in-submit side-button-right button">Sign in</div>
     </div>
 
-    <div class="timelines popup buttoned">
+    <div class="timelines popup buttoned scrollbar-custom">
         <div class="timelines-close"></div>
         <h1 class="display-as-h1">Timelines</h1>
         <div class="timeline-list"></div>
@@ -1316,14 +1344,14 @@
         </div>
     </div>
 
-    <div class="timeline-new popup buttoned">
+    <div class="timeline-new popup buttoned scrollbar-custom">
         <h1 class="display-as-h1">Create a timeline</h1>
         <div class="timeline-new-name display-as-p" data-placeholder="Title (e.g. John Smith WW2)" contenteditable="true"></div>
         <div class="timeline-new-create side-button-right button">Create</div>
         <div class="timeline-new-close side-button-left button">Close</div>
     </div>
 
-    <div class="timeline-share popup buttoned">
+    <div class="timeline-share popup buttoned scrollbar-custom">
         <h1 class="display-as-h1">Share timeline</h1>
         <p class="display-as-p">Let your friends and family view this timeline by sharing a link with them. Only you can edit your timelines.</p>
         <input type="checkbox" id="timeline-share-checkbox" />
@@ -1835,7 +1863,7 @@
     function getEventElementFromEvent(event,isPreview){
         if (event.isPublished) {
             var isPreview = isPreview && isPreview != null && isPreview === true ? true : false;
-            var $event = $('<div class="event"></div>').attr('data-id', event.createdOn);
+            var $event = $('<div class="event scrollbar-custom"></div>').attr('data-id', event.createdOn);
             var $title = $('<h1>'+event.title+'</h1>');
             $event.append($('<div class="title">').append($title));
             $event.attr('data-dateid', event.eventDateId);
