@@ -131,11 +131,12 @@
     }
 
     .popup h1 {
-        margin-bottom: 32px !important;
+        margin-bottom: 16px !important;
     }
 
     .display-as-h1 {
         font-size: 24px;
+        margin: 0 auto;
     }
 
     .scrollbar-custom::-webkit-scrollbar {
@@ -205,7 +206,7 @@
         padding: 0;
     }
 
-    .timeline-container::after {
+    .page-inactive-cover {
         content: "";
         display: block;
         position: fixed;
@@ -223,9 +224,10 @@
         -o-transition:.1s all ease-in;
     }
 
-    .timeline-container.child-page::after {
+    .child-page .page-inactive-cover {
         content: "";
         background: rgba(0,0,0,.4);
+        pointer-events: all;
     }
 
     .timeline-container.child-page .events, .timeline-container.child-page .navigation-block {
@@ -700,20 +702,39 @@
         font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
         font-size: 18px;
         box-shadow: 0 1px 0 #eee;
-        padding-bottom: 8px !important;
+        margin: 0 auto 8px auto !important;
+        padding: 24px 0 8px 0 !important;
+    }
+
+    [contenteditable="true"]:last-of-type, [contentedatible=""]:last-of-type {
+        margin: 0 auto !important;
     }
 
     [contenteditable="true"]:focus,[contentedatible=""]:focus {
         box-shadow: 0 2px 0 #8B67FF;
     }
 
-    [contenteditable="true"]:empty:before, [contentedatible=""]:empty:before {
+    [contenteditable="true"]:before, [contentedatible=""]:before {
         content: attr(data-placeholder);
         display: block;
         position: absolute;
         top:0;
         left:0;
-        opacity: 0.4;
+        opacity: 0.35;
+        font-size: 12px;
+        font-weight: 500;
+
+        transition:.15s all ease-in-out;
+        -webkit-transition:.15s all ease-in-out;
+        -moz-transition:.15s all ease-in-out;
+        -o-transition:.15s all ease-in-out;
+    }
+
+    [contenteditable="true"]:empty:before, [contentedatible=""]:empty:before {
+        top: 24px;
+        font-size: inherit;
+        font-weight: inherit;
+        opacity: 0.5;
     }
 
     .event .button {
@@ -914,8 +935,7 @@
     }
 
     .timelines.popup h1 {
-        padding-top: 2px;
-        padding-left: 40px;
+        padding: 2px 0 24px 40px;
         font-size: 22px;
         line-height: 24px;
     }
@@ -1121,10 +1141,6 @@
         opacity: 1;
     }
 
-    .timeline-share .display-as-p {
-        margin: -8px 0 0 0;
-    }
-
     .timeline-share .timeline-share-url {
         display: block;
         position: relative;
@@ -1302,6 +1318,7 @@
 
     <div class="block visible">
         <div class="timeline-container">
+            <div class="page-inactive-cover"></div>
             <div class="event-child popup">
                 <div class="event-content"></div>
                 <div class="button back sans-serif" onclick="closeChildPage()">Close</div>
@@ -1322,8 +1339,8 @@
             </div>
             <div class="event-new popup buttoned scrollbar-custom">
                 <div class="event-new-title display-as-h1" data-placeholder="Title" contenteditable="true"></div>
-                <div class="event-new-date display-as-p" data-placeholder="Type a date (e.g. May 5 1996)" contenteditable="true"></div>
-                <div class="event-new-content display-as-p" data-placeholder="Type details about the event (optional)" contenteditable="true"></div>
+                <div class="event-new-date display-as-p" data-placeholder="Date (e.g. May 1996)" contenteditable="true"></div>
+                <div class="event-new-content display-as-p" data-placeholder="Description of the event (optional)" contenteditable="true"></div>
                 <div class="event-new-close button side-button-left">Cancel</div>
                 <div class="event-new-publish button side-button-right disabled">Save</div>
             </div>
@@ -1504,6 +1521,14 @@
         var clickEventString = 'click';
         var onlyAuthenticatedUserString = 'body:not(.user-anonymous) ';
 
+        $(document).off(clickEventString, '.page-inactive-cover');
+        $(document).on(clickEventString, '.page-inactive-cover', function(e){
+            e.stopPropagation();
+            closeTimelines();
+            closeNewTimeline();
+            closeShareTimeline();
+        });
+
         $(document).off('mouseenter', '.navigation-timeline');
         $(document).off('mouseleave', '.navigation-timeline');
         $(document).on('mouseenter', '.navigation-timeline', function(){
@@ -1520,7 +1545,6 @@
         }).on('touchend', '.navigation-timeline', function(e){
             $(document).off('touchmove', '.navigation-timeline');
             e.stopPropagation();
-            e.preventDefault();
             onNavigationTimelineClick(this);
         });
 
@@ -1882,7 +1906,7 @@
             }
             $event.append($author);
 
-            if (firebase.auth().currentUser && event.author.uid == firebase.auth().currentUser.uid) {
+            if (!$('body.user-anonymous').length && firebase.auth().currentUser && event.author.uid === firebase.auth().currentUser.uid) {
                 $event.append($('<div class="event-delete button button-light color-destructive">Delete</div>').attr('onclick','deleteEvent('+event.createdOn+')'));
             }
 
@@ -2018,8 +2042,13 @@
     }
 
     function closeTimelines(){
-        $('.timeline-container').removeClass('child-page');
-        $('.timelines.popup').removeClass('visible');
+        if ($('.timelines.popup').hasClass('visible')){
+            $('.timelines.popup').removeClass('visible');
+            $('.timeline-container').removeClass('child-page');
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function addTimelinesDataToUserData(){
@@ -2075,12 +2104,18 @@
         $('.timeline-new .timeline-new-name').focus();
     }
 
-    function closeNewTimeline(isFinished){
-        $('.timeline-container').removeClass('child-page');
-        $('.timeline-new.popup').removeClass('visible');
-        $('.timeline-new .timeline-new-name').text('');
-        if (isFinished !== true) openTimelines();
-        blurAllFields();
+    function closeNewTimeline(didCreateTimeline){
+        if ($('.timeline-new.popup').hasClass('visible')){
+            $('.timeline-container').removeClass('child-page');
+            $('.timeline-new.popup').removeClass('visible');
+            $('.timeline-new .timeline-new-name').text('');
+            if (didCreateTimeline !== true) openTimelines();
+            blurAllFields();
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     function openShareTimeline(){
@@ -2089,8 +2124,14 @@
     }
 
     function closeShareTimeline(){
-        $('.timeline-container').removeClass('child-page');
-        $('.timeline-share.popup').removeClass('visible');
+        if ($('.timeline-share.popup').hasClass('visible')){
+            $('.timeline-container').removeClass('child-page');
+            $('.timeline-share.popup').removeClass('visible');
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     function toggleTimelineSharing(){
@@ -2178,6 +2219,8 @@
             $('.event-new, .navigation-block').removeClass('visible');
             $('.sign-in.popup').addClass('visible');
             $('.sign-in .sign-in-email').focus();
+            $('.events').empty();
+            $('.timelines.popup .timeline-list').empty();
             $('body').addClass('user-anonymous');
             window.onbeforeunload = null;
         }
