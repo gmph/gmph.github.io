@@ -820,10 +820,17 @@
         white-space: nowrap;
         direction: rtl;
         text-align: left;
+        opacity: 0;
+        pointer-events: none;
     }
 
-    .events:empty::after {
-        content:"Click the ‘+’ button to add an event to your timeline";
+    body.events-ready .events {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    body.events-ready:not(.user-anonymous) .events:empty::after {
+        content:"Add an event to your timeline with the ‘+’ button";
         display: inline-block;
         position: absolute;
         top: 50%;
@@ -835,7 +842,7 @@
         font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
         font-size: 24px;
         font-weight: 400;
-        line-height: 1.4em;
+        line-height: 1.5em;
         color: #aaa;
         text-align: center;
         direction: ltr;
@@ -1672,7 +1679,10 @@
             e.stopPropagation();
             var timelineId = $(this).parent().attr('data-id');
             archiveTimeline(timelineId, function(){
-                if (timelineId == timelineRef.key){
+                updateUserData(function(){
+                    displayTimelineList();
+                });
+                if (timelineId == timelineData.id){
                     openTimeline();
                 }
             });
@@ -1862,7 +1872,6 @@
         var name = timelineData.name;
         if (name == null || name == undefined || name == "") name = "Timeline";
         $('.navigation-block .navigation-title').text(name);
-        updateUserTimelineTimestamp(timelineData.id);
         updateTimelineSharing();
     }
 
@@ -1910,6 +1919,7 @@
             item.eventDateId = eventDateId;
             $('.timeline-container .events').prepend(getEventElementFromEvent(item));
             if (item.date) eventDates.push(eventDateId);
+            $('body').addClass('events-ready');
         })
         displayTimelineMinAndMax();
         if (childEventId != null) getEventByID(childEventId,openNewEvent);
@@ -1993,9 +2003,9 @@
     function createOrUpdateEvent(){
         if (!timelineData.isArchived){
             var unix = firebase.database.ServerValue.TIMESTAMP;
-            var isUpdate = $('.event-new').attr('data-id') != undefined;
+            var isUpdate = $('.event-new').attr('data-id') != undefined && $('.event-new').attr('data-id') != "";
             var id = $('.event-new').attr('data-id');
-            var createdOn = isUpdate ? eventsData[id] : unix;
+            var createdOn = isUpdate && eventsData ? eventsData[id] : unix;
             var parsedDate = parseDateTimestamp(document.querySelectorAll('.event-new .event-new-date')[0].innerText);
             parsedDate = parsedDate ? parsedDate : parseDateTimestamp(createdOnOrNow);
             var event = {
@@ -2009,7 +2019,7 @@
             };
             if (isUpdate){
                 writeData(eventsRef, id, event, function(){ closeNewEvent(true) });
-                updateUserTimelineTimestamp(timelineRef.key);
+                updateUserTimelineTimestamp(timelineData.id);
             } else {
                 pushData(eventsRef, '/', event, function(){ closeNewEvent(true) })
             }
@@ -2045,21 +2055,21 @@
         if (!timelineData.isArchived){
             closeChildPage();
             writeData(eventsRef, id, null);
-            updateUserTimelineTimestamp(timelineRef.key);
+            updateUserTimelineTimestamp(timelineData.id);
         }
     }
 
     function publishEvent(id){
         if (!timelineData.isArchived){
             writeData(eventsRef, id+'/isPublished', true);
-            updateUserTimelineTimestamp(timelineRef.key);
+            updateUserTimelineTimestamp(timelineData.id);
         }
     }
 
     function unpublishEvent(id){
         if (!timelineData.isArchived){
             writeData(eventsRef, id+'/isPublished', false);
-            updateUserTimelineTimestamp(timelineRef.key);
+            updateUserTimelineTimestamp(timelineData.id);
         }
     }
 
@@ -2099,9 +2109,11 @@
     }
 
     function openTimelines(){
-        displayTimelineList();
-        $('.timeline-container').addClass('child-page');
-        $('.timelines.popup').addClass('visible');
+        updateUserData(function(){
+            displayTimelineList();
+            $('.timeline-container').addClass('child-page');
+            $('.timelines.popup').addClass('visible');
+        });
     }
 
     function closeTimelines(){
@@ -2114,16 +2126,22 @@
         }
     }
 
-    function addTimelinesDataToUserData(){
+    function addTimelinesDataToUserData(callback){
         if (userData && userData.timelines && typeof userData.timelines === "object"){
             var timelineIds = Object.keys(userData.timelines);
             for (var i = 0; i < timelineIds.length; i++){
+                var updatedOn = typeof userData.timelines[i] === "number" ? userData.timelines[i] : userData.timelines['updatedOn'];
                 rootRef.child('timelines/' + timelineIds[i]).once('value', function(snapshot){
                     var timeline = snapshot.val();
                     timeline.id = snapshot.key;
+                    timeline.updatedOn = updatedOn;
                     userData.timelines[timeline.id] = timeline;
                 }, function(error){
                     console.warn(error);
+                }).then(function(){
+                    if (Object.keys(userData.timelines).filter(function(k){ return typeof userData.timelines[k] === 'number' }).length === 0){
+                        if (callback) callback.call(this);
+                    }
                 });
             }
         }
@@ -2139,7 +2157,7 @@
     }
 
     function updateUserTimelineTimestamp(id){
-        if (isPushKey(id)) writeData(userRef, 'timelines/' + id, firebase.database.ServerValue.TIMESTAMP);
+        if (isPushKey(id) && $('body.user-anonymous').length === 0 && firebase.auth().currentUser) writeData(userRef, 'timelines/' + id, firebase.database.ServerValue.TIMESTAMP);
     }
 
     function getTimelineListItemElementFromTimeline(timeline){
@@ -2202,7 +2220,7 @@
 
     function toggleTimelineSharing(){
         writeData(timelineRef, 'isPublic', !timelineData.isPublic);
-        updateUserTimelineTimestamp(timelineRef.key);
+        updateUserTimelineTimestamp(timelineData.id);
     }
 
     function updateTimelineSharing(){
@@ -2267,6 +2285,7 @@
             onTimelineChanged(snapshot);
             rootRef.child('events/' + getIdFromPublicReference(ref)).orderByChild('date').on('value', function(snapshot){
                 displayTimelineFromSnapshot(snapshot);
+
                 $('.events').scrollLeft(0);
             }, function(error){
                 openRootUrl();
@@ -2287,15 +2306,14 @@
             $('.sign-in.popup').removeClass('visible');
             setUpChrono();
             attachEvents();
-            updateUserData(function(){
-                if (timelineRef === undefined) openTimeline();
-            });
             blurAllFields();
             $('body').removeClass('user-anonymous');
             window.onbeforeunload = function(e) {
                 return 'Leave this website?';
             };
-            openTimeline();
+            updateUserData(function(){
+                openTimeline();
+            });
         } else {
             $('.event-new, .navigation-block').removeClass('visible');
             $('.sign-in.popup').addClass('visible');
@@ -2314,11 +2332,10 @@
     function updateUserData(callback){
         var userId = firebase.auth().currentUser.uid;
         userRef = rootRef.child("/users/" + userId);
-        userRef.on('value', function(snapshot){
+        userRef.once('value', function(snapshot){
             userData = snapshot.val();
             if (userData != null) userData.id = snapshot.key;
-            addTimelinesDataToUserData();
-            if (callback) callback.call(this);
+            addTimelinesDataToUserData(callback);
         }, function (error){
             userData = null;
             console.warn(error);
@@ -2327,10 +2344,8 @@
 
     function openTimeline(id){
         if (userData != null && userData != {} && userData.timelines && userData.timelines != null){
-            var latestActiveTimelineId = Object.keys(userData.timelines)
-                .filter(function(x){ return isTimelineId("t" + x) })
-                .reduce(function(a, b){ return userData.timelines[a] > userData.timelines[b] ? a : b });
-            var timelineId = userData.timelines[id] != undefined ? id : latestActiveTimelineId;
+            var latestActiveTimelineId = Object.keys(userData.timelines).filter(function(x){ return isPushKey(x) && userData.timelines[x].isArchived !== true })[0];
+            var timelineId = userData.timelines[id] != undefined ? id : timelineData && timelineData.id ? timelineData.id : latestActiveTimelineId;
             timelineRef = rootRef.child("timelines/" + timelineId);
             eventsRef = rootRef.child("events/" + timelineId);
             getInitialData();
