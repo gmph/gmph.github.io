@@ -1454,13 +1454,6 @@
     function closeNewEvent(didPost){
         window.location.hash = "";
         manualDateSet = false;
-        if (didPost === true) {
-            var originaltext = $('.event-new-publish').text();
-            $('.event-new-publish').addClass('disabled').text('Done!');
-            setTimeout(function(){
-                $('.event-new-publish').text(originaltext);
-            },2000);
-        }
         $('.timeline-container').removeClass('child-page')
         $('.event-new-title, .event-new-content, .event-new-date').text('');
         $('.event-new').attr('data-id','').removeClass('visible');
@@ -1879,6 +1872,7 @@
     }
 
     function displayTimelineFromSnapshot(snapshot){
+        eventsData = snapshot.val();
         var items = [];
         snapshot.forEach(function(child) {
             var item = child.val();
@@ -1981,20 +1975,21 @@
     function createOrUpdateEvent(){
         var unix = firebase.database.ServerValue.TIMESTAMP;
         var isUpdate = $('.event-new').attr('data-id') != undefined;
-        var createdOn = isUpdate ? parseInt($('.event-new').attr('data-id')) : unix;
+        var id = $('.event-new').attr('data-id');
+        var createdOn = isUpdate ? eventsData[id] : unix;
         var parsedDate = parseDateTimestamp(document.querySelectorAll('.event-new .event-new-date')[0].innerText);
         parsedDate = parsedDate ? parsedDate : parseDateTimestamp(createdOnOrNow);
         var event = {
             'author' : getCurrentAuthor(),
-            'content' : document.querySelectorAll('.event-new .event-new-content')[0].innerText,
             'createdOn' : createdOn,
+            'content' : document.querySelectorAll('.event-new .event-new-content')[0].innerText,
+            'date': parsedDate,
             'isPublished' : true,
             'title' : document.querySelectorAll('.event-new .event-new-title')[0].innerText,
             'updatedOn': unix,
-            'date': parsedDate
         };
         if (isUpdate){
-            writeData(eventsRef, createdOn, event, function(){ closeNewEvent(true) });
+            writeData(eventsRef, id, event, function(){ closeNewEvent(true) });
             updateUserTimelineTimestamp(timelineRef.key);
         } else {
             pushData(eventsRef, '/', event, function(){ closeNewEvent(true) })
