@@ -543,7 +543,7 @@ input.invalid, textarea.invalid {
 	font-weight: 300;
 }
 
-.block h2, .block h5 {
+.block h2, .block h5, .display-as-h2 {
 	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
 	font-size:20px;
 	display: block;
