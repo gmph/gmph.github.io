@@ -706,6 +706,10 @@
         padding: 24px 0 8px 0 !important;
     }
 
+    [contenteditable="true"]:first-child, [contentedatible=""]:first-child {
+        margin: -8px auto 8px auto !important;
+    }
+
     [contenteditable="true"]:last-of-type, [contentedatible=""]:last-of-type {
         margin: 0 auto !important;
     }
@@ -817,6 +821,27 @@
         white-space: nowrap;
         direction: rtl;
         text-align: left;
+    }
+
+    .events:empty::after {
+        content:"Click the ‘+’ button to add an event to your timeline";
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        -webkit-transform: translate(-50%,-50%);
+        width: auto;
+        max-width: 320px;
+        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 1.4em;
+        color: #aaa;
+        text-align: center;
+        direction: ltr;
+        overflow: hidden;
+        white-space: normal;
     }
 
     .events * {
@@ -1585,7 +1610,7 @@
         $(document).off(clickEventString, onlyAuthenticatedUserString + '.event-new-publish');
         $(document).on(clickEventString, onlyAuthenticatedUserString + '.event-new-publish', function(e){
             e.stopPropagation();
-            createEvent();
+            createOrUpdateEvent();
         });
 
         $(document).off(clickEventString, onlyAuthenticatedUserString + '.timelines-open');
@@ -1824,6 +1849,7 @@
         var name = timelineData.name;
         if (name == null || name == undefined || name == "") name = "Timeline";
         $('.navigation-block .navigation-title').text(name);
+        updateUserTimelineTimestamp(timelineData.id);
         updateTimelineSharing();
     }
 
@@ -1848,7 +1874,9 @@
     function displayTimelineFromSnapshot(snapshot){
         var items = [];
         snapshot.forEach(function(child) {
-            items.push(child.val());
+            var item = child.val();
+            item.id = child.key;
+            items.push(item);
         });
         displayTimelineFromEventList(items);
     }
@@ -1859,7 +1887,7 @@
         eventDates = [];
         itemList.forEach(function(item){
             var eventDateId = parseInt(item.date.replace(/ [0-2][0-9]:[0-5][0-9]/,'').split('/').join(''));
-            if (getUrlHash() == getPublicReferenceFromId('e', item.createdOn) && item.isPublished) childEventId = item.createdOn;
+            if (getUrlHash() == getPublicReferenceFromId('e', item.id) && item.isPublished) childEventId = item.id;
             item.eventDateId = eventDateId;
             $('.timeline-container .events').prepend(getEventElementFromEvent(item));
             if (item.date) eventDates.push(eventDateId);
@@ -1887,10 +1915,10 @@
         return parts.join(' ') + (parts.length >= 75 ? '...' : '');
     }
 
-    function getEventElementFromEvent(event,isPreview){
+    function getEventElementFromEvent(event, isPreview){
         if (event.isPublished) {
             var isPreview = isPreview && isPreview != null && isPreview === true ? true : false;
-            var $event = $('<div class="event scrollbar-custom"></div>').attr('data-id', event.createdOn);
+            var $event = $('<div class="event scrollbar-custom"></div>').attr('data-id', event.id);
             var $title = $('<h1>'+event.title+'</h1>');
             $event.append($('<div class="title">').append($title));
             $event.attr('data-dateid', event.eventDateId);
@@ -1943,30 +1971,33 @@
         $('.timeline-container .event-new-publish-container').prepend($author);
     }
 
-    function createEvent(){
-        var unix =  (new Date).getTime();
-        var createdOn = parseInt($('.event-new').attr('data-id'));
-        var createdOnOrNow = createdOn != null && createdOn != undefined && createdOn != "" && !isNaN(createdOn) ? createdOn : unix;
+    function createOrUpdateEvent(){
+        var unix = firebase.database.ServerValue.TIMESTAMP;
+        var isUpdate = $('.event-new').attr('data-id') != undefined;
+        var createdOn = isUpdate ? parseInt($('.event-new').attr('data-id')) : unix;
         var parsedDate = parseDateTimestamp(document.querySelectorAll('.event-new .event-new-date')[0].innerText);
         parsedDate = parsedDate ? parsedDate : parseDateTimestamp(createdOnOrNow);
-        var user = firebase.auth().currentUser;
         var event = {
-            author : getCurrentAuthor(),
-            content : document.querySelectorAll('.event-new .event-new-content')[0].innerText,
-            createdOn : createdOnOrNow,
-            isPublished : true,
-            title : document.querySelectorAll('.event-new .event-new-title')[0].innerText,
-            updatedOn: unix,
-            date: parsedDate
+            'author' : getCurrentAuthor(),
+            'content' : document.querySelectorAll('.event-new .event-new-content')[0].innerText,
+            'createdOn' : createdOn,
+            'isPublished' : true,
+            'title' : document.querySelectorAll('.event-new .event-new-title')[0].innerText,
+            'updatedOn': unix,
+            'date': parsedDate
         };
-        writeData(eventsRef, createdOnOrNow, event, function(){ closeNewEvent(true) });
-        updateUserTimelineTimestamp(timelineRef.key);
+        if (isUpdate){
+            writeData(eventsRef, createdOn, event, function(){ closeNewEvent(true) });
+            updateUserTimelineTimestamp(timelineRef.key);
+        } else {
+            pushData(eventsRef, '/', event, function(){ closeNewEvent(true) })
+        }
     }
 
     function openNewEvent(event){
         closeChildPage();
-        if (typeof event === 'object' && event.createdOn){
-            window.location.hash = getPublicReferenceFromId('e', event.createdOn)
+        if (event != null && typeof event === 'object' && event.createdOn){
+            window.location.hash = getPublicReferenceFromId('e', event.id)
             $('.event-new-title').text(event.title);
             $('.event-new-content').text(event.content).focus();
             $('.event-new-date').text(getTimeTextFromString(event.date, true));
@@ -2004,7 +2035,9 @@
 
     function getEventByID(id, callback){
         eventsRef.child(id).once('value', function(snapshot) {
-            callback(snapshot.val());
+            var event = snapshot.val();
+            event.id = snapshot.key;
+            callback(event);
         }, function(error){
             console.warn('Get event by ID error:')
             console.warn(error);
@@ -2074,7 +2107,7 @@
     }
 
     function updateUserTimelineTimestamp(id){
-        writeData(userRef, 'timelines/' + id, (new Date()).getTime());
+        if (isPushKey(id)) writeData(userRef, 'timelines/' + id, firebase.database.ServerValue.TIMESTAMP);
     }
 
     function getTimelineListItemElementFromTimeline(timeline){
@@ -2171,9 +2204,13 @@
         $(':focus').blur();
     }
 
-    function isPublicTimelineId(hash){
+    function isTimelineId(hash){
         var hash = hash.replace('#','');
-        return hash.charAt(0) === "t" && hash.length > 20 && hash.replace(/[^-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz]/g,'').length === hash.length;
+        return hash.charAt(0) === "t" && isPushKey(hash.substring(1, hash.length));
+    }
+
+    function isPushKey(key){
+        return key.toString().length === 20 && /[^-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz]/g.test(key.toString()) === false;
     }
 
     function displayPublicTimeline(ref){
@@ -2199,7 +2236,7 @@
     }
 
     function setSignInOrUserState(){
-        if (isPublicTimelineId(getUrlHash())){
+        if (isTimelineId(getUrlHash())){
             displayPublicTimeline(getUrlHash().replace('#',''));
         } else if (firebase.auth().currentUser) {
             addCurrentAuthorToNewEvent();
@@ -2242,7 +2279,10 @@
 
     function openTimeline(id){
         if (userData != null && userData != {} && userData.timelines && userData.timelines != null){
-            var timelineId = userData.timelines[id] != undefined ? id : Object.keys(userData.timelines)[0];
+            var latestActiveTimelineId = Object.keys(userData.timelines)
+                .filter(function(x){ return isTimelineId("t" + x) })
+                .reduce(function(a, b){ return userData.timelines[a] > userData.timelines[b] ? a : b });
+            var timelineId = userData.timelines[id] != undefined ? id : latestActiveTimelineId;
             timelineRef = rootRef.child("timelines/" + timelineId);
             eventsRef = rootRef.child("events/" + timelineId);
             getInitialData();
@@ -2255,7 +2295,7 @@
 
     function createTimeline(name, callback){
         if (firebase.auth().currentUser){
-            var unix = (new Date).getTime();
+            var unix = firebase.database.ServerValue.TIMESTAMP;
             rootRef.child('timelines').push({
                 "name" : name ? name : "Timeline",
                 "owner" : firebase.auth().currentUser.uid,
@@ -2296,7 +2336,14 @@
         } else {
             ref.child(key).set(value);
         }
+    }
 
+    function pushData(ref, path, value, callback){
+        if (callback){
+            ref.child(path).push(value, callback);
+        } else {
+            ref.child(path).push(value);
+        }
     }
 
     function parseDateTimestamp(string){
