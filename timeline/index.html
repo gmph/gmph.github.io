@@ -2295,6 +2295,7 @@
             window.onbeforeunload = function(e) {
                 return 'Leave this website?';
             };
+            openTimeline();
         } else {
             $('.event-new, .navigation-block').removeClass('visible');
             $('.sign-in.popup').addClass('visible');
