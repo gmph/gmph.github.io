@@ -1875,6 +1875,7 @@
     }
 
     function getInitialData(){
+        $('.events').scrollLeft($('.events').get(0).scrollWidth);
         timelineRef.on('value', onTimelineChanged, warnError);
         eventsRef.orderByChild('date').on('value', onEventsChanged, warnError);
     }
