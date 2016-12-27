@@ -640,8 +640,6 @@
     }
 
     .timeline-container .event-new-open:hover {
-        transform: scale(1.05);
-        transform: -webkit-scale(1.05);
         box-shadow: 0 4px 8px rgba(0,0,0,.4);
         background-color: #8360f2;
     }
@@ -1944,7 +1942,7 @@
             $event.append($author);
 
             if (!$('body.user-anonymous').length && firebase.auth().currentUser && event.author.uid === firebase.auth().currentUser.uid) {
-                $event.append($('<div class="event-delete button button-light color-destructive">Delete</div>').attr('onclick','deleteEvent('+event.createdOn+')'));
+                $event.append($('<div class="event-delete button button-light color-destructive">Delete</div>').attr('onclick','deleteEvent("'+event.id+'")'));
             }
 
             return $event;
@@ -2005,12 +2003,12 @@
 
     function openNewEvent(event){
         closeChildPage();
-        if (event != null && typeof event === 'object' && event.createdOn){
+        if (event != null && typeof event === 'object' && event.id){
             window.location.hash = getPublicReferenceFromId('e', event.id)
             $('.event-new-title').text(event.title);
             $('.event-new-content').text(event.content).focus();
             $('.event-new-date').text(getTimeTextFromString(event.date, true));
-            $('.event-new').attr('data-id', event.createdOn);
+            $('.event-new').attr('data-id', event.id);
             manualDateSet = true;
         } else {
             $('.event-new-title').text('').focus();
@@ -2064,7 +2062,7 @@
     }
 
     function loadChildPage(event){
-        window.location.hash = getPublicReferenceFromId('e', event.createdOn)
+        window.location.hash = getPublicReferenceFromId('e', event.id)
         $('.event-child .event-content').empty().append(getEventElementFromEvent(event));
         $('.event-child .gmph-button.twitter').attr('href','https://twitter.com/home?status='+encodeURIComponent(event.title)+'%20'+encodeURIComponent(window.location.href)+'%20by%20%40gmph');
         $('.event-child .gmph-button.facebook').attr('href','https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href));
