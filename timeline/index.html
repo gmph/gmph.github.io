@@ -1595,6 +1595,14 @@
             e.stopPropagation();
         });
 
+        $(document).off(clickEventString, '.events .event img:not(a img)');
+        $(document).on(clickEventString, '.events .event img:not(a img)', function(e){
+            e.stopPropagation();
+            openImageSourceInNewTab(this)
+        });
+
+        openImageSourceInNewTab
+
         $(document).off(clickEventString, onlyAuthenticatedUserString + '.event-new-open');
         $(document).on(clickEventString, onlyAuthenticatedUserString + '.event-new-open', function(e){
             e.stopPropagation();
@@ -2198,6 +2206,16 @@
     function openRootUrl(){
         window.onbeforeunload = null;
         window.location.href = getCurrentRootUrl();
+    }
+
+    function openURLInNewTab(url){
+        var win = window.open(url, '_blank');
+        win.focus();
+    }
+
+    function openImageSourceInNewTab(imageElement){
+        var $image = $(imageElement);
+        openURLInNewTab($image.attr('src'));
     }
 
     function blurAllFields(){
