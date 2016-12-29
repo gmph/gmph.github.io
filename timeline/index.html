@@ -109,9 +109,9 @@
         z-index: 20;
         transform: translate(-50%, -50%);
         -webkit-transform: translate(-50%, -50%);
-        width: 90%;
+        width: 96%;
         max-width: 640px;
-        max-height: 90vh;
+        max-height: 96vh;
         margin: 0 -4px 0 0;
         padding: 40px;
         background-color: #fff;
@@ -605,6 +605,12 @@
         overflow-y: auto;
     }
 
+    .timeline-container .event-new .event-new-content img {
+        width: 100%;
+        height: auto;
+        float: center;
+    }
+
     .timeline-container .event-new .event-new-publish-container {
         margin: 0;
     }
@@ -622,6 +628,194 @@
         margin: 0 0 0 16px;
         padding: 0;
         color: #999;
+    }
+
+    .event-new-toolbar {
+        display: block;
+        position: relative;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 0;
+        margin: -48px 0 48px 0;
+        padding: 0;
+        text-align: right;
+    }
+
+    .event-new-toolbar .toolbar-button {
+        display: inline-block;
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 40px;
+        height: 40px;
+        margin: 0 0 0 8px;
+        padding: 8px;
+        background-color: rgba(255,255,255,.96);
+        background-position: center;
+        background-size: 24px;
+        background-repeat: no-repeat;
+        border-top-left-radius: 4px;
+        opacity: 0.9;
+        transform: translateZ(0);
+        cursor: pointer;
+    }
+
+    .event-new-toolbar .toolbar-button:hover {
+        opacity: 1;
+    }
+
+    .event-new-toolbar .toolbar-button.images-open {
+        background-image: url(add-image.png);
+        background-size: 24px;
+    }
+
+    .event-new-toolbar .toolbar-button.format-bold {
+        background-image: url(format-bold.png);
+    }
+
+    .event-new-toolbar .toolbar-button.format-italic {
+        background-image: url(format-italic.png);
+    }
+
+    .event-new-toolbar .toolbar-button.format-quote {
+        background-image: url(format-quote.png);
+    }
+
+    .event-new-toolbar .toolbar-button.link {
+        background-image: url(link.png);
+    }
+
+    .images.popup {
+        box-shadow: 0 0 0 2000px rgba(0,0,0,.5);
+    }
+
+    .images.popup .image-list {
+        display: block;
+        position: block;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: auto;
+        max-height: -webkit-calc(90vh - 300px);
+        max-height: calc(90vh - 300px);
+        margin: 0;
+        padding: 0;
+        background: transparent;
+    }
+
+    .image-list .image:first-of-type:last-of-type::before {
+        content: "No images yet";
+        display: block;
+        position: absolute;
+        top:50%;
+        right: -280%;
+        transform: translate(0, -50%);
+        -webkit-transform: translate(0, -50%);
+        width: 180%;
+        height: auto;
+        margin: 0;
+        padding: 24px;
+        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 24px;
+        color: #bbb;
+        text-align: center;
+        pointer-events: none;
+    }
+
+    .images.popup .image-list .image {
+        display: inline-block;
+        position: relative;
+        top: 0;
+        right: 0;
+        width: -webkit-calc((100% - 36px)/4);
+        width: calc((100% - 36px)/4);
+        height: auto;
+        margin: 0 4px 8px 4px;
+        padding: 0;
+        background-color: #999;
+        border-radius: 2px;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        cursor: pointer !important;
+        box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .images.popup .image-list .image:hover {
+        border-radius: 3px;
+        box-shadow: 0 1px 6px rgba(0,0,0,.3);
+    }
+
+    .images.popup .image-list .image:after {
+        content: "";
+        display: block;
+        padding-top: 100%;
+    }
+
+    .images.popup .image-list .image:nth-of-type(4n-3) {
+        margin: 0 4px 8px 0;
+    }
+
+    .images.popup .image-list .image:nth-of-type(4n+0) {
+        margin: 0 0 8px 4px;
+    }
+
+    .images.popup .image.image-upload {
+        padding: 0;
+        background-color: #fff;
+        background-image: url(add-image.png);
+        background-size: 32px;
+        background-position: 48% 28%;
+        background-repeat: no-repeat;
+    }
+
+    .images.popup .image.image-upload .image-upload-input {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+        cursor: pointer !important;
+    }
+
+    .images.popup .image.image-upload .image-upload-text {
+        display: block;
+        position: absolute;
+        bottom: 28%;
+        left: 50%;
+        transform: translate(-50%, 0);
+        -webkit-transform: translate(-50%, 0);
+        width: 100%;
+        height: auto;
+        font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        color: #858C9A;
+        text-align: center;
+        pointer-events: none;
+    }
+
+    .images.popup .image.image-loading {
+        padding: 0;
+        background-color: #fff;
+        background-image: url(loading.gif);
+        background-size: 32px;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 
     .timeline-container .event-new-open {
@@ -773,6 +967,7 @@
     }
 
     .event .button-light {
+        margin: 0 8px 0 0 !important;
         background: rgba(0,0,0,.04) !important;
     }
 
@@ -1106,6 +1301,14 @@
         color: #E64444 !important;
     }
 
+    .background-grey {
+        background-color: #aaa !important;
+    }
+
+    .button.background-grey:hover {
+        background-color: #999 !important;
+    }
+
     [type="checkbox"]:not(:checked),
     [type="checkbox"]:checked {
         position: absolute;
@@ -1263,6 +1466,14 @@
 
     @media (max-width: 800px){
 
+        .popup {
+            padding: 32px;
+        }
+
+        .button.side-button-left, .button.side-button-right {
+            margin-top: 32px;
+        }
+
         .timeline-container .navigation-block .timelines-open, .timeline-container .navigation-block .navigation-title {
             top: 24px;
         }
@@ -1336,6 +1547,23 @@
             margin: 0 8px;
         }
 
+        .images.popup {
+            padding: 24px;
+        }
+
+        .images.popup .image-list {
+            margin-bottom: 0;
+        }
+
+        .images.popup .image.image-upload {
+            background-size: 32px;
+            background-position: 50% 50%;
+        }
+
+        .images.popup .image.image-upload .image-upload-text {
+            display: none;
+        }
+
     }
 
     @media (max-width: 352px){
@@ -1384,12 +1612,25 @@
             <div class="event-new popup buttoned scrollbar-custom">
                 <div class="event-new-title display-as-h1" data-placeholder="Title" contenteditable="true"></div>
                 <div class="event-new-date display-as-p" data-placeholder="Date (e.g. May 1996)" contenteditable="true"></div>
-                <div class="event-new-content display-as-p" data-placeholder="Description of the event (optional)" contenteditable="true"></div>
+                <div class="event-new-content display-as-p scrollbar-custom" data-placeholder="Description of the event (optional)" contenteditable="true"></div>
+                <div class="event-new-toolbar">
+                    <div class="toolbar-button images-open"></div>
+                </div>
                 <div class="event-new-close button side-button-left">Cancel</div>
                 <div class="event-new-publish button side-button-right disabled">Save</div>
             </div>
             <div class="events scrollbar-custom"></div>
         </div>
+    </div>
+
+    <div class="images popup buttoned">
+        <div class="image-list scrollbar-custom">
+            <div class="image image-upload">
+                <input class="image-upload-input" type="file" accept="image/*" data-type="image"/>
+                <div class="image-upload-text">Upload image</div>
+            </div>
+        </div>
+        <div class="timeline-new-close button images-close background-grey">Close</div>
     </div>
 
     <div class="sign-in popup buttoned scrollbar-custom">
@@ -1438,6 +1679,8 @@
 
     var rootRef;
     var userRef;
+    var userStorageRef;
+    var imagesRef;
     var timelineRef;
     var eventsRef;
     var connectedRef;
@@ -1486,8 +1729,10 @@
     };
 
     function manageAuth(){
-        firebase.auth().onAuthStateChanged(function (user) {
+        firebase.auth().onAuthStateChanged(function(user){
             setSignInOrUserState();
+        }, function(error){
+            warnError(error);
         });
     }
 
@@ -1597,13 +1842,16 @@
 
         $(document).off('keyup', onlyAuthenticatedUserString + '.event-new-title, .event-new-content, .event-new-date');
         $(document).on('keyup', onlyAuthenticatedUserString + '.event-new-title, .event-new-content, .event-new-date', function () {
-            if ($(this).text().replace(/\s*/g,'').length == 0) {
-                $(this).empty();
-            } else if ($(this).hasClass('event-new-date')){
+            if ($(this).hasClass('event-new-date')){
                 manualDateSet = true;
             }
             updatePublishButtonState();
             updateDatePrediction();
+        });
+
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.event-new-content img');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.event-new-content img', function(){
+            displayImagesHtmlAsMarkdownForElement($(this).closest('.event-new-content'));
         });
 
         $(document).off(clickEventString, '.events .event a, .events .event .button, .events .event .button-light');
@@ -1616,8 +1864,6 @@
             e.stopPropagation();
             openImageSourceInNewTab(this)
         });
-
-        openImageSourceInNewTab
 
         $(document).off(clickEventString, onlyAuthenticatedUserString + '.event-new-open');
         $(document).on(clickEventString, onlyAuthenticatedUserString + '.event-new-open', function(e){
@@ -1635,6 +1881,57 @@
         $(document).on(clickEventString, onlyAuthenticatedUserString + '.event-new-publish', function(e){
             e.stopPropagation();
             createOrUpdateEvent();
+        });
+
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.toolbar-button.format-bold');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.toolbar-button.format-bold', function(e){
+            e.stopPropagation();
+            insertFormattedText($(this).parent().parent().find('.event-new-content'), 'bold');
+        });
+
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.toolbar-button.format-italic');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.toolbar-button.format-italic', function(e){
+            e.stopPropagation();
+            insertFormattedText($(this).parent().parent().find('.event-new-content'), 'italic');
+        });
+
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.toolbar-button.format-quote');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.toolbar-button.format-quote', function(e){
+            e.stopPropagation();
+            insertFormattedText($(this).parent().parent().find('.event-new-content'), 'quote');
+        });
+
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.toolbar-button.link');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.toolbar-button.link', function(e){
+            e.stopPropagation();
+            insertFormattedText($(this).parent().parent().find('.event-new-content'), 'link');
+        });
+
+        $(document).off('change', onlyAuthenticatedUserString + '.image-upload-input');
+        $(document).on('change', onlyAuthenticatedUserString + '.image-upload-input', function(e){
+            e.stopPropagation();
+            uploadImageFromInput($(this));
+        });
+
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.images-open');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.images-open', function(e){
+            e.stopPropagation();
+            openImages();
+        });
+
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.images-close');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.images-close', function(e){
+            e.stopPropagation();
+            closeImages();
+        });
+
+        $(document).off(clickEventString, onlyAuthenticatedUserString + '.image:not(.image-upload)');
+        $(document).on(clickEventString, onlyAuthenticatedUserString + '.image:not(.image-upload)', function(e){
+            e.stopPropagation();
+            var $image = $(this);
+            var imageMarkdown = "![" + $image.attr('data-filename') + "](" + $image.attr('data-url') + ")";
+            $('.event-new-content').append('\n\n' + imageMarkdown + '\n\n');
+            closeImages();
         });
 
         $(document).off(clickEventString, onlyAuthenticatedUserString + '.timelines-open');
@@ -1837,6 +2134,36 @@
         }
     }
 
+    function displayImagesHtmlAsMarkdownForElement(element){
+        if (element){
+            var $element = $(element);
+            var text = $element.html();
+            text = text.replace(/(<img.*? title=")(.*?)(".*? src=")(.+?)(".*?>)/g, function(whole, a, b, c, d, e) {
+                return '![' + b + '](' + d + ')';
+            });
+            if (text != $element.html()){
+                $element.text($('<div>').html(text).text());
+                placeCaretAtEnd($element.get(0));
+            }
+            return $element;
+        }
+    }
+
+    function displayMarkdownImagesAsHtmlForElement(element){
+        if (element){
+            var $element = $(element);
+            var text = $element.text();
+            text = text.replace(/(!\[)(.*?)(\]\()(.+?)(\))/g, function(whole, a, b, c, d, e) {
+                return '<img title="' + b + '" src="' + d + '"/>';
+            });
+            if (text != $element.text()){
+                $element.html(text);
+                placeCaretAtEnd($element.get(0));
+            }
+            return $element;
+        }
+    }
+
     function copyElementTextToClipboard(element){
         try {
             var $element = $(element);
@@ -1969,6 +2296,7 @@
             $event.append($author);
 
             if (!$('body.user-anonymous').length && firebase.auth().currentUser && event.author.uid === firebase.auth().currentUser.uid) {
+                $event.append($('<div class="event-edit button button-light" onclick="getEventByID(\''+event.id+'\', openNewEvent)">Edit</div>'));
                 $event.append($('<div class="event-delete button button-light color-destructive">Delete</div>').attr('onclick','deleteEvent("'+event.id+'")'));
             }
 
@@ -2007,6 +2335,7 @@
 
     function createOrUpdateEvent(){
         if (!timelineData.isArchived){
+            displayImagesHtmlAsMarkdownForElement($('.event-new-content'));
             var unix = firebase.database.ServerValue.TIMESTAMP;
             var isUpdate = $('.event-new').attr('data-id') != undefined && $('.event-new').attr('data-id') != "";
             var id = $('.event-new').attr('data-id');
@@ -2037,7 +2366,8 @@
             if (event != null && typeof event === 'object' && event.id){
                 window.location.hash = getPublicReferenceFromId('e', event.id)
                 $('.event-new-title').text(event.title);
-                $('.event-new-content').text(event.content).focus();
+                document.querySelectorAll('.event-new .event-new-content')[0].innerText = event.content;
+                displayMarkdownImagesAsHtmlForElement($('.event-new-content')).focus();
                 $('.event-new-date').text(getTimeTextFromString(event.date, true));
                 $('.event-new').attr('data-id', event.id);
                 manualDateSet = true;
@@ -2109,8 +2439,8 @@
     function closeChildPage(){
         isChildPage = false;
         window.location.hash = "";
-        $('.timeline-container').removeClass('child-page');
         $('.event-child').removeClass('visible');
+        if (!$('.popup.visible').length) $('.timeline-container').removeClass('child-page');
     }
 
     function openTimelines(){
@@ -2124,7 +2454,7 @@
     function closeTimelines(){
         if ($('.timelines.popup').hasClass('visible')){
             $('.timelines.popup').removeClass('visible');
-            $('.timeline-container').removeClass('child-page');
+            if (!$('.popup.visible').length) $('.timeline-container').removeClass('child-page');
             return true;
         } else {
             return false;
@@ -2194,8 +2524,8 @@
 
     function closeNewTimeline(didCreateTimeline){
         if ($('.timeline-new.popup').hasClass('visible')){
-            $('.timeline-container').removeClass('child-page');
             $('.timeline-new.popup').removeClass('visible');
+            if (!$('.popup.visible').length) $('.timeline-container').removeClass('child-page');
             $('.timeline-new .timeline-new-name').text('');
             if (didCreateTimeline !== true) openTimelines();
             blurAllFields();
@@ -2215,8 +2545,8 @@
 
     function closeShareTimeline(){
         if ($('.timeline-share.popup').hasClass('visible')){
-            $('.timeline-container').removeClass('child-page');
             $('.timeline-share.popup').removeClass('visible');
+            if (!$('.popup.visible').length) $('.timeline-container').removeClass('child-page');
             return true;
         } else {
             return false;
@@ -2245,6 +2575,113 @@
 
     function getTimelineSharingUrlFromId(id){
         return getCurrentRootUrl() + "#" + getPublicReferenceFromId('t',id);
+    }
+
+    function openImages(){
+        if (!$('.images.popup').hasClass('visible')){
+            $('.timeline-container').addClass('child-page');
+            $('.images.popup').addClass('visible');
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function closeImages(){
+        if ($('.images.popup').hasClass('visible')){
+            $('.images.popup').removeClass('visible');
+            if (!$('.popup.visible').length) $('.timeline-container').removeClass('child-page');
+            displayMarkdownImagesAsHtmlForElement($('.event-new-content'));
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function uploadImageFromInput(input){
+        var $input = $(input);
+        var file = $input.get(0).files[0];
+        var fileType = file.typetype;
+        var validTypes = ["image/gif", "image/jpeg", "image/jpg", "image/png"];
+        if (validTypes.indexOf(fileType) != 1) {
+            var fileName = file.name || file.fileName;
+            var fileExtension = fileName.split('.').pop();
+            var newImageRef = imagesRef.push();
+            var uploadTask = userStorageRef.child(newImageRef.key + "." + fileExtension).put(file);
+            uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, onImageUploading, function(error){
+                warnError(error);
+                alert("Something went wrong while uploading your image.")
+            }, function(snapshot){
+                onImageUploadComplete(newImageRef, fileName, fileExtension, uploadTask.snapshot.downloadURL);
+            });
+        } else {
+            alert("Please choose an image file.");
+        }
+    }
+
+    function onImageUploading(snapshot){
+        if (snapshot.bytesTransferred == 0) {
+            var $imageLoading = $('<div>')
+                .addClass('image image-loading');
+            $('.image-list .image-upload').after($imageLoading)
+        }
+        return true;
+    }
+
+    function onImageUploadComplete(newImageRef, fileName, fileExtension, downloadURL){
+        var downloadURL = downloadURL.replace(/&?token\=[a-f0-9]{8}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{12}/, '');
+        writeData(newImageRef, '/', {
+            'name' : fileName,
+            'extension' : fileExtension,
+            'createdOn' : firebase.database.ServerValue.TIMESTAMP,
+            'url' : downloadURL,
+        });
+    }
+
+    function displayImagesFromSnapshot(snapshot){
+        var items = [];
+        snapshot.forEach(function(child) {
+            var item = child.val();
+            item.id = child.key;
+            items.unshift(item);
+        });
+        displayImagesFromImageList(items);
+    }
+
+    function displayImagesFromImageList(itemList){
+        $('.image-list .image:not(.image-upload)').remove();
+        itemList.forEach(function(item){
+            $('.image-list').append(getImageElementFromImage(item));
+        });
+    }
+
+    function getImageElementFromImage(image){
+        var $image = $('<div>')
+            .addClass('image')
+            .attr('data-id', image.id)
+            .attr('data-filename', image.name)
+            .attr('data-url', image.url)
+            .css('background-image', 'url(' + image.url + ')');
+        return $image;
+    }
+
+    function startImagesListener(){
+        imagesRef.orderByChild('createdOn').on('value', displayImagesFromSnapshot, warnError);
+    }
+
+    function stopImagesListener(){
+        if (imagesRef) imagesRef.off('value');
+    }
+
+    function insertFormattedText(element, type){
+        var typeToText = {
+            'bold' : '**Type text here**',
+            'italic' : '*Type text here*',
+            'quote' : '<br><br>>Type quote here',
+            'link' : '[Link text](http://example.com)',
+            'image' : '<br><br>![Image caption](http://link.com/to/image.jpg)'
+        }
+        $(element).html($(element).html() + typeToText[type]);
     }
 
     function getCurrentRootUrl(){
@@ -2319,6 +2756,9 @@
             updateUserData(function(){
                 openTimeline();
             });
+            userStorageRef = firebase.storage().ref('/users/' + firebase.auth().currentUser.uid);
+            imagesRef = rootRef.child('/images/' + firebase.auth().currentUser.uid);
+            startImagesListener();
         } else {
             $('.event-new, .navigation-block').removeClass('visible');
             $('.sign-in.popup').addClass('visible');
@@ -2331,6 +2771,10 @@
             userData = null;
             eventsData = null;
             timelineData = null;
+            userRef = null;
+            stopImagesListener();
+            userStorageRef = null;
+            imagesRef = null;
         }
     }
 
@@ -2503,6 +2947,28 @@
     function getUrlHash(name, url) {
         return decodeURI((window.location.hash || "").replace(/#/g,''));
     }
+
+    function createCaretPlacer(atStart) {
+        return function(el) {
+            el.focus();
+            if (typeof window.getSelection != "undefined"
+                    && typeof document.createRange != "undefined") {
+                var range = document.createRange();
+                range.selectNodeContents(el);
+                range.collapse(atStart);
+                var sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
+            } else if (typeof document.body.createTextRange != "undefined") {
+                var textRange = document.body.createTextRange();
+                textRange.moveToElementText(el);
+                textRange.collapse(atStart);
+                textRange.select();
+            }
+        };
+    }
+
+    var placeCaretAtEnd = createCaretPlacer(false);
 
     function reverseString(s){
         for (var i = s.length - 1, o = ''; i >= 0; o += s[i--]) { }
