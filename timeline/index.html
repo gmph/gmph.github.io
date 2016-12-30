@@ -698,13 +698,10 @@
         right: 0;
         width: 100%;
         height: auto;
-        max-height: -webkit-calc(90vh - 300px);
-        max-height: calc(90vh - 300px);
         margin: 0;
         padding: 0;
         background: transparent;
-        overflow-x: hidden;
-        overflow-y: auto;
+        font-size: 0;
     }
 
     .image-list .image:first-of-type:last-of-type::before {
@@ -733,8 +730,8 @@
         position: relative;
         top: 0;
         right: 0;
-        width: -webkit-calc((100% - 36px)/4);
-        width: calc((100% - 36px)/4);
+        width: -webkit-calc((100% - 26px)/4);
+        width: calc((100% - 26px)/4);
         height: auto;
         margin: 0 4px 8px 4px;
         padding: 0;
@@ -745,6 +742,8 @@
         background-repeat: no-repeat;
         cursor: pointer !important;
         box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+        overflow: hidden;
+        font-size: 0;
         -webkit-user-select: none;
         -khtml-user-select: none;
         -moz-user-select: none;
@@ -803,6 +802,8 @@
         -webkit-transform: translate(-50%, 0);
         width: 100%;
         height: auto;
+        margin: 0;
+        padding: 0;
         font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
         font-size: 14px;
         font-weight: 500;
@@ -818,6 +819,7 @@
         background-size: 32px;
         background-position: center;
         background-repeat: no-repeat;
+        pointer-events: none !important;
     }
 
     .timeline-container .event-new-open {
@@ -1625,8 +1627,8 @@
         </div>
     </div>
 
-    <div class="images popup buttoned">
-        <div class="image-list scrollbar-custom">
+    <div class="images popup buttoned scrollbar-custom">
+        <div class="image-list">
             <div class="image image-upload">
                 <input class="image-upload-input" type="file" accept="image/*" data-type="image"/>
                 <div class="image-upload-text">Upload image</div>
