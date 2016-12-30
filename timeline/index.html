@@ -693,7 +693,7 @@
 
     .images.popup .image-list {
         display: block;
-        position: block;
+        position: relative;
         top: 0;
         right: 0;
         width: 100%;
@@ -703,6 +703,8 @@
         margin: 0;
         padding: 0;
         background: transparent;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 
     .image-list .image:first-of-type:last-of-type::before {
@@ -773,8 +775,8 @@
         padding: 0;
         background-color: #fff;
         background-image: url(add-image.png);
-        background-size: 32px;
-        background-position: 48% 28%;
+        background-size: 40px;
+        background-position: 50% 34%;
         background-repeat: no-repeat;
     }
 
@@ -795,7 +797,7 @@
     .images.popup .image.image-upload .image-upload-text {
         display: block;
         position: absolute;
-        bottom: 28%;
+        bottom: 22%;
         left: 50%;
         transform: translate(-50%, 0);
         -webkit-transform: translate(-50%, 0);
