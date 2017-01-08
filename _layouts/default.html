@@ -23,9 +23,9 @@
 {% include httpsredirect.html %}
 
 <link rel="shortcut icon" href="{{ site.baseurl }}/res/img/ptlogooutline.png">
-<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Libre+Baskerville:400' rel='stylesheet' type='text/css'>
 <link href="{{ site.baseurl }}/res/css/main.css" rel="stylesheet" type="text/css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
 
 {% include fbmeta.html %}
@@ -48,7 +48,6 @@
 
 		<div class="block">
 
-			<!-- <a class="backbutton" href="/"><svg height="100%" width="100%"><g><path fill="#555" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path></g></svg></a> -->
 
 			<h1 class="heading">{{ page.heading }}</h1>
 
@@ -62,11 +61,7 @@
 
 			{{ content }}
 
-			<!-- <p class="meta"><a href="http://github.com/gmph/gmph.github.io/commits/master/{{ page.path }}" title="See versions on GitHub" target="_blank">Version {{ page.version }}</a>, posted on {{ page.date | date: "%B %-d, %Y" }} by <a href="/">Graham Macphee</a>. Graham is a Designer from Edinburgh,&nbsp;UK.</p> -->
-
 			<div id="social" class="social">
-				<!-- <div class="gmph-button label like">Liked this?</div> -->
-				<!-- <div class="gmph-button like">&nbsp;🎉 <span class="like-count">0</span></div> -->
 				<a class="gmph-button twitter" href="https://twitter.com/home?status={{ page.title }}%20{{ site.url }}{{ site.baseurl }}{{ page.url }}%20by%20%40gmph" target="_blank"><span class="twitter-logo-text"></span> Tweet</a>
 				<a class="gmph-button facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ site.baseurl }}{{ page.url }}" target="_blank"><span class="facebook-logo-text"></span> Share</a>
 			</div>
@@ -78,20 +73,6 @@
 					<div class="bio">Designer at Yavi. Geek. Feminist. I write words and code.</div>
 				</div>
 			</div>
-
-			<div class="links">
-
-				<a href="http://twitter.com/gmph">twitter</a>
-				<a href="http://facebook.com/grahammacphee">facebook</a>
-				<a href="http://instagr.am/gmph">instagram</a>
-				<a href="https://foursquare.com/gmph">foursquare</a>
-				<a href="http://thinks.grahammacphee.co.uk">blog</a>
-				<a href="http://grahammacphee.co.uk" title="My Website"><span class="upabit">...</span></a>
-
-			</div>
-
-
-			<!-- <a href="{{ site.url }}"><div class="footerimg"></div></a> -->
 
 		</div>
 
@@ -194,9 +175,5 @@
 		$('p.social').css('display','none');
 	</script>
 {% endif %}
-
-<!-- Landy -->
-<script>var JavaScript={load:function(e,t){var a,l=document.createElement("script");l.setAttribute("src",e),t&&(l.onreadystatechange=l.onload=function(){a||t(),a=!0});var o=document.getElementsByTagName("head")[0];o.insertBefore(l,o.firstChild)}},config={g:[{"event":"click","value":".postlist .postitem"},{"event":"click","value":".menu .purple"},{"event":"click","value":".menu .twitter, .menu .instagram, .menu .foursquare"}],modelId:"a6e6703d313e900ef8d1786f",user:"JELjJCCiqsNAHrPAf",url:"http://gmph.co",type:"ab",subtype:"contains"};JavaScript.load("https://d2mnlxdd0x11jg.cloudfront.net/landy.min.js",function(){landy.init(config)});</script>
-<!-- End Landy -->
 
 </html>

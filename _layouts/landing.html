@@ -29,9 +29,9 @@
 {% include httpsredirect.html %}
 
 <link rel="shortcut icon" href="{{ site.baseurl }}/res/img/ptlogooutline.png">
-<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Libre+Baskerville:400' rel='stylesheet' type='text/css'>
 <link href="{{ site.baseurl }}/res/css/main.css" rel="stylesheet" type="text/css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 {% include fbmeta.html %}
 {% include twittermeta.html %}
@@ -42,45 +42,14 @@
 
 		<div class="posttabs">
 			<div class="content">
-			<!-- <a href="#top" class="posttab home">Home</a> -->
-		        <!-- {% assign sorted_cats = site.categories | sort %}
-		        {% for category in sorted_cats %}
-		            {% if forloop.index0 == 0 %}
-		                {% assign active_class = "active" %}
-		            {% else %}
-		                {% assign active_class = "" %}
-		            {% endif %}
-		            <div class="posttab {{ active_class }}" data-tab="{{ category[0] }}" data-id="{{ forloop.index0 }}">{{ category[0] }}s</div>
-		        {% endfor %} -->
-		        <!-- <br /><br /> -->
 				<a href="{{ site.baseurl }}/articles" class="purple">Articles</a>
 				<a href="{{ site.baseurl }}/notes" class="purple">Notes</a>
 		        <a href="{{ site.baseurl }}/portfolio" class="purple">Portfolio</a>
-				<a href="http://twitter.com/gmph" target="_blank" class="twitter">Twitter</a>
-				<!-- <a href="http://instagr.am/gmph" class="instagram">Instagram</a>
-				<a href="https://foursquare.com/gmph" class="foursquare">Foursquare</a> -->
-
+				<a href="https://twitter.com/gmph" target="_blank" class="twitter">Twitter</a>
 			</div>
 	    </div>
 
 		<div class="block landing">
-
-			<!-- <div class="menubutton">
-				<div class="hamburgerpart"></div>
-				<div class="hamburgerpart"></div>
-				<div class="hamburgerpart"></div>
-			</div>
-
-			<div class="menu closed">
-
-				<div class="bigclose"></div>
-
-				<a href="{{ site.baseurl }}/portfolio" class="purple">Portfolio</a>
-				<a href="http://twitter.com/gmph" class="twitter">Twitter</a>
-				<a href="http://instagr.am/gmph" class="instagram">Instagram</a>
-				<a href="https://foursquare.com/gmph" class="foursquare">Foursquare</a>
-
-			</div> -->
 
 			<h1 class="nomo"><span class="title">{{ page.heading }}</span><span class="cursor blink">&#124;</span></h1>
 
@@ -180,7 +149,7 @@
 		}
 
 		function displayMostPlayedSongThisWeek(){
-			$.get('http://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&user=grahammacphee&period=1month&api_key=5f134f063744307ee6f126ac2c480fab&format=json', function(data){
+			$.get('https://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&user=grahammacphee&period=1month&api_key=5f134f063744307ee6f126ac2c480fab&format=json', function(data){
 				var mostPlayedSong = {};
 				try {
 					mostPlayedSong['name'] = data.toptracks.track[0].name;
@@ -289,7 +258,7 @@
 				var latestLocation = locationData[locationData.length-1];
 
 				var $locationContainer;
-				var $mapImage = $('<div class="location-map-container"></div>').append($('<img class="location-map" src="'+latestLocation.mapImageURL+'&key='+randomString+'"/>'));
+				var $mapImage = $('<div class="location-map-container"></div>').append($('<img class="location-map" src="'+latestLocation.mapImageURL.replace('http://', 'https://')+'&key='+randomString+'"/>'));
 				var $locationDescription = $('<div class="song-description">'+description+'</div>');
 
 				var $locationContainer = $('<a href="'+latestLocation.linkURL+'" target="_blank"></a>').append($('<div class="location-container"></div>').append($mapImage).append(($('<div class="location-info"></div>').append($('<div class="location-description">'+description+'</div>'))).append($('<div class="location-name">'+latestLocation.name+'</div>'))));
@@ -543,9 +512,5 @@
     });
 
 </script>
-
-<!-- Landy -->
-<script>var JavaScript={load:function(e,t){var a,l=document.createElement("script");l.setAttribute("src",e),t&&(l.onreadystatechange=l.onload=function(){a||t(),a=!0});var o=document.getElementsByTagName("head")[0];o.insertBefore(l,o.firstChild)}},config={g:[{"event":"click","value":".postlist .postitem"},{"event":"click","value":".menu .purple"},{"event":"click","value":".menu .twitter, .menu .instagram, .menu .foursquare"}],modelId:"a6e6703d313e900ef8d1786f",user:"JELjJCCiqsNAHrPAf",url:"http://gmph.co",type:"ab",subtype:"contains"};JavaScript.load("https://d2mnlxdd0x11jg.cloudfront.net/landy.min.js",function(){landy.init(config)});</script>
-<!-- End Landy -->
 
 </html>
