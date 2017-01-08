@@ -605,7 +605,7 @@
     function getAuthorElement(author, date, inNewPost){
         var $authorLink = $('<a target="_blank"></a>').attr('href',author.link);
         var $author = $('<div class="author no-underline"></div>');
-        $author.append($authorLink.clone().append($('<img>').attr('src',author.image)));
+        $author.append($authorLink.clone().append($('<img>').attr('src',author.image.replace('http://','https://'))));
         var timeText = date != undefined ? ' on ' + getTimeTextFromUnix(date) : "";
         $author.append($(marked('['+author.name+ timeText + ']('+author.link+')')).addClass('name sans-serif'));
         if (isAdmin() && inNewPost) $author.attr('onclick','changePublishingMode()');

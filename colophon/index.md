@@ -25,7 +25,7 @@ The illustrations in this blog are based on the logomark, with each one's subtle
 
 ## Source
 
-This blog is hosted by GitHub and uses [GitHub Pages](https://pages.github.com) and [Jekyll](http://jekyllrb.com). The full source code of this blog is available to view on GitHub in [this repository](http://github.com/gmph/gmph.github.io). You can view a changelog of all code added and changed within the blog (including article revisions and edits) on GitHub [here](http://github.com/gmph/gmph.github.io/commits/master). You can also find links to the revisions of each article at the bottom of the page.
+This blog is hosted by GitHub and uses [GitHub Pages](https://pages.github.com) and [Jekyll](http://jekyllrb.com). The full source code of this blog is available to view on GitHub in [this repository](http://github.com/gmph/gmph.github.io). You can view a changelog of all code added and changed within the blog (including article revisions and edits) on GitHub [here](http://github.com/gmph/gmph.github.io/commits/master).
 
 ## Rights
 

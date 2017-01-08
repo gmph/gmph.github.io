@@ -1,6 +1,6 @@
 ---
-layout: default
-title: Portfolio | Graham Macphee
+layout: default-nometa
+title: Portfolio
 heading: Portfolio
 subheading: Designs by Graham Macphee (2012-17)
 date: 19th December 2015
@@ -89,10 +89,12 @@ You can see more work on [Dribbble](http://dribbble.com/gmph).
 
 ##### Hire me
 
-If you would like to work with me, please [email me](mailto:hi@gmph.co?subject=&body=Hey%20Graham%2C%0A%0A) and include:
+If you would like to work with me, please email me and include:
 
-- a brief description of the project
+- a brief description of your project
 - your budget, if it is contract work
 - any time requirements for the project
 
-The more specific you can be about the work required or role you'd like me to fulfill the better.
+I love reading the details of projects so the more you can share up front, the better.
+
+<h6><a class="button" href="mailto:hi@gmph.co">Email me</a> No recruitment agencies</h6>

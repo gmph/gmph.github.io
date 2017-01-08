@@ -383,23 +383,32 @@ input.invalid, textarea.invalid {
     height:auto;
     margin: 16px 0 0 0;
     padding: 16px;
+    border: none !important;
     border-radius: 3px;
     border: solid 1px rgba(0,0,0,0);
 	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
-    font-size: 17px;
+    font-size: 16px;
     color: #888;
     font-weight: 400;
     text-align: center;
     background: #eee;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .button {
-    width: 100%;
+    display: inline-block;
+    vertical-align: baseline;
+    width: auto;
     float:none;
-    color: #fff;
+    margin: 0 12px 0 0;
+    padding: 7px 24px 9px 24px;
+    color: #fff !important;
     font-weight: 500;
-    background: #8B67FF;
+    background: #8B67FF !important;
+}
+
+.button:hover {
+    background: #8B67FF !important;
 }
 
 .contact-form .contact-email:hover {
