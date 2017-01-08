@@ -15,9 +15,13 @@
 <meta name="description" content="" />
 <meta name="keywords" content="" />
 <meta charset="utf-8">
+<link rel="canonical" href="{{ site.url }}{{ page.url }}" />
 <link rel="alternate" type="application/atom+xml" title="{{ site.name }}" href="{{ site.baseurl }}/atom.xml" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#8B67FF">
+
+{% include httpsredirect.html %}
+
 <link rel="shortcut icon" href="{{ site.baseurl }}/res/img/ptlogooutline.png">
 <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400' rel='stylesheet' type='text/css'>
 <link href="{{ site.baseurl }}/res/css/main.css" rel="stylesheet" type="text/css">

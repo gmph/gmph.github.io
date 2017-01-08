@@ -15,6 +15,7 @@
 <meta name="description" content="I tend to think about puppies, pizza and equality. I enjoy being creative: writing, photography, guitar, ukulele and singing occasionally. I'm quiet and thoughtful, and like nature and quiet nights. I'm interested in a combination of technology, design, psychology and sociology." />
 <meta name="keywords" content="I tend to think about puppies, pizza and equality. I enjoy being creative: writing, photography, guitar, ukulele and singing occasionally. I'm quiet and thoughtful, and like nature and quiet nights. I'm interested in a combination of technology, design, psychology and sociology." />
 <meta charset="utf-8">
+<link rel="canonical" href="{{ site.url }}{{ page.url }}" />
 <link rel="alternate" type="application/atom+xml" title="{{ site.name }}" href="{{ site.baseurl }}/atom.xml" />
 <meta property="og:title" content="{{ page.title }}">
 <meta property="og:type" content="website">
@@ -24,6 +25,9 @@
 <meta property="twitter:account_id" content="87261538" /> <!-- Twitter ID, currently for @gmph -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#8B67FF">
+
+{% include httpsredirect.html %}
+
 <link rel="shortcut icon" href="{{ site.baseurl }}/res/img/ptlogooutline.png">
 <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400' rel='stylesheet' type='text/css'>
 <link href="{{ site.baseurl }}/res/css/main.css" rel="stylesheet" type="text/css">
@@ -105,7 +109,6 @@
 
 		function getAndDisplayDesigns(){
 			$.get('https://api.dribbble.com/v1/users/gmph/shots?access_token=0c812957ccb3bc8a857fad33c03f91f3ce4661ab199210d893649b7a920aa51b', function(designs){
-				console.log(designs);
 				var listOfDesigns = [];
 				for (var i = 0; i < designs.length && i < 4; i++){
 					listOfDesigns.push({
