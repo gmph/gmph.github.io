@@ -35,6 +35,12 @@ Copyright 2016, Graham Macphee. All rights reserved.
 <meta name="twitter:description"       content="Your personal kanban board for managing tasks. Sign in with Twitter.">
 <meta property="twitter:account_id"    content="87261538" /> <!-- @gmph -->
 
+<script type="text/javascript">
+    var host = "gmph.co";
+    if ((host == window.location.host) && (window.location.protocol != "https:"))
+        window.location.protocol = "https";
+</script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" href="/res/img/ptlogooutline.png">
 <meta name="theme-color" content="#f8f8f8">
@@ -355,7 +361,7 @@ body {
         });
 
         attachEvents();
-        
+
     }
 
     function setNoConnectionBarVisible(shouldSetAsVisible){
@@ -564,7 +570,7 @@ body {
         } catch (e){
             return false;
         }
-        
+
     }
 
     function logInWithTwitter(){
@@ -627,7 +633,7 @@ body {
                     } catch (e){
                         // Disallowed heading
                     }
-                    
+
                 }
                 dataLoadedOnce = true;
             } else {
@@ -801,7 +807,7 @@ body {
 
             var range,selection;
             if(document.createRange)//Firefox, Chrome, Opera, Safari, IE 9+
-            {    
+            {
                 range = document.createRange();//Create a range (a range is a like the selection but invisible)
                 range.selectNodeContents(contentEditableElement);//Select the entire contents of the element with the range
                 range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
@@ -810,7 +816,7 @@ body {
                 selection.addRange(range);//make the range you have just created the visible selection
             }
             else if(document.selection)//IE 8 and lower
-            { 
+            {
                 range = document.body.createTextRange();//Create a range (a range is a like the selection but invisible)
                 range.moveToElementText(contentEditableElement);//Select the entire contents of the element with the range
                 range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
