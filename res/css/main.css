@@ -116,8 +116,8 @@ html,body {
     opacity: 1;
 }
 
-.block.landing {
-    padding-bottom:280px;
+.block.landing, .block.nometa {
+    padding-bottom: 96px;
 }
 
 .block.menuopen {
@@ -261,7 +261,7 @@ html,body {
     color:#55FFC7 !important;
 }
 
-.menu .purple, .posttabs .purple:hover {
+.menu .purple, .posttabs .purple:hover, .color-purple, .color-purple * {
     color:#8B67FF !important;
 }
 
@@ -320,7 +320,9 @@ span.littleline {
 	height:1px;
 	width:40px;
 	background: #ddd;
-	margin:2px 0 -10px 0;
+    font-size: 1px;
+	margin:2px 0 -8px 0;
+    padding: 0 !important;
 }
 
 .contact-form {
@@ -573,19 +575,18 @@ input.invalid, textarea.invalid {
 	font-weight: 300;
 }
 
-.block h5 {
+.block h5, .block .view-all {
 	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
 	font-size:17px;
 	display: block;
-	margin: 30px 0 0 0;
+	margin: 56px 0 0 0;
 	line-height: 1.3em;
-	color:#d9d9d9;
-	font-weight: 700;
-    text-transform: uppercase;
+	color: #aaa;
+	font-weight: 500;
 }
 
 .block h6 {
-    color:#999 !important;
+    color: #999 !important;
 }
 
 .block p, ul, ol, blockquote, .block h6, .display-as-p {
@@ -876,8 +877,8 @@ code {
 .postview {
     position: static;
     width:calc(100% + 8px);
-    margin:-20px 0 0 0;
-    padding: 20px 8px 0 0;
+    margin: 0 auto 30px auto;
+    padding: 0 8px 0 0;
     overflow-x: visible;
     overflow-y: hidden;
 }
@@ -1002,9 +1003,13 @@ li.postitem {
     font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
     font-size:19px;
     font-weight: 700;
-    margin:0 auto;
-    padding: 30px 0;
+    margin: 24px auto 40px auto;
+    padding: 0;
     border-radius: 3px;
+}
+
+.landing li.postitem {
+    margin: 24px auto;
 }
 
 li.postitem a {
@@ -1031,8 +1036,8 @@ li.postitem h2 {
 span.postitemmeta {
     margin-left:4px;
     font-size:17px;
-    font-weight: 300;
-    color:#bbb;
+    font-weight: 400;
+    color:#aaa;
     /*float:right;*/
 }
 
@@ -1040,6 +1045,13 @@ div.positemdescription p {
     margin-top:0;
     padding-top:10px;
     color:#555;
+}
+
+.view-all {
+    display: inline !important;
+    margin: 16px auto;
+    background: transparent !important;
+    border: none !important;
 }
 
 .block .links {
@@ -1085,50 +1097,79 @@ div.block div.links a {
 	top:-4px;
 }
 
+.designs-container {
+    margin: 16px 0 0 0;
+    font-size: 0;
+}
+
+.designs-container a {
+    display: inline-block;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: calc(50% - 4px);
+    width: -webkit-calc(50% - 4px);
+    margin: 0;
+    padding: 4px;
+    background: #f8f8f8 !important;
+    border: none !important;
+    border-radius: 4px;
+    cursor: pointer !important;
+}
+
+.designs-container a:hover {
+    background: #e9e9e9 !important;
+}
+
+.designs-container a:nth-last-of-type(2n){
+    margin: 0 8px 8px 0;
+}
+
+.designs-container a img {
+    margin: 0;
+}
+
 .song-container {
     display: block;
     position: relative;
     top:0;
     left: 0;
     width:100%;
-    height:96px;
-    background: #fbfbfb;
+    height: 64px;
+    background: transparent !important;
     overflow: hidden;
-    margin: 0 auto 20px auto;
+    margin: 24px auto 16px auto;
     padding:0;
-    border-radius: 2px;
-    border-bottom: solid 2px rgba(255,255,255,0) !important;
-}
-
-.song-container:hover {
-    background: rgba(85,255,199,.1) !important;
-    border-bottom: solid 2px rgba(85,255,199,.5) !important;
+    border: none !important;
 }
 
 .song-image {
     display: inline-block;
     position: relative;
-    top:0;
+    top: 0;
     left: 0;
     vertical-align: middle;
-    width:96px;
-    height:100%;
+    width: 64px;
+    height: 64px;
     object-fit: cover;
     margin: 0 !important;
     padding:0 !important;
+    border-radius: 96px;
+    overflow: hidden;
 }
 
 .song-info {
     display: inline-block;
     position: absolute;
     top:50%;
-    left: 96px;
+    left: 64px;
     transform: translate(0,-50%);
+    -webkit-transform: translate(0,-50%);
     vertical-align: middle;
     width:auto;
     height:auto;
     margin: 0;
-    padding:0 0 0 32px;
+    padding:0 0 4px 24px;
 }
 
 .song-description {
@@ -1169,31 +1210,27 @@ div.block div.links a {
     top:0;
     left: 0;
     width:100%;
-    height:96px;
-    background: #fbfbfb;
+    height: 64px;
+    background: transparent !important;
     overflow: hidden;
-    margin: 0 auto 20px auto;
+    margin: 0 auto 24px auto;
     padding:0;
-    border-radius: 2px;
-    border-bottom: solid 2px rgba(255,255,255,0) !important;
-}
-
-.location-container:hover {
-    background: rgba(85,255,199,.1) !important;
-    border-bottom: solid 2px rgba(85,255,199,.5) !important;
+    border: none !important;
 }
 
 .location-map-container {
     display: inline-block;
     position: relative;
-    top:0;
+    top: 0;
     left: 0;
     width:auto;
-    height:96px;
-    width:96px;
+    height: 64px;
+    width: 64px;
     margin: 0 !important;
     padding:0 !important;
     overflow: hidden;
+    border-radius: 96px;
+    opacity: 0.99;
 }
 
 .location-map {
@@ -1213,13 +1250,14 @@ div.block div.links a {
     display: inline-block;
     position: absolute;
     top:50%;
-    left: 96px;
+    left: 64px;
     transform: translate(0,-50%);
+    -webkit-transform: translate(0,-50%);
     vertical-align: middle;
     width:auto;
     height:auto;
     margin: 0;
-    padding:0 0 0 32px;
+    padding:0 0 4px 24px;
 }
 
 .location-description {
@@ -1572,7 +1610,7 @@ div.footerimg div.img:hover {
 		line-height:1.4em;
 	}
 
-    .block h5 {
+    .block h5, .view-all {
 		font-size: 16px;
 	}
 

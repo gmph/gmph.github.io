@@ -39,7 +39,7 @@
 		<div class="posttabs">
 			<div class="content">
 			<!-- <a href="#top" class="posttab home">Home</a> -->
-		        {% assign sorted_cats = site.categories | sort %}
+		        <!-- {% assign sorted_cats = site.categories | sort %}
 		        {% for category in sorted_cats %}
 		            {% if forloop.index0 == 0 %}
 		                {% assign active_class = "active" %}
@@ -47,8 +47,9 @@
 		                {% assign active_class = "" %}
 		            {% endif %}
 		            <div class="posttab {{ active_class }}" data-tab="{{ category[0] }}" data-id="{{ forloop.index0 }}">{{ category[0] }}s</div>
-		        {% endfor %}
+		        {% endfor %} -->
 		        <!-- <br /><br /> -->
+				<a href="{{ site.baseurl }}/articles" class="purple">Articles</a>
 				<a href="{{ site.baseurl }}/notes" class="purple">Notes</a>
 		        <a href="{{ site.baseurl }}/portfolio" class="purple">Portfolio</a>
 				<a href="http://twitter.com/gmph" target="_blank" class="twitter">Twitter</a>
@@ -87,27 +88,69 @@
 			<h2 class="subheading">{{ page.subheading }}</h2>
 			{% endif %}
 
-			<span class="littleline"></span>
+			<!-- <span class="littleline"></span> -->
 
 			{{ content }}
 
-			<!-- <div class="links">
-				<a href="http://twitter.com/gmph">twitter</a>
-				<a href="http://facebook.com/grahammacphee">facebook</a>
-				<a href="http://instagr.am/gmph">instagram</a>
-				<a href="https://foursquare.com/gmph">foursquare</a>
-				<a href="https://uk.linkedin.com/in/grahammacphee">linkedin</a>
-				<a href="http://google.co.uk/search?q=graham+macphee+designer" title="Google me..."><span class="upabit">...</span></a>
-			</div> -->
-
 		</div>
 
-		<a href="#top"><div class="footerimg"><div class="img"></div></div></a>
+		<!-- <a href="#top"><div class="footerimg"><div class="img"></div></div></a> -->
 
 </body>
 
 
 <script language="javascript">
+
+	var designsManager = function($){
+
+		function getAndDisplayDesigns(){
+			$.get('https://api.dribbble.com/v1/users/gmph/shots?access_token=0c812957ccb3bc8a857fad33c03f91f3ce4661ab199210d893649b7a920aa51b', function(designs){
+				console.log(designs);
+				var listOfDesigns = [];
+				for (var i = 0; i < designs.length && i < 4; i++){
+					listOfDesigns.push({
+						'id' : designs[i].id,
+						'title' : designs[i].title,
+						'url' : designs[i].html_url,
+						'image' : designs[i].images.hidpi || designs[i].images.normal,
+					});
+				}
+				return displayDesigns(listOfDesigns);
+			});
+		}
+
+		function displayDesigns(listOfDesigns){
+			var $designs = $('.designs-container');
+			for (var i = 0; i < listOfDesigns.length; i++){
+				$designs.append(getDesignElementFromDesignItem(listOfDesigns[i]));
+			}
+		}
+
+		function getDesignElementFromDesignItem(design){
+			var $design = $('<a>')
+				.addClass('design-item')
+				.attr({
+					'href' : design.url,
+					'target' : '_blank',
+					'data-id' : design.id,
+					'title' : design.title,
+					'alt' : design.title
+				});
+			var $image = $('<img>')
+				.attr({
+					'title' : design.title,
+					'alt' : design.title,
+					'src' : design.image
+				});
+			$design.append($image);
+			return $design;
+		}
+
+		return {
+			displayDesigns : getAndDisplayDesigns,
+		}
+
+	}($)
 
 	var musicManager = function($){
 
@@ -134,7 +177,7 @@
 		}
 
 		function displayMostPlayedSongThisWeek(){
-			$.get('http://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&user=grahammacphee&period=7day&api_key=5f134f063744307ee6f126ac2c480fab&format=json', function(data){
+			$.get('http://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&user=grahammacphee&period=1month&api_key=5f134f063744307ee6f126ac2c480fab&format=json', function(data){
 				var mostPlayedSong = {};
 				try {
 					mostPlayedSong['name'] = data.toptracks.track[0].name;
@@ -160,7 +203,7 @@
 					// No name
 					mostPlayedSong['url'] = null;
 				}
-				return displaySongWithDescriptionInElement(mostPlayedSong,'Most played this week',$('.most-listened'));
+				return displaySongWithDescriptionInElement(mostPlayedSong,'Most played this month',$('.most-listened'));
 			})
 		}
 
@@ -275,6 +318,7 @@
     	locationManager.init(function(){
 			locationManager.displayLatestTrip('Recent trip',$('.latest-trip'));
 		});
+		designsManager.displayDesigns();
 	});
 
     function initLoadingState(){
