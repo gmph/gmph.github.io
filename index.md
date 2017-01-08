@@ -7,7 +7,9 @@ published: true
 format: markdown
 ---
 
-I tend to think about puppies, pizza and equality. I enjoy being creative: design, photography, writing, playing ukulele and singing. I'm quiet and thoughtful. I like nature and quiet nights. You can get in touch with me by [email](mailto:hi@gmph.co).
+I'm a designer from Edinburgh, Scotland. I tend to think about puppies, pizza and equality. I enjoy being creative: design, photography, writing, playing ukulele and singing. I'm quiet and thoughtful. I like nature and quiet nights.
+
+You can get in touch with me by [email](mailto:hi@gmph.co).
 
 <div class="postview">
 
@@ -54,6 +56,33 @@ I tend to think about puppies, pizza and equality. I enjoy being creative: desig
 
 I am a designer with 4 years industry experience working for startups around the world; currently at [Yavi](http://yavi.co) building delightful tools for workers. Previously I worked as a writer and review manager for UltraLinx, and for other online publications.
 
+<ul class="postlist work-links active">
+    <li class="postitem">
+        <a href="https://timeline.gmph.co" target="_blank">
+            <h2><span class="postitemtitle">Timeline</span> <span class="postitemmeta">Side project &rarr;</span></h2>
+            <div class="positemdescription">
+                <p>Create a timeline of events with images and stories which you can share with friends and family.</p>
+            </div>
+        </a>
+    </li>
+    <li class="postitem">
+        <a href="http://gmph.co/shout" target="_blank">
+            <h2><span class="postitemtitle">Shout</span> <span class="postitemmeta">Side project &rarr;</span></h2>
+            <div class="positemdescription">
+                <p>Create colourful, animated GIFs from images, text and emoji to get your message across on social media.</p>
+            </div>
+        </a>
+    </li>
+    <li class="postitem">
+        <a href="http://yaviapp.com" target="_blank">
+            <h2><span class="postitemtitle">Yavi</span> <span class="postitemmeta">Employee, 2016 - Present &rarr;</span></h2>
+            <div class="positemdescription">
+                <p>Make your scheduling more efficient by putting work chat and schedule on your team's phones.</p>
+            </div>
+        </a>
+    </li>
+</ul>
+
 <!-- If you would like to discuss a role at your company, please [email me](mailto:hi@grahammacphee.co.uk) to arrange a call. -->
 
 <a class="color-purple view-all" href="/portfolio">View portfolio &rarr;</a>
@@ -75,4 +104,6 @@ I'm creative. You can see my photography on [Instagram](http://instagram.com/gmp
     </div>
 </p>
 
-You can email me at [hi@gmph.co](mailto:hi@gmph.co) to say hello – I love talking about design. You can read more about this website in its [colophon](/colophon).
+You can email me at [hi@gmph.co](mailto:hi@gmph.co) to say hello. Currently I'm interested in discussing small collaborative projects.
+
+You can read more about this website in its [colophon](/colophon).

@@ -579,7 +579,7 @@ input.invalid, textarea.invalid {
 	font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
 	font-size:17px;
 	display: block;
-	margin: 56px 0 0 0;
+	margin: 72px 0 0 0;
 	line-height: 1.3em;
 	color: #aaa;
 	font-weight: 500;
@@ -1098,7 +1098,7 @@ div.block div.links a {
 }
 
 .designs-container {
-    margin: 16px 0 0 0;
+    margin: 20px 0 0 0;
     font-size: 0;
 }
 
@@ -1555,10 +1555,6 @@ div.footerimg div.img:hover {
     .posttabs .right-align {
         margin: 0 0 0 10px;
         float: right;
-    }
-
-    .postview {
-        padding-top:25px !important;
     }
 
     .postview ul.postlist {
