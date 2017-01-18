@@ -15,34 +15,29 @@ You can get in touch with me by [email](mailto:hi@gmph.co).
 
     <h5 class="postviewtitle">Articles</h5>
 
+    {% assign counter = 0 %}
+    {% assign maxPostCount = 2 %}
     {% assign sorted_cats = site.categories | sort %}
     {% for category in sorted_cats %}
         {% assign sorted_posts = category[1] | reversed %}
-        {% if forloop.index0 == 0 %}
-            {% assign active_class = "active" %}
-        {% else %}
-            {% assign active_class = "after" %}
-        {% endif %}
-        <ul class="postlist {{ category[0] }} {{ active_class }}" data-id="{{ forloop.index0 }}">
-            {% for post in sorted_posts limit:2 %}
-            {% unless post.private %}
+        <ul class="postlist {{ category[0] }} active" data-id="{{ forloop.index0 }}">
+            {% for post in sorted_posts %}
+            {% if post.private != true and counter < maxPostCount %}
+            {% assign counter=counter | plus:1 %}
             <li class="postitem">
-
                 {% if post.redirect %}
-                    <a href="{{ post.redirect }}" target="_blank">
+                    <a href="{{ post.redirect }}" target="\_blank">
                 {% else %}
                     <a href="{{ post.url }}">
                 {% endif %}
-
                         <h2><span class="postitemtitle">{{ post.title }}</span> <span class="postitemmeta">{{ post.date | date: "%B %-d, %Y" }}</span></h2>
 
                         <div class="positemdescription">
                             <p>{{ post.content | strip_html | truncatewords: 36 }}</p>
                         </div>
-
                     </a>
                 </li>
-            {% endunless %}
+            {% endif %}
             {% endfor %}
             <a class="color-purple view-all" href="/articles">View all articles &rarr;</a>
         </ul>
