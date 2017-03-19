@@ -38,30 +38,18 @@
 
 </head>
 
-<body>
+<body class="landing">
 
-		<div class="posttabs">
-			<div class="content">
-				<a href="{{ site.baseurl }}/articles" class="purple">Articles</a>
-				<a href="{{ site.baseurl }}/notes" class="purple">Notes</a>
-		        <a href="{{ site.baseurl }}/portfolio" class="purple">Portfolio</a>
-				<a href="https://twitter.com/gmph" target="_blank" class="twitter">Twitter</a>
-			</div>
-	    </div>
+		<!--<div class="posttabs">-->
+			<!--<div class="content">-->
+				<!--<a href="{{ site.baseurl }}/articles" class="purple">Articles</a>-->
+				<!--<a href="{{ site.baseurl }}/notes" class="purple">Notes</a>-->
+		        <!--<a href="{{ site.baseurl }}/portfolio" class="purple">Portfolio</a>-->
+				<!--<a href="https://twitter.com/gmph" target="_blank" class="twitter">Twitter</a>-->
+			<!--</div>-->
+	    <!--</div>-->
 
 		<div class="block landing">
-
-			<h1 class="nomo"><span class="title">{{ page.heading }}</span><span class="cursor blink">&#124;</span></h1>
-
-			<h1 class="moon"><span class="mobile-title">{{ page.heading }}</span></h1>
-
-			{% if page.private %}
-			<h2 class="subheading">This article is currently a private draft.</h2>
-			{% else if page.subheading %}
-			<h2 class="subheading">{{ page.subheading }}</h2>
-			{% endif %}
-
-			<!-- <span class="littleline"></span> -->
 
 			{{ content }}
 
@@ -92,7 +80,7 @@
 		}
 
 		function displayDesigns(listOfDesigns){
-			var $designs = $('.designs-container');
+			var $designs = $('.designs-container .grid');
 			for (var i = 0; i < listOfDesigns.length; i++){
 				$designs.append(getDesignElementFromDesignItem(listOfDesigns[i]));
 			}

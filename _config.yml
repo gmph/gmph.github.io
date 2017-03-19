@@ -12,3 +12,7 @@ defaults:
       path: "" # all files in the project
     values:
       author: {"name": "Graham Macphee", "email": "hi@gmph.co", "uri": "http://gmph.co", "twitter" : "gmph"}
+gems:
+  - jekyll-mentions
+jekyll-mentions:
+  base_url: https://twitter.com

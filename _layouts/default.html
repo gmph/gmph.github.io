@@ -67,7 +67,7 @@
 			</div>
 
 			<div class="meta">
-				<a href="{{ site.url }}"><img class="gmph-profile-picture" src="{{ site.url }}/res/img/grahamfade.png"/></a>
+				<a href="{{ site.url }}"><img class="gmph-profile-picture" src="/res/img/graham.png"/></a>
 				<div class="gmph-profile-text">
 					<div class="name"><a href="{{ site.url }}">Graham&nbsp;Macphee</a></div>
 					<div class="bio">Designer at Yavi. Geek. Feminist. I write words and code.</div>
@@ -133,7 +133,6 @@
 
 	var likeIncreaseTimeout;
 	function increaseLikeCountIfNeeded(likes){
-		console.log('int = '+ parseInt($('.gmph-button.like .like-count').text()));
 		if (parseInt($('.gmph-button.like .like-count').text()) < likes){
 			$('.gmph-button.like .like-count').text(parseInt($('.gmph-button.like .like-count').text()) + 1);
 			likeIncreaseTimeout = setTimeout(function(){
