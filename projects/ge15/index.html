@@ -1,0 +1,1173 @@
+---
+permalink: /ge15
+---
+
+<!DOCTYPE html>
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=100" />
+<![endif]-->
+
+<html id="top">
+
+<head>
+
+<title>#GE2015 UK Statistics</title>
+<meta name="author" content="Graham Macphee" />
+<meta name="description" content="A set of statistics to support discussion regarding the 2015 UK General Election." />
+<meta name="keywords" content="A set of statistics to support discussion regarding the 2015 UK General Election." />
+<meta charset="utf-8">
+<meta property="og:title" content="#GE2015 UK Statistics">
+<meta property="og:type" content="website">
+<meta property="og:url" content="http://gmph.co/ge15">
+<meta property="og:site_name" content="#GE2015 UK Statistics">
+<meta property="og:image" content="https://41.media.tumblr.com/b6947e85df11118c14141fdf82512b29/tumblr_nmhjcxTEEA1qgct8oo1_250.png" />
+<meta name="twitter:url" content="https://grahammacphee"/>
+<meta property="og:description" content="A set of statistics to support discussion regarding the 2015 UK General Election.">
+<meta property="twitter:account_id" content="87261538" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@gmph" />
+<meta name="twitter:title" content="#GE2015 UK Statistics" />
+<meta name="twitter:description" content="A set of statistics to support discussion regarding the 2015 UK General Election." />
+<meta name="twitter:image" content="https://41.media.tumblr.com/b6947e85df11118c14141fdf82512b29/tumblr_nmhjcxTEEA1qgct8oo1_250.png" />
+<meta name="twitter:url" content="https://gmph.co/ge15" />
+
+<script type="text/javascript">
+    var host = "gmph.co";
+    if ((host == window.location.host) && (window.location.protocol != "https:"))
+        window.location.protocol = "https";
+</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2c3638"/>
+<link rel="shortcut icon" href="https://41.media.tumblr.com/b6947e85df11118c14141fdf82512b29/tumblr_nmhjcxTEEA1qgct8oo1_250.png">
+<link rel="icon" sizes="192x192" href="https://41.media.tumblr.com/b6947e85df11118c14141fdf82512b29/tumblr_nmhjcxTEEA1qgct8oo1_250.png">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700|CPT+Serif:400,700' rel='stylesheet' type='text/css'>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+<style type="text/css">
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+#tumblr_controls.tumblr_controls.sticky {
+    display:none !important;
+}
+
+* {
+    margin:0;
+    padding:0;
+    border:0;
+
+    text-decoration:none;
+    font-feature-settings: kern;
+    text-ren­der­ing: optimizeLegibility !important;
+    -webkit-box-sizing:border-box !important;
+    -moz-box-sizing:border-box !important;
+    box-sizing:border-box !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+
+    transition: .2s all ease-in-out;
+    -webkit-transition: .2s all ease-in-out;
+    -moz-transition: .2s all ease-in-out;
+    -o-transition: .2s all ease-in-out;
+}
+
+body {
+    background:#f9f9f9;
+    width:100%;
+    max-width: 100%;
+    height: auto;
+    overflow-x: hidden !important;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.nomo {
+    display: block;
+}
+
+.bypop, .bybug {
+	width:100%;
+	overflow: hidden;
+	height:300px;
+    position:fixed;
+    top:0;
+    left:0;
+    box-shadow: 4px 0 10px 12px #f9f9f9;
+}
+
+.dataset {
+	width:100%;
+	height: auto;
+	background: #2c3638;
+	padding:14px 8px 15px 0;
+	overflow: hidden;
+}
+
+.options {
+	width:100%;
+	max-width:900px;
+	margin:300px auto 0 auto;
+	height:auto;
+	padding:60px 40px;
+	text-align: center;
+}
+
+.key {
+	margin: 0 0 40px 0;
+}
+
+#k1 .colour {
+	background:#54d4a5;
+}
+
+#k2 .colour {
+	background: #e78044;
+}
+
+.colour {
+	display: inline-block;
+	width:12px;
+	height: 12px;
+	border-radius: 10px;
+	margin: 0 2px 0 0;
+	position: relative;
+	top:1px;
+	left: 0;
+}
+
+.key .text {
+	display: inline-block;
+}
+
+.data,.title {
+	display: inline-block;
+	padding:10px 20px;
+	border-radius: 2px;
+	background: none;
+	margin: 0 -4px 7px 6px;
+	font-size:16px;
+	color:#333;
+	background: #d9d9d9;
+}
+
+.data:hover {
+	cursor: pointer;
+	color: #222;
+}
+
+.title {
+	width: 100%;
+	text-align: center;
+	text-transform: uppercase;
+	font-weight:700;
+	color: rgba(255,255,255,.8);
+	font-size: 20px;
+	padding:10px 20px 0 20px;
+	background: #2c3638;
+}
+
+.charts {
+	width: 100%;
+	height:100%;
+}
+
+.main {
+	width:100%;
+	height:100%;
+	background: #abd2ef;
+	margin: 0;
+}
+
+.main .bar1 {
+	width:100%;
+	height:100%;
+	background:#489ddc;
+	text-align: center;
+	padding:104px 0 0 0;
+	color: #fff;
+	font-size: 18px;
+}
+
+.main .text {
+    opacity:0;
+	position: relative;
+	top:-100%;
+	left:0;
+	z-index:5;
+	width: auto;
+	float:right;
+	text-align: right !important;
+	margin:5px;
+	padding:10px 20px 8px 20px;
+	font-size: 40px;
+	color: #489ddc;
+	background:rgba(171,210,239,.9);
+	border-radius:3px;
+}
+
+.smaller {
+	position: relative;
+	top:-24px;
+	left: -1px;
+	font-size: .6em;
+	opacity: .6;
+}
+
+div.divider {
+	width: 100px;
+	height:2px;
+	background: #ddd;
+	margin:20px auto 26px auto;
+}
+
+.age {
+	width:100%;
+	height:25%;
+	padding: 5px 0 0 0;
+}
+
+.age div {
+	vertical-align: top;
+	position: relative;
+	z-index: 2;
+	display: inline-block;
+	height:100%;
+	margin: 0 -4px 0 0;
+	text-align: center;
+	padding:18px 0 0 0;
+	color:rgba(19,73,53,.6);
+}
+
+.perc {
+	opacity: .6;
+}
+
+.a0to4 {
+	width:6.2%;
+	background:#a5e8d0;
+}
+
+.a5to14 {
+	width:11.4%;
+	background:#91e3c5;
+}
+
+.a15to24 {
+	width:13.1%;
+	background:#7cdebb;
+}
+
+.a25to34 {
+	width:13.3%;
+	background:#68d9b0;
+}
+
+.a35to44 {
+	width:13.9%;
+	background:#54d4a5;
+}
+
+.a45to54 {
+	width:13.8%;
+	background:#3fcf9b;
+}
+
+.a55to64 {
+	width:11.7%;
+	background:#31c38e;
+}
+
+div.a65to74 {
+	width:8.7%;
+	background:#2caf7f;
+	margin: 0 -5px 0 0;
+}
+
+.a75plus {
+	width:7.9%;
+	background:#279a70;
+}
+
+.income {
+	width:100%;
+	height:25%;
+	margin:5px 0 5px 0;
+	background: #ea8f5b;
+}
+
+.income div {
+	vertical-align: top;
+	position: relative;
+	z-index: 2;
+	display: inline-block;
+	height:100%;
+	margin: 0 -4px 0 0;
+	text-align: center;
+	padding:18px 0 0 0;
+	color:rgba(84,38,10,.5);
+}
+
+.i10 {
+	width:10%;
+	background: #f0ae88;
+}
+
+.i25 {
+	width:15%;
+	background: #ed9f71;
+}
+
+.i50 {
+	width:25%;
+	background: #ea8f5b;
+}
+
+.i75 {
+	width:25%;
+	background: #e78044;
+}
+
+.i90 {
+	width:15%;
+	background: #e4712d;
+}
+
+.i99 {
+	width:10%;
+	background: #dc631c;
+}
+
+.contribute {
+	width:100%;
+	height:auto;
+	padding:30px;
+	background: #ddd;
+}
+
+.contribute .content {
+	width:70%;
+	max-width: 800px;
+	margin: 20px auto;
+	text-align: center;
+}
+
+input.tweetmsg {
+	width:80%;
+	font-size:16px;
+	padding:13px 16px 12px 16px;
+	border-radius: 3px;
+	border: solid 2px #c9c9c9;
+}
+
+.contribute input:focus {
+	outline-color: transparent;
+	outline-style: none;
+	border:solid 2px #489ddc !important;
+}
+
+::-webkit-input-placeholder {
+   transition: .2s all ease-in-out;
+    -webkit-transition: .2s all ease-in-out;
+    -moz-transition: .2s all ease-in-out;
+    -o-transition: .2s all ease-in-out;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   transition: .2s all ease-in-out;
+    -webkit-transition: .2s all ease-in-out;
+    -moz-transition: .2s all ease-in-out;
+    -o-transition: .2s all ease-in-out;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   transition: .2s all ease-in-out;
+    -webkit-transition: .2s all ease-in-out;
+    -moz-transition: .2s all ease-in-out;
+    -o-transition: .2s all ease-in-out;
+}
+
+:-ms-input-placeholder {
+   transition: .2s all ease-in-out;
+    -webkit-transition: .2s all ease-in-out;
+    -moz-transition: .2s all ease-in-out;
+    -o-transition: .2s all ease-in-out;
+}
+
+
+.contribute input:focus::-webkit-input-placeholder {
+   color: rgba(255,255,255,0);
+   position: relative;
+   top:-15px;
+}
+
+.contribute input:focus:-moz-placeholder { /* Firefox 18- */
+   color: rgba(255,255,255,0);
+   position: relative;
+   top:-15px;
+}
+
+.contribute input:focus::-moz-placeholder {  /* Firefox 19+ */
+   color: rgba(255,255,255,0);
+   position: relative;
+   top:-15px;
+}
+
+.contribute input:focus:-ms-input-placeholder {
+   color: rgba(255,255,255,0);
+   position: relative;
+   top:-15px;
+}
+
+a#tweetbtn {
+    position:relative;
+    top:-1px;
+    left:0;
+    margin:0 0 0 5px;
+    padding:11px 22px 12px 22px;
+    font-size:15px;
+    background:#489ddc;
+    border-radius:2px;
+    color:#fff;
+    opacity:.9;
+}
+
+a#tweetbtn:hover {
+    opacity:1;
+}
+
+div.info {
+    max-width:675px;
+    margin:50px auto 15px auto;
+    padding:28px 30px 27px 30px;
+    border-radius:3px;
+    text-align:left;
+    line-height:1.5em;
+    font-size:16px;
+    color:#333;
+    background:#eee;
+}
+
+.contribute p {
+    max-width:550px;
+    margin:30px auto 0 auto;
+    font-size:14px;
+    color:#949494;
+    opacity:0.9;
+}
+
+.contribute p a {
+    color:#888;
+    border-bottom:solid 1px #ccc;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    -webkit-tap-highlight-color: transparent; /* For some Androids */
+}
+
+@media(max-width:800px){
+
+    div.bypop {
+        height:200px;
+        position:fixed;
+        top:0;
+        left:0;
+    }
+
+    div.dataset {
+        padding:9px 0 10px 0;
+    }
+
+    div.dataset div.title {
+        font-size:18px;
+    }
+
+	div.main div.bar1 {
+		font-size: 20px;
+		padding-top:56px;
+	}
+
+	div.options {
+	    width:100%;
+	    margin-top:200px;
+	    height:auto;
+	    padding:30px 6%;
+	}
+
+	div.options div.data {
+	    width:100%;
+		font-size: 14px;
+		margin:0 0 5px 0;
+		padding:18px 18px 17px 18px;
+	}
+
+	div.main div.text {
+	    font-size:24px;
+	    width:auto;
+	}
+
+	.smaller {
+	    top:-14px;
+	    left:-1px;
+	}
+
+	.contribute {
+	    position:relative;
+	    top:0;
+	    left:0;
+	    z-index:10;
+	}
+
+	.contribute .content {
+	    width:100%;
+	    margin:3px 0 0 0;
+	}
+
+	input.tweetmsg {
+	    display:block;
+	    width:100%;
+	    font-size:16px;
+	}
+
+	a#tweetbtn {
+	    display:block;
+	    margin:10px 0 0 0;
+	}
+
+	div.info {
+	    margin:34px auto 5px auto;
+        text-align:left;
+        font-size:15px;
+        line-height:22px;
+    }
+
+    .contribute p {
+        font-size:13px;
+    }
+
+}
+
+::selection {
+    background: rgba(150,150,150,0.3);
+}
+::-moz-selection {
+    background: rgba(150,150,150,0.3);
+}
+
+</style>
+
+</head>
+
+<body id="top">
+
+	<div class="bypop">
+
+		<div class="dataset">
+			<div class="title">#GE2015 UK Statistics</div>
+		</div>
+
+		<div class="charts">
+			<div class="main">
+				<div class="bar1">Select a statistic.</div>
+				<div class="text">A set of statistics to support discussion regarding the 2015 UK General Election.</div>
+			</div>
+			<!-- <div class="age">
+				<div class="a0to4">0-4 yrs<br /><span class="perc">6.2%</span></div>
+				<div class="a5to14">5-14 yrs<br /><span class="perc">11.4%</span></div>
+				<div class="a15to24">15-24 yrs<br /><span class="perc">13.1%</span></div>
+				<div class="a25to34">25-34 yrs<br /><span class="perc">13.3%</span></div>
+				<div class="a35to44">35-44 yrs<br /><span class="perc">13.9%</span></div>
+				<div class="a45to54">45-54 yrs<br /><span class="perc">13.8%</span></div>
+				<div class="a55to64">55-64 yrs<br /><span class="perc">11.7%</span></div>
+				<div class="a65to74">65-74 yrs<br /><span class="perc">8.7%</span></div>
+				<div class="a75plus">75+ yrs<br /><span class="perc">7.9%</span></div>
+			</div>
+			<div class="income">
+				<div class="i10">< £9,690<br /><span class="perc">10%</span></div>
+				<div class="i25">< £14,500<br /><span class="perc">25%</span></div>
+				<div class="i50">< £21,300<br /><span class="perc">50%</span></div>
+				<div class="i75">< £33,300<br /><span class="perc">75%</span></div>
+				<div class="i90">< £50,500<br /><span class="perc">90%</span></div>
+				<div class="i99">< £156,000<br /><span class="perc">99%</span></div>
+			</div> -->
+		</div>
+
+	</div>
+
+	<div class="options">
+
+		<!-- <div class="key">
+			<div class="ekey" id="k1">
+				<div class="colour"></div>
+				<div class="text">Percentage of Age Groups within Population</div>
+			</div>
+			<div class="ekey" id="k2">
+				<div class="colour"></div>
+				<div class="text">Income Before Tax at Percentiles of Population</div>
+			</div>
+		</div> -->
+
+		<div class="data" id="d1">Non-UK-Born Workers (% Pop.)</div>
+		<div class="data" id="d2">EU-Born Workers (% Pop.)</div>
+		<div class="data" id="d27">Non-UK-Born GDP (% GDP.)</div>
+		<div class="data" id="d49">Non-UK-Born Pop. (% Pop.)</div>
+		<div class="data" id="d48">Non-UK-Born New Employers (% Bus.)</div>
+		<div class="data" id="d3">Unable to Get Work (% Pop.)</div>
+		<div class="data" id="d28">Unemployment (% Workers)</div>
+		<div class="data" id="d29">Youth Unemployment (% 16-24 yrs)</div>
+		<div class="divider"></div>
+		<div class="data" id="d13">Foreign-National Doctors (% NHS Drs.)</div>
+		<div class="data" id="d14">Health Tourism Cost (% NHS Budget)</div>
+		<div class="data" id="d30">NHS Budget 2009 (% Total)</div>
+		<div class="data" id="d31">NHS Budget 2013 (% Total)</div>
+		<div class="data" id="d32">NHS Satisfaction 2009 (% Very/Quite)</div>
+        <div class="data" id="d33">NHS Satisfaction 2013 (% Very/Quite)</div>		<div class="divider"></div>
+		<div class="data" id="d7">Women Pop. (% Pop.)</div>
+		<div class="data" id="d8">Female Representation (% MPs)</div>
+		<div class="data" id="d24">Female CEOs (% FTSE100)</div>
+		<div class="data" id="d50">Ethnic Minority Pop. (% Pop.)</div>
+		<div class="data" id="d51">Ethnic Minority Rep. (% MPs)</div>
+		<div class="data" id="d52">Ethnic Min. Board Memb. (% FTSE100)</div>
+		<div class="divider"></div>
+		<div class="data" id="d43">State Schools, Eng. 2nd Lang. (% Pupils)</div>
+		<div class="data" id="d44">Overcrowded Schools (% Class >30)</div>
+		<div class="data" id="d45">EU-Born, High Education (% A8)</div>
+		<div class="data" id="d46">UK-Born, High Education (% UK)</div>
+		<div class="divider"></div>
+		<div class="data" id="d4">UK-Born Benefit Claimants (% Pop.)</div>
+		<div class="data" id="d5">Non-UK-Born Benefit Claimants (% Pop.)</div>
+		<div class="data" id="d6">EU-Born Benefit Claimants (Est. % Pop.)</div>
+		<div class="data" id="d47">EU (A8) Extra Contribution (+% in of out)</div>
+		<div class="data" id="d25">Benefit Fraud (% Borrowing)</div>
+		<div class="data" id="d26">Tax Fraud (% Borrowing)</div>
+		<div class="divider"></div>
+        <div class="data" id="d21">Houses Built 2008 (% Target)</div>
+        <div class="data" id="d22">Houses Built 2010 (% Target)</div>
+        <div class="data" id="d23">Houses Built 2012 (% Target)</div>
+        <div class="divider"></div>
+		<div class="data" id="d9">Government Debt 2007 (% GDP)</div>
+		<div class="data" id="d10">Government Debt 2010 (% GDP)</div>
+		<div class="data" id="d11">Government Debt Forecast 2015 (% GDP)</div>
+		<div class="data" id="d12">Government Debt 2015 (% GDP)</div>
+		<div class="divider"></div>
+		<div class="data" id="d34">Conservative Support 2010 (% Vote, UK)</div>
+		<div class="data" id="d35">Labour Support 2010 (% Vote, UK)</div>
+		<div class="data" id="d36">Lib. Dem. Support 2010 (% Vote, UK)</div>
+		<div class="data" id="d38">UKIP Support 2010 (% Vote, UK)</div>
+		<div class="data" id="d37">Green Party Support 2010 (% Vote, UK)</div>
+		<div class="data" id="d15">P. Cymru Support 2010 (% Vote, Wales)</div>
+		<div class="data" id="d16">SNP Support GE 2010 (% Vote, Scotland)</div>
+		<div class="data" id="d17">SNP Support SP 2011 (% Vote, Scotland)</div>
+        <div class="divider"></div>
+        <div class="data" id="d41">Overall Turnout 2010 (% Eligible)</div>
+        <div class="data" id="d18">18-24 yrs Turnout 2010 (% Eligible)</div>
+        <div class="data" id="d39">25-44 yrs Turnout 2010 (% Eligible)</div>
+        <div class="data" id="d40">45-64 yrs Turnout 2010 (% Eligible)</div>
+        <div class="data" id="d19">65+ yrs Turnout 2010 (% Eligible)</div>
+        <div class="data" id="d42">Ethnic Min. Turnout 2010 (% Eligible)</div>
+        <div class="data" id="d20">Independence Ref. Turnout (% Eligible)</div>
+        <div class="info"><strong>Notes</strong>: The Labour Party was in Government from 1997-2009. From 2010-2015, a Conservative and Liberal Democrat coalition has been in power. The population of the UK is 64.1m. The national debt of the UK is currently £1.5 trillion. GDP is £1.81 trillion ($2.7tn) and GDP per capita is £28.2k. Mean income is £29.0k and median income is £14.2k. Life expectancy is 81.5. Please remember that this page is purely statistical: morals and values are important too.</div>
+
+	</div>
+
+	<div class="contribute">
+
+		<div class="content">
+
+			<input class="tweetmsg" rows="1" placeholder="Which stat should we include next?"></input>
+			<a href="https://twitter.com/home?status=@gmph Which stat should we include next?%20%23ge2015" id="tweetbtn" target="_blank">Tweet</a></h1>
+
+			<p>Thank you for visiting. Public-record statistics used. All information accurate at time of publishing. Design and development by <a href="http://twitter.com/gmph">Graham&nbsp;Macphee</a>.&nbsp;&copy;&nbsp;2015. </p>
+
+		</div>
+
+	</div>
+
+	<!-- <div class="bybug">
+
+		<div class="dataset">
+			<div class="title">By %age UK Budget (2014-15)</div>
+			<div class="data">% option 1</div>
+			<div class="data">% option 2</div>
+			<div class="data">& option 3</div>
+		</div>
+
+		<div class="charts">
+			<div class="main"></div>
+			<div class="age"></div>
+			<div class="income"></div>
+		</div>
+
+	</div> -->
+
+<script language="javascript">
+
+	window.addEventListener("load", function() { window. scrollTo(0, 0); });
+
+	$('.main .text').text("");
+
+    $('body').css('opacity','0');
+
+    $(document).ready(function(){
+    	$('body').css('opacity','1');
+	});
+
+	$(function() {
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({
+              scrollTop: target.offset().top
+            }, 1000);
+            return false;
+          }
+        }
+      });
+    });
+
+
+	$('#d1').click(function(){
+		$('.main .bar1').css('width','8.2%');
+		$('.main .text').text("8.2%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d1').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("");
+	});
+
+	$('#d2').click(function(){
+		$('.main .bar1').css('width','1.2%');
+		$('.main .text').text("1.2%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d2').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("");
+	});
+
+	$('#d3').click(function(){
+		$('.main .bar1').css('width','4.7%');
+		$('.main .text').text("4.7%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d3').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("");
+	});
+
+	$('#d4').click(function(){
+		$('.main .bar1').css('width','14.9%');
+		$('.main .text').text("14.9%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d4').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("");
+	});
+
+	$('#d5').click(function(){
+		$('.main .bar1').css('width','0.6%');
+		$('.main .text').text("0.6%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d5').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("");
+	});
+
+	$('#d6').click(function(){
+		$('.main .bar1').css('width','0.08%');
+		$('.main .text').text("0.08%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d6').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("");
+	});
+
+	$('#d13').click(function(){
+		$('.main .bar1').css('width','26.0%');
+		$('.main .text').text("26.0%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d13').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("");
+	});
+
+	$('#d14').click(function(){
+		$('.main .bar1').css('width','0.01%');
+		$('.main .text').text("0.01%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d14').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("");
+	});
+
+	$('#d7').click(function(){
+		$('.main .bar1').css('width','50.9%');
+		$('.main .text').text("50.9%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d7').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("");
+	});
+
+	$('#d8').click(function(){
+		$('.main .bar1').css('width','22.7%');
+		$('.main .text').html("22.7%<br /><span class='smaller'>148/650</span>").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d8').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("");
+	});
+
+	$('#d9').click(function(){
+		$('.main .bar1').css('width','43.7%');
+		$('.main .text').text("43.7%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d9').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("");
+	});
+
+
+	$('#d10').click(function(){
+		$('.main .bar1').css('width','78.4%');
+		$('.main .text').text("78.4%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d10').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("");
+	});
+
+	$('#d11').click(function(){
+		$('.main .bar1').css('width','78.7%');
+		$('.main .text').text("78.7%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d11').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("");
+	});
+
+	$('#d12').click(function(){
+		$('.main .bar1').css('width','81.6%');
+		$('.main .text').text("81.6%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d12').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("");
+	});
+
+	$('#d15').click(function(){
+		$('.main .bar1').css('width','11.3%');
+		$('.main .text').text("11.3%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d15').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d16').click(function(){
+		$('.main .bar1').css('width','19.9%');
+		$('.main .text').text("19.9%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d16').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d17').click(function(){
+		$('.main .bar1').css('width','45.4%');
+		$('.main .text').text("45.4%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d17').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d18').click(function(){
+		$('.main .bar1').css('width','44.0%');
+		$('.main .text').text("44.0%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d18').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d19').click(function(){
+		$('.main .bar1').css('width','76.0%');
+		$('.main .text').text("76.0%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d19').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d20').click(function(){
+		$('.main .bar1').css('width','84.6%');
+		$('.main .text').text("84.6%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d20').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d21').click(function(){
+		$('.main .bar1').css('width','74.5%');
+		$('.main .text').text("74.5%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d21').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d22').click(function(){
+		$('.main .bar1').css('width','57.3%');
+		$('.main .text').text("57.3%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d22').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d23').click(function(){
+		$('.main .bar1').css('width','56.5%');
+		$('.main .text').text("56.5%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d23').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d24').click(function(){
+		$('.main .bar1').css('width','5%');
+		$('.main .text').html("5%<br /><span class='smaller'>5/100</span>").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d24').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d25').click(function(){
+		$('.main .bar1').css('width','3.1%');
+		$('.main .text').text("3.1%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d25').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d26').click(function(){
+		$('.main .bar1').css('width','32.4%');
+		$('.main .text').text("32.4%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d26').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d27').click(function(){
+		$('.main .bar1').css('width','9.8%');
+		$('.main .text').text("9.8%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d27').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d28').click(function(){
+		$('.main .bar1').css('width','5.8%');
+		$('.main .text').text("5.8%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d28').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d29').click(function(){
+		$('.main .bar1').css('width','16.2%');
+		$('.main .text').text("16.2%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d29').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d30').click(function(){
+		$('.main .bar1').css('width','17.7%');
+		$('.main .text').text("17.7%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d30').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d31').click(function(){
+		$('.main .bar1').css('width','19.0%');
+		$('.main .text').text("19.0%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d31').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d32').click(function(){
+		$('.main .bar1').css('width','64.0%');
+		$('.main .text').text("64.0%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d32').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d33').click(function(){
+		$('.main .bar1').css('width','60.0%');
+		$('.main .text').text("60.0%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d33').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d34').click(function(){
+		$('.main .bar1').css('width','36.1%');
+		$('.main .text').text("36.1%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d34').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d35').click(function(){
+		$('.main .bar1').css('width','29.0%');
+		$('.main .text').text("29.0%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d35').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d36').click(function(){
+		$('.main .bar1').css('width','23.0%');
+		$('.main .text').text("23.0%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d36').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d37').click(function(){
+		$('.main .bar1').css('width','0.9%');
+		$('.main .text').text("0.9%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d37').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d38').click(function(){
+		$('.main .bar1').css('width','3.1%');
+		$('.main .text').text("3.1%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d38').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d39').click(function(){
+		$('.main .bar1').css('width','60.5%');
+		$('.main .text').text("60.5%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d39').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d40').click(function(){
+		$('.main .bar1').css('width','71.0%');
+		$('.main .text').text("71.0%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d40').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d41').click(function(){
+		$('.main .bar1').css('width','65.1%');
+		$('.main .text').text("65.1%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d41').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d42').click(function(){
+		$('.main .bar1').css('width','53.6%');
+		$('.main .text').text("53.6%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d42').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d43').click(function(){
+		$('.main .bar1').css('width','13.6%');
+		$('.main .text').text("13.6%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d43').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d44').click(function(){
+		$('.main .bar1').css('width','12.5%');
+		$('.main .text').text("12.5%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d44').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d45').click(function(){
+		$('.main .bar1').css('width','36.0%');
+		$('.main .text').text("36.0%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d45').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d46').click(function(){
+		$('.main .bar1').css('width','17.0%');
+		$('.main .text').text("17.0%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d46').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d47').click(function(){
+		$('.main .bar1').css('width','37.0%');
+		$('.main .text').text("37.0%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d47').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d48').click(function(){
+		$('.main .bar1').css('width','14.3%');
+		$('.main .text').text("14.3%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d48').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d49').click(function(){
+		$('.main .bar1').css('width','11.9%');
+		$('.main .text').text("11.9%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d49').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d50').click(function(){
+		$('.main .bar1').css('width','12.4%');
+		$('.main .text').text("12.4%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d50').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d51').click(function(){
+		$('.main .bar1').css('width','4.2%');
+		$('.main .text').html("4.2%<br /><span class='smaller'>27/650</span>").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d51').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+	$('#d52').click(function(){
+		$('.main .bar1').css('width','5.3%');
+		$('.main .text').text("5.3%").css('opacity','.9');
+		$('.data').css({'background':'#d9d9d9','color':'#333'});
+		$('#d52').css({'background':'#489ddc','color':'#fff'});
+		$('.main .bar1').text("").css('opacity','.9');
+	});
+
+
+	// TWEET
+
+	$('input.tweetmsg').keyup(function(e) {
+	    var tweetmsg = $('input.tweetmsg').val();
+	    $('#tweetbtn').attr('href', 'https://twitter.com/home?status=@gmph%20'+tweetmsg+'%20%23ge2015');
+	    if((e.keyCode || e.which) == 13) { //Enter keycode
+			window.open('https://twitter.com/home?status=@gmph%20'+tweetmsg+'%20%23ge2015', "_blank");
+    	}
+	});
+
+
+</script>
+
+</body>
+
+</html>
+
+<!-- Copyright 2015, Graham Macphee. All rights reserved. Please contact me at hi@grahammacphee.co.uk if you would like to use any of this code. -->

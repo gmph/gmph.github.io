@@ -10,7 +10,7 @@ permalink: /the-political-automaton
 version: 1.0
 ---
 
-![On The Political Machine]({{ site.baseurl }}/res/posts/politicalmachine.png)
+![On The Political Machine]({{ site.baseurl }}/assets/img/posts/politicalmachine.png)
 
 The levers of power are being pulled right now – up, down, left, right – seized and swapped between the slick, manicured, moisurised hands of the various leaders of Europe. In Downing Street, the Prime Minister's loyal civil servants are waiting to carry out his every command. The campaigning, advertising and propaganda are ready and waiting to be shipped out. The ministers are waiting to fight for the space to challenge the Prime Minister and snatch for power. Newspapers are ready to sell their cases. Large corporations are ready to shower us with press releases. The political class are ready, and the country's fate stands shaking on this mountainous European question: Should the United Kingdom remain a member of the European Union?
 

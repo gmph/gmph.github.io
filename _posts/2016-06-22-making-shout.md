@@ -19,7 +19,7 @@ Thinking back over the recent work I have done, I don't think I gave enough time
 
 The idea for Shout partially came from an obvious trend on social media towards using animated text for marketing. I would often see posts like this for events or products:
 
-![Shout Meetup Example]({{site.url}}/res/posts/shout1.gif){:style="box-shadow: 0 1px 4px rgba(0,0,0,.1)"}
+![Shout Meetup Example]({{site.url}}/assets/img/posts/shout1.gif){:style="box-shadow: 0 1px 4px rgba(0,0,0,.1)"}
 
 This seemed like a simple output. I had no idea how to achieve it, or even if it was possible with an in-browser solution, but it was worth a try. I wanted to start building something extremely simple. I started with a single static frame using HTML Canvas (my first time using it). I put a rectangle in it. I set the colour of that rectangle. Very interesting... After some work, I had my code adding a coloured canvas with some text in it to the page.
 
@@ -27,7 +27,7 @@ From this single frame I started to build programatic text setting. I added an i
 
 Prioritising a simple, releasable version, I worked on the styling and started to format the input so that it would look exactly like the canvas it would create. After lots of fiddling with line-heights, scaling and positioning in the canvas code, I had a page which would create two animated text frames from the input.
 
-![Shout Backgrounds]({{site.url}}/res/posts/shout_backgrounds.gif){:class="white-edges"}
+![Shout Backgrounds]({{site.url}}/assets/img/posts/shout_backgrounds.gif){:class="white-edges"}
 
 After some more styling, I added some preset background colour options. These named colours were shown on each frame and were got on GIF creation to set the background of each frame independently.
 
@@ -35,23 +35,23 @@ Next I needed some refactoring to create the final GIF more generically from rea
 
 At this point it seemed like I had the basic features sorted. I played with the tool and tried unexpected inputs. New-lines were not being so friendly to me, and the frame timings seemed a little odd. To tackle the first I added some restrictions to the text inputs with JS, managing new-lines specially. For the timing issue, I created a function to calculate reading time of a frame and switched timings to use that – tweaking this till it felt right took some time.
 
-![Shout Styles]({{site.url}}/res/posts/shout_styles.gif){:class="white-edges"}
+![Shout Styles]({{site.url}}/assets/img/posts/shout_styles.gif){:class="white-edges"}
 
 Now for some more styling: I added a toggle for text style. The options for Bold, Italic and Normal seemed sensible. Each of these was now also checked when getting frame data and rendered in the final frames.
 
-![Shout Emoji]({{site.url}}/res/posts/shout_emoji.gif){:class="white-edges"}
+![Shout Emoji]({{site.url}}/assets/img/posts/shout_emoji.gif){:class="white-edges"}
 
 Next up, being adventurous, I tried typing some emoji in my inputs. I was surprised to find that not only did they work with the fonts I had chosen, but they were also rendered correctly by the HTML Canvas and in the final GIFs. There was one issue with how Chrome and Safari render emoji which meant that they would be distorted or disappear in the Italic or Bold text styles. I considered this to be a minor issue and not one I could fix.
 
-![Shout Animations]({{site.url}}/res/posts/shout_animations.gif){:class="white-edges"}
+![Shout Animations]({{site.url}}/assets/img/posts/shout_animations.gif){:class="white-edges"}
 
 At this point, I turned to some final styling and animations, making the frame editor sleeker. I really enjoy being able to focus fully on design implementation, finding even small interaction issues and fixing them. That was me happy. I was ready to release the project quietly to a few friends and see what they thought.
 
-![Shout Polish]({{site.url}}/res/posts/shout_polish.gif){:class="white-edges"}
+![Shout Polish]({{site.url}}/assets/img/posts/shout_polish.gif){:class="white-edges"}
 
 After some time playing with it on my own and getting feedback, there were a couple of important fixes and additions that seemed needed: a fix for playing speed, custom frame colours and background images. The timing issue was caused by the way I was adding frames and how speicifc apps render them. Because some apps overwrite the frame-duration in a GIF to a standard duration, my 2 second-long frames were showing for 100ms in some apps (notably Telegram). With some tweaking, I added a loop to create individual 100ms frames to fill the total of their expected duration. This fixed the playback speed issue!
 
-![Shout Images]({{site.url}}/res/posts/shout_images.gif){:class="white-edges"}
+![Shout Images]({{site.url}}/assets/img/posts/shout_images.gif){:class="white-edges"}
 
 As for the new features: I added those in without too much trouble thanks to spectrum.js for colour-picking and some simple JS for handling file uploads, converting them to blobs and drawing those on the HTML canvas. Image positioning and shading was a little tricky as it involved loading the images to calculate their dimensions and placing them in the centre of the canvas accordingly. I also wanted to add a case so that it was possible to add an image-only frame and not have it shaded. With these working, I moved on.
 

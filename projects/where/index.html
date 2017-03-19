@@ -1,0 +1,327 @@
+---
+permalink: /where
+---
+
+<!DOCTYPE html>
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=100" />
+<style type="text/css">
+/* IE CSS HERE */
+<style>
+<![endif]-->
+
+<html id="top">
+
+<head>
+
+<title>Where's Graham?</title>
+<meta name="author" content="Graham Macphee" />
+<meta name="description" content="See Graham's latest public location data from live geo-fence updates and his Swarm and Foursquare checkins." />
+<meta name="keywords" content="See Graham's latest public location data from live geo-fence updates and his Swarm and Foursquare checkins." />
+<meta charset="utf-8">
+<meta property="og:title" content="Where's Graham?">
+<meta property="og:type" content="website">
+<meta property="og:url" content="gmph.co/where">
+<meta property="og:site_name" content="Graham Macphee">
+<meta property="og:description" content="See Graham's latest public location data from live geo-fence updates and his Swarm and Foursquare checkins.">
+<meta property="twitter:account_id" content="87261538" /> <!-- Twitter ID, currently for @gmph -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#FFFFFF">
+
+<script type="text/javascript">
+    var host = "gmph.co";
+    if ((host == window.location.host) && (window.location.protocol != "https:"))
+        window.location.protocol = "https";
+</script>
+
+<link rel="shortcut icon" href="http://gmph.co/assets/img/ptlogooutline.png">
+<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400' rel='stylesheet' type='text/css'>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<style type="text/css">
+
+	@font-face {
+		font-family: 'Helvetica Neue';
+		src: url('../assets/font/hnl.ttf') format('truetype');
+		font-weight: 300;
+	}
+
+	@font-face {
+		font-family: 'Helvetica Neue';
+		src: url('../assets/font/hnm.ttf') format('truetype');
+		font-weight: 400;
+	}
+
+	@font-face {
+		font-family: 'Helvetica Neue';
+		src: url('../assets/font/hnb.ttf') format('truetype');
+		font-weight: 700;
+	}
+
+	* {
+		font-family: 'Helvetica Neue';
+		transition:.15s all ease-out;
+	    -webkit-transition:.15s all ease-out;
+	    -moz-transition:.15s all ease-out;
+	    -o-transition:.15s all ease-out
+	}
+
+	html, body {
+		background: #fff;
+		overflow: hidden;
+	}
+
+	.content {
+		display: block;
+		position: absolute;
+		top:50%;
+		left:50%;
+		-webkit-transform:translate(-50%,-50%);
+		transform:translate(-50%,-50%);
+		width:auto;
+		text-align: center;
+		text-shadow: 0 0 10px rgba(255,255,255,.8), 0 0 10px rgba(255,255,255,.8), 0 0 10px rgba(255,255,255,.8), 0 0 10px rgba(255,255,255,.8);
+	}
+
+	.hidden {
+		opacity: 0 !important;
+		pointer-events: none !important;
+	}
+
+	.loading {
+		display: block;
+		position: absolute;
+		top:50%;
+		left:50%;
+		-webkit-transform:translate(-50%,-50%);
+		transform:translate(-50%,-50%);
+		padding:0 0 0 30px;
+		background-image:url(../projects/where/loading.gif);
+		background-size: auto 60% !important;
+		background-repeat: no-repeat !important;
+		background-position:0 52% !important;
+		text-align: center;
+		font-size:26px;
+		color:#bbb;
+		opacity: 0.6;
+	}
+
+	#map {
+		display: block;
+		position: fixed;
+		top:40%;
+		left:50%;
+		transform: translate(-50%,-50%);
+		z-index:-1;
+		width:130%;
+		height:130%;
+		pointer-events: none;
+		opacity: 0.8;
+		-webkit-filter: grayscale(100%) contrast(120%);
+    	filter: grayscale(100%) contrast(120%);
+	}
+
+	a {
+		color:inherit;
+		text-decoration: none !important;
+	}
+
+	.title {
+		font-size:16px;
+		color:rgba(0,0,0,.3);
+	}
+
+	.region {
+		margin: 0 0 40px 0;
+		font-size:54px;
+		font-weight:700;
+		color:rgba(0,0,0,.9);
+	}
+
+	.name {
+		margin:5px auto 0 auto;
+		font-size:19px;
+		color:#ccc;
+	}
+
+	.name:hover {
+		color:#aaa;
+	}
+
+	.date {
+		padding: 5px 0 10px 0;
+		font-size:16px;
+		font-weight:300;
+		color:rgba(0,0,0,.4);
+	}
+
+	a.foursquare {
+		display:inline-block;
+		position: relative;
+		top:0;
+		left:0;
+		padding:10px 18px 12px 40px;
+		background-image:url(../projects/where/foursquare.png);
+		background-size: auto 42% !important;
+		background-repeat: no-repeat !important;
+		background-position:18px 52% !important;
+		font-size:14px;
+		line-height: 1.4em;
+		font-weight: 500;
+		border-radius: 100px;
+		color:#F94877;
+		background-color:#fff;
+		box-shadow: 0 2px 5px rgba(0,0,0,.1);
+	}
+
+	a.foursquare:hover {
+		box-shadow: 0 4px 12px rgba(0,0,0,.15);
+	}
+
+	@media (max-width:800px) {
+
+		.region {
+			font-size: 34px;
+		}
+
+	}
+
+</style>
+
+</head>
+
+<body>
+
+	<div class="loading">Loading...</div>
+
+	<div class="content hidden">
+
+		<!-- <div class="title">Last seen in...</div> -->
+		<div id="latestLocation"></div>
+		<a href="http://foursquare.com/gmph" class="foursquare">See more on Foursquare</a>
+
+	</div>
+
+	<iframe id="map" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/view?center=1,1&zoom=1&key=AIzaSyDQJOQNtvd0-mEKu-2veoiz3QMnLf01kis" allowfullscreen></iframe>
+
+</body>
+
+
+<script language="javascript">
+
+	var locationManager = function($){
+
+		var $locationContainer = $('#latestLocation');
+
+		var randomString = "AIzaSyDQJOQNtvd0-mEKu-2veoiz3QMnLf01kis";
+		var mapZoomLevel = "14";
+
+		var locationDataText;
+		var locationData = [];
+		var eventLocationDataProcessed = new Event('locationDataProcessed');
+
+		function init(callback){
+			getDataFromTextFile("https://dl.dropboxusercontent.com/u/17016249/Data/location.txt");
+			if (callback){
+				document.addEventListener('locationDataProcessed', callback, false);
+			}
+		}
+
+		function getParameterByName(name, url) {
+		    if (!url) url = window.location.href;
+		    name = name.replace(/[\[\]]/g, "\\$&");
+		    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+		        results = regex.exec(url);
+		    if (!results) return null;
+		    if (!results[2]) return '';
+		    return decodeURIComponent(results[2].replace(/\+/g, " "));
+		}
+
+	    function getDataFromTextFile(file){
+	        var rawFile = new XMLHttpRequest();
+	        rawFile.open("GET", file, true);
+	        rawFile.onreadystatechange = function (){
+	            if(rawFile.readyState === 4){
+	                if(rawFile.status === 200 || rawFile.status == 0){
+	                    locationDataText = rawFile.responseText;
+						processLocationData();
+	                }
+	            }
+	        }
+	        rawFile.send(null);
+	    }
+
+		function processLocationData(){
+			var locationDataTextSplit = locationDataText.split("/%/");
+			locationDataTextSplit.pop();
+			for (i=0;i<locationDataTextSplit.length;i++){
+				locationData.push(JSON.parse(locationDataTextSplit[i]));
+			}
+			document.dispatchEvent(eventLocationDataProcessed);
+		}
+
+		function displayLatestLocationName(){
+			var numberOfLocations = locationData.length-1;
+			var latestLocation = locationData[numberOfLocations];
+			var latestValidName = ' <a href="'+latestValidURL+'" target="_blank"><div class="name">' + latestLocation.name + "</div></a>";
+			var latestValidURL = latestLocation.linkURL;
+			var latestMapCenter = getParameterByName("center",locationData[numberOfLocations].mapImageURL);
+			$('#map').attr('src','https://www.google.com/maps/embed/v1/view?center='+latestMapCenter+'&zoom='+mapZoomLevel+'&key='+randomString);
+			updateText = '<a href="'+latestValidURL+'" target="_blank"><div class="region">' + latestLocation.name + "</div></a>" + '<a href="'+latestValidURL+'" target="_blank"><!--<div class="date">' + latestLocation.date.slice(0,-2) + latestLocation.date.substring(latestLocation.date.length-2).toLowerCase() + '</div>--></a>';
+			$locationContainer.html(updateText);
+		}
+
+		return {
+			init : init,
+			displayLatestLocationName : displayLatestLocationName,
+		}
+
+	}($);
+
+	$(document).ready(function(){
+		locationManager.init(function(){
+			setStyleLoading();
+			locationManager.displayLatestLocationName();
+			setStyleReady();
+		});
+		$('#latestLocation,.title').hover(function(){
+			$('.content').addClass('location-hover');
+		},function(){
+			$('.content').removeClass('location-hover');
+		});
+		$('.foursquare').hover(function(){
+			$('.content').addClass('foursquare-hover');
+		},function(){
+			$('.content').removeClass('foursquare-hover');
+		});
+	});
+
+
+	function setStyleLoading(){
+		$('.content').addClass('hidden');
+		$('.loading').removeClass('hidden');
+	}
+
+	function setStyleReady(){
+		$('.content').removeClass('hidden');
+		$('.loading').addClass('hidden');
+	}
+
+	$(function() {
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({
+              scrollTop: (target.offset().top - 30)
+		  	}, 400);
+            return false;
+          }
+        }
+      });
+    });
+
+</script>
+
+</html>

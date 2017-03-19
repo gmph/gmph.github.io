@@ -11,7 +11,7 @@ permalink: /language-of-gender
 version: 1.0
 ---
 
-![My Gender]({{ site.url }}/res/posts/gender.png)
+![My Gender]({{ site.url }}/assets/img/posts/gender.png)
 
 ###### I will be referring to my article “[My Gender Changed When I Visited India](https://femsplain.com/my-gender-changed-when-i-visited-india)”, published in _Femsplain_ on February 25th, 2016.
 

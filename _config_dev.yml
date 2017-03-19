@@ -1,1 +1,18 @@
+title: "Graham Macphee"
 url: http://127.0.0.1:4000
+enforce_ssl: https://127.0.0.1:4000
+author: "Graham Macphee"
+fb_author : "100000408177137"
+locale: "en_GB"
+permalink: /:title
+excerpt_separator: "<!--MORE-->"
+defaults:
+  -
+    scope:
+      path: "" # all files in the project
+    values:
+      author: {"name": "Graham Macphee", "email": "hi@gmph.co", "uri": "http://gmph.co", "twitter" : "gmph"}
+gems:
+  - jekyll-redirect-from
+  - jekyll-mentions
+jekyll-mentions: https://twitter.com

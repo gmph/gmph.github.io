@@ -12,7 +12,7 @@ permalink: /trigger-warnings
 version: 1.0
 ---
 
-![On Trigger Warnings]({{ site.url }}/res/posts/trigger.png)
+![On Trigger Warnings]({{ site.url }}/assets/img/posts/trigger.png)
 
 ###### This article discusses trigger warnings and includes detailed examples of common triggers.
 
