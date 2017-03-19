@@ -16,3 +16,5 @@ gems:
   - jekyll-redirect-from
   - jekyll-mentions
 jekyll-mentions: https://twitter.com
+sass:
+    sass_dir: assets/css
