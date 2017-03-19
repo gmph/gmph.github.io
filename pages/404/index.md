@@ -7,5 +7,3 @@ permalink: /404.html
 ---
 
 ### It seems you've stumbled upon a broken link. Let me know if you think something should be here by tweeting me a quick message: [@gmph](http://twitter.com/gmph). <br/><br/>You'll be redirected [home](/) in 10 seconds...
-
-<br/><br/><br/><br/>

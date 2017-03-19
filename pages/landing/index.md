@@ -5,6 +5,7 @@ heading: Graham Macphee
 date: 28th April 2015
 published: true
 format: markdown
+permalink: /
 ---
 
 I'm a designer from Edinburgh, Scotland. I tend to think about puppies, pizza and equality. I enjoy being creative: design, photography, writing, playing ukulele and singing. I'm quiet and thoughtful. I like nature and quiet nights.

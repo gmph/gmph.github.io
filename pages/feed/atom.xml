@@ -1,6 +1,7 @@
 ---
 layout: nil
 title : Atom Feed
+permalink: /atom.xml
 ---
 
 <?xml version="1.0" encoding="utf-8"?>
