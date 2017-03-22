@@ -575,7 +575,7 @@ permalink: /notes
 
     function getPostElementFromPost(post,isPreview){
         var isAdmin = firebase.auth().currentUser && firebase.auth().currentUser.uid == ADMIN_UID;
-        if (post.isPublished || isAdmin || post.author.uid == firebase.auth().currentUser.uid) {
+        if (post.isPublished || isAdmin || (firebase.auth().currentUser && post.author.uid == firebase.auth().currentUser.uid)) {
             var isPreview = isPreview && isPreview != null && isPreview === true ? true : false;
             var $post = $('<div class="post"></div>').attr('data-id',post.createdOn);
             var $content = isPreview ? $(marked(truncateStringToXWords(post.content,75))) : $(marked(post.content));
