@@ -10,30 +10,7 @@
 
 <head>
 
-<title>{{ page.title }} | Graham Macphee</title>
-<meta name="author" content="Graham Macphee" />
-<meta name="description" content="" />
-<meta name="keywords" content="" />
-<meta charset="utf-8">
-<link rel="canonical" href="{{ site.url }}{{ page.url }}" />
-<link rel="alternate" type="application/atom+xml" title="{{ site.name }}" href="{{ site.baseurl }}/atom.xml" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#8B67FF">
-
-{% include httpsredirect.html %}
-
-<link rel="shortcut icon" href="{{ site.baseurl }}/assets/img/ptlogooutline.png">
-<link href='https://fonts.googleapis.com/css?family=Libre+Baskerville:400' rel='stylesheet' type='text/css'>
-<link href="{{ site.baseurl }}/assets/css/main.css" rel="stylesheet" type="text/css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-
-{% include fbmeta.html %}
-{% include twittermeta.html %}
-
-{% if page.url == "/404.html" %}
-	<meta http-equiv="refresh" content="10; url=/">
-{% endif %}
+{% include head.html %}
 
 </head>
 

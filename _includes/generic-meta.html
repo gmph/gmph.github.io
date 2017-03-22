@@ -1,0 +1,9 @@
+<title>{% if page.url != "/" %}{{ page.title }} – {% endif %}{{ site.title }}</title>
+<meta name="author" content="{% if page and page.author and page.author.name %}{{ page.author.name }}{% else %}{{ site.author.name }}{% endif %}" />
+<meta name="description" content="{% if page.content %}{{ page.content | strip_html | truncatewords:160 }}{% else %}{{ site.description }}{% endif %}" />
+<meta name="keywords" content="{% if page.content %}{{ page.content | strip_html | truncatewords:160 }}{% else %}{{ site.keywords }}{% endif %}" />
+<meta charset="utf-8">
+<link rel="canonical" href="{{ site.url }}{% if page and page.url %}{{ page.url }}{% endif %}" />
+<link rel="alternate" type="application/atom+xml" title="Feed – {{ site.name }}" href="{{ site.baseurl }}/atom.xml" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="{{ site.baseurl }}{{ site.logo }}">
