@@ -16,20 +16,11 @@
 
 <body>
 
-		<div class="posttabs">
-			<div class="content">
-				<a href="{{ site.baseurl }}/articles" class="purple">Articles</a>
-				<a href="{{ site.baseurl }}/notes" class="purple">Notes</a>
-		        <a href="{{ site.baseurl }}/portfolio" class="purple">Portfolio</a>
-				<a href="https://twitter.com/gmph" target="_blank" class="twitter">Twitter</a>
-			</div>
-	    </div>
+		{% include navigation.html %}
 
-		<div class="block landing">
+		<article>
 
-			<h1 class="nomo"><span class="title">{{ page.heading }}</span><span class="cursor blink">&#124;</span></h1>
-
-			<h1 class="moon"><span class="mobile-title">{{ page.heading }}</span></h1>
+			<h1>{{ page.heading }}</h1>
 
 			{% if page.private %}
 			<h2 class="subheading">This article is currently a private draft.</h2>
@@ -41,84 +32,30 @@
 
 			{{ content }}
 
-		</div>
+		</article>
 
-		<!-- <a href="#top"><div class="footerimg"><div class="img"></div></div></a> -->
+		{% include footer.html %}
 
 </body>
 
 
 <script language="javascript">
 
-	var designsManager = function($){
-
-		function getAndDisplayDesigns(){
-			$.get('https://api.dribbble.com/v1/users/gmph/shots?access_token=0c812957ccb3bc8a857fad33c03f91f3ce4661ab199210d893649b7a920aa51b', function(designs){
-				var listOfDesigns = [];
-				for (var i = 0; i < designs.length && i < 4; i++){
-					listOfDesigns.push({
-						'id' : designs[i].id,
-						'title' : designs[i].title,
-						'url' : designs[i].html_url,
-						'image' : designs[i].images.hidpi || designs[i].images.normal,
-					});
-				}
-				return displayDesigns(listOfDesigns);
-			});
-		}
-
-		function displayDesigns(listOfDesigns){
-			var $designs = $('.designs-container');
-			for (var i = 0; i < listOfDesigns.length; i++){
-				$designs.append(getDesignElementFromDesignItem(listOfDesigns[i]));
-			}
-		}
-
-		function getDesignElementFromDesignItem(design){
-			var $design = $('<a>')
-				.addClass('design-item')
-				.attr({
-					'href' : design.url,
-					'target' : '_blank',
-					'data-id' : design.id,
-					'title' : design.title,
-					'alt' : design.title
-				});
-			var $image = $('<img>')
-				.attr({
-					'title' : design.title,
-					'alt' : design.title,
-					'src' : design.image
-				});
-			$design.append($image);
-			return $design;
-		}
-
-		return {
-			displayDesigns : getAndDisplayDesigns,
-		}
-
-	}($)
-
 	var musicManager = function($){
 
-		function displaySongWithDescriptionInElement(songWithNameArtistImageUrl,description,element){
+		function displaySongWithDescriptionInElement(songWithNameArtistImageUrl, description, element){
+			var $element = $(element);
 			var song = songWithNameArtistImageUrl;
-			var $songContainer = $('<div class="song-container"></div>');
 			var songString = "";
-			var $songImage;
-			if (song['name'] != undefined){
-				songString = song['name'];
-				if (song['artist'] != undefined){
-					songString += " by " + song['artist'];
+			if (song && song.name){
+				songString = song.name;
+				if (song.artist){
+					songString += " by " + song.artist;
 				}
-				if (song['image'] != undefined){
-					$songImage = $('<img class="song-image" src="'+song['image']+'"/>');
-					$songContainer.append($songImage);
-				}
-				var $song = $('<a href="'+song.url+'" target="_blank"></a>').append($songContainer.append(($('<div class="song-info"></div>').append($('<div class="song-description">'+description+'</div>'))).append($('<div class="song-text">'+songString+'</div>'))));
-				$(element).after($song);
-				$(element).remove();
+				$element.find('a').attr('href',song.url);
+				$element.find('.background').attr('src', song.image);
+				$element.find('h3').text(songString);
+				$element.find('p').text(description);
 			} else {
 				$(element).remove();
 			}
@@ -151,8 +88,10 @@
 					// No name
 					mostPlayedSong['url'] = null;
 				}
-				return displaySongWithDescriptionInElement(mostPlayedSong,'Most played this month',$('.most-listened'));
-			})
+				return displaySongWithDescriptionInElement(mostPlayedSong,'Most played this month',$('#music-container'));
+			}).fail(function (){
+				$('#music-container').remove();
+			});
 		}
 
 		return {
@@ -212,35 +151,14 @@
 			document.dispatchEvent(eventLocationDataProcessed);
 		}
 
-		function displayLatestLocationName(){
-			try {
-				var numberOfLocations = locationData.length-1;
-				var latestLocation = locationData[numberOfLocations];
-				var latestValidName = ' <a href="'+latestValidURL+'" target="_blank"><div class="name">' + latestLocation.name + "</div></a>";
-				var latestValidURL = latestLocation.linkURL;
-				var latestMapCenter = getParameterByName("center",locationData[numberOfLocations].mapImageURL);
-				$('#map').attr('src','https://www.google.com/maps/embed/v1/view?center='+latestMapCenter+'&zoom='+mapZoomLevel+'&key='+randomString);
-				updateText = '<a href="'+latestValidURL+'" target="_blank"><div class="region">' + latestLocation.name + "</div></a>" + '<a href="'+latestValidURL+'" target="_blank"><!--<div class="date">' + latestLocation.date.slice(0,-2) + latestLocation.date.substring(latestLocation.date.length-2).toLowerCase() + '</div>--></a>';
-				$locationContainer.html(updateText);
-			} catch (e){
-				$locationContainer.remove();
-			}
-
-		}
-
-		function displayLatestTrip(description,element){
+		function displayLatestTrip(description, element){
 			try {
 				var $element = $(element);
 				var latestLocation = locationData[locationData.length-1];
-
-				var $locationContainer;
-				var $mapImage = $('<div class="location-map-container"></div>').append($('<img class="location-map" src="'+latestLocation.mapImageURL.replace('http://', 'https://')+'&key='+randomString+'"/>'));
-				var $locationDescription = $('<div class="song-description">'+description+'</div>');
-
-				var $locationContainer = $('<a href="'+latestLocation.linkURL+'" target="_blank"></a>').append($('<div class="location-container"></div>').append($mapImage).append(($('<div class="location-info"></div>').append($('<div class="location-description">'+description+'</div>'))).append($('<div class="location-name">'+latestLocation.name+'</div>'))));
-
-				$element.after($locationContainer);
-				$element.remove();
+				$element.find('a').attr('href',latestLocation.linkURL);
+				$element.find('.background').attr('src', latestLocation.mapImageURL.replace('http://', 'https://').replace('zoom=16', 'zoom=9').replace('size=710x440','size=320x160')+'&key='+randomString);
+				$element.find('h3').text(latestLocation.name);
+				$element.find('p').text(description);
 			} catch (e){
 				$(element).remove();
 			}
@@ -248,7 +166,6 @@
 
 		return {
 			init : init,
-			displayLatestLocationName : displayLatestLocationName,
 			displayLatestTrip : displayLatestTrip,
 		}
 
@@ -264,9 +181,8 @@
     	navigateToHashCategory();
     	musicManager.displayMostPlayedThisWeek();
     	locationManager.init(function(){
-			locationManager.displayLatestTrip('Recent trip',$('.latest-trip'));
+			locationManager.displayLatestTrip('Recent trip',$('#trip-container'));
 		});
-		designsManager.displayDesigns();
 	});
 
     function initLoadingState(){
@@ -293,26 +209,10 @@
 
     function setStyling(){
     	$('.title').html('Graham Macphee');
-		$('.cursor').addClass('blink');
     	$('a').each(function() {
 		    if ($(this).find('img').length) {
 		        $(this).css('border','none');
 		    }
-		});
-
-		if ($(window).scrollTop() <= $('.postview').offset().top - 50){
-			$('.posttabs').addClass('no-active');
-			$('.posttab.home').addClass('active');
-		} else {
-			$('.posttabs').removeClass('no-active');
-			$('.posttab.home').removeClass('active');
-		}
-
-		$('.postlist').each(function(){
-			for (var i = 0; i < $(this).find('.postitem').length; i++){
-				$(this).find('.postitem').eq(i).css('transition','.3s all ease-out '+(150*i)+'ms');
-				$(this).find('.postitem').eq(i).css('-webkit-transition','.3s all ease-out '+(150*i)+'ms');
-			}
 		});
     }
 
@@ -321,62 +221,7 @@
     	$('.posttab[data-tab="'+hash+'"]').click();
     }
 
-    function attachEvents(){
-
-    	$(document).on('scroll',function(){
-			if ($(window).scrollTop() <= $('.postview').offset().top - 100){
-				$('.posttabs').addClass('no-active');
-				$('.posttab.home').addClass('active');
-			} else {
-				$('.posttabs').removeClass('no-active');
-				$('.posttab.home').removeClass('active');
-			}
-		});
-
-    	$(document).on('click','.posttab',function(){
-			var $activeTab = $(this);
-			if (!$activeTab.hasClass('active') || $(window).scrollTop() <= 100){
-				var category = $activeTab.attr('data-tab');
-				var id = parseInt($activeTab.attr('data-id'));
-				if (!$activeTab.hasClass('active')){
-					$('.postlist').css({'opacity':'0','top':'15px'});
-				}
-				$('.posttab').removeClass('active before after');
-				$activeTab.addClass('active');
-				$('html,body').animate({
-					"scrollTop" : $('.postlist[data-id="'+id+'"]').closest('.postview').offset().top - 17,
-				},300);
-				setTimeout(function(){
-					$('.postlist').removeClass('active before after');
-					$('.postlist.'+category).addClass('active');
-
-					$('.posttab').each(function(){
-						var $thisTab = $(this);
-						if (parseInt($thisTab.attr('data-id')) < id){
-							$thisTab.addClass('before');
-							$('.postlist[data-id="'+$thisTab.attr('data-id')+'"]').addClass('before');
-						} else if (parseInt($thisTab.attr('data-id')) > id){
-							$thisTab.addClass('after');
-							$('.postlist[data-id="'+$thisTab.attr('data-id')+'"]').addClass('after');
-						}
-					});
-
-
-					$('.postlist').css({'opacity':'','top':''});
-				},400);
-			}
-		});
-
-		$(document).on( "touchstart", ".menubutton, .bigclose" , function(e) {
-			e.preventDefault();
-			controlMenu();
-		} );
-
-		$(document).on( "click", ".menubutton, .bigclose" , function() {
-			controlMenu();
-		} );
-
-    }
+    function attachEvents(){}
 
     function controlMenu(){
 		$('.menubutton').toggleClass('close');
@@ -473,7 +318,7 @@
 	}
 
 	$(function() {
-      $('a[href*=#]:not([href=#])').click(function() {
+      $('a[href*="#"]:not([href="#"])').click(function() {
         if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
           var target = $(this.hash);
           target = target.length ? target : $('[name=' + this.hash.slice(1) +']');

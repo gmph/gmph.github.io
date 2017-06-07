@@ -1,4 +1,4 @@
-{% assign simpleImageURL = site.url | append:"/assets/ptlogooutline.png" %}
+{% assign simpleImageURL = site.url | append:"/assets/graham.png" %}
 {% assign imageURL = simpleImageURL %}
 {% assign images = page.content | split:"<img " | reverse %}
 {% for image in images %}
@@ -18,7 +18,7 @@
 <meta property="og:type" content="{% if page.layout == 'default' %}article{% else %}website{% endif %}">
 <meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 <meta property="og:image" content="{{ imageURL }}">
-<meta property="og:description" content="{{ page.content | strip_html | truncatewords:160 }}">
+<meta property="og:description" content="{{ page.content | strip_html | truncatewords:55 }}">
 <meta property="og:site_name" content="{{ site.title }}">
 <meta property="og:locale" content="{{ site.locale }}">
 {% if page.date %}

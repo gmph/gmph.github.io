@@ -1,7 +1,8 @@
 @import 'colors';
+@import 'fonts';
 
-* {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+*, .sans-serif, .sans-serif * {
+  font-family: $sans-serif;
   color: $black;
 }
 
@@ -13,7 +14,7 @@ article {
 }
 
 blockquote {
-  padding: 0 8px;
+  padding: 0 1em;
   border-left: solid 2px rgba(0,0,0,.3);
   line-height: 1.4em;
   opacity: 0.7;
@@ -23,38 +24,12 @@ article img, article video {
   max-width: 100%;
   height: auto;
   margin: 0.5em 0 0 0;
-  border: solid 1px rgba(0,0,0,.12);
-  border-radius: 4px;
+  border: solid 1px $highlight;
+  border-radius: 8px;
 }
 
 article video {
   margin: 1.5em 0 0 0;
-}
-
-article img.half {
-  display: inline-block;
-  width: calc(50% - 8px);
-  height: auto;
-  margin: 0.5em 11px 0 0;
-  border: solid 1px rgba(0,0,0,.12);
-  border-radius: 4px;
-}
-
-article img.half:nth-of-type(2n){
-  margin: 0.5em 0 0 0;
-}
-
-article img.third {
-  display: inline-block;
-  width: calc(33.333333% - 8px);
-  height: auto;
-  margin: 0.5em 5px 0 0;
-  border: solid 1px rgba(0,0,0,.12);
-  border-radius: 4px;
-}
-
-article img.third:nth-of-type(3n){
-  margin: 0.5em 0 0 0;
 }
 
 article img.large {
@@ -72,6 +47,7 @@ article img.no-border {
 
 h1, h2, h3, h4, h5, h6 {
   margin: 1.5em auto 0 auto;
+  line-height: 1.45em;
 }
 
 h1 {
@@ -91,10 +67,18 @@ h3 {
 
 h4 {
   font-size: 1.1em;
+  font-weight: 400;
+}
+
+h2 + h5 {
+  margin: -1.25em auto 0 auto;
 }
 
 h5 {
   font-size: 1em;
+  font-weight: 500;
+  color: $grey2;
+  margin: 0 auto 0.75em auto;;
 }
 
 h6 {
@@ -103,46 +87,76 @@ h6 {
   font-weight: 400;
 }
 
-p, blockquote {
+article h1:first-of-type {
+  margin: 140px auto 128px auto;
+  font-size: 3.8em;
+  font-weight: 400;
+  line-height: 1.35em;
+  letter-spacing: -0.0115em;
+}
+
+@media (max-width: 1000px){
+
+  article h1:first-of-type {
+    margin: 120px auto 96px auto;
+    font-size: 2.75em;
+  }
+
+}
+
+@media (max-width: 720px){
+
+  article h1:first-of-type {
+    margin: 80px auto 72px auto;
+    font-size: 2em;
+  }
+
+}
+
+@media (max-width: 560px){
+
+  article h1:first-of-type {
+    margin: 56px auto 48px auto;
+    font-size: 1.6em;
+  }
+
+}
+
+p, blockquote, ul, ol {
+  color: $black;
+  font-family: $serif;
   margin: 1em auto 0 auto;
   font-size: 1em;
-  line-height: 1.4em;
+  line-height: 1.8em;
+}
+
+p *, blockquote *, ul *, ol * {
+  font-family: $serif;
+}
+
+ul li, ol li {
+  margin: 0 0 0.5em 1.5em;
+  padding: 0 0 0 0.25em;
 }
 
 a {
   color: inherit;
   text-decoration: none;
-  border-bottom: solid 1px rgba(0,0,0,.2);
-}
-
-a.button {
-  display: inline-block;
-  margin: 8px 0 0 0;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 3px;
-  background: rgba(0,0,0,.04);
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.1);
-  font-weight: 500;
-  line-height: 1.4em;
-  color: #555;
-  text-shadow: 0 1px 2px rgba(0,0,0,.1);
-}
-
-a.button:hover {
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.1), inset 0 0 9999px rgba(0,0,0,.04);
+  border-bottom: solid 2px rgba($turquoise, 0.48);
 }
 
 hr {
-  margin: 2em 0;
+  margin: 0.5em 0;
   border: none;
-  border-bottom: solid 1px rgba(0,0,0,.16);
+  border-bottom: solid 2px $highlight;
+}
+
+br {
+  margin: 0.5em 0;
 }
 
 mark {
-  padding: 0 2px 1px 2px;
   background-color: $highlight;
-  border-radius: 2px;
 }
 
 pre {

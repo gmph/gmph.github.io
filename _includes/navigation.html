@@ -1,0 +1,11 @@
+<div class="navigation">
+    <a href="{{ site.baseurl }}/">
+        <h1>Graham Macphee</h1>
+    </a>
+    <nav>
+        {% unless page.url contains "/portfolio" or page.url == "/articles" %}<a class="nosmamo" href="{{ site.baseurl }}/articles">Articles</a>{% endunless %}
+        {% if page.url contains "/portfolio" or page.url == "/articles" %}<a class="nosmamo" href="{{ site.baseurl }}/">Portfolio</a>{% endif %}
+        <a href="https://twitter.com/gmph" target="_blank" class="twitter nomo">Twitter</a>
+        <a href="{{ site.baseurl }}/hire" class="button">Hire me</a>
+    </nav>
+</div>

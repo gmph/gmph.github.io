@@ -13,8 +13,8 @@ fb_author : "100000408177137"
 
 # Helpers
 
-url: http://127.0.0.1:4000
-enforce_ssl: https://127.0.0.1:4000
+url: localhost:4000
+enforce_ssl: localhost:4000
 locale: "en_GB"
 permalink: /:title
 excerpt_separator: "<!--MORE-->"
@@ -31,7 +31,7 @@ defaults:
         email: hi@gmph.co
         uri: https://gmph.co
         twitter : gmph
-        picture: /assets/img/graham/png
+        picture: /assets/img/graham.png
   -
     scope:
       path: ""      # empty string for all files
@@ -47,4 +47,4 @@ gems:
   - jekyll-seo-tag
 jekyll-mentions: https://twitter.com
 sass:
-    sass_dir: assets/css
+    sass_dir: _styles

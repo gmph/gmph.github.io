@@ -6,6 +6,7 @@ body {
   background-size: 100% auto !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
+  background-color: $white;
 }
 
 body.case-study {
@@ -16,7 +17,7 @@ main, article, footer {
   display: block;
   position: relative;
   width: 90%;
-  max-width: 560px;
+  max-width: 1040px;
   margin: 0 auto;
 }
 
@@ -25,12 +26,15 @@ article {
 }
 
 footer {
+  width: 100%;
   margin-top: 48px;
   padding: 24px 0 44px 0;
-  border-top: 1px solid rgba(0,0,0,.12);
+  border-top: solid 2px $highlight;
 }
 
 footer p {
+  max-width: 90vw;
+  margin: 0 auto;
   color: $black;
   opacity: 0.6;
 }
@@ -80,7 +84,33 @@ footer p {
   margin: 24px auto;
 }
 
-@media (max-width: 800px){
+@media (min-width: 1001px){
+
+  article .x-wide {
+    display: block;
+    position: relative;
+    top: 0;
+    left: -16%;
+    width: 132%;
+    margin: 120px auto;
+  }
+
+}
+
+@media (min-width: 721px){
+
+  article .wide {
+    display: block;
+    position: relative;
+    top: 0;
+    left: -8%;
+    width: 116%;
+    margin: 40px auto;
+  }
+
+}
+
+@media (max-width: 720px){
   
   .full-width .background {
     display: none;

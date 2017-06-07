@@ -31,7 +31,7 @@ defaults:
         email: hi@gmph.co
         uri: https://gmph.co
         twitter : gmph
-        picture: /assets/img/graham/png
+        picture: /assets/img/graham.png
   -
     scope:
       path: ""      # empty string for all files
@@ -47,4 +47,4 @@ gems:
   - jekyll-seo-tag
 jekyll-mentions: https://twitter.com
 sass:
-    sass_dir: assets/css
+    sass_dir: _styles

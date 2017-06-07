@@ -1,105 +1,144 @@
 ---
 layout: landing
 title: Graham Macphee
-heading: Graham Macphee
+heading: I'm Graham Macphee. I use design to prototype and create useful, usable digital products.
 date: 28th April 2015
 published: true
 format: markdown
 permalink: /
+redirect_from: 
+- /portfolio/
+- /portfolio
+- /pages/
+- /pages
+- /projects/
+- /projects
+- /assets/
+- /assets
 ---
 
-I'm a designer from Edinburgh, Scotland. I tend to think about puppies, pizza and equality. I enjoy being creative: design, photography, writing, playing ukulele and singing. I'm quiet and thoughtful. I like nature and quiet nights.
+<div class="half line">
 
-You can get in touch with me by [email](mailto:hi@gmph.co).
+    <p>I have worked for startups in Europe and the US for 4 years to solve critical business challenges through design.</p>
 
-<div class="postview">
+    <p>I work closely with teams to understand the product, market and strategy. By holding insightful research sessions, I understand user needs. I then validate designs by testing prototypes, and use data to inform iterations.</p>
 
-    <h5 class="postviewtitle">Articles</h5>
+    <p>My goal is to make measurable differences to user experience and behaviour which impact the bottom line.</p>
 
-    {% assign counter = 0 %}
-    {% assign maxPostCount = 2 %}
-    {% assign sorted_cats = site.categories | sort %}
-    {% for category in sorted_cats %}
-        {% assign sorted_posts = category[1] | reversed %}
-        <ul class="postlist {{ category[0] }} active" data-id="{{ forloop.index0 }}">
-            {% for post in sorted_posts %}
-            {% if post.private != true and counter < maxPostCount %}
-            {% assign counter=counter | plus:1 %}
-            <li class="postitem">
-                {% if post.redirect %}
-                    <a href="{{ post.redirect }}" target="\_blank">
-                {% else %}
-                    <a href="{{ post.url }}">
-                {% endif %}
-                        <h2><span class="postitemtitle">{{ post.title }}</span> <span class="postitemmeta">{{ post.date | date: "%B %-d, %Y" }}</span></h2>
+    <a class="button" href="/hire">Hire me for a project &rarr;</a>
 
-                        <div class="positemdescription">
-                            <p>{{ post.content | strip_html | truncatewords: 36 }}</p>
-                        </div>
-                    </a>
-                </li>
-            {% endif %}
-            {% endfor %}
-            <a class="color-purple view-all" href="/articles">View all articles &rarr;</a>
-        </ul>
-    {% endfor %}
+    <br class="moon">
+    <br class="moon">
+    
+</div>
+
+<div class="half">
+    {% include project.html primary-text="Yavi, chat and schedule for shift workers" secondary-text="View case study" background-image="pages/portfolio/img/yavi.png" link="/portfolio/yavi" arrow="→" %}
+</div>
+
+<div class="half">
+    {% include project.html primary-text="Happy Up, private notes to make you smile" secondary-text="View side project" background-image="pages/portfolio/img/happyup.png" arrow="→" %}
+</div>
+
+<div class="half">
+    {% include project.html primary-text="Suave, an organised read-later list" secondary-text="View case study" background-image="pages/portfolio/img/suave.png" arrow="→" %}
+</div>
+
+<div class="half">
+    {% include project.html primary-text="Shout, create simple gifs for social media" secondary-text="View side project" background-image="pages/portfolio/img/shout.png" arrow="→" %}
+</div>
+
+<div class="half">
+    {% include project.html primary-text="Timeline, discover your loved ones' memories" secondary-text="View side project" background-image="pages/portfolio/img/timeline.png" arrow="→" %}
+</div>
+
+<div class="half">
+    {% include project.html primary-text="Snipandshare, share screenshots from Chrome" secondary-text="View case study" background-image="pages/portfolio/img/snipandshare.png" arrow="→" %}
+</div>
+
+<div class="half">
+    {% include project.html primary-text="Wonderloop, video profile introductions" secondary-text="View case study" background-image="pages/portfolio/img/wonderloop.png" arrow="→" %}
+</div>
+
+<hr>
+<br class="nomo">
+
+<h5>Other work</h5>
+
+<div class="half">
+    {% include project.html primary-text="MoDaCo Solutions" secondary-text="Interface design for a home automation app for Android, in the Material style, featured at Google I/O" %}
+</div>
+
+<div class="half">
+    {% include project.html primary-text="Plasma Cat Media" secondary-text="Original branding and web design for a London-based creative agency with clients including Google and Barclaycard" %}
+</div>
+
+<div class="half">
+    {% include project.html primary-text="Boid" secondary-text="Interface design and branding for the Android Twitter client, with over 50,000 downloads and a 4 star rating from 1,656 reviews" %}
+</div>
+
+<div class="half"></div>
+
+<hr>
+<br class="nomo">
+
+<div class="half">
+
+    <h3>Contact me</h3>
+
+    <p>Say hi! Send an email to <a href="mailto:hi@gmph.co">hi@gmph.co</a>, or send me a message on Twitter, <a href="http://twitter.com/gmph">@gmph</a>.</p>
+
+    <br>
+
+    <h3>More about me</h3>
+
+    <p>I live and work in Edinburgh, UK. I tend to think about puppies, pizza and equality. I enjoy being creative: design, photography, writing, playing ukulele and singing. I’m quiet and thoughtful. I like nature and quiet nights in.</p>
+
+    <br>
+
+    <div id="music-container">
+        {% include project.html link="" primary-text="Loading most played song..." secondary-text="" background-image="" style="inline" %}
+    </div>
+
+    <div id="trip-container">
+        {% include project.html link="" primary-text="Loading most recent trip..." secondary-text="" background-image="" style="inline" %}
+    </div>
+
+    <br>
+
+    <p>You can see my designs above and on <a href="http://dribbble.com/gmph" target="_blank">Dribbble</a>, and find my photography on <a href="http://instagram.com/gmph" target="_blank">Instagram</a>.</p>    
+
+    <br class="moon">
+    <br class="moon">
+    <hr class="moon">
 
 </div>
 
-<h5>Recent work</h5>
+<div class="half">
 
-<div class="designs-container"></div>
+    <h3>Articles</h3>
 
-I am a designer with 4 years industry experience working for startups around the world; currently at [Yavi](http://yavi.co) building delightful tools for workers. Previously I worked as a writer and review manager for UltraLinx, and for other online publications.
-
-<ul class="postlist work-links active">
-    <li class="postitem">
-        <a href="https://timeline.gmph.co" target="_blank">
-            <h2><span class="postitemtitle">Timeline</span> <span class="postitemmeta">Side project &rarr;</span></h2>
-            <div class="positemdescription">
-                <p>Create a timeline of events with images and stories which you can share with friends and family.</p>
+    {% assign counter = 0 %}
+    {% assign maxPostCount = 2 %}
+    <div data-id="{{ forloop.index0 }}">
+        {% for post in site.posts %}
+        {% if post.private != true and counter < maxPostCount %}
+        {% assign counter=counter | plus:1 %}
+        <div>
+            {% if post.redirect %}
+                <a href="{{ post.redirect }}" target="\_blank">
+            {% else %}
+                <a href="{{ post.url }}">
+            {% endif %}
+                    <h4>{{ post.title }}</h4> 
+                    <h5 class="postitemmeta">{{ post.date | date: "%B %-d, %Y" }}</h5>
+                    <p>{{ post.content | strip_html | truncatewords: 44 }}</p>
+                </a>
             </div>
-        </a>
-    </li>
-    <li class="postitem">
-        <a href="http://gmph.co/shout" target="_blank">
-            <h2><span class="postitemtitle">Shout</span> <span class="postitemmeta">Side project &rarr;</span></h2>
-            <div class="positemdescription">
-                <p>Create colourful, animated GIFs from images, text and emoji to get your message across on social media.</p>
-            </div>
-        </a>
-    </li>
-    <li class="postitem">
-        <a href="http://yaviapp.com" target="_blank">
-            <h2><span class="postitemtitle">Yavi</span> <span class="postitemmeta">Employee, 2016 - Present &rarr;</span></h2>
-            <div class="positemdescription">
-                <p>Make your scheduling more efficient by putting work chat and schedule on your team's phones.</p>
-            </div>
-        </a>
-    </li>
-</ul>
-
-<!-- If you would like to discuss a role at your company, please [email me](mailto:hi@grahammacphee.co.uk) to arrange a call. -->
-
-<a class="color-purple view-all" href="/portfolio">View portfolio &rarr;</a>
-
-<h5>More about me</h5>
-
-I'm creative. You can see my photography on [Instagram](http://instagram.com/gmph) and illustrations and prints on [Depop](http://depop.com/gmph).
-
-<p>
-    <div class="song-container most-listened">
-        <div class="song-info">
-            <div class="song-description">Loading most played song...</div>
-        </div>
+            <br>
+        {% endif %}
+        {% endfor %}
+        <a class="button" href="/articles">View all articles &rarr;</a>
     </div>
-    <div class="location-container latest-trip">
-        <div class="location-info">
-            <div class="location-description">Loading most recent trip...</div>
-        </div>
-    </div>
-</p>
 
-You can email me at [hi@gmph.co](mailto:hi@gmph.co) to say hello. Currently I'm interested in discussing small collaborative projects.
-
-You can read more about this website in its [colophon](/colophon).
+</div>

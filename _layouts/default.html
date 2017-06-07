@@ -16,15 +16,9 @@
 
 <body>
 
-		<div class="posttabs default">
-			<div class="content">
-		        <a href="/" class="back"><span class="arrow">&larr;</span> Home</a>
-		        <a href="#social" class="right-align">Share</a>
-	        </div>
-	    </div>
+		{% include navigation.html %}
 
-		<div class="block">
-
+		<article class="mw-640">
 
 			<h1 class="heading">{{ page.heading }}</h1>
 
@@ -33,39 +27,29 @@
 			{% else if page.subheading %}
 			<h2 class="subheading">{{ page.subheading }}</h2>
 			{% endif %}
-
-			<span class="littleline"></span>
-
+	
 			{{ content }}
 
-			<div id="social" class="social">
-				<a class="gmph-button twitter" href="https://twitter.com/home?status={{ page.title }}%20{{ site.url }}{{ site.baseurl }}{{ page.url }}%20by%20%40gmph" target="_blank"><span class="twitter-logo-text"></span> Tweet</a>
-				<a class="gmph-button facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ site.baseurl }}{{ page.url }}" target="_blank"><span class="facebook-logo-text"></span> Share</a>
-			</div>
+			<p>
+				<a class="button bg-twitter" href="https://twitter.com/home?status={{ page.title }}%20{{ site.url }}{{ site.baseurl }}{{ page.url }}%20by%20%40gmph" target="_blank"><span class="twitter-logo-text"></span> Tweet</a>
+				<a class="button bg-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ site.baseurl }}{{ page.url }}" target="_blank"><span class="facebook-logo-text"></span> Share</a>
+			</p>
 
-			<div class="meta">
-				<a href="{{ site.url }}"><img class="gmph-profile-picture" src="/assets/img/grahamfade.png"/></a>
-				<div class="gmph-profile-text">
-					<div class="name"><a href="{{ site.url }}">Graham&nbsp;Macphee</a></div>
-					<div class="bio">Designer at Yavi. Geek. Feminist. I write words and code.</div>
-				</div>
-			</div>
+			<br>
+			<br>
+			<br>
+			<br>
 
-		</div>
+			<a class="button bg-light" href="{{ site.baseurl }}/articles">&larr; View all articles</a>
+
+			{% include footer.html %}
+
+		</article>
 
 </body>
 
 
 <script language="javascript">
-
-    $(document).ready(function(){
-    	$('.block, .posttabs').css('opacity','0');
-	    $('body').css('overflow-y','hidden');
-		setTimeout(function(){
-    		$('.block, .posttabs').css('opacity','1');
-    		$('body').css('overflow-y','scroll');
-    	},400);
-	});
 
 	$('a').each(function() {
 	    if ($(this).find('img,svg').length) {
@@ -74,7 +58,7 @@
 	});
 
 	$(function() {
-      $('a[href*=#]:not([href=#])').click(function() {
+      $('a[href*="#"]:not([href="#"])').click(function() {
         if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
           var target = $(this.hash);
           target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
@@ -87,62 +71,6 @@
         }
       });
     });
-
-    var domainName =  window.location.hostname.replace(/[^a-z0-9]/gi,'-');
-
-    var pageName = window.location.pathname;
-    if (pageName[0] == '/'){
-    	pageName = pageName.substring(1);
-    }
-    if (pageName[pageName.length - 1] == '/'){
-    	pageName = pageName.slice(0,pageName.length - 1);
-    }
-    pageName = pageName.replace(/[^a-z0-9]/gi,'-');
-
-	var fPosts = firebase.initializeApp({
-		apiKey: "AIzaSyADZwqY2285Jd8X5-Z1zGoeOOcrbXoenqg",
-		authDomain: "project-7565141284569736729.firebaseapp.com",
-		databaseURL: "https://project-7565141284569736729.firebaseio.com",
-		storageBucket: "",
-	});
-
-	var postRef = fPosts.database().ref(domainName+'/posts/'+pageName);
-
-	var likeIncreaseTimeout;
-	function increaseLikeCountIfNeeded(likes){
-		console.log('int = '+ parseInt($('.gmph-button.like .like-count').text()));
-		if (parseInt($('.gmph-button.like .like-count').text()) < likes){
-			$('.gmph-button.like .like-count').text(parseInt($('.gmph-button.like .like-count').text()) + 1);
-			likeIncreaseTimeout = setTimeout(function(){
-				increaseLikeCountIfNeeded(likes);
-			},40);
-		}
-	}
-
-	postRef.on('value', function(snapshot) {
-		var likes = snapshot.child('likes').val();
-		increaseLikeCountIfNeeded(likes);
-		// $('.gmph-button.like .like-count').text(likes);
-		if (likes == null){
-			postRef.update({
-				'likes' : 0
-			});
-		}
-	});
-
-	var likeTimeout;
-
-	$(document).on('click','.gmph-button.like',function(){
-		$('.gmph-button.like').addClass('disabled');
-		likeTimeout = setTimeout(function(){
-			$('.gmph-button.like').removeClass('disabled');
-		},500);
-		postRef.child('likes').transaction(function(likes) {
-		    return  (likes || 0) + 1;
-		});
-	})
-
-
 
 </script>
 

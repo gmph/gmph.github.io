@@ -1,0 +1,84 @@
+@import 'colors';
+
+.project {
+    display: block;
+    position: relative;
+    padding: 0 0 0 0;
+    overflow: hidden;
+    font-size: 0;
+}
+
+.project a {
+    opacity: 0.99;
+    transition: all .1s ease-in-out;
+}
+
+.project a:hover {
+    opacity: 0.88;
+}
+
+.project .background {
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    margin: 16px 0 0 0;
+    padding: 0;
+    border-radius: 8px;
+    border: none;
+}
+
+.project.inline .background {
+    display: inline-block;
+    vertical-align: middle;
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+}
+
+.project .text {
+    display: block;
+    position: relative;
+    width: auto;
+    height: auto;
+    padding: 16px 0 8px 0;
+    font-size: 16px;
+}
+
+.project.inline .text {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 80px);
+    padding: 16px 0 0 16px;
+}
+
+.project .text h3 {
+    margin: 0;
+}
+
+.project.inline .text h3 {
+    font-weight: 400;
+}
+
+.project .text p {
+    margin: 2px 0 0 0;
+    font-size: 1em;
+    line-height: 1.6em;
+    opacity: 0.56;
+}
+
+.project .text .arrow {
+    display: inline;
+    position: relative;
+    top: 1px;
+    left: 4px;
+    margin: 0;
+    padding: 0;
+    transition: all .1s ease-in-out;
+}
+
+.project:hover a .text .arrow {
+    left: 10px;
+}

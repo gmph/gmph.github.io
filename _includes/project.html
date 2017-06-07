@@ -1,0 +1,9 @@
+<div class="project {% if include.style  %}{{ include.style }}{% endif %}">
+    {% if include.link %}<a href="{{ include.link }}">{% endif %}
+        {% if include.background-image %}<img class="background" src="{{ include.background-image }}"/>{% endif %}
+        <div class="text">
+            {% if include.primary-text %}<h3>{{ include.primary-text }}</h3>{% endif %}
+            {% if include.secondary-text %}<p class="sans-serif">{{ include.secondary-text }} {% if include.arrow %}<span class="arrow">{{ include.arrow }}</span>{% endif %}</p>{% endif %}
+        </div> 
+    {% if include.link %}</a>{% endif %}
+</div>
