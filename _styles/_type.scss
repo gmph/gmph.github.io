@@ -1,0 +1,202 @@
+@import 'colors';
+@import 'fonts';
+
+*, .sans-serif, .sans-serif * {
+  font-family: $sans-serif;
+  color: $black;
+}
+
+article {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+blockquote {
+  padding: 0 1em;
+  border-left: solid 2px rgba(0,0,0,.3);
+  line-height: 1.4em;
+  opacity: 0.7;
+}
+
+article img, article video {
+  max-width: 100%;
+  height: auto;
+  margin: 0.5em 0 0 0;
+  border: solid 1px $highlight;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+article video {
+  margin: 1.5em 0 0 0;
+}
+
+article img.large {
+  position: relative;
+  width: 160%;
+  max-width: 90vw;
+  height: auto;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+article img.no-border, article .no-border img {
+  border: none;
+  border-radius: 3px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 1.5em auto 0 auto;
+  line-height: 1.45em;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 1em auto 1em auto;
+}
+
+h2 {
+  font-size: 1.6em;
+  margin: 1em auto;
+}
+
+h3 {
+  font-size: 1.2em;
+  margin: 1.5em auto 0 auto;
+}
+
+h4 {
+  font-size: 1.2em;
+  font-weight: 400;
+}
+
+h2 + h5 {
+  margin: -1.25em auto 0 auto;
+}
+
+h5 {
+  font-size: 1em;
+  font-weight: 500;
+  color: $grey2;
+  margin: 0 auto 0.75em auto;;
+}
+
+h6 {
+  margin: 2.4em auto 0 auto;
+  font-size: 1em;
+  font-weight: 400;
+}
+
+article h1:first-of-type {
+  margin: 140px auto 128px auto;
+  font-size: 3.8em;
+  font-weight: 400;
+  line-height: 1.35em;
+  letter-spacing: -0.0115em;
+}
+
+@media (max-width: 1000px){
+
+  article h1:first-of-type {
+    margin: 120px auto 96px auto;
+    font-size: 2.75em;
+  }
+
+}
+
+@media (max-width: 720px){
+
+  article h1:first-of-type {
+    margin: 80px auto 72px auto;
+    font-size: 2em;
+  }
+
+}
+
+@media (max-width: 560px){
+
+  article h1:first-of-type {
+    margin: 56px auto 48px auto;
+    font-size: 1.6em;
+  }
+
+}
+
+p, blockquote, ul, ol {
+  color: $black;
+  font-family: $serif;
+  margin: 1.25em auto 1.25em auto;
+  font-size: 1em;
+  line-height: 1.8em;
+}
+
+p *, blockquote *, ul *, ol * {
+  font-family: $serif;
+}
+
+ul li, ol li {
+  margin: 0 0 0.5em 1.5em;
+  padding: 0 0 0 0.25em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p a, li a, blockquote a, pre a, code a, h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+  border-bottom: solid 2px rgba($turquoise, 0.48);
+}
+
+hr {
+  margin: 1em 0;
+  border: none;
+  border-bottom: solid 2px $highlight;
+}
+
+mark {
+  background-color: $highlight;
+}
+
+pre {
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.tag {
+  position: relative;
+  top: -1px;
+  left: 0;
+  padding: 2px 4px;
+  margin: 0 8px;
+  background-color: #aaa;
+  border-radius: 3px;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.text-align-center {
+  text-align: center !important;
+}
+
+.lh10 {
+  line-height: 1em !important;
+}
+
+.lh12 {
+  line-height: 1.2em !important;
+}
+
+::selection {
+  background: $black;
+  color: #fff;
+}
+
+::moz-selection {
+  background: $black;
+  color: #fff;
+}

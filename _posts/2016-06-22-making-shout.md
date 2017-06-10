@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: article
 title: Making Shout
 heading: Making Shout
 date: 22nd June 2016

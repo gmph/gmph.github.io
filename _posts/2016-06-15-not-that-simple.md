@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: article
 title: It's Not That Simple
 heading: It's not that simple.
 date: 15th June 2016

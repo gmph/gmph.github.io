@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: article
 title: The Experience Barrier for Digital Products
 heading: The Experience Barrier
 subheading: Improving usability of digital products

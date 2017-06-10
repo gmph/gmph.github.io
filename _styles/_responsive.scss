@@ -1,0 +1,40 @@
+@media (min-width: 721px){
+
+    .nomo, .nosmamo {
+        display: auto;
+    }
+
+
+    .moon {
+        display: none !important;
+    }
+
+} 
+
+@media (max-width: 720px){
+
+    .nomo {
+        display: none !important;
+    }
+
+    .moon, .nosmamo {
+        display: auto;
+    }
+
+}
+
+@media (max-width: 360px){
+
+    .nomo {
+        display: none !important;
+    }
+
+    .moon {
+        display: auto;
+    }
+
+    .nosmamo {
+        display: none !important;
+    }
+
+}

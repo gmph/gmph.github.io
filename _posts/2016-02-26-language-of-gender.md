@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: article
 title: The Language of Gender
 heading: The Language of Gender
 date: 26th February 2016

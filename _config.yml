@@ -1,18 +1,50 @@
+# Meta
+
 title: "Graham Macphee"
+description: ""
+keywords: ""
+author: gmph
+image: "/assets/img/graham.png"
+twitter:
+  username: gmph
+facebook:
+  admins: 100000408177137
+fb_author : "100000408177137"  
+
+# Helpers
+
 url: https://gmph.co
-enforce_ssl: gmph.co
-author: "Graham Macphee"
-fb_author : "100000408177137"
+enforce_ssl: https://gmph.co
 locale: "en_GB"
 permalink: /:title
 excerpt_separator: "<!--MORE-->"
+
+# Defaults
+
 defaults:
   -
     scope:
       path: "" # all files in the project
     values:
-      author: {"name": "Graham Macphee", "email": "hi@gmph.co", "uri": "http://gmph.co", "twitter" : "gmph"}
+      author: 
+        name: Graham Macphee
+        email: hi@gmph.co
+        uri: https://gmph.co
+        twitter : gmph
+        picture: /assets/img/graham.png
+  -
+    scope:
+      path: ""      # empty string for all files
+      type: posts   # limit to posts
+    values:
+      is-post: true # automatically set is_post=true for all posts
+
+# Gems
+
 gems:
   - jekyll-redirect-from
   - jekyll-mentions
+  - jekyll-seo-tag
 jekyll-mentions: https://twitter.com
+sass:
+    sass_dir: _styles

@@ -10,71 +10,12 @@
 
 <head>
 
-<title>{{ page.title }}</title>
-<meta name="author" content="Graham Macphee" />
-<meta name="description" content="" />
-<meta name="keywords" content="" />
-<meta charset="utf-8">
-<link rel="canonical" href="{{ site.url }}{{ page.url }}" />
-<link rel="alternate" type="application/atom+xml" title="{{ site.name }}" href="{{ site.baseurl }}/atom.xml" />
-<meta property="og:title" content="{{ page.title }}">
-<meta property="og:type" content="website">
-<meta property="og:url" content="{{ site.baseurl }}/{{ page.path }}">
-<meta property="og:site_name" content="Graham Macphee">
-<meta property="og:description" content="">
-<meta property="twitter:account_id" content="87261538" /> <!-- Twitter ID, currently for @gmph -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#8B67FF">
-<link rel="shortcut icon" href="{{ site.baseurl }}/assets/img/ptlogooutline.png">
-<link href='https://fonts.googleapis.com/css?family=Libre+Baskerville:400' rel='stylesheet' type='text/css'>
-<link href="{{ site.baseurl }}/assets/css/main.css" rel="stylesheet" type="text/css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+{% include head.html %}
 <meta name="robots" content="noindex, follow" />
 <meta http-equiv="refresh" content="0; url={{ page.redirect }}">
-
-{% include fbmeta.html %}
-{% include twittermeta.html %}
 
 </head>
 
 <body>
-
-		<img class="loadimg" src="{{ site.baseurl }}/assets/img/ptlogo.png"/>
-
-		<div class="block">
-
-			<a class="backbutton" href="/"><svg height="100%" width="100%"><g><path fill="#555" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path></g></svg></a>
-
-			<h1 class="heading">{{ page.heading }}</h1>
-
-			{% if page.private %}
-			<h2 class="subheading">This article is currently a private draft.</h2>
-			{% else if page.subheading %}
-			<h2 class="subheading">{{ page.subheading }}</h2>
-			{% endif %}
-
-			<span class="littleline"></span>
-
-			{{ content }}
-
-			<p class="meta"><a href="https://github.com/gmph/gmph.github.io/commits/master/{{ page.path }}" title="See versions on GitHub" target="_blank">Version {{ page.version }}</a>, posted on {{ page.date | date: "%B %-d, %Y" }} by <a href="/">Graham Macphee</a>. Graham is a Designer from Edinburgh,&nbsp;UK.</p>
-
-			<p class="social">
-				<a href="https://twitter.com/gmph" class="twitter-follow-button" data-show-count="false" data-size="large" data-dnt="true">Follow @gmph</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>&nbsp;
-				<a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="gmph" data-size="large" data-dnt="true">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-			</p>
-
-			<a href="/"><img class="footerimg" src="{{ site.baseurl }}/assets/img/ptfooter.png"/></a>
-
-		</div>
-
 </body>
-
-
-<script language="javascript">
-
-$('.block').css('opacity','0');
-$('body').css('overflow-y','hidden');
-$('.loadimg').css('opacity','0');
-
 </html>
