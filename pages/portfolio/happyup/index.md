@@ -25,9 +25,12 @@ This lovely app was built in collaboration with Kristi Kelly ([YouHue](http://yo
 
 ## Interface design
 
-<div class="third no-row no-border"><img src="/pages/portfolio/happyup/happyupstart.png"/></div>
-<div class="third no-row no-border"><img src="/pages/portfolio/happyup/happyupsave.png"/></div>
-<div class="third no-row no-border"><img src="/pages/portfolio/happyup/happyupdiscard.png"/></div>
-<div class="third no-row no-border"><img src="/pages/portfolio/happyup/happyupone.png"/></div>
-<div class="third no-row no-border"><img src="/pages/portfolio/happyup/happyupeducation.png"/></div>
-<div class="third no-row no-border"><img src="/pages/portfolio/happyup/happyupscroll.png"/></div>
+<p>
+    <div class="third no-row no-border"><img src="/pages/portfolio/happyup/happyupstart.png"/></div>
+    <div class="third no-row no-border"><img src="/pages/portfolio/happyup/happyupsave.png"/></div>
+    <div class="third no-row no-border"><img src="/pages/portfolio/happyup/happyupdiscard.png"/></div>
+    <div class="third no-row no-border"><img src="/pages/portfolio/happyup/happyupone.png"/></div>
+    <div class="third no-row no-border"><img src="/pages/portfolio/happyup/happyupeducation.png"/></div>
+    <div class="third no-row no-border"><img src="/pages/portfolio/happyup/happyupscroll.png"/></div>
+    <br>
+</p>
