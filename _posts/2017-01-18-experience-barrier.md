@@ -105,4 +105,4 @@ Hence, the best areas to look at will generally be at the bottom of the funnel w
 
 Have suggestions or questions? Used this technique and have some thoughts to share with others?
 
-You can email [hi@gmph.co](mailto:hi@gmph.co). Valuable points will be added here.
+You can email [hi@grahammacphee.com](mailto:hi@grahammacphee.com). Valuable points will be added here.

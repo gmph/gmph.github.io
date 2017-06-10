@@ -10,7 +10,7 @@ Tasks – your personal kanban board
 Your personal kanban board for managing tasks. Sign in with Twitter.
 
 A personal project by Graham Macphee. Graham is a Designer from
-Edinburgh, UK. See more of his work: http://gmph.co/portfolio
+Edinburgh, UK. See more of his work: http://grahammacphee.com/portfolio
 
 Copyright 2016, Graham Macphee. All rights reserved.
 
@@ -26,7 +26,7 @@ Copyright 2016, Graham Macphee. All rights reserved.
 <meta charset="utf-8">
 
 <!-- Facebook -->
-<meta property="og:url"                content="http://gmph.co/tasks/" />
+<meta property="og:url"                content="http://grahammacphee.com/tasks/" />
 <meta property="og:type"               content="article" />
 <meta property="og:title"              content="Tasks – your personal kanban board" />
 <meta property="og:description"        content="Your personal kanban board for managing tasks. Sign in with Twitter." />
@@ -40,7 +40,7 @@ Copyright 2016, Graham Macphee. All rights reserved.
 <meta property="twitter:account_id"    content="87261538" /> <!-- @gmph -->
 
 <script type="text/javascript">
-    var host = "gmph.co";
+    var host = "grahammacphee.com";
     if ((host == window.location.host) && (window.location.protocol != "https:"))
         window.location.protocol = "https";
 </script>
@@ -521,7 +521,7 @@ body {
 
         firebase.auth().getRedirectResult().then(function(result) {
 
-            firebase.auth().currentUser.updateEmail(result.user.displayName.toLowerCase().replace(/\s/g,'+').substring(0,20)+'+'+result.user.uid+'+gmphtasks'+'@gmph.co');
+            firebase.auth().currentUser.updateEmail(result.user.displayName.toLowerCase().replace(/\s/g,'+').substring(0,20)+'+'+result.user.uid+'+gmphtasks'+'@grahammacphee.com');
 
             if (result.user){
                 user = result.user;

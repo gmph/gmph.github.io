@@ -15,7 +15,7 @@ version: 1.1
 
 Thinking back over the recent work I have done, I don't think I gave enough time to document my experience with a little side project from the start of the year: "Shout" is a web app which creates colourful animated GIFs from text and images.
 
-[Shout – Create colourful animated GIFs from text and images](http://gmph.co/shout){:target="_blank"}{:data-gmph="link"}
+[Shout – Create colourful animated GIFs from text and images](http://grahammacphee.com/shout){:target="_blank"}{:data-gmph="link"}
 
 The idea for Shout partially came from an obvious trend on social media towards using animated text for marketing. I would often see posts like this for events or products:
 
@@ -65,4 +65,4 @@ Actually, it will never really be perfect. There is more I have considered doing
 
 I think working on Shout summarises what I love about side-projects and building things: it's the joy of the chase, of finding that elegant solution to a problem you see, of making the interations as fluid as possible, of taking the time to consider and perfect things you care about in the product. It's the fun of learning while you work on something you really enjoy.
 
-“Shout” came from the idea that colour and animation can give more volume to your words. You should [try it out](http://gmph.co/shout).
+“Shout” came from the idea that colour and animation can give more volume to your words. You should [try it out](http://grahammacphee.com/shout).

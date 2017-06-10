@@ -28,8 +28,8 @@ defaults:
     values:
       author: 
         name: Graham Macphee
-        email: hi@gmph.co
-        uri: https://gmph.co
+        email: hi@grahammacphee.com
+        uri: https://grahammacphee.com
         twitter : gmph
         picture: /assets/img/graham.png
   -

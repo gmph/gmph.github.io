@@ -19,7 +19,7 @@ Inspired by tools like Pablo and Peach, Shout is a simple web app designed to in
 
 The project let me experiment with HTML canvas, Web Workers and blob storage. It also allowed for some relatively deep investigation into GIF processing and generation using Javascript.
 
-#### Try it at [gmph.co/shout &rarr;](https://gmph.co/shout)
+#### Try it at [grahammacphee.com/shout &rarr;](https://grahammacphee.com/shout)
 
 <br>
 

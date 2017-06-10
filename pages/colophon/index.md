@@ -12,7 +12,7 @@ permalink: /colophon
 
 ## Author
 
-This blog was written, designed and coded by Graham Macphee. It was mainly written in and published from Edinburgh, Scotland. More information about Graham can be found on [the front page](http://gmph.co), and on [Twitter](http://twitter.com/gmph). Graham has also written for other online publications, including reviews for [UltraLinx](http://theultralinx.com), design critique for [UltraUI](http://ui.theultralinx.com) and editorials for [Femsplain](http://femsplain.com).
+This blog was written, designed and coded by Graham Macphee. It was mainly written in and published from Edinburgh, Scotland. More information about Graham can be found on [the front page](http://grahammacphee.com), and on [Twitter](http://twitter.com/gmph). Graham has also written for other online publications, including reviews for [UltraLinx](http://theultralinx.com), design critique for [UltraUI](http://ui.theultralinx.com) and editorials for [Femsplain](http://femsplain.com).
 
 ## Design
 

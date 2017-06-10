@@ -57,7 +57,7 @@ $(document).ready(function($){
 		
 
 		$('div#pluginSpyButton').click(function(){
-			window.open('http://gmph.co/ftwplugin', '_blank');
+			window.open('http://grahammacphee.com/ftwplugin', '_blank');
 			$('div#pluginSpyBox').css({'opacity':'0','bottom':'-300px'});
 			$('body *:not(#pluginSpyBox)').removeClass('pluginSpyGrey');
 			window.location.href += "#noftw";

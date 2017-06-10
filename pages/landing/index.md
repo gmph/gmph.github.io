@@ -125,7 +125,7 @@ redirect_from:
 
     <h3>Contact me</h3>
 
-    <p>Say hi! Send an email to <a href="mailto:hi@gmph.co">hi@gmph.co</a>, or send me a message on Twitter, <a href="http://twitter.com/gmph">@gmph</a>.</p>
+    <p>Say hi! Send an email to <a href="mailto:hi@grahammacphee.com">hi@grahammacphee.com</a>, or send me a message on Twitter, <a href="http://twitter.com/gmph">@gmph</a>.</p>
 
     <br class="moon">
 

@@ -13,8 +13,8 @@ fb_author : "100000408177137"
 
 # Helpers
 
-url: https://gmph.co
-enforce_ssl: https://gmph.co
+url: https://grahammacphee.com
+enforce_ssl: https://grahammacphee.com
 locale: "en_GB"
 permalink: /:title
 excerpt_separator: "<!--MORE-->"
@@ -28,8 +28,8 @@ defaults:
     values:
       author: 
         name: Graham Macphee
-        email: hi@gmph.co
-        uri: https://gmph.co
+        email: hi@grahammacphee.com
+        uri: https://grahammacphee.com
         twitter : gmph
         picture: /assets/img/graham.png
   -

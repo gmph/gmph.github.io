@@ -14,7 +14,7 @@ permalink: /notes
     <meta charset="utf-8">
 
     <!-- Facebook -->
-    <meta property="og:url"                content="http://gmph.co/notes/" />
+    <meta property="og:url"                content="http://grahammacphee.com/notes/" />
     <meta property="og:type"               content="article" />
     <meta property="og:title"              content="Notes | Graham Macphee" />
     <meta property="og:description"        content="Graham Macphee's short form notes. Scrappy thoughts that needed to go somewhere." />
@@ -28,7 +28,7 @@ permalink: /notes
     <meta property="twitter:account_id"    content="87261538" /> <!-- @gmph -->
 
     <script type="text/javascript">
-        var host = "gmph.co";
+        var host = "grahammacphee.com";
         if ((host == window.location.host) && (window.location.protocol != "https:"))
             window.location.protocol = "https";
     </script>
@@ -354,8 +354,8 @@ permalink: /notes
             <div class="post-child">
                 <div class="post-content"></div>
                 <div id="social" class="social">
-    				<a class="gmph-button twitter" href="https://twitter.com/home?status=Notes%20|Graham%20Macphee%20http://gmph.co/notes%20by%20%40gmph" target="_blank"><span class="twitter-logo-text"></span> Tweet</a>
-    				<a class="gmph-button facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://gmph.co/notes" target="_blank"><span class="facebook-logo-text"></span> Share</a>
+    				<a class="gmph-button twitter" href="https://twitter.com/home?status=Notes%20|Graham%20Macphee%20http://grahammacphee.com/notes%20by%20%40gmph" target="_blank"><span class="twitter-logo-text"></span> Tweet</a>
+    				<a class="gmph-button facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://grahammacphee.com/notes" target="_blank"><span class="facebook-logo-text"></span> Share</a>
     			</div>
             </div>
             <div class="user-block">
@@ -768,7 +768,7 @@ permalink: /notes
 
         firebase.auth().getRedirectResult().then(function(result) {
 
-            firebase.auth().currentUser.updateEmail(result.user.displayName.toLowerCase().replace(/\s/g,'+').substring(0,20)+'+'+result.user.uid+'+gmphblog'+'@gmph.co');
+            firebase.auth().currentUser.updateEmail(result.user.displayName.toLowerCase().replace(/\s/g,'+').substring(0,20)+'+'+result.user.uid+'+gmphblog'+'@grahammacphee.com');
 
             if (result.user){
                 user = result.user;

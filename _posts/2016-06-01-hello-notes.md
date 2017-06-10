@@ -21,4 +21,4 @@ Look at that garbage.
 
 I could never publish an article with that. But I can leave this lovely, low-quality note for you to read. Ah, freedom.
 
-To see more notes, and even contribute one of your own, check out [gmph.co/notes](http://gmph.co/notes).
+To see more notes, and even contribute one of your own, check out [grahammacphee.com/notes](http://grahammacphee.com/notes).

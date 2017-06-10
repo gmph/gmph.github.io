@@ -19,7 +19,7 @@ I built the Timeline web app with plain HTML, CSS and JS with jQuery. All stylin
 
 The most enjoyable part of the project was building a time travel interaction to jump along the timeline using a bar of dates. It’s more fun than it sounds, so you should probably sign up, add some events from your life and try it out.
 
-#### Try it at [timeline.gmph.co &rarr;](https://timeline.gmph.co)
+#### Try it at [timeline.grahammacphee.com &rarr;](https://timeline.grahammacphee.com)
 
 <br>
 
