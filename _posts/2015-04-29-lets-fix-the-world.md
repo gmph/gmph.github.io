@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: article
 title: Let's Fix the World
 heading: Let's fix the world.
 date: 29th April 2015

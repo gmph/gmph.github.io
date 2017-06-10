@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: article
 title: Designing Messaging
 heading: Designing Messaging
 date: 2nd June 2016

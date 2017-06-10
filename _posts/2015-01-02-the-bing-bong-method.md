@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: article
 title: The Bing Bong Method
 heading: The Bing Bong Method
 subheading: A brief guide to public speaking for politicians.

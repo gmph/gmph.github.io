@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: article
 title: Safe Spaces and Mental Health
 heading: Safe Spaces and Mental Health
 date: 14th September 2016

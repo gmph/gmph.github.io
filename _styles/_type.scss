@@ -26,6 +26,7 @@ article img, article video {
   margin: 0.5em 0 0 0;
   border: solid 1px $highlight;
   border-radius: 8px;
+  overflow: hidden;
 }
 
 article video {
@@ -41,8 +42,9 @@ article img.large {
   transform: translate(-50%, 0);
 }
 
-article img.no-border {
+article img.no-border, article .no-border img {
   border: none;
+  border-radius: 3px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -66,7 +68,7 @@ h3 {
 }
 
 h4 {
-  font-size: 1.1em;
+  font-size: 1.2em;
   font-weight: 400;
 }
 
@@ -125,7 +127,7 @@ article h1:first-of-type {
 p, blockquote, ul, ol {
   color: $black;
   font-family: $serif;
-  margin: 1em auto 0 auto;
+  margin: 1.25em auto 1.25em auto;
   font-size: 1em;
   line-height: 1.8em;
 }
@@ -142,17 +144,16 @@ ul li, ol li {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+p a, li a, blockquote a, pre a, code a, h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   border-bottom: solid 2px rgba($turquoise, 0.48);
 }
 
 hr {
-  margin: 0.5em 0;
+  margin: 1em 0;
   border: none;
   border-bottom: solid 2px $highlight;
-}
-
-br {
-  margin: 0.5em 0;
 }
 
 mark {
@@ -176,6 +177,18 @@ pre {
   text-transform: uppercase;
   font-weight: 600;
   font-size: 12px;
+}
+
+.text-align-center {
+  text-align: center !important;
+}
+
+.lh10 {
+  line-height: 1em !important;
+}
+
+.lh12 {
+  line-height: 1.2em !important;
 }
 
 ::selection {

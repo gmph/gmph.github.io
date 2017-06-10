@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: article
 title: How Designers Think
 heading: How Designers Think
 date: 29th April 2015

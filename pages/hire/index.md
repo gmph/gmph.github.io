@@ -1,5 +1,5 @@
 ---
-layout: default-nometa
+layout: page
 title: Hire me
 date: 6th June 2017
 published: true
@@ -32,7 +32,7 @@ permalink: /hire
         <input class="input-email" name="email" type="email" placeholder="e.g. harold@finchtech.com" autocomplete="email" />
 
         <label for="phone">Your phone number <span class="op4">(optional)</span></label>
-        <input class="input-phone" name="phone" type="tel" placeholder="e.g. 07495884738" autocomplete="tel" />
+        <input class="input-phone" name="phone" type="tel" placeholder="e.g. 01314 495864" autocomplete="tel" />
 
         <br>
 

@@ -1,0 +1,173 @@
+.mw-720 {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mw-640 {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mw-560 {
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mw-480 {
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.whole {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    height: auto;
+    margin: 0;
+}
+
+.half {
+    display: inline-block;
+    vertical-align: top;
+    width: calc((100% - 8px)/2);
+    height: auto;
+    margin: 0 3px 0 0;
+}
+
+div.half:nth-of-type(2n-1){
+    padding-right: 20px;
+    padding-bottom: 32px;
+}
+
+div.half:nth-of-type(2n){
+    padding-left: 20px;
+    padding-bottom: 32px;
+}
+
+.half:nth-of-type(2n){
+    margin: 0;
+}
+
+.third {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc((100% - 16px) / 3);
+    height: auto;
+    margin: 0 3px 0 0;
+}
+
+.third:nth-of-type(3n){
+    margin: 0;
+}
+
+.quarter {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc((100% - 24px) / 4);
+    height: auto;
+    margin: 0 3px 0 0;
+    padding: 0 24px;
+}
+
+.quarter:nth-of-type(4n-3){
+    margin: 0;
+    padding: 0 24px 0 0;
+}
+
+.quarter:nth-of-type(4n){
+    margin: 0;
+    padding: 0 0 0 24px;
+}
+
+.m-24 {
+    margin: -12px 0 !important;
+}
+
+.m-16 {
+    margin: -8px 0 !important;
+}
+
+.m-8 {
+    margin: -4px 0 !important;
+}
+
+.m-4 {
+    margin: -2px 0 !important;
+}
+
+.m0 {
+    margin: 0 !important;
+}
+
+.m4 {
+    margin: 2px 0 !important;
+}
+
+.m8 {
+    margin: 4px 0 !important;
+}
+
+.m12 {
+    margin: 6px 0 !important;
+}
+
+.m16 {
+    margin: 8px 0 !important;
+}
+
+.m24 {
+    margin: 12px 0 !important;
+}
+
+.m32 {
+    margin: 16px 0 !important;
+}
+
+.m40 {
+    margin: 20px 0 !important;
+}
+
+.m48 {
+    margin: 24px 0 !important;
+}
+
+.m56 {
+    margin: 28px 0 !important;
+}
+
+.m64 {
+    margin: 32px 0 !important;
+}
+
+@media (max-width: 720px){
+
+    .half:not(.no-row), .third:not(.no-row) {
+        display: block;
+        margin: 16px 0 !important;
+        padding: 0 !important;
+        width: 100%;
+    }
+
+    .quarter:not(.no-row) {
+        display: inline-block;
+        vertical-align: top;
+        width: calc((100% - 8px)/2);
+        height: auto;
+        margin: 0 3px 0 0;
+        padding: 0 0 8px 0;
+    }
+
+    div.quarter:not(.no-row):nth-of-type(2n-1){
+        padding-right: 12px;
+    }
+
+    div.quarter:not(.no-row):nth-of-type(2n){
+        margin: 0;
+        padding-left: 12px;
+    }
+
+}

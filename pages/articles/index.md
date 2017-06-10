@@ -1,5 +1,5 @@
 ---
-layout: default-nometa
+layout: page
 title: All Articles
 heading: All articles
 date: 28th April 2015

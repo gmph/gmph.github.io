@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: article
 title: The Political Automaton
 heading: The Political Automaton
 date: 19th February 2016

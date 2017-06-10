@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=100" />
+<style type="text/css">
+/* IE CSS HERE */
+<style>
+<![endif]-->
+
+<html id="top">
+
+<head>
+
+{% include head.html %}
+
+</head>
+
+<body>
+
+		{% include navigation.html %}
+
+		<article class="mw-640">
+
+			<h1 class="heading">{{ page.heading }}</h1>
+
+			{% if page.private %}
+			<h2 class="subheading">This page is currently a private draft.</h2>
+			{% else if page.subheading %}
+			<h2 class="subheading">{{ page.subheading }}</h2>
+			{% endif %}
+	
+			{{ content }}
+
+			{% include footer.html %}
+
+		</article>
+
+</body>
+
+</html>

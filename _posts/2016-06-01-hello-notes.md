@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: article
 title: Hello Notes
 heading: Hello, Notes.
 date: 1st June 2016

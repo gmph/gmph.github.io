@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: article
 title: Colophon | Graham Macphee
 heading: Colophon.
 date: 15th February 2016

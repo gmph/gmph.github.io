@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: article
 title: Mental Health and Me
 heading: Mental Health and Me
 date: 31st August 2015

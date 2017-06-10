@@ -28,13 +28,14 @@ article {
 footer {
   width: 100%;
   margin-top: 48px;
-  padding: 24px 0 44px 0;
-  border-top: solid 2px $highlight;
+  padding: 0 0 44px 0;
 }
 
 footer p {
   max-width: 90vw;
   margin: 0 auto;
+  padding: 24px 0 0 0;
+  border-top: solid 2px rgba(0,0,0,.16);
   color: $black;
   opacity: 0.6;
 }

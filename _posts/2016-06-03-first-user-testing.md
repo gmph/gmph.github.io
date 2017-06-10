@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: article
 title: My First User Testing
 heading: My First User Testing
 date: 3rd June 2016

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: article
 title: On Trigger Warnings
 heading: On Trigger Warnings
 subheading: What are trigger warnings and why do we need them?

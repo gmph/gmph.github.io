@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: article
 title: On Investigatory Powers
 heading: On Investigatory Powers
 date: 13th November 2015

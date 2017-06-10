@@ -48,37 +48,4 @@
 
 </body>
 
-
-<script language="javascript">
-
-	$('a').each(function() {
-	    if ($(this).find('img,svg').length) {
-	        $(this).css({'border':'none','background':'none'});
-	    }
-	});
-
-	$(function() {
-      $('a[href*="#"]:not([href="#"])').click(function() {
-        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-          var target = $(this.hash);
-          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-          if (target.length) {
-            $('html,body').animate({
-              scrollTop: (target.offset().top - 70)
-		  	}, 400);
-            return false;
-          }
-        }
-      });
-    });
-
-</script>
-
-{% if page.url == "/404.html" %}
-	<script language="javascript">
-		$('p.meta').css('display','none');
-		$('p.social').css('display','none');
-	</script>
-{% endif %}
-
 </html>

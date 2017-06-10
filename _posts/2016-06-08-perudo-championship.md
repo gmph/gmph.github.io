@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: article
 title: Games at Yavi
 heading: Games at Yavi
 date: 8th June 2016
