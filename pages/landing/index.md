@@ -6,15 +6,6 @@ date: 28th April 2015
 published: true
 format: markdown
 permalink: /
-redirect_from: 
-- /portfolio/
-- /portfolio
-- /pages/
-- /pages
-- /projects/
-- /projects
-- /assets/
-- /assets
 ---
 
 <div class="half line">
