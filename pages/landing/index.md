@@ -6,6 +6,10 @@ date: 28th April 2015
 published: true
 format: markdown
 permalink: /
+redirect_from:
+- /portfolio/
+- /projects/
+- /pages/
 ---
 
 <div class="half line">

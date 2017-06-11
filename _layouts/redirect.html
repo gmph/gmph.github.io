@@ -12,7 +12,7 @@
 
 {% include head.html %}
 <meta name="robots" content="noindex, follow" />
-<meta http-equiv="refresh" content="0; url={{ page.redirect }}">
+<meta http-equiv="refresh" content="0; url={% if page.redirect and page.redirect.to %}{{page.redirect.to}}{% else %}{{ page.redirect }}{% endif %}">
 
 </head>
 
