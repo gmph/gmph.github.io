@@ -108,9 +108,9 @@ redirect_from:
         {% include project.html link="" primary-text="Loading most played song..." secondary-text="" background-image="" style="inline" %}
     </div>
 
-    <div id="trip-container">
+    <!-- <div id="trip-container">
         {% include project.html link="" primary-text="Loading most recent trip..." secondary-text="" background-image="" style="inline" %}
-    </div>
+    </div> -->
 
     <br>
 
