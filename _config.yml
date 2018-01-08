@@ -48,3 +48,5 @@ gems:
 jekyll-mentions: https://twitter.com
 sass:
     sass_dir: _styles
+
+exclude: [ 'Gemfile*', '_site/', '.sass-cache/', '.vscode/' ]
