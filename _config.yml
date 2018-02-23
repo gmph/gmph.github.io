@@ -39,9 +39,9 @@ defaults:
     values:
       is-post: true # automatically set is_post=true for all posts
 
-# Gems
+# Plugins
 
-gems:
+plugins:
   - jekyll-redirect-from
   - jekyll-mentions
   - jekyll-seo-tag
