@@ -52,6 +52,14 @@ div.half:nth-of-type(2n){
     margin: 0;
 }
 
+div.half.half-small:nth-of-type(2n-1){
+    padding-bottom: 16px;
+}
+
+div.half.half-small:nth-of-type(2n){
+    padding-bottom: 16px;
+}
+
 .third {
     display: inline-block;
     vertical-align: middle;
@@ -150,6 +158,10 @@ div.half:nth-of-type(2n){
         margin: 16px 0 !important;
         padding: 0 !important;
         width: 100%;
+    }
+
+    .half:not(.no-row).half-small {
+        margin: 12px 0 !important;
     }
 
     .quarter:not(.no-row) {
